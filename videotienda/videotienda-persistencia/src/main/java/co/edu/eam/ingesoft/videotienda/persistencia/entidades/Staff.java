@@ -38,14 +38,12 @@ public class Staff implements Serializable {
 	@Column(name="last_update", nullable=false)
 	private Timestamp lastUpdate;
 
-	@Column(length=40)
-	private String password;
+	
 
 	@Lob
 	private byte[] picture;
 
-	@Column(nullable=false, length=16)
-	private String username;
+	
 
 	//bi-directional many-to-one association to Payment
 	@OneToMany(mappedBy="staff",fetch=FetchType.LAZY)
@@ -68,6 +66,10 @@ public class Staff implements Serializable {
 	//bi-directional many-to-one association to Store
 	@OneToMany(mappedBy="staff",fetch=FetchType.LAZY)
 	private List<Store> stores;
+	
+	@OneToOne
+	@JoinColumn(name="id_usuario", unique=true)
+	private Usuario usuario;
 
 	public Staff() {
 	}
@@ -120,13 +122,7 @@ public class Staff implements Serializable {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 
 	public byte[] getPicture() {
 		return this.picture;
@@ -136,14 +132,8 @@ public class Staff implements Serializable {
 		this.picture = picture;
 	}
 
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
+	
+ 
 	public List<Payment> getPayments() {
 		return this.payments;
 	}
