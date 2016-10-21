@@ -4,14 +4,14 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
 	version="2.0">
 
-	
+
 
 	<named-query name="listarPeliculas">
 		<query>
 			SELECT f FROM Film f WHERE f.length=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="listarCategorias">
 		<query>
 			SELECT f FROM Category f
@@ -19,7 +19,7 @@
 	</named-query>
 
 
-<named-query name="Pais.listartodos">
+	<named-query name="Pais.listartodos">
 		<query>
 			SELECT c FROM Country c
 		</query>
