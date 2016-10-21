@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="627.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.eam.ingesoft.videotienda.vista.util.MainController">
+	<!-- TODO Add Nodes -->
+	<children>
+		<BorderPane prefHeight="600" prefWidth="800" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<bottom>
+				<ToolBar />
+			</bottom>
+			<top>
+				<VBox fillWidth="true" prefHeight="31.0" prefWidth="1055.0">
+					<children>
+						<MenuBar prefHeight="25.0" prefWidth="673.9999755859375">
+							<menus>
+
+
+
+								<Menu fx:id="mnuInicio" mnemonicParsing="false" text="Inicio" />
+								<Menu fx:id="mnuPeliculas" mnemonicParsing="false" text="Peliculas" />
+								<Menu fx:id="mnuActores" mnemonicParsing="false" text="Actores" />
+								<Menu fx:id="mnuGeneros" mnemonicParsing="false" text="Generos" />
+								<Menu fx:id="mnuEmpleados" mnemonicParsing="false" text="Empleados" />
+
+								<Menu fx:id="mnuSucursales" mnemonicParsing="false" text="Sucursales" />
+
+								<Menu fx:id="mnuPrestamos" mnemonicParsing="false" text="Prestamos" />
+                        <Menu mnemonicParsing="false" text="Parametrizacion">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem  onAction="#abrirGEstionarCiudad" fx:id="mnuItemGestionarCiudad" mnemonicParsing="false" text="Ciudad" />
+                          </items>
+                        </Menu>
+								
+
+							</menus>
+						</MenuBar>
+
+
+
+
+					</children>
+				</VBox>
+			</top>
+			<center>
+				<BorderPane prefHeight="525.0" prefWidth="1055.0" BorderPane.alignment="CENTER">
+					<top>
+						<Pane prefHeight="73.0" prefWidth="1055.0" style="-fx-background-color: black; -fx-background-image: ;" BorderPane.alignment="CENTER">
+							<children>
+								<Label layoutX="14.0" layoutY="20.0" prefHeight="38.0" prefWidth="302.0" text="Videotienda" textFill="#ffffff">
+									<font>
+										<Font size="31.0" />
+									</font>
+								</Label>
+							</children>
+						</Pane>
+					</top>
+					<center>
+						<ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+							<content>
+								<AnchorPane fx:id="contenido" prefHeight="200.0" prefWidth="200.0" />
+							</content>
+						</ScrollPane>
+					</center>
+				</BorderPane>
+			</center>
+		</BorderPane>
+	</children>
+</AnchorPane>

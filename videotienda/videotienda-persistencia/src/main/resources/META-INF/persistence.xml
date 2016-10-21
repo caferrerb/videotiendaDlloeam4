@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Persistence deployment descriptor for dev profile -->
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+
+	<persistence-unit name="jpa_pu">
+		
+		<mapping-file>orm.xml</mapping-file>
+		
+		<class>co.edu.uniquindio.videotienda.entidades.Actor</class>
+		<class>co.edu.uniquindio.videotienda.entidades.Address</class>
+		<class>co.edu.uniquindio.videotienda.entidades.Category</class>
+		<class>co.edu.uniquindio.videotienda.entidades.City</class>
+		<class>co.edu.uniquindio.videotienda.entidades.Country</class>
+		<class>co.edu.uniquindio.videotienda.entidades.Customer</class>
+		<class>co.edu.uniquindio.videotienda.entidades.Film</class>
+		<class>co.edu.uniquindio.videotienda.entidades.FilmActor</class>
+		<class>co.edu.uniquindio.videotienda.entidades.FilmActorPK</class>
+		<class>co.edu.uniquindio.videotienda.entidades.FilmCategory</class>
+		<class>co.edu.uniquindio.videotienda.entidades.FilmCategoryPK</class>
+		<class>co.edu.uniquindio.videotienda.entidades.FilmText</class>
+		<class>co.edu.uniquindio.videotienda.entidades.Inventory</class>
+		<class>co.edu.uniquindio.videotienda.entidades.Language</class>
+		<class>co.edu.uniquindio.videotienda.entidades.Payment</class>
+		<class>co.edu.uniquindio.videotienda.entidades.Rental</class>
+		<class>co.edu.uniquindio.videotienda.entidades.Staff</class>
+		<class>co.edu.uniquindio.videotienda.entidades.Store</class>
+
+ 
+	
+	</persistence-unit>
+</persistence>

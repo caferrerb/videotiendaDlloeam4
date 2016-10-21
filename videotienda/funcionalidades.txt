@@ -1,0 +1,18 @@
+1	Peliculas
+2	Cliente
+3	Generos
+4	Empleados
+5	Tiendas
+6	Actores
+7	Alquilar pelicula
+8	Inventario
+9	Entregar pelicula
+10	Ver peliculas rentadas
+11	Vender pelicula
+12	Estadísticas Alquileres Cliente(Films y generos predilectos)
+13	Preferencias Generos Cliente
+14	Traslado cliente de ciudad (no puede tener prestamos vencido)
+15	Pagar Deuda prestamo
+16	Reporte de peliculas alquiladas/vendidas  en la tienda en un intervalo de tiempo
+17	reporte de ingresos de la tienda(filtrado por genero, pelicula y cliente)
+18  Autorizacion
