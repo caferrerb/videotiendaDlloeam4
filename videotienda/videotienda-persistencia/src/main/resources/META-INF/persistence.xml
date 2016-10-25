@@ -9,24 +9,24 @@
 		
 		<mapping-file>orm.xml</mapping-file>
 		
-		<class>co.edu.uniquindio.videotienda.entidades.Actor</class>
-		<class>co.edu.uniquindio.videotienda.entidades.Address</class>
-		<class>co.edu.uniquindio.videotienda.entidades.Category</class>
-		<class>co.edu.uniquindio.videotienda.entidades.City</class>
-		<class>co.edu.uniquindio.videotienda.entidades.Country</class>
-		<class>co.edu.uniquindio.videotienda.entidades.Customer</class>
-		<class>co.edu.uniquindio.videotienda.entidades.Film</class>
-		<class>co.edu.uniquindio.videotienda.entidades.FilmActor</class>
-		<class>co.edu.uniquindio.videotienda.entidades.FilmActorPK</class>
-		<class>co.edu.uniquindio.videotienda.entidades.FilmCategory</class>
-		<class>co.edu.uniquindio.videotienda.entidades.FilmCategoryPK</class>
-		<class>co.edu.uniquindio.videotienda.entidades.FilmText</class>
-		<class>co.edu.uniquindio.videotienda.entidades.Inventory</class>
-		<class>co.edu.uniquindio.videotienda.entidades.Language</class>
-		<class>co.edu.uniquindio.videotienda.entidades.Payment</class>
-		<class>co.edu.uniquindio.videotienda.entidades.Rental</class>
-		<class>co.edu.uniquindio.videotienda.entidades.Staff</class>
-		<class>co.edu.uniquindio.videotienda.entidades.Store</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Actor</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Address</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Category</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.City</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Country</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Customer</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Film</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.FilmActor</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.FilmActorPK</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.FilmCategory</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.FilmCategoryPK</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.FilmText</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Inventory</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Language</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Payment</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Rental</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Staff</class>
+		<class>co.edu.eam.ingesoft.videotienda.entidades.Store</class>
 
  
 	
