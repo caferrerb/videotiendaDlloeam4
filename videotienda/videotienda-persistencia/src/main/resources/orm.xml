@@ -26,7 +26,11 @@
 		</query>
 	</named-query>
 
-
+	<named-query name="Actor.ListarTodos">
+	<query>
+			SELECT a FROM Actor a
+		</query>
+	</named-query>
 
 
 
