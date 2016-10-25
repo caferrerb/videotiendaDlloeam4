@@ -66,29 +66,62 @@ public class Film implements Serializable {
 
 	@Column(nullable=false, length=255)
 	private String title;
-
+	
+	//Lenguaje original de la pelicula
 	//bi-directional many-to-one association to Language
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="language_id", nullable=false)
 	private Language language1;
 
+	//Lenguaje de los subtitulos
 	//bi-directional many-to-one association to Language
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="original_language_id")
 	private Language language2;
 
-	//bi-directional many-to-one association to FilmActor
-	@OneToMany(mappedBy="film",fetch=FetchType.LAZY)
-	private List<FilmActor> filmActors;
-
-	//bi-directional many-to-one association to FilmCategory
-	@OneToMany(mappedBy="film",fetch=FetchType.LAZY)
-	private List<FilmCategory> filmCategories;
-
-	
 
 	public Film() {
 	}
+	
+	
+
+	/**
+	 * @param filmId
+	 * @param description
+	 * @param lastUpdate
+	 * @param length
+	 * @param rating
+	 * @param releaseYear
+	 * @param poster
+	 * @param rentalDuration
+	 * @param rentalRate
+	 * @param replacementCost
+	 * @param specialFeatures
+	 * @param title
+	 * @param language1
+	 * @param language2
+	 */
+	public Film(int filmId, String description, Timestamp lastUpdate, int length, String rating, Date releaseYear,
+			byte[] poster, byte rentalDuration, double rentalRate, double replacementCost, String specialFeatures,
+			String title, Language language1, Language language2) {
+		super();
+		this.filmId = filmId;
+		this.description = description;
+		this.lastUpdate = lastUpdate;
+		this.length = length;
+		this.rating = rating;
+		this.releaseYear = releaseYear;
+		this.poster = poster;
+		this.rentalDuration = rentalDuration;
+		this.rentalRate = rentalRate;
+		this.replacementCost = replacementCost;
+		this.specialFeatures = specialFeatures;
+		this.title = title;
+		this.language1 = language1;
+		this.language2 = language2;
+	}
+
+
 
 	public int getFilmId() {
 		return this.filmId;
@@ -193,54 +226,6 @@ public class Film implements Serializable {
 	public void setLanguage2(Language language2) {
 		this.language2 = language2;
 	}
-
-	public List<FilmActor> getFilmActors() {
-		return this.filmActors;
-	}
-
-	public void setFilmActors(List<FilmActor> filmActors) {
-		this.filmActors = filmActors;
-	}
-
-	public FilmActor addFilmActor(FilmActor filmActor) {
-		getFilmActors().add(filmActor);
-		filmActor.setFilm(this);
-
-		return filmActor;
-	}
-
-	public FilmActor removeFilmActor(FilmActor filmActor) {
-		getFilmActors().remove(filmActor);
-		filmActor.setFilm(null);
-
-		return filmActor;
-	}
-
-	public List<FilmCategory> getFilmCategories() {
-		return this.filmCategories;
-	}
-
-	public void setFilmCategories(List<FilmCategory> filmCategories) {
-		this.filmCategories = filmCategories;
-	}
-
-	public FilmCategory addFilmCategory(FilmCategory filmCategory) {
-		getFilmCategories().add(filmCategory);
-		filmCategory.setFilm(this);
-
-		return filmCategory;
-	}
-
-	public FilmCategory removeFilmCategory(FilmCategory filmCategory) {
-		getFilmCategories().remove(filmCategory);
-		filmCategory.setFilm(null);
-
-		return filmCategory;
-	}
-
-	
-
-	
 
 	
 
