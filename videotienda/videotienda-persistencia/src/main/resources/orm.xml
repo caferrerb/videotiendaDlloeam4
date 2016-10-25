@@ -28,7 +28,7 @@
 
 	<named-query name="Actor.ListarTodos">
 	<query>
-			SELECT a FROM Actor a
+			SELECT act FROM Actor act
 		</query>
 	</named-query>
 
