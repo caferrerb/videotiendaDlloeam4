@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="jpPanelFondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane id="jpbuscarPelicula" layoutX="21.0" layoutY="21.0" prefHeight="425.0" prefWidth="554.0" style="-fx-background-color: #E0E9E8;">
+         <children>
+            <TableView id="jttablacontenidoPelicula" layoutX="10.0" layoutY="85.0" prefHeight="256.0" prefWidth="534.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <columns>
+                  <TableColumn id="jcolumnaGenero" prefWidth="75.0" text="GENERO" />
+                  <TableColumn id="jcolumnaTitulo" prefWidth="75.0" text="TITULO" />
+                  <TableColumn id="jcolumnaLong" prefWidth="75.0" text="LONG" />
+                  <TableColumn id="jcolumnaPrecio" prefWidth="75.0" text="PRECIO" />
+                  <TableColumn id="jcolumnaboton" prefWidth="75.0">
+                     <graphic>
+                        <Button id="jbVender" mnemonicParsing="false" text="VENDER" />
+                     </graphic>
+                  </TableColumn>
+               </columns>
+            </TableView>
+            <Button id="jbBuscarPelicula" layoutX="217.0" layoutY="37.0" mnemonicParsing="false" text="BUSCAR" />
+            <TextField id="jtfTitulo" layoutX="61.0" layoutY="37.0" />
+            <Label id="jlTitulo" layoutX="10.0" layoutY="41.0" text="Titulo">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

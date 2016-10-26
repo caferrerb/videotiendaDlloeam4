@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="jpfondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="10.0" layoutY="12.0" prefHeight="425.0" prefWidth="431.0" style="-fx-background-color: #E0E9E8;" />
+      <TextField id="jtfNombreCliente" layoutX="123.0" layoutY="83.0" />
+      <Button id="jbVenderCliente" layoutX="303.0" layoutY="328.0" mnemonicParsing="false" text="VENDER">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <ImageView id="jimagenPerfil" fitHeight="150.0" fitWidth="200.0" layoutX="122.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Desktop/descarga.jpg" />
+         </image>
+      </ImageView>
+      <Label id="jlFoto" layoutX="24.0" layoutY="136.0" text="FOTO:" textAlignment="JUSTIFY" />
+      <Label id="jlNombre" layoutX="24.0" layoutY="95.0" text="NOMBRE:" />
+      <Button id="jbBuscarCliente" layoutX="296.0" layoutY="44.0" mnemonicParsing="false" text="BUSCAR" textAlignment="JUSTIFY">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <TextField id="jtfIdCliente" layoutX="123.0" layoutY="44.0" />
+      <Label id="jlidCliente" layoutX="24.0" layoutY="48.0" text="ID CLIENTE:" />
+   </children>
+</AnchorPane>
