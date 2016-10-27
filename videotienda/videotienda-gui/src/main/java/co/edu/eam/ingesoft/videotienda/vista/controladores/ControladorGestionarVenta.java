@@ -30,7 +30,7 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 	
 	@FXML
 	public void buscar(){
-		
+		System.out.println("buscando...");
 	}
 
 }
