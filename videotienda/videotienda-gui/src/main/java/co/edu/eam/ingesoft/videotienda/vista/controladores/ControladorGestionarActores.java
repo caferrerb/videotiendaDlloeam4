@@ -7,6 +7,8 @@ import java.awt.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.text.html.ImageView;
+
 import org.hibernate.event.spi.InitializeCollectionEventListener;
 import org.springframework.stereotype.Controller;
 
@@ -20,10 +22,16 @@ import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 public class ControladorGestionarActores extends BaseController {
 
 	@FXML
-	private TextField tfDocumento;
+	private TextField jtfDocumento;
 	
 	@FXML
-	private TextField tfDocumento;
+	private TextField jtfNombre;
+	
+	@FXML
+	private TextField jtfApellido;
+	
+	@FXML
+	private ImageView imgFoto;
 	
 	public void initializable(URL location, ResourceBundle resources){
 		

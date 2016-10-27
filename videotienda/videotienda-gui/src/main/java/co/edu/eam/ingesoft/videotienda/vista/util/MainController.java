@@ -144,6 +144,7 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirGEstionarCiudad(){
 		agregarVentana("/fxml/gestionarciudad.fxml", ControladorGestionarCIudad.class);
+		
 	}
 
 
