@@ -28,7 +28,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="39.0" layoutY="192.0" text="Foto">
+                  <Label layoutX="33.0" layoutY="193.0" text="Foto">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -38,7 +38,7 @@
                   <TextField fx:id="jtfApellido" layoutX="121.0" layoutY="107.0" />
                   <ImageView fx:id="imgFoto" fitHeight="125.0" fitWidth="155.0" layoutX="121.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icono.jpg" />
+                        <Image url="@../../../git/videotiendaDlloeam4/videotienda/videotienda-gui/src/main/resources/fxml/icono.jpg" />
                      </image>
                   </ImageView>
                   <DatePicker layoutX="121.0" layoutY="348.0" prefHeight="27.0" prefWidth="147.0" />
@@ -52,7 +52,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="33.0" layoutY="149.0" text="Ciudad">
+                  <Label layoutX="31.0" layoutY="149.0" text="Ciudad">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
