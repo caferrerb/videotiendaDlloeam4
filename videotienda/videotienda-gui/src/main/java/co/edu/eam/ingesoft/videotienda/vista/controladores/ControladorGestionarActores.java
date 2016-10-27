@@ -44,6 +44,9 @@ public class ControladorGestionarActores extends BaseController implements Initi
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+	}
+	
+	public void crear(){
+		System.out.println("Creando...");
 	}
 }

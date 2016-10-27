@@ -36,11 +36,6 @@
                   <TextField fx:id="tfDocumento" layoutX="121.0" layoutY="26.0" />
                   <TextField fx:id="tfNombre" layoutX="121.0" layoutY="69.0" />
                   <TextField fx:id="tfApellido" layoutX="121.0" layoutY="107.0" />
-                  <ImageView fx:id="imgFoto" fitHeight="125.0" fitWidth="155.0" layoutX="121.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../git/videotiendaDlloeam4/videotienda/videotienda-gui/src/main/resources/fxml/icono.jpg" />
-                     </image>
-                  </ImageView>
                   <DatePicker fx:id="dateFecha" layoutX="121.0" layoutY="348.0" prefHeight="27.0" prefWidth="147.0" />
                   <Label layoutX="29.0" layoutY="339.0" prefHeight="17.0" prefWidth="47.0" text="Ultima">
                      <font>

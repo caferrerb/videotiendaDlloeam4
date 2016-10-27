@@ -24,7 +24,8 @@
 								<Menu fx:id="mnuPeliculas" mnemonicParsing="false" text="Peliculas" />
 								<Menu fx:id="mnuActores" mnemonicParsing="false" text="Actores">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="Gestionar Actores" />
+                              
+                                <MenuItem fx:id="mnuItemGestionarActores" mnemonicParsing="false" onAction="#abrirGestionarActores" text="Gestionar Actores" />
                            </items></Menu>
 								<Menu fx:id="mnuGeneros" mnemonicParsing="false" text="Generos" />
 								<Menu fx:id="mnuEmpleados" mnemonicParsing="false" text="Empleados" />
@@ -36,6 +37,7 @@
                           <items>
                             <MenuItem mnemonicParsing="false" text="Action 1" />
                               <MenuItem fx:id="mnuItemGestionarCiudad" mnemonicParsing="false" onAction="#abrirGEstionarCiudad" text="Ciudad" />
+                            
                           </items>
                         </Menu>
 								

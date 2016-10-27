@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import org.springframework.context.ApplicationContext;
 
 import co.edu.eam.ingesoft.videotienda.main.ContextFactory;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
 import javafx.fxml.FXML;
@@ -148,6 +149,12 @@ public class MainController implements Initializable {
 	public void abrirGEstionarCiudad(){
 		agregarVentana("/fxml/gestionarciudad.fxml", ControladorGestionarCIudad.class);
 		
+	}
+	
+	@FXML
+	public void abrirGestionarActores(){
+		agregarVentana("/fxml/GestionarActores.fxml", ControladorGestionarActores.class);
+	
 	}
 
 
