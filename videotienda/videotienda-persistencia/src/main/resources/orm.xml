@@ -19,7 +19,6 @@
 	</named-query>
 
 
-
 	<named-query name="Pais.listartodos">
 		<query>
 			SELECT c FROM Country c
