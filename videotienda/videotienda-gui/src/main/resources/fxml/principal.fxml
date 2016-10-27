@@ -36,6 +36,8 @@
 								<Menu fx:id="mnuSucursales" mnemonicParsing="false" text="Sucursales" />
 
 								<Menu fx:id="mnuPrestamos" mnemonicParsing="false" text="Prestamos" />
+					
+							
                         <Menu mnemonicParsing="false" text="Parametrizacion">
                           <items>
                             <MenuItem mnemonicParsing="false" text="Action 1" />
