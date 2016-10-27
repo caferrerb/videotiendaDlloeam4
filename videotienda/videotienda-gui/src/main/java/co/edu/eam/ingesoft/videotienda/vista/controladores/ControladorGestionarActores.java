@@ -13,6 +13,7 @@ import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
@@ -40,6 +41,9 @@ public class ControladorGestionarActores extends BaseController implements Initi
 	
 	@FXML
 	private TextField tfCiudad;
+	
+	@FXML
+	private TableView tbListaPelicula;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -47,6 +51,6 @@ public class ControladorGestionarActores extends BaseController implements Initi
 	}
 	
 	public void crear(){
-		System.out.println("Creandooooo...");
+		System.out.println("Creandoooooo...");
 	}
 }
