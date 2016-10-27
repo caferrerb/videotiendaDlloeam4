@@ -75,6 +75,9 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem mnuItemGestionarCiudad;
+	
+	@FXML
+	private MenuItem mnuItemGestionarActores;
 
 	@FXML
 	private AnchorPane contenido;
