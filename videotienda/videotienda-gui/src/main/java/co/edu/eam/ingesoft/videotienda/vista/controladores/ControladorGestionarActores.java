@@ -47,6 +47,6 @@ public class ControladorGestionarActores extends BaseController implements Initi
 	}
 	
 	public void crear(){
-		System.out.println("Creandooo...");
+		System.out.println("Creandoooo...");
 	}
 }
