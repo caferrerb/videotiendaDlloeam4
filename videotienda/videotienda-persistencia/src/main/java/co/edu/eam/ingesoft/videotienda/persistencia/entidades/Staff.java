@@ -220,7 +220,7 @@ public class Staff implements Serializable {
 	public String toString() {
 		return "Staff [staffId=" + staffId + ", active=" + active + ", email="
 				+ email + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", lastUpdate=" + lastUpdate + ", password=" + password
+				+ ", lastUpdate=" + lastUpdate
 				+ ", ]";
 	}
 
