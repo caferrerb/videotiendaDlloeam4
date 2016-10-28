@@ -16,7 +16,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="ventanaGestionarPeliculas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="1426.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="ventanaGestionarPeliculas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="1426.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="620.0" layoutY="14.0" prefHeight="40.0" prefWidth="243.0" text="Gestionar Peliculas" textFill="WHITE">
          <font>
@@ -99,4 +99,4 @@
         </content>
       </TitledPane>
    </children>
-</Pane>
+</AnchorPane>
