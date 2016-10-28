@@ -20,11 +20,12 @@ public class BOFilm extends BOGenerico<Film>{
 		super.crear(entidad);
 	}
 	
+	
 	/**
 	 * metodo que lista los datos de las peliculas
 	 * @return
 	 */
-	public List<Film> listarPeliculas(){
-		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTARDATOSPELICULAS);
+	public List<Film> listarPeliculas(String nombre){
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_POR_NOMBRE_PELICULA,nombre);
 	}
 }

@@ -23,27 +23,28 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="jBCrear" layoutX="339.0" layoutY="627.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" style="-fx-background-color: white;" text="CREAR">
+      <Button fx:id="jBCrear" layoutX="339.0" layoutY="627.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" text="CREAR" textFill="WHITE">
          <font>
-            <Font size="21.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="jBBuscar" layoutX="631.0" layoutY="627.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" style="-fx-background-color: white;" text="BUSCAR">
+      <Button fx:id="jBBuscar" layoutX="631.0" layoutY="627.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" text="BUSCAR" textFill="WHITE">
          <font>
-            <Font size="21.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="jBEditar" layoutX="907.0" layoutY="627.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" style="-fx-background-color: white;" text="EDITAR">
+      <Button fx:id="jBEditar" layoutX="907.0" layoutY="627.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" text="EDITAR" textFill="WHITE">
          <font>
-            <Font size="21.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
       <TitledPane fx:id="jPDatosBasicos" animated="false" layoutX="11.0" layoutY="66.0" prefHeight="523.0" prefWidth="713.0" text="Datos Basicos">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="491.0" prefWidth="553.0">
                <children>
-                  <Label layoutX="508.0" layoutY="347.0" prefHeight="21.0" prefWidth="67.0" text="Poratada:" />
-                  <ImageView fx:id="jPoster" fitHeight="136.0" fitWidth="108.0" layoutX="589.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label layoutX="575.0" layoutY="278.0" prefHeight="21.0" prefWidth="82.0" text="Poratada:" />
+                  <ImageView fx:id="jPoster" fitHeight="151.0" fitWidth="151.0" layoutX="541.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
+                  </ImageView>
                   <Label layoutX="13.0" layoutY="19.0" prefHeight="21.0" prefWidth="99.0" text="ID de pelicula:" />
                   <Label layoutX="13.0" layoutY="347.0" prefHeight="21.0" prefWidth="88.0" text="Descripcion:" />
                   <TextArea fx:id="jTFescriptionj" layoutX="13.0" layoutY="380.0" prefHeight="97.0" prefWidth="333.0" />
@@ -70,6 +71,7 @@
                   <DatePicker fx:id="jYearRelease" layoutX="161.0" layoutY="157.0" prefHeight="31.0" prefWidth="187.0" />
                   <Label layoutX="362.0" layoutY="206.0" prefHeight="21.0" prefWidth="141.0" text="Duracion de pelicula:" />
                   <TextField fx:id="jTFLength" layoutX="511.0" layoutY="201.0" />
+                  <Button fx:id="jBSeleccionImagen" layoutX="388.0" layoutY="342.0" mnemonicParsing="false" onAction="#abrirImagen" text="Seleccione Imagen:" />
                </children>
             </AnchorPane>
         </content>
@@ -84,7 +86,7 @@
                   <TextField fx:id="jTFPersonaje" layoutX="138.0" layoutY="70.0" prefHeight="31.0" prefWidth="340.0" />
                   <Button fx:id="jCBAgregar" layoutX="567.0" layoutY="25.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="72.0" text="+">
                      <font>
-                        <Font size="34.0" />
+                        <Font name="System Bold" size="34.0" />
                      </font>
                   </Button>
                   <TableView layoutX="15.0" layoutY="141.0" prefHeight="330.0" prefWidth="637.0">
