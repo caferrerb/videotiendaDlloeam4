@@ -52,7 +52,7 @@
                             <MenuItem fx:id="menuItemGestionarTiendas" mnemonicParsing="false" text="Gestionar Tiendas" />
                           </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Seguridad">
+                        <Menu mnemonicParsing="false" text="Autorizacion">
                           <items>
                             <MenuItem mnemonicParsing="false" text="Roles" />
                           </items>
