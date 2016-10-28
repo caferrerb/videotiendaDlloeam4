@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOCiudad;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOEmpleado;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOTienda;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
@@ -29,10 +30,9 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 	@Autowired
 	private BOTienda boTienda;
 	
-	/**
+	
 	@Autowired
-	private BOStaff boEmpleado;
-	*/
+	private BOEmpleado boEmpleado;
 	
 	@Autowired
 	private BOCiudad boCiudad;
@@ -64,6 +64,7 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		llenarComboCiudad();
+		llenarComboEmpleado();
 		
 	}
 	
@@ -71,6 +72,13 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 		List<City> lista = boCiudad.listarCiudades();
 		for (City city : lista){
 			cbCiudad.getItems().add(city);
+		}
+	}
+	
+	private void llenarComboEmpleado(){
+		List<Staff> lista = boEmpleado.listarEmpleados();
+		for (Staff staff : lista){
+			cbEmpleado.getItems().add(staff);
 		}
 	}
 	

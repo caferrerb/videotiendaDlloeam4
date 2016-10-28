@@ -9,4 +9,6 @@ public class ConstantesNamedQueries {
 	
 	public static final String CONSULTA_LISTARCIUDADES="Ciudad.listarTodos";
 	
+	public static final String CONSULTA_LISTAREMPLEADOS="Empleado.listarTodos";
+	
 }
