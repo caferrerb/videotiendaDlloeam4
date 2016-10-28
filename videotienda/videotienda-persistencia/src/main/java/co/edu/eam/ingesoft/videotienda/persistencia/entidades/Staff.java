@@ -64,8 +64,8 @@ public class Staff implements Serializable {
 	private Store store;
 
 	//bi-directional many-to-one association to Store
-	@OneToMany(mappedBy="staff",fetch=FetchType.LAZY)
-	private List<Store> stores;
+	//@OneToMany(mappedBy="staff",fetch=FetchType.LAZY)
+	//private List<Store> stores;
 	
 	@OneToOne
 	@JoinColumn(name="id_usuario", unique=true)
@@ -194,34 +194,12 @@ public class Staff implements Serializable {
 		this.store = store;
 	}
 
-	public List<Store> getStores() {
-		return this.stores;
-	}
-
-	public void setStores(List<Store> stores) {
-		this.stores = stores;
-	}
-
-	public Store addStore(Store store) {
-		getStores().add(store);
-		store.setStaff(this);
-
-		return store;
-	}
-
-	public Store removeStore(Store store) {
-		getStores().remove(store);
-		store.setStaff(null);
-
-		return store;
-	}
 
 	@Override
 	public String toString() {
 		return "Staff [staffId=" + staffId + ", active=" + active + ", email="
 				+ email + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", lastUpdate=" + lastUpdate
-				+ ", ]";
+				+ ", lastUpdate=" + lastUpdate + " ]";
 	}
 
 }
