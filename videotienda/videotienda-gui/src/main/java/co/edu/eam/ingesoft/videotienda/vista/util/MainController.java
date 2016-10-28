@@ -176,8 +176,7 @@ public class MainController implements Initializable {
 
 	@FXML
 	public void abrirGestionarEmpleados(){
-		agregarVentana("/fxml/VentanaGestionEmpleados.fxml", ControladorGestionarEmpleado.class);
-	
+		agregarVentana("/fxml/VentanaGestionEmpleados.fxml", ControladorGestionarEmpleado.class);	
 	}
 	
 	@FXML

@@ -33,6 +33,7 @@
                            </items></Menu>
 								<Menu fx:id="mnuGeneros" mnemonicParsing="false" text="Generos" />
 							<Menu fx:id="mnuEmpleados" mnemonicParsing="false" text="Empleados">
+							
                            <items>
                               <MenuItem fx:id="mnuItemGestionarEmpleado" mnemonicParsing="false" onAction="#abrirGestionarEmpleados" text="Gestionar" />
                            </items></Menu>
