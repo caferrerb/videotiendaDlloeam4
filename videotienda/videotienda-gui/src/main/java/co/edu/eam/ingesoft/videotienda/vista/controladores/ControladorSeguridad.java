@@ -4,5 +4,5 @@ import javafx.scene.control.TextField;
 
 public class ControladorSeguridad {
 
-	private TextField tfNombre;
+	private TextField tfNombreRol;
 }
