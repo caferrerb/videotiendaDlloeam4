@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutX="36.0" layoutY="31.0" prefHeight="534.0" prefWidth="431.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Roles">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="36.0" layoutY="170.0" prefHeight="200.0" prefWidth="360.0">
+                          <columns>
+                            <TableColumn prefWidth="126.0" text="ID" />
+                            <TableColumn prefWidth="123.0" text="NOMBRE" />
+                          </columns>
+                        </TableView>
+                        <GridPane layoutX="58.0" layoutY="53.0" prefHeight="18.0" prefWidth="315.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Nombre del Rol" />
+                              <TextField id="tfNombreRol" prefHeight="25.0" prefWidth="197.0" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Button id="btnCrearRol" layoutX="186.0" layoutY="106.0" mnemonicParsing="false" text="Crear" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab text="Pantalla x Rol">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button id="btnAgregar" layoutX="331.0" layoutY="64.0" mnemonicParsing="false" text="Agregar" />
+                        <TableView layoutX="47.0" layoutY="149.0" prefHeight="259.0" prefWidth="352.0">
+                          <columns>
+                            <TableColumn prefWidth="133.0" text="Rol" />
+                            <TableColumn prefWidth="114.0" text="Pantalla" />
+                          </columns>
+                        </TableView>
+                        <GridPane layoutX="40.0" layoutY="42.0" prefHeight="93.0" prefWidth="284.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="85.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="215.0" minWidth="10.0" prefWidth="215.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Roles" />
+                              <ComboBox id="cbRoles" prefHeight="25.0" prefWidth="170.0" promptText="Seleccione un rol" GridPane.columnIndex="1" />
+                              <Label text="Pantallas" GridPane.rowIndex="1" />
+                              <ComboBox id="cbPantalla" prefHeight="25.0" prefWidth="173.0" promptText="Seleccione una pantalla" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Usuario">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="507.0" prefWidth="431.0">
+                     <children>
+                        <Label layoutX="56.0" layoutY="248.0" text="Rol" />
+                        <ComboBox id="cbRolAsignar" layoutX="110.0" layoutY="244.0" prefHeight="25.0" prefWidth="165.0" promptText="Seleccione un rol" />
+                        <Button id="btnAsignar" layoutX="299.0" layoutY="244.0" mnemonicParsing="false" text="Asignar" />
+                        <TableView layoutX="51.0" layoutY="296.0" prefHeight="165.0" prefWidth="329.0">
+                          <columns>
+                            <TableColumn prefWidth="163.0" text="Rol" />
+                              <TableColumn prefWidth="165.0" />
+                          </columns>
+                        </TableView>
+                        <GridPane layoutX="41.0" layoutY="36.0" prefHeight="90.0" prefWidth="376.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="121.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="255.0" minWidth="10.0" prefWidth="255.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Empleado" />
+                              <ComboBox id="cbEmpleado" prefHeight="25.0" prefWidth="266.0" promptText="Elegir el empleado" GridPane.columnIndex="1" />
+                              <Label text="Password" GridPane.rowIndex="2" />
+                              <TextField id="tfPassword" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="Usuario" GridPane.rowIndex="1" />
+                              <TextField id="tfUsuario" prefHeight="25.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Button id="btnEstablecer" layoutX="181.0" layoutY="148.0" mnemonicParsing="false" text="Establecer" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

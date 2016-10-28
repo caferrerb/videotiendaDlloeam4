@@ -11,6 +11,12 @@
 			SELECT f FROM Film f WHERE f.length=?1
 		</query>
 	</named-query>
+	
+	<named-query name="Film.listarDatosPeliculas">
+		<query>
+			SELECT f FROM Film f 
+		</query>
+	</named-query>
 
 	<named-query name="listarCategorias">
 		<query>
