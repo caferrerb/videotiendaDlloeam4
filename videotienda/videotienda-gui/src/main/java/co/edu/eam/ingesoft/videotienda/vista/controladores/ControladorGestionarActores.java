@@ -3,12 +3,15 @@
  */
 package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOActores;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOFilm;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,8 +25,11 @@ import javafx.scene.image.ImageView;
  *
  */
 @Controller
-public class ControladorGestionarActores extends BaseController implements Initializable {
+public class ControladorGestionarActores extends BaseController implements Initializable{
 
+	@Autowired
+	private BOActores boActores;
+	
 	@FXML
 	private TextField tfDocumento;
 	
@@ -47,10 +53,31 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		
 	}
 	
-	public void crear(){
+	public void crearActores(){
+		
+		Actor act = new Actor();
+		act.setActorId((Integer.parseInt(tfDocumento.getText())));
+		act.setFirstName(tfNombre.getText());
+		act.setLastName(tfApellido.getText());
+		//act.setLastUpdate();
+		
 		System.out.println("Creandoooooo...");
 	}
+	public void EditarActores(){
+		System.out.println("Editandoo...");
+	}
+	public void buscarActores(){
+		System.out.println("Buscandoo...");
+	}
+	public void eliminarActores(){
+		System.out.println("Eliminandoo...");
+	}
+
+	
+
+	
+	
 }
