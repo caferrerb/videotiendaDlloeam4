@@ -31,7 +31,17 @@
 		</query>
 	</named-query>
 
-
+	<named-query name="Ciudad.ListarTodos">
+	<query>
+			SELECT c FROM City c
+		</query>
+	</named-query>
+	
+	<named-query name="Empleado.ListarTodos">
+	<query>
+			SELECT s FROM Staff s
+		</query>
+	</named-query>
 
 
 </entity-mappings>

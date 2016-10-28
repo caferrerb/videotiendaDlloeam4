@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="ventanaGestionarPeliculas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="1426.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="620.0" layoutY="14.0" prefHeight="40.0" prefWidth="243.0" text="Gestionar Peliculas" textFill="WHITE">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Button fx:id="jBCrear" layoutX="339.0" layoutY="627.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" style="-fx-background-color: white;" text="CREAR">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="jBBuscar" layoutX="631.0" layoutY="627.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" style="-fx-background-color: white;" text="BUSCAR">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="jBEditar" layoutX="907.0" layoutY="627.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" style="-fx-background-color: white;" text="EDITAR">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <TitledPane fx:id="jPDatosBasicos" animated="false" layoutX="11.0" layoutY="66.0" prefHeight="523.0" prefWidth="713.0" text="Datos Basicos">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="491.0" prefWidth="553.0">
+               <children>
+                  <Label layoutX="508.0" layoutY="347.0" prefHeight="21.0" prefWidth="67.0" text="Poratada:" />
+                  <ImageView fx:id="jPoster" fitHeight="136.0" fitWidth="108.0" layoutX="589.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label layoutX="13.0" layoutY="19.0" prefHeight="21.0" prefWidth="99.0" text="ID de pelicula:" />
+                  <Label layoutX="13.0" layoutY="347.0" prefHeight="21.0" prefWidth="88.0" text="Descripcion:" />
+                  <TextArea fx:id="jTFescriptionj" layoutX="13.0" layoutY="380.0" prefHeight="97.0" prefWidth="333.0" />
+                  <Label layoutX="362.0" layoutY="67.0" prefHeight="21.0" prefWidth="138.0" text="Ultima actualizacion:" />
+                  <DatePicker fx:id="jLastUpdate" layoutX="510.0" layoutY="64.0" prefHeight="31.0" prefWidth="187.0" />
+                  <TextField fx:id="jTFFilmID" layoutX="161.0" layoutY="14.0" prefHeight="31.0" prefWidth="187.0" />
+                  <Label layoutX="13.0" layoutY="115.0" prefHeight="21.0" prefWidth="100.0" text="Clasificacion:" />
+                  <TextField fx:id="jTFRating" layoutX="161.0" layoutY="110.0" prefHeight="31.0" prefWidth="187.0" />
+                  <Label layoutX="13.0" layoutY="162.0" prefHeight="21.0" prefWidth="141.0" text="Año de lanzamiento:" />
+                  <Label layoutX="13.0" layoutY="206.0" prefHeight="21.0" prefWidth="141.0" text="Duracion de alquiler:" />
+                  <TextField fx:id="jTFRentalDuration" layoutX="161.0" layoutY="201.0" prefHeight="31.0" prefWidth="187.0" />
+                  <Label layoutX="12.0" layoutY="256.0" prefHeight="21.0" prefWidth="127.0" text="Tarifa de alquiler:" />
+                  <TextField fx:id="jTFRentalRate" layoutX="161.0" layoutY="251.0" prefHeight="31.0" prefWidth="187.0" />
+                  <Label layoutX="12.0" layoutY="303.0" prefHeight="21.0" prefWidth="136.0" text="Costo de remplazo:" />
+                  <TextField fx:id="jTFReplacementCost" layoutX="161.0" layoutY="298.0" prefHeight="31.0" prefWidth="187.0" />
+                  <Label layoutX="395.0" layoutY="19.0" prefHeight="21.0" prefWidth="99.0" text="Caracteristicas:" />
+                  <TextField fx:id="jTFFactures" layoutX="511.0" layoutY="14.0" prefHeight="31.0" prefWidth="187.0" />
+                  <Label layoutX="11.0" layoutY="63.0" prefHeight="21.0" prefWidth="52.0" text="Titulo:" />
+                  <TextField fx:id="jTFTitle" layoutX="78.0" layoutY="59.0" prefHeight="31.0" prefWidth="270.0" />
+                  <Label layoutX="432.0" layoutY="115.0" prefHeight="21.0" prefWidth="71.0" text="Lenguaje:" />
+                  <TextField fx:id="jTFLanguaje1" layoutX="511.0" layoutY="110.0" prefHeight="31.0" prefWidth="187.0" />
+                  <Label layoutX="351.0" layoutY="162.0" prefHeight="21.0" prefWidth="154.0" text="Lenguaje de subtitulos:" />
+                  <TextField fx:id="jTFLanguaje2" layoutX="511.0" layoutY="158.0" prefHeight="31.0" prefWidth="187.0" />
+                  <DatePicker fx:id="jYearRelease" layoutX="161.0" layoutY="157.0" prefHeight="31.0" prefWidth="187.0" />
+                  <Label layoutX="362.0" layoutY="206.0" prefHeight="21.0" prefWidth="141.0" text="Duracion de pelicula:" />
+                  <TextField fx:id="jTFLength" layoutX="511.0" layoutY="201.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TitledPane fx:id="jPActores" animated="false" layoutX="748.0" layoutY="67.0" prefHeight="523.0" prefWidth="666.0" text="Actores">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="443.0" prefWidth="664.0">
+               <children>
+                  <Label layoutX="48.0" layoutY="30.0" prefHeight="21.0" prefWidth="54.0" text="Actores:" />
+                  <ComboBox fx:id="jCBActores" layoutX="138.0" layoutY="25.0" prefHeight="31.0" prefWidth="338.0" />
+                  <Label layoutX="31.0" layoutY="75.0" prefHeight="21.0" prefWidth="71.0" text="Personaje:" />
+                  <TextField fx:id="jTFPersonaje" layoutX="138.0" layoutY="70.0" prefHeight="31.0" prefWidth="340.0" />
+                  <Button fx:id="jCBAgregar" layoutX="567.0" layoutY="25.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="72.0" text="+">
+                     <font>
+                        <Font size="34.0" />
+                     </font>
+                  </Button>
+                  <TableView layoutX="15.0" layoutY="141.0" prefHeight="330.0" prefWidth="637.0">
+                    <columns>
+                      <TableColumn prefWidth="156.0" text="Actor" />
+                      <TableColumn fx:id="jTablaGestionPeliculas" prefWidth="237.0" text="Personaje" />
+                        <TableColumn prefWidth="242.0" text="Accion" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+   </children>
+</AnchorPane>

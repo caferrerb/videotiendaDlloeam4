@@ -3,19 +3,21 @@ package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 
 import java.awt.TextField;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javax.swing.text.TableView;
 
-import org.hibernate.hql.internal.ast.tree.InitializeableNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOFilm;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 
 @Controller
-public class ControladorGestionarVenta extends BaseController implements InitializeableNode {
+public class ControladorGestionarVenta extends BaseController implements Initializable {
 
 	@Autowired
 	private BOFilm boPelicula;
@@ -27,15 +29,15 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 	private TableView jttablacontenidoPelicula;
 	
 	
-	@Override
-	public void initialize(Object arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	@FXML
 	public void buscarPelicula(){
 		System.out.println("buscando...");
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

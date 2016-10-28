@@ -9,6 +9,7 @@ import co.edu.eam.ingesoft.videotienda.main.ContextFactory;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
 import javafx.fxml.FXML;
@@ -91,6 +92,8 @@ public class MainController implements Initializable {
 	@FXML
 	private MenuItem mnuItemGestionarEmpleado;
 	
+	@FXML
+	private MenuItem menuItemGestionarPelicula;
 	/**
 	 * Inicializacion de la ventana.
 	 */
@@ -175,4 +178,10 @@ public class MainController implements Initializable {
 		agregarVentana("/fxml/VentanaGestionEmpleados.fxml", ControladorGestionarEmpleado.class);
 	
 	}
+	
+	@FXML
+	public void abrirGestionarPeliculas(){
+		agregarVentana("/fxml/VentanaGestionarPeliculas.fxml", ControladorGestionarPelicula.class);
+	}
+	
 }
