@@ -98,6 +98,14 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 		**/
 	}
 	
+	public void editar(){
+		
+	}
+	
+	public void buscar(){
+		
+	}
+	
 	
 	
 	
