@@ -170,7 +170,7 @@ public class MainController implements Initializable {
 	
 	@FXML
 	public void abrirGestionarVenta(){
-		agregarVentana("/fxml/gestionarVenta.fxml", ControladorGestionarVenta.class);
+		agregarVentana("/fxml/GestionarVentaPelicula.fxml", ControladorGestionarVenta.class);
 	}
 
 	@FXML

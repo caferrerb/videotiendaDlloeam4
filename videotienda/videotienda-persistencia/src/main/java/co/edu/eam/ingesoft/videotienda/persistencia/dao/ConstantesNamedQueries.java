@@ -12,8 +12,8 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAREMPLEADOS="Empleado.listarTodos";
 	
 	/**
-	 * consulta para listar datos de las peliculas
+	 * consulta para listar datos de las peliculas por nombre de la pelicula
 	 */
-	public static final String CONSULTA_LISTARDATOSPELICULAS = "Film.listarDatosPeliculas";
+	public static final String CONSULTA_POR_NOMBRE_PELICULA = "Film.listarNombrePelicula";
 	
 }
