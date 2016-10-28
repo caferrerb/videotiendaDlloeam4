@@ -66,12 +66,15 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		
 		System.out.println("Creandoooooo...");
 	}
-	public void EditarActores(){
+	@FXML
+	public void editarActores(){
 		System.out.println("Editandoo...");
 	}
+	@FXML
 	public void buscarActores(){
 		System.out.println("Buscandoo...");
 	}
+	@FXML
 	public void eliminarActores(){
 		System.out.println("Eliminandoo...");
 	}
