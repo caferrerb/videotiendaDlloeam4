@@ -12,8 +12,12 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAREMPLEADOS="Empleado.ListarTodos";
 	
 	/**
+<<<<<<< HEAD
+	 * consulta para listar datos de las peliculas por nombre de la pelicula
+=======
 	 * consulta para listar datos de las peliculas..
+>>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 	 */
-	public static final String CONSULTA_LISTARDATOSPELICULAS = "Film.listarDatosPeliculas";
+	public static final String CONSULTA_POR_NOMBRE_PELICULA = "Film.listarNombrePelicula";
 	
 }
