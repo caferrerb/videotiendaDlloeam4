@@ -31,7 +31,7 @@
                         <Label text="DIRECCION 2:" GridPane.rowIndex="1" />
                         <Label text="EMPLEADO:" GridPane.rowIndex="2" />
                         <TextField fx:id="tfDireccion2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label prefHeight="17.0" prefWidth="108.0" text="CODIGO POSTAL:" GridPane.rowIndex="3" />
+                        <Label prefHeight="17.0" prefWidth="159.0" text="CODIGO POSTAL:" GridPane.rowIndex="3" />
                         <Label text="CIUDAD:" GridPane.rowIndex="5" />
                         <ComboBox fx:id="cbCiudad" prefHeight="25.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label text="LOCALIDAD:" GridPane.rowIndex="4" />
