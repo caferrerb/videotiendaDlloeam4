@@ -55,7 +55,8 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 	@FXML
 	private ComboBox<City> cbCiudad;
 	
-	
+	@FXML
+	private TextField tfTelefono;
 	
 	
 
