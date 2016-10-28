@@ -86,6 +86,19 @@ public class ControladorGestionarActores extends BaseController implements Initi
 	@FXML
 	public void editarActores(){
 		System.out.println("Editandoo...");
+        
+	}
+	@FXML
+	public void buscarActores(){
+		System.out.println("Buscandoo...");
+	}
+	@FXML
+	public void eliminarActores(){
+		System.out.println("Eliminandoo...");
+	}
+	
+	@FXML
+	public void abrirImagen(){
 		FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar Imagen");
 
@@ -118,17 +131,8 @@ public class ControladorGestionarActores extends BaseController implements Initi
 				e.printStackTrace();
 			}
         }
-        
-        
 	}
-	@FXML
-	public void buscarActores(){
-		System.out.println("Buscandoo...");
-	}
-	@FXML
-	public void eliminarActores(){
-		System.out.println("Eliminandoo...");
-	}
+	
 
 	
 
