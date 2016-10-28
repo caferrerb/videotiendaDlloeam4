@@ -1,6 +1,6 @@
 package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
-import java.awt.TextField;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -11,14 +11,13 @@ import org.springframework.stereotype.Controller;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOCiudad;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOEmpleado;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOTienda;
-import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Address;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
-import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 /**
  * Clase responsable de controlar la ventana de gestionar tienda
@@ -31,8 +30,7 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 
 	@Autowired
 	private BOTienda boTienda;
-	
-	
+		
 	@Autowired
 	private BOEmpleado boEmpleado;
 	
