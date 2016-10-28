@@ -49,7 +49,7 @@
                         </Menu>
                         <Menu fx:id="mnuTiendas" mnemonicParsing="false" text="Tiendas">
                           <items>
-                            <MenuItem fx:id="menuItemGestionarTiendas" mnemonicParsing="false" text="Gestionar Tiendas" />
+                            <MenuItem fx:id="menuItemGestionarTiendas" mnemonicParsing="false"  onAction="#abrirGestionarTienda" text="Gestionar Tiendas" />
                           </items>
                         </Menu>
 								

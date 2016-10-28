@@ -7,8 +7,8 @@ public class ConstantesNamedQueries {
 	 */
 	public static final String CONSULTA_LISTARPAISES="Pais.listartodos";
 	
-	public static final String CONSULTA_LISTARCIUDADES="Ciudad.listarTodos";
+	public static final String CONSULTA_LISTARCIUDADES="Ciudad.ListarTodos";
 	
-	public static final String CONSULTA_LISTAREMPLEADOS="Empleado.listarTodos";
+	public static final String CONSULTA_LISTAREMPLEADOS="Empleado.ListarTodos";
 	
 }
