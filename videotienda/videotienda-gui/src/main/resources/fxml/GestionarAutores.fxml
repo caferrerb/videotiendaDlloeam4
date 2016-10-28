@@ -93,22 +93,22 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </TitledPane>
-      <Button fx:id="btnCrearActor" layoutX="131.0" layoutY="444.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" text="Crear">
+      <Button onAction="#crearActores" fx:id="btnCrearActor" layoutX="131.0" layoutY="444.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" text="Crear">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnBuscarActor" layoutX="253.0" layoutY="444.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" text="Buscar">
+      <Button onAction="#buscarActores" fx:id="btnBuscarActor" layoutX="253.0" layoutY="444.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" text="Buscar">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnEliminarAutor" layoutX="372.0" layoutY="445.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Eliminar">
+      <Button onAction="#eliminarActores" fx:id="btnEliminarAutor" layoutX="372.0" layoutY="445.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Eliminar">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnEditarActor" layoutX="488.0" layoutY="445.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Editar">
+      <Button onAction="#editarActores" fx:id="btnEditarActor" layoutX="488.0" layoutY="445.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Editar">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

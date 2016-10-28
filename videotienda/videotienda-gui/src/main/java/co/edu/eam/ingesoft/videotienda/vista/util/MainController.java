@@ -8,6 +8,8 @@ import org.springframework.context.ApplicationContext;
 import co.edu.eam.ingesoft.videotienda.main.ContextFactory;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -79,10 +81,16 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem mnuItemGestionarActores;
+	
+	@FXML
+	private MenuItem mIVenderPeliculas;
 
 	@FXML
 	private AnchorPane contenido;
 
+	@FXML
+	private MenuItem mnuItemGestionarEmpleado;
+	
 	/**
 	 * Inicializacion de la ventana.
 	 */
@@ -156,6 +164,15 @@ public class MainController implements Initializable {
 		agregarVentana("/fxml/GestionarActores.fxml", ControladorGestionarActores.class);
 	
 	}
+	
+	@FXML
+	public void abrirGestionarVenta(){
+		agregarVentana("/fxml/gestionarVenta.fxml", ControladorGestionarVenta.class);
+	}
 
-
+	@FXML
+	public void abrirGestionarEmpleados(){
+		agregarVentana("/fxml/VentanaGestionEmpleados.fxml", ControladorGestionarEmpleado.class);
+	
+	}
 }
