@@ -22,17 +22,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" text="Crear">
+                  <Button fx:id="BtCrear" mnemonicParsing="false" text="Crear">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" text="Editar" textAlignment="CENTER" GridPane.columnIndex="1">
+                  <Button fx:id="BtEditar" mnemonicParsing="false" text="Editar" textAlignment="CENTER" GridPane.columnIndex="1">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" text="Buscar" GridPane.columnIndex="2">
+                  <Button fx:id="BtBuscar" mnemonicParsing="false" text="Buscar" GridPane.columnIndex="2">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -41,23 +41,23 @@
             </GridPane>
          </children>
       </Pane>
-      <ImageView fitHeight="150.0" fitWidth="166.0" layoutX="96.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="PhFoto" fitHeight="150.0" fitWidth="166.0" layoutX="96.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Downloads/14716194_10154708233054828_7210323768630378580_n.jpg" />
          </image>
       </ImageView>
-      <DatePicker layoutX="42.0" layoutY="378.0" />
-      <DatePicker layoutX="42.0" layoutY="326.0" />
-      <CheckBox layoutX="42.0" layoutY="282.0" mnemonicParsing="false" text="Activo">
+      <DatePicker fx:id="DtFechaActualizacion" layoutX="42.0" layoutY="378.0" />
+      <DatePicker fx:id="DtFechaCreacion" layoutX="42.0" layoutY="326.0" />
+      <CheckBox fx:id="CheckActivo" layoutX="46.0" layoutY="285.0" mnemonicParsing="false" text="Activo">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </CheckBox>
-      <TextField layoutX="42.0" layoutY="247.0" prefHeight="25.0" prefWidth="189.0" />
-      <TextField layoutX="42.0" layoutY="196.0" />
-      <TextField layoutX="42.0" layoutY="138.0" prefHeight="25.0" prefWidth="189.0" />
-      <TextField layoutX="42.0" layoutY="87.0" prefHeight="25.0" prefWidth="189.0" />
-      <TextField layoutX="42.0" layoutY="35.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="TfDireccion" layoutX="42.0" layoutY="247.0" prefHeight="25.0" prefWidth="189.0" />
+      <TextField fx:id="TfEmail" layoutX="42.0" layoutY="196.0" />
+      <TextField fx:id="TfSegundoNombre" layoutX="42.0" layoutY="138.0" prefHeight="25.0" prefWidth="189.0" />
+      <TextField fx:id="TfPrimerNombre" layoutX="42.0" layoutY="87.0" prefHeight="25.0" prefWidth="189.0" />
+      <TextField fx:id="TfidTienda" layoutX="42.0" layoutY="35.0" prefHeight="25.0" prefWidth="149.0" />
       <Label layoutX="44.0" layoutY="417.0" text="Foto">
          <font>
             <Font name="Arial" size="14.0" />
@@ -105,8 +105,8 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <ComboBox prefHeight="25.0" prefWidth="200.0" promptText="Seleccione una tienda" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" text="Agregar Horario" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ComboBox fx:id="comboBoxSelecTienda" prefHeight="25.0" prefWidth="200.0" promptText="Seleccione una tienda" GridPane.columnIndex="1" />
+            <Button fx:id="BtAgregarHorario" mnemonicParsing="false" text="Agregar Horario" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="15.0" />
                </font>
@@ -125,7 +125,7 @@
             <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <TableView layoutX="395.0" layoutY="151.0" prefHeight="200.0" prefWidth="246.0" style="-fx-background-radius: 10;">
+      <TableView fx:id="TbHorario" layoutX="395.0" layoutY="151.0" prefHeight="200.0" prefWidth="246.0" style="-fx-background-radius: 10;">
          <columns>
             <TableColumn prefWidth="75.0" text="Dia" />
             <TableColumn prefWidth="100.0" text="Horario" />
