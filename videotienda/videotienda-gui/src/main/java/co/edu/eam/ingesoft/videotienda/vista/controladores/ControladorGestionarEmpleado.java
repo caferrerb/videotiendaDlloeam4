@@ -10,10 +10,14 @@ import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Controller;
 
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 
 @Controller
@@ -37,8 +41,10 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	private DatePicker DtFechaActualizacion;
 	@FXML
 	private ImageView PhFoto;
-	
-	
+	@FXML
+	private ComboBox<Store> comboBoxSelecTienda;
+	@FXML
+	private TableView<StaffSchedule> TbHorario;
 	
 	
 	@Override
