@@ -2,13 +2,13 @@ package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 
 
-import java.awt.TextField;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
-import javax.swing.text.TableView;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,16 +29,23 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 	private TextField jtfTitulo;
 	
 	@FXML
-	private TableView jttablacontenidoPelicula;
+	private TableView<Film> jttablacontenidoPelicula;
+	
+//	@FXML
+//	private TableView jttablacontenidoPelicula;
 	
 	
 	@FXML
 	public void buscarPelicula(){
 		System.out.println("buscando...");
 		
-		Film pelicula = (Film) boPelicula.listarPeliculas(jtfTitulo.getText());
-		System.out.println(pelicula.getDescription());
-		System.out.println(pelicula.getTitle());
+		String nomPelicula = jtfTitulo.getText();
+		List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
+		for (int i = 0; i < pelicula.size(); i++) {
+			System.out.println(pelicula.get(i).getTitle());
+			System.out.println(pelicula.get(i).getDescription());
+		}
+		
 		
 		
 	}
