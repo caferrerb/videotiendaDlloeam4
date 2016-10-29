@@ -88,10 +88,8 @@ public class Actor implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Actor [actorId=" + actorId + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", lastUpdate=" + lastUpdate + "]";
+		return firstName+" "+lastName;
 	}
 	
 	
-
 }
