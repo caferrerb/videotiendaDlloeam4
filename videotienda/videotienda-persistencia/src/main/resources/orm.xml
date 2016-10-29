@@ -11,7 +11,7 @@
 			SELECT f FROM Film f WHERE f.length=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="Film.listarNombrePelicula">
 		<query>
 			SELECT f FROM Film f WHERE f.title=?1
@@ -32,22 +32,27 @@
 	</named-query>
 
 	<named-query name="Actor.ListarTodos">
-	<query>
+		<query>
 			SELECT act FROM Actor act
 		</query>
 	</named-query>
 
 	<named-query name="Ciudad.ListarTodos">
-	<query>
+		<query>
 			SELECT c FROM City c
 		</query>
 	</named-query>
-	
+
 	<named-query name="Empleado.ListarTodos">
-	<query>
+		<query>
 			SELECT s FROM Staff s
 		</query>
 	</named-query>
 
+	<named-query name="Rol.ListarTodos">
+		<query>
+			SELECT r FROM Rol r
+		</query>
+	</named-query>
 
 </entity-mappings>

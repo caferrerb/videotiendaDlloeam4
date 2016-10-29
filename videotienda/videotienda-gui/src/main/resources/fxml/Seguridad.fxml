@@ -14,10 +14,10 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="36.0" layoutY="170.0" prefHeight="200.0" prefWidth="360.0">
+                        <TableView fx:id="tablaRoles" layoutX="43.0" layoutY="170.0" prefHeight="200.0" prefWidth="360.0">
                           <columns>
-                            <TableColumn prefWidth="126.0" text="ID" />
-                            <TableColumn prefWidth="123.0" text="NOMBRE" />
+                            <TableColumn fx:id="idRolCL" prefWidth="126.0" text="ID" />
+                            <TableColumn fx:id="nombreRolCL" prefWidth="123.0" text="NOMBRE" />
                           </columns>
                         </TableView>
                         <GridPane layoutX="58.0" layoutY="53.0" prefHeight="18.0" prefWidth="315.0">
@@ -32,10 +32,10 @@
                           </rowConstraints>
                            <children>
                               <Label text="Nombre del Rol" />
-                              <TextField id="tfNombreRol" prefHeight="25.0" prefWidth="197.0" GridPane.columnIndex="1" />
+                              <TextField fx:id="tfNombreRol" prefHeight="25.0" prefWidth="197.0" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
-                        <Button id="btnCrearRol" layoutX="186.0" layoutY="106.0" mnemonicParsing="false" text="Crear" />
+                        <Button id="btnCrearRol" layoutX="186.0" layoutY="106.0" mnemonicParsing="false" onAction="#crearRol" text="Crear" />
                      </children>
                   </AnchorPane>
                </content>
@@ -63,9 +63,9 @@
                           </rowConstraints>
                            <children>
                               <Label text="Roles" />
-                              <ComboBox id="cbRoles" prefHeight="25.0" prefWidth="170.0" promptText="Seleccione un rol" GridPane.columnIndex="1" />
+                              <ComboBox fx:id="cbRoles" prefHeight="25.0" prefWidth="170.0" promptText="Seleccione un rol" GridPane.columnIndex="1" />
                               <Label text="Pantallas" GridPane.rowIndex="1" />
-                              <ComboBox id="cbPantalla" prefHeight="25.0" prefWidth="173.0" promptText="Seleccione una pantalla" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="cbPantalla" prefHeight="25.0" prefWidth="173.0" promptText="Seleccione una pantalla" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -77,7 +77,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="507.0" prefWidth="431.0">
                      <children>
                         <Label layoutX="56.0" layoutY="248.0" text="Rol" />
-                        <ComboBox id="cbRolAsignar" layoutX="110.0" layoutY="244.0" prefHeight="25.0" prefWidth="165.0" promptText="Seleccione un rol" />
+                        <ComboBox fx:id="cbRolUsuario" layoutX="110.0" layoutY="244.0" prefHeight="25.0" prefWidth="165.0" promptText="Seleccione un rol" />
                         <Button id="btnAsignar" layoutX="299.0" layoutY="244.0" mnemonicParsing="false" text="Asignar" />
                         <TableView layoutX="51.0" layoutY="296.0" prefHeight="165.0" prefWidth="329.0">
                           <columns>
@@ -97,11 +97,11 @@
                           </rowConstraints>
                            <children>
                               <Label text="Empleado" />
-                              <ComboBox id="cbEmpleado" prefHeight="25.0" prefWidth="266.0" promptText="Elegir el empleado" GridPane.columnIndex="1" />
+                              <ComboBox fx:id="cbEmpleado" prefHeight="25.0" prefWidth="266.0" promptText="Elegir el empleado" GridPane.columnIndex="1" />
                               <Label text="Password" GridPane.rowIndex="2" />
-                              <TextField id="tfPassword" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="tfPassword" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label text="Usuario" GridPane.rowIndex="1" />
-                              <TextField id="tfUsuario" prefHeight="25.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="tfUsuario" prefHeight="25.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                         <Button id="btnEstablecer" layoutX="181.0" layoutY="148.0" mnemonicParsing="false" text="Establecer" />

@@ -20,4 +20,9 @@ public class ConstantesNamedQueries {
 	 */
 	public static final String CONSULTA_POR_NOMBRE_PELICULA = "Film.listarNombrePelicula";
 	
+	/**
+	 * Consulta para listar todos los roles
+	 */
+	public static final String CONSULTA_LISTAR_ROLES="Rol.ListarTodos";
+	
 }

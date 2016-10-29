@@ -12,6 +12,7 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarE
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarTienda;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorSeguridad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,6 +72,9 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	private Menu mnuPrestamos;
+	
+	@FXML
+	private Menu mnuAutorizacion;
 
 	/**
 	 * item de iniciar sesion.
@@ -95,6 +99,9 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem menuItemGestionarPelicula;
+	
+	@FXML
+	private MenuItem mnuItemRoles;
 	/**
 	 * Inicializacion de la ventana.
 	 */
@@ -187,5 +194,10 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirGestionarTienda(){		
 		agregarVentana("/fxml/VentanaGestionarTienda.fxml", ControladorGestionarTienda.class);
+	}
+	
+	@FXML
+	public void abrirAutorizacion(){		
+		agregarVentana("/fxml/Seguridad.fxml", ControladorSeguridad.class);
 	}
 }
