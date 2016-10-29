@@ -46,6 +46,9 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 		llenarComboCiudades();
 	}
 	
+	/**
+	 * LLena el combo de ciudades
+	 */
 	private void llenarComboCiudades(){
 		List<City> listaCiudades = boCiudad.listarCiudades();
 		for (City city : listaCiudades) {
@@ -53,6 +56,9 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 		}
 	}
 	
+	/**
+	 * Permite buscar un cliente registrado
+	 */
 	@FXML
 	public void buscar(){
 		
@@ -67,6 +73,9 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 		
 	}
 	
+	/**
+	 * Traslada la ciudad de un cliente
+	 */
 	@FXML
 	public void trasladar(){
 		if (cliente == null){
