@@ -49,7 +49,7 @@
                         <Font name="System Bold Italic" size="9.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnAgregarImagen" layoutX="76.0" layoutY="428.0" mnemonicParsing="false" onAction="#abrirImagen" prefHeight="29.0" prefWidth="163.0" text="Seleccione imagen">
+                  <Button fx:id="btnAgregarImagen" layoutX="91.0" layoutY="428.0" mnemonicParsing="false" onAction="#abrirImagen" prefHeight="29.0" prefWidth="163.0" text="Seleccione imagen">
                      <font>
                         <Font name="System Bold Italic" size="13.0" />
                      </font></Button>

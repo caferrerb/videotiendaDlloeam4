@@ -111,7 +111,7 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		}
 	}
 
-	public void crearActores() {
+	public void crearActores() throws Exception {
 		
 		try {
 			if (imgFile == null || tfDocumento.getText().isEmpty() || tfApellido.getText().isEmpty() || tfNombre.getText().isEmpty()) {
@@ -132,6 +132,7 @@ public class ControladorGestionarActores extends BaseController implements Initi
 				act.setCountry((Country) cbCiudad.getValue());
 				
 				boActores.crear(act);
+				
 			}
 
 		} catch (IOException e) {
