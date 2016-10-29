@@ -53,38 +53,99 @@ public class Actor implements Serializable {
 	public Actor() {
 	}
 
+
+	/**
+	 * @return the actorId
+	 */
 	public int getActorId() {
-		return this.actorId;
+		return actorId;
 	}
 
+
+	/**
+	 * @param actorId the actorId to set
+	 */
 	public void setActorId(int actorId) {
 		this.actorId = actorId;
 	}
 
+	/**
+	 * @return the firstName
+	 */
 	public String getFirstName() {
-		return this.firstName;
+		return firstName;
 	}
 
+	/**
+	 * @param firstName the firstName to set
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
+	/**
+	 * @return the lastName
+	 */
 	public String getLastName() {
-		return this.lastName;
+		return lastName;
 	}
 
+	/**
+	 * @param lastName the lastName to set
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
+	/**
+	 * @return the lastUpdate
+	 */
 	public Date getLastUpdate() {
-		return this.lastUpdate;
+		return lastUpdate;
 	}
 
+
+	/**
+	 * @param lastUpdate the lastUpdate to set
+	 */
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 
+	/**
+	 * @return the country
+	 */
+	public Country getCountry() {
+		return country;
+	}
+
+	/**
+	 * @param country the country to set
+	 */
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	/**
+	 * @return the photo
+	 */
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	/**
+	 * @param photo the photo to set
+	 */
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	@Override
 	public String toString() {
