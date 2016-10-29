@@ -36,20 +36,9 @@
                   <TextField fx:id="tfDocumento" layoutX="121.0" layoutY="26.0" />
                   <TextField fx:id="tfNombre" layoutX="121.0" layoutY="69.0" />
                   <TextField fx:id="tfApellido" layoutX="121.0" layoutY="107.0" />
-                  <ImageView fx:id="imgFoto" fitHeight="156.0" fitWidth="154.0" layoutX="133.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgFoto" fitHeight="209.0" fitWidth="195.0" layoutX="100.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
                    
                   </ImageView>
-                  <DatePicker fx:id="dateFecha" layoutX="153.0" layoutY="417.0" prefHeight="27.0" prefWidth="114.0" />
-                  <Label layoutX="28.0" layoutY="413.0" prefHeight="17.0" prefWidth="60.0" text="Ultima">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="20.0" layoutY="430.0" text="Actualizacion">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
                   <Label layoutX="31.0" layoutY="149.0" text="Ciudad">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -60,7 +49,7 @@
                         <Font name="System Bold Italic" size="9.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnAgregarImagen" layoutX="112.0" layoutY="367.0" mnemonicParsing="false" onAction="#abrirImagen" prefHeight="29.0" prefWidth="163.0" text="Seleccione imagen">
+                  <Button fx:id="btnAgregarImagen" layoutX="76.0" layoutY="428.0" mnemonicParsing="false" onAction="#abrirImagen" prefHeight="29.0" prefWidth="163.0" text="Seleccione imagen">
                      <font>
                         <Font name="System Bold Italic" size="13.0" />
                      </font></Button>

@@ -24,6 +24,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Country;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -44,7 +45,7 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@Autowired
 	private BOActores boActores;
-	
+
 	@Autowired
 	private BOPais boPais;
 
@@ -59,9 +60,6 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@FXML
 	private ImageView imgFoto;
-
-	@FXML
-	private DatePicker dateFecha;
 
 	@FXML
 	private ComboBox cbCiudad;
@@ -101,36 +99,45 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		imgFile = fileChooser.showOpenDialog(MainApp.getStage()); // Obtener la
 																	// imagen
 																	// seleccionada
+
 		if (imgFile != null) {
-			Image image = new Image("file:" + imgFile.getAbsolutePath());
-			imgFoto.setImage(image); // Mostar la imagen
+			if (imgFile.length() <= 100 * 1024) {
+				Image image = new Image("file:" + imgFile.getAbsolutePath());
+				imgFoto.setImage(image); // Mostar la imagen
+			} else {
+				notificar("Crear Actor", "Supero el tamaño maximo de la foto que son 100k", TipoNotificacion.ERROR);
+			}
+
 		}
 	}
 
 	public void crearActores() {
-
-		Actor act = new Actor();
-
+		
 		try {
-			if (imgFile != null) {
+			if (imgFile == null || tfDocumento.getText().isEmpty() || tfApellido.getText().isEmpty() || tfNombre.getText().isEmpty()) {
+			
+				notificar("Crear Actor","Verifique que todos los campos esten llenos y haya cargado una imagen ", TipoNotificacion.ERROR);
+
+			}else{
 				byte[] bites = new byte[(int) imgFile.length()];
 				FileInputStream fin = new FileInputStream(imgFile);
 				fin.read(bites);
-
+				
+				Actor act = new Actor();
+				
 				act.setActorId((Integer.parseInt(tfDocumento.getText())));
 				act.setFirstName(tfNombre.getText());
 				act.setLastName(tfApellido.getText());
-				// act.setLastUpdate(dateFecha);
 				act.setPhoto(bites);
-				// act.setCountry();
+				act.setCountry((Country) cbCiudad.getValue());
+				
+				boActores.crear(act);
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		System.out.println("Creandoooooo...");
 	}
 
 	@FXML
