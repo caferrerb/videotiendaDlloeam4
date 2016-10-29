@@ -2,11 +2,11 @@ package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 
 
-import java.awt.Checkbox;
-import java.awt.Image;
-import java.awt.TextField;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
 
 import org.springframework.stereotype.Controller;
 
@@ -15,16 +15,18 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 @Controller
 public class ControladorGestionarEmpleado extends BaseController implements Initializable {
 
 	@FXML
-	private  TextField TfidTienda;
+	private TextField TfidTienda;
 	@FXML
 	private TextField TfPrimerNombre;	
 	@FXML
@@ -34,7 +36,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	@FXML
 	private TextField TfDireccion;
 	@FXML
-	private Checkbox CheckActivo;
+	private CheckBox CheckActivo;
 	@FXML
 	private DatePicker DtFechaCreacion;
 	@FXML
@@ -53,9 +55,20 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		
 	}
 
-	
+	@FXML
+	public void crearEmpleado(){
+		JOptionPane.showMessageDialog(null, "Crear");
+	}
 
+	@FXML
+	public void editar(){
+		
+	}
 	
+	@FXML
+	public void buscar(){
+		
+	}
 
 
 }

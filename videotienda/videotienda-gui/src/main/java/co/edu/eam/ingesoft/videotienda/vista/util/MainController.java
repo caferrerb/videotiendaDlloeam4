@@ -12,6 +12,7 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarE
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarTienda;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorVentanaTrasladarCiudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +54,12 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	private Menu mnuActores;
+	
+	/**
+	 * Menu equipos
+	 */
+	@FXML
+	private Menu menuCliente;
 
 	/**
 	 * Menu equipos
@@ -77,6 +84,9 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	private MenuItem mnuSucursales;
+	
+	@FXML
+	private MenuItem menuItemTraslado;
 	
 	@FXML
 	private MenuItem mnuItemGestionarCiudad;
@@ -170,14 +180,18 @@ public class MainController implements Initializable {
 	}
 	
 	@FXML
+	public void abrirTrasladarCliente(){
+		agregarVentana("/fxml/VentanaTrasladarCiudadCliente.fxml", ControladorVentanaTrasladarCiudad.class);
+	}
+	
+	@FXML
 	public void abrirGestionarVenta(){
-		agregarVentana("/fxml/gestionarVenta.fxml", ControladorGestionarVenta.class);
+		agregarVentana("/fxml/GestionarVentaPelicula.fxml", ControladorGestionarVenta.class);
 	}
 
 	@FXML
 	public void abrirGestionarEmpleados(){
-		agregarVentana("/fxml/VentanaGestionEmpleados.fxml", ControladorGestionarEmpleado.class);
-	
+		agregarVentana("/fxml/VentanaGestionEmpleados.fxml", ControladorGestionarEmpleado.class);	
 	}
 	
 	@FXML

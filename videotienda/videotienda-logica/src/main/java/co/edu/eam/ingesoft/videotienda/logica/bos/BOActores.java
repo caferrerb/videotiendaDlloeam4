@@ -31,4 +31,11 @@ public class BOActores extends BOGenerico<Actor> {
 		}
 	}
 
+	/**
+	 * metodo para listar autores
+	 * @return autores registrados
+	 */
+	public List<Actor> listarAutores(){
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_AUTORES);
+	}
 }

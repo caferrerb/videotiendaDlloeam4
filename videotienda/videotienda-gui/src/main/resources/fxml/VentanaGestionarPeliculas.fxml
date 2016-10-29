@@ -80,9 +80,9 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="443.0" prefWidth="664.0">
                <children>
-                  <Label layoutX="48.0" layoutY="30.0" prefHeight="21.0" prefWidth="54.0" text="Actores:" />
+                  <Label layoutX="34.0" layoutY="30.0" prefHeight="21.0" prefWidth="68.0" text="Actores:" />
                   <ComboBox fx:id="jCBActores" layoutX="138.0" layoutY="25.0" prefHeight="31.0" prefWidth="338.0" />
-                  <Label layoutX="31.0" layoutY="75.0" prefHeight="21.0" prefWidth="71.0" text="Personaje:" />
+                  <Label layoutX="16.0" layoutY="75.0" prefHeight="21.0" prefWidth="86.0" text="Personaje:" />
                   <TextField fx:id="jTFPersonaje" layoutX="138.0" layoutY="70.0" prefHeight="31.0" prefWidth="340.0" />
                   <Button fx:id="jCBAgregar" layoutX="567.0" layoutY="25.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="72.0" text="+">
                      <font>
