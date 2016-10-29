@@ -49,5 +49,10 @@
 		</query>
 	</named-query>
 
+	<named-query name="Language.ListarTodos">
+	<query>
+			SELECT lag FROM Language lag
+		</query>
+	</named-query>
 
 </entity-mappings>
