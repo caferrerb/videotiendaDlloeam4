@@ -54,5 +54,11 @@
 			SELECT r FROM Rol r
 		</query>
 	</named-query>
+	
+	<named-query name="UsuarioRol.ListarPorRol">
+		<query>
+			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1
+		</query>
+	</named-query>
 
 </entity-mappings>

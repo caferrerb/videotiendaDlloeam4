@@ -18,6 +18,7 @@
                           <columns>
                             <TableColumn fx:id="idRolCL" prefWidth="126.0" text="ID" />
                             <TableColumn fx:id="nombreRolCL" prefWidth="123.0" text="NOMBRE" />
+                              <TableColumn fx:id="eliminarRolCL" prefWidth="110.0" text="Eliminar" />
                           </columns>
                         </TableView>
                         <GridPane layoutX="58.0" layoutY="53.0" prefHeight="18.0" prefWidth="315.0">
@@ -78,7 +79,7 @@
                      <children>
                         <Label layoutX="56.0" layoutY="248.0" text="Rol" />
                         <ComboBox fx:id="cbRolUsuario" layoutX="110.0" layoutY="244.0" prefHeight="25.0" prefWidth="165.0" promptText="Seleccione un rol" />
-                        <Button id="btnAsignar" layoutX="299.0" layoutY="244.0" mnemonicParsing="false" text="Asignar" />
+                        <Button id="btnAsignar" layoutX="299.0" layoutY="244.0" mnemonicParsing="false" onAction="#asignarRol" text="Asignar" />
                         <TableView layoutX="51.0" layoutY="296.0" prefHeight="165.0" prefWidth="329.0">
                           <columns>
                             <TableColumn prefWidth="163.0" text="Rol" />
@@ -104,7 +105,7 @@
                               <TextField fx:id="tfUsuario" prefHeight="25.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
-                        <Button id="btnEstablecer" layoutX="181.0" layoutY="148.0" mnemonicParsing="false" text="Establecer" />
+                        <Button id="btnEstablecer" layoutX="181.0" layoutY="148.0" mnemonicParsing="false" onAction="#establecerUsuario" text="Establecer" />
                      </children>
                   </AnchorPane>
               </content>
