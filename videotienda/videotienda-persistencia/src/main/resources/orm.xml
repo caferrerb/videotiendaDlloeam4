@@ -48,6 +48,12 @@
 			SELECT s FROM Staff s
 		</query>
 	</named-query>
+	
+	<named-query name="Tienda.ListarTodos">
+	<query>
+			SELECT s FROM Store s
+		</query>
+	</named-query>
 
 	<named-query name="Language.ListarTodos">
 	<query>

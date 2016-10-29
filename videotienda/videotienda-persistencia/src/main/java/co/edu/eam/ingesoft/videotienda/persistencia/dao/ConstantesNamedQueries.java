@@ -22,6 +22,10 @@ public class ConstantesNamedQueries {
 	
 	public static final String CONSULTA_LISTAR_AUTORES = "Actor.ListarTodos";
 	
+
 	public static final String CONSULTA_LISTAR_LENGUAJES = "Language.ListarTodos";
+
+	public static final String CONSULTA_LISTAR_TIENDAS = "Tienda.ListarTodos";
+
 	
 }

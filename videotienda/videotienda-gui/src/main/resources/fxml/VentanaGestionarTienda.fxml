@@ -5,18 +5,19 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="1017.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="392.0" prefWidth="1017.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane animated="false" layoutX="14.0" layoutY="14.0" prefHeight="251.0" prefWidth="414.0" text="DATOS BASICOS">
+      <TitledPane animated="false" layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="414.0" text="DATOS BASICOS">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="212.0" prefWidth="308.0">
                <children>
-                  <GridPane layoutX="14.0" layoutY="14.0" prefHeight="206.0" prefWidth="363.0">
+                  <GridPane layoutX="14.0" layoutY="14.0" prefHeight="242.0" prefWidth="363.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="187.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="145.0" />
                     </columnConstraints>
                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -26,39 +27,41 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="DIRECCION:" />
-                        <TextField fx:id="tfDireccion" GridPane.columnIndex="1" />
-                        <Label text="DIRECCION 2:" GridPane.rowIndex="1" />
-                        <Label text="EMPLEADO:" GridPane.rowIndex="2" />
-                        <TextField fx:id="tfDireccion2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label prefHeight="17.0" prefWidth="159.0" text="CODIGO POSTAL:" GridPane.rowIndex="3" />
-                        <Label text="CIUDAD:" GridPane.rowIndex="5" />
-                        <ComboBox fx:id="cbCiudad" prefHeight="25.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label text="LOCALIDAD:" GridPane.rowIndex="4" />
-                        <TextField fx:id="tfCodigoPostal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="TELEFONO:" GridPane.rowIndex="6" />
-                        <TextField fx:id="tfTelefono" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <ComboBox fx:id="cbEmpleado" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="tfLocalidad" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="DIRECCION:" GridPane.rowIndex="1" />
+                        <TextField fx:id="tfDireccion" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="DIRECCION 2:" GridPane.rowIndex="2" />
+                        <Label text="EMPLEADO:" GridPane.rowIndex="3" />
+                        <TextField fx:id="tfDireccion2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label prefHeight="17.0" prefWidth="159.0" text="CODIGO POSTAL:" GridPane.rowIndex="4" />
+                        <Label text="CIUDAD:" GridPane.rowIndex="6" />
+                        <ComboBox fx:id="cbCiudad" prefHeight="25.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label text="LOCALIDAD:" GridPane.rowIndex="5" />
+                        <TextField fx:id="tfCodigoPostal" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="TELEFONO:" GridPane.rowIndex="7" />
+                        <TextField fx:id="tfTelefono" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <ComboBox fx:id="cbEmpleado" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="tfLocalidad" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="TIENDA:" />
+                        <ComboBox fx:id="cbTiendas" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
-      <TabPane layoutX="517.0" layoutY="17.0" prefHeight="260.0" prefWidth="442.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="517.0" layoutY="17.0" prefHeight="300.0" prefWidth="442.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="EMPLEADOS">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="391.0">
                      <children>
-                        <TableView layoutX="11.0" layoutY="16.0" prefHeight="200.0" prefWidth="427.0">
+                        <TableView fx:id="tbEmpleado" layoutX="11.0" layoutY="16.0" prefHeight="246.0" prefWidth="427.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="CODIGO" />
-                            <TableColumn fx:id="tbEmpleados" prefWidth="75.0" text="NOMBRE" />
-                              <TableColumn prefWidth="94.0" text="APELLIDO" />
-                              <TableColumn prefWidth="85.0" text="HORARIO" />
-                              <TableColumn prefWidth="96.0" />
+                            <TableColumn fx:id="cCodigo" prefWidth="75.0" text="CODIGO" />
+                            <TableColumn fx:id="cNombre" prefWidth="75.0" text="NOMBRE" />
+                              <TableColumn fx:id="cApellido" prefWidth="94.0" text="APELLIDO" />
+                              <TableColumn fx:id="cHorario" prefWidth="85.0" text="HORARIO" />
+                              <TableColumn fx:id="cButtonEmpleados" prefWidth="96.0" />
                           </columns>
                         </TableView>
                      </children>
@@ -69,11 +72,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="49.0" layoutY="16.0" prefHeight="200.0" prefWidth="364.0">
+                        <TableView fx:id="tbInventario" layoutX="19.0" layoutY="16.0" prefHeight="239.0" prefWidth="414.0">
                           <columns>
-                            <TableColumn fx:id="tbInventario" prefWidth="75.0" text="TITULO" />
-                            <TableColumn prefWidth="104.0" text="GENERO" />
-                              <TableColumn prefWidth="100.0" text="CANTIDAD" />
+                            <TableColumn fx:id="cTitulo" prefWidth="75.0" text="TITULO" />
+                            <TableColumn fx:id="cGenero" prefWidth="104.0" text="GENERO" />
+                              <TableColumn fx:id="cCantidad" prefWidth="100.0" text="CANTIDAD" />
+                              <TableColumn fx:id="cButtonInventario" prefWidth="134.0" />
                           </columns>
                         </TableView>
                      </children>
@@ -82,7 +86,7 @@
           </Tab>
         </tabs>
       </TabPane>
-      <GridPane layoutX="236.0" layoutY="277.0" prefHeight="90.0" prefWidth="428.0">
+      <GridPane layoutX="238.0" layoutY="333.0" prefHeight="90.0" prefWidth="428.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="152.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.0" minWidth="10.0" prefWidth="150.0" />
