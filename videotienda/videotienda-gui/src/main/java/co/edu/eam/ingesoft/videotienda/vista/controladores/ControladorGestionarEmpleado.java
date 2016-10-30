@@ -2,17 +2,18 @@ package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 import java.net.URL;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOCiudad;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BODireccion;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOEmpleado;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOPais;
+import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Address;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Country;
@@ -38,6 +39,10 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	@Autowired
 	private BOCiudad boCiudad;
 	
+	@Autowired
+	private BOPais pais;
+	@Autowired
+	private BODireccion boDireccion;
 	
 	@FXML
 	private TextField TfidTienda;
@@ -70,50 +75,54 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	@FXML
 	private ComboBox<City> CBCiudad;
 	@FXML
-	private TextField TFDepartamento;
+	private ComboBox<Country> CBPais;
 	@FXML
 	private DatePicker DTUlltimaActualizacionDir;
 	@FXML
 	private TextField TFTelefono;
 	@FXML
 	private TextField TFCodigoPos;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		
 		llenarComboCiudad();
+		llenarPais();
 	}
 
 	@FXML
-	public void crearEmpleado(){
-		
-		Staff empleado = new Staff();
-		Address direccion = new Address();
-		//Busca una ciudad por su id
-		City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
-		direccion.setAddress(TFDireccionA.getText());
-		direccion.setAddress2(TFDdireccionB.getText());
-		direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
-		direccion.setCity(ciudad);
-		direccion.setDistrict(TFDepartamento.getText());
-		direccion.setLastUpdate((Timestamp) DTUlltimaActualizacionDir.getUserData());
-		direccion.setPhone(TFTelefono.getText());
-		direccion.setPostalCode(TFCodigoPos.getText());
-		empleado.setAddress(direccion);
-		empleado.setEmail(TfEmail.getText());
-		empleado.setFirstName(TfPrimerNombre.getText());
-		empleado.setLastName(TfSegundoNombre.getText());
-		empleado.setLastUpdate((Timestamp) DtFechaCreacion.getUserData());
-		if(CheckActivo.isSelected() == true){
-			empleado.setActive(true);
-		}else{
-			empleado.setActive(false);
+	public void crearEmpleado() throws ExcepcionNegocio {
+		try {
+			Staff empleado = new Staff();
+			Address direccion = new Address();
+			// Busca una ciudad por su id
+			City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
+			direccion.setAddress(TFDireccionA.getText());
+			direccion.setAddress2(TFDdireccionB.getText());
+			direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
+			direccion.setCity(ciudad);
+			direccion.setDistrict( CBPais.getSelectionModel().getSelectedItem().toString());
+			direccion.setLastUpdate((Timestamp) DTUlltimaActualizacionDir.getUserData());
+			direccion.setPhone(TFTelefono.getText());
+			direccion.setPostalCode(TFCodigoPos.getText());
+			empleado.setAddress(direccion);
+			empleado.setEmail(TfEmail.getText());
+			empleado.setFirstName(TfPrimerNombre.getText());
+			empleado.setLastName(TfSegundoNombre.getText());
+			empleado.setLastUpdate((Timestamp) DtFechaCreacion.getUserData());
+			if (CheckActivo.isSelected() == true) {
+				empleado.setActive(true);
+			} else {
+				empleado.setActive(false);
+			}
+			boDireccion.crearDireccion(direccion);
+			boEmpleado.crearEmpleado(empleado);
+
+			notificar("Gestionar empleado", "Empleado Creado con exito", TipoNotificacion.INFO);
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		boEmpleado.crear(empleado);
-		
-		notificar("Gestionar empleado","Empleado Creado con exito", TipoNotificacion.INFO);
-		
 	}
 
 	@FXML
@@ -125,7 +134,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	public void buscarEmpleado() {
 
 	}
-	
+
 	private void llenarComboCiudad() {
 		List<City> lista = boCiudad.listarCiudades();
 		for (City ciudad : lista) {
@@ -133,4 +142,10 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		}
 	}
 
+	private void llenarPais() {
+		List<Country> lista = pais.listarPaises();
+		for (Country pais : lista) {
+			CBPais.getItems().add(pais);
+		}
+	}
 }

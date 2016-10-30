@@ -3,8 +3,11 @@ package co.edu.eam.ingesoft.videotienda.logica.bos;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 
 @Component
@@ -32,5 +35,10 @@ public class BOEmpleado extends BOGenerico<Staff>{
 	public List<Staff> listarEmpleadosTienda(byte id){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_EMPLEADOS_TIENDA,id);
 		
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void crearEmpleado(Staff empleado){
+		super.crear(empleado);
 	}
 }

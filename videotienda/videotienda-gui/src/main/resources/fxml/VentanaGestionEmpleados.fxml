@@ -190,11 +190,6 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="TFDepartamento" GridPane.columnIndex="1" GridPane.rowIndex="9">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </TextField>
             <DatePicker fx:id="DTUlltimaActualizacionDir" GridPane.columnIndex="1" GridPane.rowIndex="11">
                <GridPane.margin>
                   <Insets left="10.0" />
@@ -220,6 +215,11 @@
                   <Image url="@../Downloads/14716194_10154708233054828_7210323768630378580_n.jpg" />
                </image>
             </ImageView>
+            <ComboBox fx:id="CBPais" prefHeight="25.0" prefWidth="162.0" promptText="Seleccione un departamento" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </ComboBox>
          </children>
       </GridPane>
    </children>

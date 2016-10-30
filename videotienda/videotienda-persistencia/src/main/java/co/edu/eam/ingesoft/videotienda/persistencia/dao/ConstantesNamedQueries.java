@@ -29,5 +29,5 @@ public class ConstantesNamedQueries {
 	
 	public static final String CONSULTA_LISTAR_EMPLEADOS_TIENDA = "EmpleadosTienda.ListarTodos";
 
-	
+
 }

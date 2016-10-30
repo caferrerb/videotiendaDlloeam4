@@ -60,6 +60,8 @@ public class Address implements Serializable {
 	public Address() {
 	}
 
+
+
 	public int getAddressId() {
 		return this.addressId;
 	}
