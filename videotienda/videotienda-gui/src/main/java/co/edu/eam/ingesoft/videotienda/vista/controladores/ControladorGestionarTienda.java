@@ -113,16 +113,21 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 			}else{
 				Store store = cbTiendas.getSelectionModel().getSelectedItem();
 				
-				List<Staff> lista = boEmpleado.listarEmpleados();
+				List<Staff> lista = boEmpleado.listarEmpleadosTienda(store.getStoreId());
 				for (Staff staff : lista){
 					data.add(staff);
 					
-				cCodigo.setCellValueFactory(new PropertyValueFactory<>("CODIGO"));
-				cNombre.setCellValueFactory(new PropertyValueFactory<>("NOMBRE"));
-				cApellido.setCellValueFactory(new PropertyValueFactory<>("APELLIDO"));
-				cHorario.setCellValueFactory(new PropertyValueFactory<>("HORARIO"));
-				cButtonEmpleados.setCellValueFactory(new PropertyValueFactory<>("VER"));
+				cCodigo.setCellValueFactory(new PropertyValueFactory<Staff, Byte>("CODIGO"));
+				cCodigo.setMinWidth(100);
+				cNombre.setCellValueFactory(new PropertyValueFactory<Staff, String>("NOMBRE"));
+				cNombre.setMinWidth(100);
+				cApellido.setCellValueFactory(new PropertyValueFactory<Staff, String>("APELLIDO"));
+				cApellido.setMinWidth(100);
+				cHorario.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Date>("HORARIO"));
+				cHorario.setMinWidth(100);
+				cButtonEmpleados.setCellValueFactory(new PropertyValueFactory<Staff, Button>("INFORMACION"));
 				tbEmpleado.setItems(data);
+
 				
 			}
 		}		
@@ -137,7 +142,7 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 		llenarComboCiudad();
 		llenarComboEmpleado();
 		llenarComboTienda();
-		cargarTablaEmpleados();
+		//cargarTablaEmpleados();
 		
 	}
 	
@@ -164,6 +169,10 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 		}
 	}
 	
+	private void empleadosTienda(){
+		
+	}
+	
 	public void crear(){
 	
 		/*
@@ -182,8 +191,9 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 		
 	}
 	
+	@FXML
 	public void buscar(){
-		
+		cargarTablaEmpleados();
 	}
 	
 	

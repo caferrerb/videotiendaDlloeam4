@@ -54,10 +54,16 @@
 			SELECT s FROM Store s
 		</query>
 	</named-query>
-
+	
 	<named-query name="Language.ListarTodos">
 	<query>
 			SELECT lag FROM Language lag
+		</query>
+	</named-query>
+
+	<named-query name="EmpleadosTienda.ListarTodos">
+	<query>
+			SELECT s FROM Staff s WHERE s.store=?1 
 		</query>
 	</named-query>
 

@@ -5,6 +5,7 @@ package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,9 +18,12 @@ import javax.imageio.ImageIO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.sun.javafx.font.freetype.FTFactory;
+
 import co.edu.eam.ingesis.gestorlab.gui.MainApp;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOActores;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOPais;
+import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Country;
@@ -76,7 +80,6 @@ public class ControladorGestionarActores extends BaseController implements Initi
 	public void initialize(URL location, ResourceBundle resources) {
 
 		llenarComboPaises();
-
 	}
 
 	@FXML
@@ -91,7 +94,6 @@ public class ControladorGestionarActores extends BaseController implements Initi
 	public void abrirImagen() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Buscar Imagen");
-
 		// Agregar filtros para facilitar la busqueda
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Images", "*.*"),
 				new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"));
@@ -111,27 +113,31 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		}
 	}
 
-	public void crearActores() {
-		
-		try {
-			if (imgFile == null || tfDocumento.getText().isEmpty() || tfApellido.getText().isEmpty() || tfNombre.getText().isEmpty()) {
-			
-				notificar("Crear Actor","Verifique que todos los campos esten llenos y haya cargado una imagen ", TipoNotificacion.ERROR);
+	public void crearActores() throws ExcepcionNegocio {
 
-			}else{
+		try {
+			if (imgFile == null || tfApellido.getText().isEmpty() || tfNombre.getText().isEmpty()) {
+
+				notificar("Crear Actor", "Verifique que todos los campos esten llenos y haya cargado una imagen ",
+						TipoNotificacion.ERROR);
+
+			} else {
 				byte[] bites = new byte[(int) imgFile.length()];
 				FileInputStream fin = new FileInputStream(imgFile);
 				fin.read(bites);
-				
+
 				Actor act = new Actor();
-				
+
 				act.setActorId((Integer.parseInt(tfDocumento.getText())));
 				act.setFirstName(tfNombre.getText());
 				act.setLastName(tfApellido.getText());
 				act.setPhoto(bites);
 				act.setCountry((Country) cbCiudad.getValue());
-				
+
 				boActores.crear(act);
+				notificar("Crear Actor", "El Actor se ha creado exitosamente", TipoNotificacion.INFO);
+				limpiar();
+
 			}
 
 		} catch (IOException e) {
@@ -142,25 +148,45 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@FXML
 	public void editarActores() {
-		System.out.println("Editandoo...");
+		Actor act = new Actor();
+		act.setActorId(Integer.parseInt(tfDocumento.getText()));
+		act.setFirstName(tfNombre.getText());
+		act.setLastName(tfApellido.getText());
+		act.setCountry((Country) cbCiudad.getValue());
 
+		boActores.editar(act);
+		notificar("Editar Actor", "El Actor se edito correctamente", TipoNotificacion.INFO);
 	}
 
 	@FXML
 	public void buscarActores() {
 		if (tfDocumento != null) {
-			Actor ac = boActores.buscar(tfDocumento.getText());
+			Actor ac = boActores.buscar(Integer.parseInt(tfDocumento.getText()));
 			tfNombre.setText(ac.getFirstName());
 			tfApellido.setText(ac.getLastName());
-			// imgFoto.set
+			cbCiudad.setValue(ac.getCountry());
 
+		} else {
+			notificar("Buscar Actor", "Verifique que este buscado por numero de documento", TipoNotificacion.ERROR);
 		}
 
 	}
 
 	@FXML
 	public void eliminarActores() {
-		System.out.println("Eliminandoo...");
+		boActores.eliminar(Integer.parseInt(tfDocumento.getText()));
+		notificar("Eliminar Actor", "El actor se elimino correctamente", TipoNotificacion.INFO);
+		limpiar();
+	}
+
+	@FXML
+	public void limpiar() {
+		tfNombre.setText(null);
+		tfDocumento.setText(null);
+		tfApellido.setText(null);
+		cbCiudad.setValue(null);
+		imgFoto.setImage(null);
+
 	}
 
 }

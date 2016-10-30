@@ -61,7 +61,7 @@
                             <TableColumn fx:id="cNombre" prefWidth="75.0" text="NOMBRE" />
                               <TableColumn fx:id="cApellido" prefWidth="94.0" text="APELLIDO" />
                               <TableColumn fx:id="cHorario" prefWidth="85.0" text="HORARIO" />
-                              <TableColumn fx:id="cButtonEmpleados" prefWidth="96.0" />
+                              <TableColumn fx:id="cButtonEmpleados" prefWidth="96.0" text="INFO" />
                           </columns>
                         </TableView>
                      </children>
@@ -74,10 +74,10 @@
                      <children>
                         <TableView fx:id="tbInventario" layoutX="19.0" layoutY="16.0" prefHeight="239.0" prefWidth="414.0">
                           <columns>
-                            <TableColumn fx:id="cTitulo" prefWidth="75.0" text="TITULO" />
-                            <TableColumn fx:id="cGenero" prefWidth="104.0" text="GENERO" />
-                              <TableColumn fx:id="cCantidad" prefWidth="100.0" text="CANTIDAD" />
-                              <TableColumn fx:id="cButtonInventario" prefWidth="134.0" />
+                            <TableColumn fx:id="cTitulo" prefWidth="142.0" text="TITULO" />
+                            <TableColumn fx:id="cGenero" prefWidth="90.0" text="GENERO" />
+                              <TableColumn fx:id="cCantidad" prefWidth="90.0" text="CANTIDAD" />
+                              <TableColumn fx:id="cButtonInventario" prefWidth="91.0" text="INFO" />
                           </columns>
                         </TableView>
                      </children>
@@ -100,7 +100,7 @@
          <children>
             <Button fx:id="bCrear" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="CREAR" />
             <Button fx:id="bEditar" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="EDITAR" GridPane.columnIndex="1" />
-            <Button fx:id="bBuscar" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="BUSCAR" GridPane.columnIndex="2" />
+            <Button fx:id="bBuscar" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="BUSCAR" GridPane.columnIndex="2" onAction="#buscar"/>
          </children>
       </GridPane>
    </children>
