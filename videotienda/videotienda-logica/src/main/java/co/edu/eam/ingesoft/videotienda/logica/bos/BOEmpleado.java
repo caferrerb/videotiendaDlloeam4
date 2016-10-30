@@ -20,4 +20,17 @@ public class BOEmpleado extends BOGenerico<Staff>{
 	public List<Staff> listarEmpleados(){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAREMPLEADOS);
 	}
+	
+	
+	/**
+	 * Metodo que lista todos los empleados por tienda
+	 * @author Jhoan Sebastian Salazar Henao<br/>
+	 *         email: jsebastian48@hotmail.com <br/>
+	 *         Fecha: 29/10/2016<br/>
+	 * @return
+	 */
+	public List<Staff> listarEmpleadosTienda(byte id){
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_EMPLEADOS_TIENDA,id);
+		
+	}
 }
