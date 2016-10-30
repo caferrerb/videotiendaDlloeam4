@@ -29,7 +29,7 @@ public class Actor implements Serializable {
 
 	@Id
 	@Column(name="actor_id", unique=true, nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int actorId;
 
 	@Column(name="first_name", nullable=false, length=45)
@@ -38,9 +38,9 @@ public class Actor implements Serializable {
 	@Column(name="last_name", nullable=false, length=45)
 	private String lastName;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="last_update", nullable=false)
-	private Date lastUpdate;
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@Column(name="last_update", nullable=false)
+//	private Date lastUpdate;
 	
 	@JoinColumn(name="country_id",nullable=false)
 	@ManyToOne
@@ -100,17 +100,17 @@ public class Actor implements Serializable {
 	/**
 	 * @return the lastUpdate
 	 */
-	public Date getLastUpdate() {
-		return lastUpdate;
-	}
+//	public Date getLastUpdate() {
+//		return lastUpdate;
+//	}
 
 
 	/**
 	 * @param lastUpdate the lastUpdate to set
 	 */
-	public void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
+//	public void setLastUpdate(Date lastUpdate) {
+//		this.lastUpdate = lastUpdate;
+//	}
 
 	/**
 	 * @return the country
