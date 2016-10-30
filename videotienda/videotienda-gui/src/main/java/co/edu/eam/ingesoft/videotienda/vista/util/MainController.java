@@ -12,6 +12,8 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarE
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarTienda;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorReporteVentaAlquiler;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorVentanaTrasladarCiudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,6 +55,12 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	private Menu mnuActores;
+	
+	/**
+	 * Menu equipos
+	 */
+	@FXML
+	private Menu menuCliente;
 
 	/**
 	 * Menu equipos
@@ -79,6 +87,9 @@ public class MainController implements Initializable {
 	private MenuItem mnuSucursales;
 	
 	@FXML
+	private MenuItem menuItemTraslado;
+	
+	@FXML
 	private MenuItem mnuItemGestionarCiudad;
 	
 	@FXML
@@ -95,6 +106,9 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem menuItemGestionarPelicula;
+	
+	@FXML
+    private MenuItem menuItemReportes;
 	/**
 	 * Inicializacion de la ventana.
 	 */
@@ -170,6 +184,11 @@ public class MainController implements Initializable {
 	}
 	
 	@FXML
+	public void abrirTrasladarCliente(){
+		agregarVentana("/fxml/VentanaTrasladarCiudadCliente.fxml", ControladorVentanaTrasladarCiudad.class);
+	}
+	
+	@FXML
 	public void abrirGestionarVenta(){
 		agregarVentana("/fxml/GestionarVentaPelicula.fxml", ControladorGestionarVenta.class);
 	}
@@ -187,5 +206,10 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirGestionarTienda(){		
 		agregarVentana("/fxml/VentanaGestionarTienda.fxml", ControladorGestionarTienda.class);
+	}
+	
+	@FXML
+	public void abrirGestionReportesVentasAlquiler(){
+		agregarVentana("/fxml/VentanaReportesVentasAlquiler.fxml", ControladorReporteVentaAlquiler.class);
 	}
 }
