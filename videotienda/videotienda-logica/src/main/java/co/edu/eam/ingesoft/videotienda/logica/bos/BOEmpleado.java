@@ -20,4 +20,8 @@ public class BOEmpleado extends BOGenerico<Staff>{
 	public List<Staff> listarEmpleados(){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAREMPLEADOS);
 	}
+	
+	
+	
+	
 }
