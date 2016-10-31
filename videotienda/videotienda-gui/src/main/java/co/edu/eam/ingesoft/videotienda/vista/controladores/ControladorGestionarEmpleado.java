@@ -142,6 +142,42 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	@FXML
 	public void editarEmpleado() {
 
+		Staff empleado = new Staff();
+		Address direccion = new Address();
+		//Busca una ciudad por su id
+		City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
+		direccion.setAddress(TFDireccionA.getText());
+		direccion.setAddress2(TFDdireccionB.getText());
+		direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
+		direccion.setCity(ciudad);
+		direccion.setDistrict(TFDepartamento.getText());
+		direccion.setLastUpdate(new Timestamp(new Date().getTime()));
+		direccion.setPhone(TFTelefono.getText());
+		direccion.setPostalCode(TFCodigoPos.getText());
+		// Empleado
+		empleado.setAddress(direccion);
+		empleado.setStaffId((byte) Integer.parseInt(TFIdEmpleado.getText()));
+		empleado.setEmail(TfEmail.getText());
+		empleado.setFirstName(TfPrimerNombre.getText());
+		empleado.setLastName(TfSegundoNombre.getText());
+		empleado.setLastUpdate (new Timestamp(new Date().getTime()));
+		empleado.setAddress(direccion);
+		
+		Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
+		empleado.setUsuario(usuario);
+		
+		Store tienda = boTienda.buscar(comboBoxSelecTienda.getSelectionModel().getSelectedItem().getStoreId());
+		empleado.setStore(tienda);
+
+		if (CheckActivo.isSelected() == true) {
+			empleado.setActive(true);
+		} else {
+			empleado.setActive(false);
+		}
+		boDireccion.editarDireccion(direccion);
+		boEmpleado.editarEmpleado(empleado);
+
+		notificar("Editar empleado", "Empleado editado con exito", TipoNotificacion.INFO);
 	}
 
 	@FXML

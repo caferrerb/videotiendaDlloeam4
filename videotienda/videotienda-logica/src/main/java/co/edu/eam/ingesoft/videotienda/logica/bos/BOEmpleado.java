@@ -37,8 +37,22 @@ public class BOEmpleado extends BOGenerico<Staff>{
 		
 	}
 	
+	/**
+	 * Permite crear un empleado 
+	 * @param empleado
+	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void crearEmpleado(Staff empleado){
 		super.crear(empleado);
 	}
+	
+	/**
+	 * Permite editar un empleado
+	 * @param empleado
+	 */
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void editarEmpleado(Staff empleado){
+		super.editar(empleado);
+	}
+	
 }
