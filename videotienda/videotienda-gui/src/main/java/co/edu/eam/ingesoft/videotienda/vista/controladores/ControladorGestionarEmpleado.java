@@ -2,9 +2,11 @@ package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,14 +14,15 @@ import org.springframework.stereotype.Controller;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOCiudad;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BODireccion;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOEmpleado;
-import co.edu.eam.ingesoft.videotienda.logica.bos.BOPais;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOTienda;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuario;
 import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Address;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
-import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Country;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.FXML;
@@ -36,16 +39,23 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 
 	@Autowired
 	private BOEmpleado boEmpleado;
+
 	@Autowired
 	private BOCiudad boCiudad;
-	
-	@Autowired
-	private BOPais pais;
+
 	@Autowired
 	private BODireccion boDireccion;
-	
+
+	@Autowired
+	private BOUsuario boUsuario;
+
+	@Autowired
+	private BOTienda boTienda;
+
 	@FXML
-	private TextField TfidTienda;
+	private TextField TFIdEmpleado;
+	@FXML
+	private TextField TFIdUsuario;
 	@FXML
 	private TextField TfPrimerNombre;
 	@FXML
@@ -53,13 +63,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	@FXML
 	private TextField TfEmail;
 	@FXML
-	private TextField TfDireccion;
-	@FXML
 	private CheckBox CheckActivo;
 	@FXML
 	private DatePicker DtFechaCreacion;
-	@FXML
-	private DatePicker DtFechaActualizacion;
 	@FXML
 	private ImageView PhFoto;
 	@FXML
@@ -75,7 +81,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	@FXML
 	private ComboBox<City> CBCiudad;
 	@FXML
-	private ComboBox<Country> CBPais;
+	private TextField TFDepartamento;
 	@FXML
 	private DatePicker DTUlltimaActualizacionDir;
 	@FXML
@@ -85,31 +91,41 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		llenarComboCiudad();
-		llenarPais();
+		llenarTienda();
 	}
 
 	@FXML
 	public void crearEmpleado() throws ExcepcionNegocio {
-		try {
+		
 			Staff empleado = new Staff();
 			Address direccion = new Address();
-			// Busca una ciudad por su id
+			//Busca una ciudad por su id
 			City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
 			direccion.setAddress(TFDireccionA.getText());
 			direccion.setAddress2(TFDdireccionB.getText());
 			direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
 			direccion.setCity(ciudad);
-			direccion.setDistrict( CBPais.getSelectionModel().getSelectedItem().toString());
-			direccion.setLastUpdate((Timestamp) DTUlltimaActualizacionDir.getUserData());
+			direccion.setDistrict(TFDepartamento.getText());
+			direccion.setLastUpdate(new Timestamp(new Date().getTime()));
 			direccion.setPhone(TFTelefono.getText());
 			direccion.setPostalCode(TFCodigoPos.getText());
+			// Empleado
 			empleado.setAddress(direccion);
+			empleado.setStaffId((byte) Integer.parseInt(TFIdEmpleado.getText()));
 			empleado.setEmail(TfEmail.getText());
 			empleado.setFirstName(TfPrimerNombre.getText());
 			empleado.setLastName(TfSegundoNombre.getText());
-			empleado.setLastUpdate((Timestamp) DtFechaCreacion.getUserData());
+			empleado.setLastUpdate(new Timestamp(new Date().getTime()));
+			empleado.setAddress(direccion);
+			
+			Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
+			empleado.setUsuario(usuario);
+			
+			Store tienda = boTienda.buscar(comboBoxSelecTienda.getSelectionModel().getSelectedItem().getStoreId());
+			empleado.setStore(tienda);
+
 			if (CheckActivo.isSelected() == true) {
 				empleado.setActive(true);
 			} else {
@@ -120,9 +136,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 
 			notificar("Gestionar empleado", "Empleado Creado con exito", TipoNotificacion.INFO);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	@FXML
@@ -142,10 +156,11 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		}
 	}
 
-	private void llenarPais() {
-		List<Country> lista = pais.listarPaises();
-		for (Country pais : lista) {
-			CBPais.getItems().add(pais);
+	
+	private void llenarTienda() {
+		List<Store> lista = boTienda.listarTiendas();
+		for (Store tienda : lista) {
+			comboBoxSelecTienda.getItems().add(tienda);
 		}
 	}
 }

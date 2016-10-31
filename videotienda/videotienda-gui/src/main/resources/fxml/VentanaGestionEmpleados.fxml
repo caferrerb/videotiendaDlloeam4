@@ -10,14 +10,14 @@
 
 <AnchorPane id="idGestionEmpleado" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="588.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane layoutX="401.0" layoutY="23.0" prefHeight="90.0" prefWidth="279.0">
+      <GridPane layoutX="424.0" layoutY="23.0" prefHeight="90.0" prefWidth="235.0">
          <children>
             <Label text="Tienda">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="comboBoxSelecTienda" prefHeight="25.0" prefWidth="200.0" promptText="Seleccione una tienda" GridPane.columnIndex="1" />
+            <ComboBox fx:id="comboBoxSelecTienda" prefHeight="25.0" prefWidth="162.0" promptText="Seleccione una tienda" GridPane.columnIndex="1" />
             <Button fx:id="BtAgregarHorario" mnemonicParsing="false" text="Agregar Horario" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="15.0" />
@@ -71,7 +71,7 @@
             </Button>
          </children>
       </GridPane>
-      <GridPane layoutX="33.0" layoutY="14.0" prefHeight="450.0" prefWidth="336.0">
+      <GridPane layoutX="33.0" layoutY="52.0" prefHeight="450.0" prefWidth="336.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -95,70 +95,88 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Id tienda">
+            <Label text="Id Empleado">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="TfidTienda" prefHeight="25.0" prefWidth="149.0" GridPane.rowIndex="1" />
-            <Label text="Primer Nombre" GridPane.rowIndex="2">
+            <TextField fx:id="TFIdEmpleado" prefHeight="25.0" prefWidth="149.0" GridPane.rowIndex="1" />
+            <Label text="Nombre" GridPane.rowIndex="4">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="TfPrimerNombre" prefHeight="25.0" prefWidth="189.0" GridPane.rowIndex="3" />
-            <Label text="Segundo Nombre" GridPane.rowIndex="4">
+            <TextField fx:id="TfPrimerNombre" prefHeight="25.0" prefWidth="189.0" GridPane.rowIndex="5" />
+            <Label text="Apellido" GridPane.rowIndex="6">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="TfSegundoNombre" prefHeight="25.0" prefWidth="189.0" GridPane.rowIndex="5" />
-            <Label text="Email" GridPane.rowIndex="6">
+            <TextField fx:id="TfSegundoNombre" prefHeight="25.0" prefWidth="189.0" GridPane.rowIndex="7" />
+            <Label text="Email" GridPane.rowIndex="8">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="TfEmail" GridPane.rowIndex="7" />
-            <CheckBox fx:id="CheckActivo" mnemonicParsing="false" text="Activo" GridPane.rowIndex="8">
+            <TextField fx:id="TfEmail" GridPane.rowIndex="9" />
+            <CheckBox fx:id="CheckActivo" mnemonicParsing="false" text="Activo" GridPane.rowIndex="12">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </CheckBox>
-            <Label text="Fecha de creacion" GridPane.rowIndex="9">
+            <Label text="Fecha de creacion" GridPane.rowIndex="10">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <DatePicker fx:id="DtFechaCreacion" GridPane.rowIndex="10" />
+            <DatePicker fx:id="DtFechaCreacion" GridPane.rowIndex="11" />
             <Label text="Id direccion" GridPane.columnIndex="1">
                <padding>
                   <Insets left="10.0" />
                </padding>
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
             </Label>
             <Label text="Direccion 1" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
             </Label>
             <Label text="Direccion 2" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
             </Label>
             <Label text="Ciudad" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
             </Label>
             <Label text="Departamento" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
             </Label>
             <Label text="Ultima actualizacion" GridPane.columnIndex="1" GridPane.rowIndex="10">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
             </Label>
             <ComboBox fx:id="CBCiudad" prefHeight="25.0" prefWidth="165.0" promptText="Seleccione una ciudad" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <GridPane.margin>
@@ -169,11 +187,17 @@
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
             </Label>
             <Label text="Codigo postal" GridPane.columnIndex="1" GridPane.rowIndex="14">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
             </Label>
             <TextField fx:id="TFIdDireccion" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
@@ -205,21 +229,26 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </TextField>
-            <Label text="Foto" GridPane.rowIndex="11">
+            <Label text="Foto" GridPane.rowIndex="13">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="PhFoto" fitHeight="90.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="13">
+            <Label text="Id Usuario" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></Label>
+            <TextField fx:id="TFIdUsuario" prefHeight="25.0" prefWidth="149.0" GridPane.rowIndex="3" />
+            <TextField fx:id="TFDepartamento" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <ImageView fx:id="PhFoto" fitHeight="90.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="15">
                <image>
                   <Image url="@../Downloads/14716194_10154708233054828_7210323768630378580_n.jpg" />
                </image>
             </ImageView>
-            <ComboBox fx:id="CBPais" prefHeight="25.0" prefWidth="162.0" promptText="Seleccione un departamento" GridPane.columnIndex="1" GridPane.rowIndex="9">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </ComboBox>
          </children>
       </GridPane>
    </children>
