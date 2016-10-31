@@ -129,7 +129,6 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <DatePicker fx:id="DtFechaCreacion" GridPane.rowIndex="11" />
             <Label text="Id direccion" GridPane.columnIndex="1">
                <padding>
                   <Insets left="10.0" />
@@ -214,11 +213,6 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </TextField>
-            <DatePicker fx:id="DTUlltimaActualizacionDir" GridPane.columnIndex="1" GridPane.rowIndex="11">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </DatePicker>
             <TextField fx:id="TFTelefono" GridPane.columnIndex="1" GridPane.rowIndex="13">
                <GridPane.margin>
                   <Insets left="10.0" />
@@ -246,9 +240,15 @@
             </TextField>
             <ImageView fx:id="PhFoto" fitHeight="90.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="15">
                <image>
-                  <Image url="@../Downloads/14716194_10154708233054828_7210323768630378580_n.jpg" />
+                  <Image url="@../imagenes/foto-perfil.jpg" />
                </image>
             </ImageView>
+            <TextField fx:id="TFFechaCreacion" editable="false" GridPane.rowIndex="11" />
+            <TextField fx:id="TFUlltimaActualizacionDir" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="11">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </TextField>
          </children>
       </GridPane>
    </children>

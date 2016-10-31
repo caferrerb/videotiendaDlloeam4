@@ -65,7 +65,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	@FXML
 	private CheckBox CheckActivo;
 	@FXML
-	private DatePicker DtFechaCreacion;
+	private TextField TFFechaCreacion;
 	@FXML
 	private ImageView PhFoto;
 	@FXML
@@ -83,7 +83,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	@FXML
 	private TextField TFDepartamento;
 	@FXML
-	private DatePicker DTUlltimaActualizacionDir;
+	private TextField TFUlltimaActualizacionDir;
 	@FXML
 	private TextField TFTelefono;
 	@FXML
@@ -117,7 +117,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			empleado.setEmail(TfEmail.getText());
 			empleado.setFirstName(TfPrimerNombre.getText());
 			empleado.setLastName(TfSegundoNombre.getText());
-			empleado.setLastUpdate(new Timestamp(new Date().getTime()));
+			empleado.setLastUpdate (new Timestamp(new Date().getTime()));
 			empleado.setAddress(direccion);
 			
 			Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
@@ -146,7 +146,26 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 
 	@FXML
 	public void buscarEmpleado() {
-
+		Staff empleado = boEmpleado.buscar((byte) Integer.parseInt(TFIdEmpleado.getText()));
+		
+		if(empleado != null){
+			TFIdUsuario.setText(empleado.getUsuario().getUsuario());
+			TfPrimerNombre.setText(empleado.getFirstName());
+			TfSegundoNombre.setText(empleado.getLastName());
+			TfEmail.setText(empleado.getEmail());
+			TFFechaCreacion.setText(empleado.getLastUpdate().toString());
+			if(empleado.getActive()== true){
+				CheckActivo.setSelected(true);
+			}
+			//TFIdDireccion.setText(Integer.toString(empleado.getAddress().getAddressId()));
+			TFDireccionA.setText(empleado.getAddress().getAddress());
+			TFDdireccionB.setText(empleado.getAddress().getAddress2());
+			//CBCiudad.setSelectionModel(empleado.getAddress().getCity().getCity());
+			TFDepartamento.setText(empleado.getAddress().getDistrict());
+			TFUlltimaActualizacionDir.setText(empleado.getAddress().getLastUpdate().toString());
+			TFTelefono.setText(empleado.getAddress().getPhone());
+			TFCodigoPos.setText(empleado.getAddress().getPostalCode());
+		}
 	}
 
 	private void llenarComboCiudad() {
