@@ -68,6 +68,8 @@
                               <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" />
                            </items>
                         </Menu>
+								
+
 							</menus>
 						</MenuBar>
 

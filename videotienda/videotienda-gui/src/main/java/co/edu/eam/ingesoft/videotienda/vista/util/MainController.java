@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import org.springframework.context.ApplicationContext;
 
 import co.edu.eam.ingesoft.videotienda.main.ContextFactory;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
@@ -19,6 +20,7 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaControll
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
@@ -104,6 +106,7 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem mnuItemRoles;
+	
 	/**
 	 * Inicializacion de la ventana.
 	 */
