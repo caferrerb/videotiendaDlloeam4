@@ -124,14 +124,17 @@ public class MainController implements Initializable {
 	 * @param url,
 	 *            ruta del archivo xml de la vista.
 	 */
-	private void agregarVentana(String pagina, Class controller) {
+	public void agregarVentana(String pagina, Class controller) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(pagina));
 			 fxmlLoader.setResources(ResourceBundle.getBundle("i18n.mensajes"));
 			
 			BaseController control = fxmlLoader.<BaseController> getController();
+			
 			ApplicationContext context = ContextFactory.getContext();
-			fxmlLoader.setController(context.getBean(controller));
+			BaseController controlador =(BaseController) context.getBean(controller);
+			controlador.init(this);
+			fxmlLoader.setController(controlador);
 			AnchorPane cmdPane = (AnchorPane) fxmlLoader.load();
 			contenido.getChildren().setAll(cmdPane);
 
