@@ -195,9 +195,17 @@ public class Staff implements Serializable {
 	}
 
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	@Override
 	public String toString() {
-		return getFirstName() + " " + getLastName();
+		return staffId+" - "+ firstName;
 	}
 
 }

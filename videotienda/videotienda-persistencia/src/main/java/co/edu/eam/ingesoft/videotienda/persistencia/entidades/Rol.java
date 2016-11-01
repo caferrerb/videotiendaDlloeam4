@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,6 +22,7 @@ public class Rol implements Serializable{
 	public static final String LISTAR_ROLES_USUARIO = "Rol.listarRolesUsuario";
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_ROL", length=12, nullable=false)
 	private int id;
 	
@@ -64,8 +67,9 @@ public class Rol implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	
-	
-	
+	@Override
+	public String toString() {
+		return descripcion;
+	}
 	
 }
