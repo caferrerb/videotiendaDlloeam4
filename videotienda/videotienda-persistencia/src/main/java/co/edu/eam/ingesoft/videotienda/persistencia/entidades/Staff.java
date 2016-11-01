@@ -54,12 +54,12 @@ public class Staff implements Serializable {
 	private List<Rental> rentals;
 
 	//bi-directional many-to-one association to Address
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="address_id", nullable=false)
 	private Address address;
 
 	//bi-directional many-to-one association to Store
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="store_id", nullable=false)
 	private Store store;
 
@@ -67,7 +67,7 @@ public class Staff implements Serializable {
 	//@OneToMany(mappedBy="staff",fetch=FetchType.LAZY)
 	//private List<Store> stores;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="id_usuario", unique=true)
 	private Usuario usuario;
 

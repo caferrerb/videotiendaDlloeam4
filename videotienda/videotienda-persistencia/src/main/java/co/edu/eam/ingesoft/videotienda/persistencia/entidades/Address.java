@@ -41,7 +41,7 @@ public class Address implements Serializable {
 	private String postalCode;
 
 	//bi-directional many-to-one association to City
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="city_id", nullable=false)
 	private City city;
 
