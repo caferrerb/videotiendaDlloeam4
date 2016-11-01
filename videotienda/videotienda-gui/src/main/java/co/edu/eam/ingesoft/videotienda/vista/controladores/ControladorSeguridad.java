@@ -48,7 +48,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	private TextField tfNombreRol;
 	@FXML
 	private ComboBox<Rol> cbRoles;
-	// Asignar usuario
+	// Asignar usuario.
 	@FXML
 	private TextField tfUsuario;
 	@FXML
