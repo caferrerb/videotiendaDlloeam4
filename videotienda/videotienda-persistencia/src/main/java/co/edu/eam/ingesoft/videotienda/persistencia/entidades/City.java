@@ -25,7 +25,6 @@ public class City implements Serializable {
 	@Column(nullable=false, length=50)
 	private String city;
 
-	
 
 	//bi-directional many-to-one association to Country
 	@ManyToOne//(fetch=FetchType.LAZY)

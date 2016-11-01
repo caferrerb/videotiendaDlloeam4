@@ -58,9 +58,9 @@
                             <MenuItem fx:id="menuItemGestionarTiendas" mnemonicParsing="false" onAction="#abrirGestionarTienda" text="Gestionar Tiendas" />
                           </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Seguridad">
+                        <Menu fx:id="mnuAutorizacion" mnemonicParsing="false" text="Autorizacion">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Roles" />
+                            <MenuItem fx:id="mnuItemRoles" mnemonicParsing="false" onAction="#abrirAutorizacion" text="Roles" />
                           </items>
                         </Menu>
                         <Menu fx:id="menuReportes" mnemonicParsing="false" text="Reportes">
@@ -68,6 +68,8 @@
                               <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" />
                            </items>
                         </Menu>
+								
+
 							</menus>
 						</MenuBar>
 
@@ -91,7 +93,7 @@
 						</Pane>
 					</top>
 					<center>
-						<ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+						<ScrollPane fx:id="mnuItemAutorizacion" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 							<content>
 								<AnchorPane fx:id="contenido" prefHeight="200.0" prefWidth="200.0" />
 							</content>

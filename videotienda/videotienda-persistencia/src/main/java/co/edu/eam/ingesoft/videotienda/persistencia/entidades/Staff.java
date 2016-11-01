@@ -59,8 +59,13 @@ public class Staff implements Serializable {
 	private Address address;
 
 	//bi-directional many-to-one association to Store
+<<<<<<< HEAD
 	@ManyToOne
 	@JoinColumn(name="store_id")
+=======
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="store_id", nullable=false)
+>>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 	private Store store;
 
 	//bi-directional many-to-one association to Store
@@ -194,26 +199,18 @@ public class Staff implements Serializable {
 		this.store = store;
 	}
 
-	
 
-	/**
-	 * @return the usuario
-	 */
 	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	/**
-	 * @param usuario the usuario to set
-	 */
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
 	@Override
 	public String toString() {
-		return getFirstName() + " " + getLastName();
+		return staffId+" - "+ firstName;
 	}
-	
 
 }

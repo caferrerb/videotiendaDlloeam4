@@ -28,9 +28,13 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Country;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.MainController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -39,6 +43,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * @author GAR-T
@@ -78,9 +83,9 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		llenarComboPaises();
+		llenarComboPaises();	
 	}
+	
 
 	@FXML
 	private void llenarComboPaises() {
@@ -165,6 +170,8 @@ public class ControladorGestionarActores extends BaseController implements Initi
 			tfNombre.setText(ac.getFirstName());
 			tfApellido.setText(ac.getLastName());
 			cbCiudad.setValue(ac.getCountry());
+			Image im=new Image(new ByteArrayInputStream(ac.getPhoto()));
+			imgFoto.setImage(im);
 
 		} else {
 			notificar("Buscar Actor", "Verifique que este buscado por numero de documento", TipoNotificacion.ERROR);
@@ -188,5 +195,21 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		imgFoto.setImage(null);
 
 	}
+	
+	
+	
+	@FXML
+    private void mostrarVentanaPelicula() throws IOException {
+
+		String fxmlFile = "/fxml/VentanaGestionarPeliculas.fxml";
+		FXMLLoader loader = new FXMLLoader();
+		Parent rootNode = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
+		
+		Scene scene = new Scene(rootNode, 1000, 690);
+		scene.getStylesheets().add("/styles/styles.css");
+    }
+	
+	
+	 
 
 }
