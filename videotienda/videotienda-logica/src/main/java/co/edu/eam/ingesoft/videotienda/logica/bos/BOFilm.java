@@ -19,11 +19,16 @@ public class BOFilm extends BOGenerico<Film>{
 
 //	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void crear(Film entidad) {
-		// TODO Auto-generated method stub
+	public void crear(Film entidad){
+		
 		super.crear(entidad);
 	}
 	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Film buscarPelicula(int id) {
+		
+		return super.buscar(id);
+	}
 	
 	/**
 	 * metodo que lista los datos de las peliculas
