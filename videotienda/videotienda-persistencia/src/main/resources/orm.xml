@@ -109,6 +109,7 @@
 		<query>
 			SELECT a FROM Acceso a
 		</query>
-y>
+		</named-query>
+
 
 </entity-mappings>
