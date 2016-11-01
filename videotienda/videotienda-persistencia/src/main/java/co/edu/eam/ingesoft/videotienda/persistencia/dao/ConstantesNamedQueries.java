@@ -44,4 +44,9 @@ public class ConstantesNamedQueries {
 	 * consulta que lista los datos de la tabla ventas en la ventana reporte
 	 */
 	public static final String CONSULTA_LISTAR_DATOS_VENTA = "datosTablaVentas.Listar";
+	
+	/**
+	 * Consulta para listar todos las pantallas
+	 */
+	public static final String CONSULTA_LISTAR_PANTALLAS="Acesso.ListarTodos";
 }
