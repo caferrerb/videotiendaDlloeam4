@@ -86,6 +86,8 @@
 		
 		</named-query>
 	
+
+
 		<named-query name="datosTablaRental.Listar">
 			<query>
 				SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN r.customer c
