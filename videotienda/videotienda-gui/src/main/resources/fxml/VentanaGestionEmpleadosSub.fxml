@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="241.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="241.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="21.0" layoutY="51.0" prefHeight="170.0" prefWidth="279.0">
         <columnConstraints>
@@ -22,14 +22,14 @@
             <Label text="Dia" />
             <Label text="Horario Inicio" GridPane.rowIndex="1" />
             <Label text="Horario FInal" GridPane.rowIndex="2" />
-            <ComboBox prefWidth="150.0" promptText="Seleccion un dia" GridPane.columnIndex="1" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="CBDia" prefWidth="150.0" promptText="Seleccion un dia" GridPane.columnIndex="1" />
             <Button mnemonicParsing="false" text="Agregar" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
+            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Label layoutX="68.0" layoutY="14.0" text="HORAIO EMPLREADO" underline="true">
@@ -38,4 +38,4 @@
          </font>
       </Label>
    </children>
-</Pane>
+</AnchorPane>

@@ -6,17 +6,21 @@ import java.util.ResourceBundle;
 import org.springframework.context.ApplicationContext;
 
 import co.edu.eam.ingesoft.videotienda.main.ContextFactory;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarTienda;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorSeguridad;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorReporteVentaAlquiler;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorVentanaTrasladarCiudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
@@ -54,12 +58,6 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	private Menu mnuActores;
-	
-	/**
-	 * Menu equipos
-	 */
-	@FXML
-	private Menu menuCliente;
 
 	/**
 	 * Menu equipos
@@ -78,15 +76,15 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	private Menu mnuPrestamos;
+	
+	@FXML
+	private Menu mnuAutorizacion;
 
 	/**
 	 * item de iniciar sesion.
 	 */
 	@FXML
 	private MenuItem mnuSucursales;
-	
-	@FXML
-	private MenuItem menuItemTraslado;
 	
 	@FXML
 	private MenuItem mnuItemGestionarCiudad;
@@ -105,6 +103,10 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem menuItemGestionarPelicula;
+	
+	@FXML
+	private MenuItem mnuItemRoles;
+	
 	/**
 	 * Inicializacion de la ventana.
 	 */
@@ -180,13 +182,8 @@ public class MainController implements Initializable {
 	}
 	
 	@FXML
-	public void abrirTrasladarCliente(){
-		agregarVentana("/fxml/VentanaTrasladarCiudadCliente.fxml", ControladorVentanaTrasladarCiudad.class);
-	}
-	
-	@FXML
 	public void abrirGestionarVenta(){
-		agregarVentana("/fxml/GestionarVentaPelicula.fxml", ControladorGestionarVenta.class);
+		agregarVentana("/fxml/GestionarVentaPeliculas.fxml", ControladorGestionarVenta.class);
 	}
 
 	@FXML
@@ -202,5 +199,10 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirGestionarTienda(){		
 		agregarVentana("/fxml/VentanaGestionarTienda.fxml", ControladorGestionarTienda.class);
+	}
+	
+	@FXML
+	public void abrirAutorizacion(){		
+		agregarVentana("/fxml/Seguridad.fxml", ControladorSeguridad.class);
 	}
 }

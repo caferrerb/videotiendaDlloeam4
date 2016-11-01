@@ -3,6 +3,8 @@ package co.edu.eam.ingesoft.videotienda.logica.bos;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
@@ -20,5 +22,9 @@ public class BOCiudad extends BOGenerico<City> {
 	public List<City> listarCiudades(){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTARCIUDADES);
 	}
-
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void crear(City ciudad){
+		super.crear(ciudad);
+	}
 }
