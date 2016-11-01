@@ -37,7 +37,7 @@
                               	 <MenuItem id="ItemGestionarActores" fx:id="mnuItemGestionarActores" mnemonicParsing="false" onAction="#abrirGestionarActores" text="GestionarActores" />
                                 
                            </items></Menu>
-								<Menu fx:id="mnuGeneros" mnemonicParsing="false" text="Generos" />
+								<Menu fx:id="mnuGeneros" mnemonicParsing="false" onAction="#abrirGestionarGeneros" text="Generos" />
 							<Menu fx:id="mnuEmpleados" mnemonicParsing="false" text="Empleados">
 							
                            <items>

@@ -10,6 +10,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarGenero;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarTienda;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
@@ -209,6 +210,11 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirGestionarEmpleados(){
 		agregarVentana("/fxml/VentanaGestionEmpleados.fxml", ControladorGestionarEmpleado.class);	
+	}
+
+	@FXML
+	public void abrirGestionarGeneros(){
+		agregarVentana("/fxml/VentanaGestionarGenero.fxml", ControladorGestionarGenero.class);	
 	}
 	
 	@FXML
