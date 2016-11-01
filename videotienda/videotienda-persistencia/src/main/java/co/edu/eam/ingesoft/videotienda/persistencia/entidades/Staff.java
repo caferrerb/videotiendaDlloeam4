@@ -38,19 +38,17 @@ public class Staff implements Serializable {
 	@Column(name="last_update", nullable=false)
 	private Timestamp lastUpdate;
 
-	
-
 	@Lob
 	private byte[] picture;
 
 	
 
 	//bi-directional many-to-one association to Payment
-	@OneToMany(mappedBy="staff",fetch=FetchType.LAZY)
+	@OneToMany
 	private List<Payment> payments;
 
 	//bi-directional many-to-one association to Rental
-	@OneToMany(mappedBy="staff",fetch=FetchType.LAZY)
+	@OneToMany
 	private List<Rental> rentals;
 
 	//bi-directional many-to-one association to Address
@@ -60,7 +58,7 @@ public class Staff implements Serializable {
 
 	//bi-directional many-to-one association to Store
 	@ManyToOne
-	@JoinColumn(name="store_id", nullable=false)
+	@JoinColumn(name="store_id")
 	private Store store;
 
 	//bi-directional many-to-one association to Store

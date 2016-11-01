@@ -29,7 +29,7 @@ public class Actor implements Serializable {
 
 	@Id
 	@Column(name="actor_id", unique=true, nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int actorId;
 
 	@Column(name="first_name", nullable=false, length=45)
@@ -38,9 +38,9 @@ public class Actor implements Serializable {
 	@Column(name="last_name", nullable=false, length=45)
 	private String lastName;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="last_update", nullable=false)
-	private Date lastUpdate;
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@Column(name="last_update", nullable=false)
+//	private Date lastUpdate;
 	
 	@JoinColumn(name="country_id",nullable=false)
 	@ManyToOne
@@ -53,38 +53,99 @@ public class Actor implements Serializable {
 	public Actor() {
 	}
 
+
+	/**
+	 * @return the actorId
+	 */
 	public int getActorId() {
-		return this.actorId;
+		return actorId;
 	}
 
+
+	/**
+	 * @param actorId the actorId to set
+	 */
 	public void setActorId(int actorId) {
 		this.actorId = actorId;
 	}
 
+	/**
+	 * @return the firstName
+	 */
 	public String getFirstName() {
-		return this.firstName;
+		return firstName;
 	}
 
+	/**
+	 * @param firstName the firstName to set
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
+	/**
+	 * @return the lastName
+	 */
 	public String getLastName() {
-		return this.lastName;
+		return lastName;
 	}
 
+	/**
+	 * @param lastName the lastName to set
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	public Date getLastUpdate() {
-		return this.lastUpdate;
+	/**
+	 * @return the lastUpdate
+	 */
+//	public Date getLastUpdate() {
+//		return lastUpdate;
+//	}
+
+
+	/**
+	 * @param lastUpdate the lastUpdate to set
+	 */
+//	public void setLastUpdate(Date lastUpdate) {
+//		this.lastUpdate = lastUpdate;
+//	}
+
+	/**
+	 * @return the country
+	 */
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
+	/**
+	 * @param country the country to set
+	 */
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
+	/**
+	 * @return the photo
+	 */
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	/**
+	 * @param photo the photo to set
+	 */
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	@Override
 	public String toString() {

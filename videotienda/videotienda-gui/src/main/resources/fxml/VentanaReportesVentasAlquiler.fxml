@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="110.0" layoutY="78.0" text="Store:" />
+      <Label layoutX="78.0" layoutY="120.0" text="Fecha inicio:" />
+      <DatePicker id="jDfechaInicio" layoutX="159.0" layoutY="116.0" prefHeight="5.0" prefWidth="133.0" />
+      <Label layoutX="313.0" layoutY="120.0" text="Fecha Final:" />
+      <DatePicker id="jDfechaFinal" layoutX="405.0" layoutY="116.0" prefHeight="5.0" prefWidth="141.0" />
+      <ComboBox id="jcbstore" layoutX="159.0" layoutY="74.0" prefHeight="25.0" prefWidth="133.0" />
+      <Button id="jBbuscar" fx:id="jBbuscar" layoutX="576.0" layoutY="116.0" mnemonicParsing="false" text="Buscar" />
+      <Label layoutX="159.0" layoutY="190.0" text="Alquiler:" />
+      <Label layoutX="510.0" layoutY="190.0" text="Venta:" />
+      <Label layoutX="132.0" layoutY="448.0" text="Total por Prestamo:" />
+      <Label layoutX="475.0" layoutY="448.0" text="Total por Venta:" />
+      <TextField id="jTtotalPrestamo" layoutX="110.0" layoutY="477.0" />
+      <TextField id="jTtotalVenta" layoutX="452.0" layoutY="477.0" />
+      <TableView id="TBAlquiler" layoutX="46.0" layoutY="220.0" prefHeight="200.0" prefWidth="298.0">
+        <columns>
+          <TableColumn fx:id="ColumnaAlquilerIdInventario" prefWidth="95.0" text="ID INVENTARIO" />
+          <TableColumn fx:id="ColumnaAlquilerTitulo" prefWidth="55.0" text="TITULO" />
+            <TableColumn fx:id="ColumnaAlquilerCliente" prefWidth="75.0" text="CLIENTE" />
+            <TableColumn fx:id="ColumnaAlquilerEstado" prefWidth="75.0" text="ESTADO" />
+        </columns>
+      </TableView>
+      <TableView layoutX="383.0" layoutY="220.0" prefHeight="200.0" prefWidth="298.0">
+        <columns>
+          <TableColumn fx:id="ColumnaVentaIdPelicula" prefWidth="75.0" text="ID PELICULA" />
+          <TableColumn fx:id="ColumnaVentaTitulo" prefWidth="75.0" text="TITULO" />
+            <TableColumn fx:id="ColumnaVentaCliente" prefWidth="75.0" text="CLIENTE" />
+            <TableColumn id="TBVenta" fx:id="ColumnaVentaFecha" prefWidth="75.0" text="FECHA" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

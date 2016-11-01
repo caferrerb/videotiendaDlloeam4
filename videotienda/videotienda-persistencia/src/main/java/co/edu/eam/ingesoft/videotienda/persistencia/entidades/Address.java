@@ -46,19 +46,21 @@ public class Address implements Serializable {
 	private City city;
 
 	//bi-directional many-to-one association to Customer
-	@OneToMany(mappedBy="address",fetch=FetchType.LAZY)
+	@OneToMany
 	private List<Customer> customers;
 
 	//bi-directional many-to-one association to Staff
-	@OneToMany(mappedBy="address",fetch=FetchType.LAZY)
+	@OneToMany
 	private List<Staff> staffs;
 
 	//bi-directional many-to-one association to Store
-	@OneToMany(mappedBy="address",fetch=FetchType.LAZY)
+	@OneToMany
 	private List<Store> stores;
 
 	public Address() {
 	}
+
+
 
 	public int getAddressId() {
 		return this.addressId;

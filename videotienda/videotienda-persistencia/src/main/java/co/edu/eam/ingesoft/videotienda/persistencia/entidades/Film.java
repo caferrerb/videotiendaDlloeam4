@@ -227,7 +227,16 @@ public class Film implements Serializable {
 		this.language2 = language2;
 	}
 
-	
+	public byte[] getPoster() {
+		return poster;
+	}
+
+
+	public void setPoster(byte[] poster) {
+		this.poster = poster;
+	}
+
+
 
 	@Override
 	public String toString() {
