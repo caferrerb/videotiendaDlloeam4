@@ -23,11 +23,7 @@
                   <TableColumn fx:id="jcolumnaTitulo" prefWidth="75.0" text="TITULO" />
                   <TableColumn fx:id="jcolumnaLong" prefWidth="75.0" text="LONG" />
                   <TableColumn fx:id="jcolumnaPrecio" prefWidth="75.0" text="PRECIO" />
-                  <TableColumn fx:id="jcolumnaboton" prefWidth="75.0">
-                     <graphic>
-                        <Button fx:id="jbVender" mnemonicParsing="false" text="VENDER" />
-                     </graphic>
-                  </TableColumn>
+                  <TableColumn fx:id="jcolumnaboton" prefWidth="75.0" text="BOTON" />
                </columns>
             </TableView>
             <Button fx:id="jbBuscarPelicula" layoutX="217.0" layoutY="37.0" mnemonicParsing="false" onAction="#buscarPelicula" text="BUSCAR" />
