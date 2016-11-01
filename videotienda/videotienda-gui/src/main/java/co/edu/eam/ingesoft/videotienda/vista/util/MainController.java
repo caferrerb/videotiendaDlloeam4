@@ -12,6 +12,7 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarE
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarTienda;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorSeguridad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorReporteVentaAlquiler;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorVentanaTrasladarCiudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
@@ -55,12 +56,6 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	private Menu mnuActores;
-	
-	/**
-	 * Menu equipos
-	 */
-	@FXML
-	private Menu menuCliente;
 
 	/**
 	 * Menu equipos
@@ -79,15 +74,15 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	private Menu mnuPrestamos;
+	
+	@FXML
+	private Menu mnuAutorizacion;
 
 	/**
 	 * item de iniciar sesion.
 	 */
 	@FXML
 	private MenuItem mnuSucursales;
-	
-	@FXML
-	private MenuItem menuItemTraslado;
 	
 	@FXML
 	private MenuItem mnuItemGestionarCiudad;
@@ -108,7 +103,7 @@ public class MainController implements Initializable {
 	private MenuItem menuItemGestionarPelicula;
 	
 	@FXML
-    private MenuItem menuItemReportes;
+	private MenuItem mnuItemRoles;
 	/**
 	 * Inicializacion de la ventana.
 	 */
@@ -184,13 +179,8 @@ public class MainController implements Initializable {
 	}
 	
 	@FXML
-	public void abrirTrasladarCliente(){
-		agregarVentana("/fxml/VentanaTrasladarCiudadCliente.fxml", ControladorVentanaTrasladarCiudad.class);
-	}
-	
-	@FXML
 	public void abrirGestionarVenta(){
-		agregarVentana("/fxml/GestionarVentaPelicula.fxml", ControladorGestionarVenta.class);
+		agregarVentana("/fxml/GestionarVentaPeliculas.fxml", ControladorGestionarVenta.class);
 	}
 
 	@FXML
@@ -209,7 +199,7 @@ public class MainController implements Initializable {
 	}
 	
 	@FXML
-	public void abrirGestionReportesVentasAlquiler(){
-		agregarVentana("/fxml/VentanaReportesVentasAlquiler.fxml", ControladorReporteVentaAlquiler.class);
+	public void abrirAutorizacion(){		
+		agregarVentana("/fxml/Seguridad.fxml", ControladorSeguridad.class);
 	}
 }

@@ -11,7 +11,7 @@
 			SELECT f FROM Film f WHERE f.length=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="Film.listarNombrePelicula">
 		<query>
 			SELECT f FROM Film f WHERE f.title=?1
@@ -32,19 +32,19 @@
 	</named-query>
 
 	<named-query name="Actor.ListarTodos">
-	<query>
+		<query>
 			SELECT act FROM Actor act
 		</query>
 	</named-query>
 
 	<named-query name="Ciudad.ListarTodos">
-	<query>
+		<query>
 			SELECT c FROM City c
 		</query>
 	</named-query>
-	
+
 	<named-query name="Empleado.ListarTodos">
-	<query>
+		<query>
 			SELECT s FROM Staff s
 		</query>
 	</named-query>
@@ -61,9 +61,27 @@
 		</query>
 	</named-query>
 
+<<<<<<< HEAD
+	<named-query name="Rol.ListarTodos">
+		<query>
+			SELECT r FROM Rol r
+		</query>
+	</named-query>
+	
+	<named-query name="UsuarioRol.ListarRolesPorUsuario">
+		<query>
+			SELECT usuR.rol FROM UsuarioRol usuR WHERE usuR.usuario.usuario=?1
+		</query>
+	</named-query>
+	
+	<named-query name="UsuarioRol.ListarPorRol">
+		<query>
+			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1
+=======
 	<named-query name="EmpleadosTienda.ListarTodos">
 	<query>
 			SELECT s FROM Staff s WHERE s.store=?1 
+>>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 		</query>
 	</named-query>
 
