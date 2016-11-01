@@ -40,7 +40,7 @@
 							<Menu fx:id="mnuEmpleados" mnemonicParsing="false" text="Empleados">
 							
                            <items>
-                              <MenuItem fx:id="mnuItemGestionarEmpleado" mnemonicParsing="false" onAction="#abrirGestionarEmpleados" text="Gestionar" />
+                              <MenuItem fx:id="mnuItemGestionarEmpleado" mnemonicParsing="false" onAction="#abrirGestionarEmpleados" text="GestionarEmpleado" />
                            </items></Menu>
 
 								<Menu fx:id="mnuSucursales" mnemonicParsing="false" text="Sucursales" />
