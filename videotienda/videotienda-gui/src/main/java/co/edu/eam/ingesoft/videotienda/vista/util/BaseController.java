@@ -102,4 +102,13 @@ public class BaseController {
 	@FXML
 	public void cerrar() {
 	}
+	
+	/**
+	 * MEtodo para abrir una ventana.
+	 * @param ventana
+	 * @param controlador
+	 */
+	public void abrirVentana(String ventana,Class controlador){
+		mainController.agregarVentana(ventana, controlador);
+	}
 }

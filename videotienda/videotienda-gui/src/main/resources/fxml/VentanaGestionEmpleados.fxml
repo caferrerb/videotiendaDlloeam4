@@ -8,17 +8,17 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="idGestionEmpleado" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="588.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="idGestionEmpleado" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane layoutX="424.0" layoutY="23.0" prefHeight="90.0" prefWidth="235.0">
+      <GridPane layoutX="451.0" layoutY="26.0" prefHeight="90.0" prefWidth="235.0">
          <children>
             <Label text="Tienda">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="comboBoxSelecTienda" prefHeight="25.0" prefWidth="162.0" promptText="Seleccione una tienda" GridPane.columnIndex="1" />
-            <Button fx:id="BtAgregarHorario" mnemonicParsing="false" text="Agregar Horario" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ComboBox fx:id="comboBoxSelecTienda" prefHeight="25.0" prefWidth="162.0" promptText="Seleccione ID de la tienda" GridPane.columnIndex="1" />
+            <Button fx:id="BtAgregarHorario" mnemonicParsing="false" onAction="#llamarVentana" text="Agregar Horario" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="15.0" />
                </font>
@@ -37,14 +37,14 @@
             <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <TableView fx:id="TbHorario" layoutX="418.0" layoutY="129.0" prefHeight="200.0" prefWidth="246.0" style="-fx-background-radius: 10;">
+      <TableView fx:id="TbHorario" layoutX="445.0" layoutY="134.0" prefHeight="200.0" prefWidth="246.0" style="-fx-background-radius: 10;">
          <columns>
             <TableColumn prefWidth="75.0" text="Dia" />
             <TableColumn prefWidth="100.0" text="Horario" />
             <TableColumn prefWidth="75.0" text="Opciones" />
          </columns>
       </TableView>
-      <GridPane layoutX="418.0" layoutY="425.0">
+      <GridPane layoutX="431.0" layoutY="425.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -71,7 +71,7 @@
             </Button>
          </children>
       </GridPane>
-      <GridPane layoutX="33.0" layoutY="52.0" prefHeight="450.0" prefWidth="336.0">
+      <GridPane layoutX="34.0" layoutY="26.0" prefHeight="450.0" prefWidth="336.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -238,10 +238,13 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </TextField>
-            <ImageView fx:id="PhFoto" fitHeight="90.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="15">
+            <ImageView fx:id="PhFoto" fitHeight="95.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="15">
                <image>
                   <Image url="@../imagenes/foto-perfil.jpg" />
                </image>
+               <GridPane.margin>
+                  <Insets left="38.0" />
+               </GridPane.margin>
             </ImageView>
             <TextField fx:id="TFFechaCreacion" editable="false" GridPane.rowIndex="11" />
             <TextField fx:id="TFUlltimaActualizacionDir" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="11">
@@ -251,5 +254,6 @@
             </TextField>
          </children>
       </GridPane>
+      <Button fx:id="BTBuscarImagen" layoutX="72.0" layoutY="512.0" mnemonicParsing="false" onAction="#abrirImagen" text="Buscar imagen" />
    </children>
 </AnchorPane>

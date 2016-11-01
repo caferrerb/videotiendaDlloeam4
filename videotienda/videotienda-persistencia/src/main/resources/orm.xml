@@ -48,20 +48,19 @@
 			SELECT s FROM Staff s
 		</query>
 	</named-query>
-	
+
 	<named-query name="Tienda.ListarTodos">
-	<query>
+		<query>
 			SELECT s FROM Store s
 		</query>
 	</named-query>
-	
+
 	<named-query name="Language.ListarTodos">
-	<query>
+		<query>
 			SELECT lag FROM Language lag
 		</query>
 	</named-query>
 
-<<<<<<< HEAD
 	<named-query name="Rol.ListarTodos">
 		<query>
 			SELECT r FROM Rol r

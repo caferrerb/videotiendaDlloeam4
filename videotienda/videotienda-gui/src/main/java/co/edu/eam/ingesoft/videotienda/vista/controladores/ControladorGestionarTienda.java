@@ -113,19 +113,19 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 			}else{
 				Store store = cbTiendas.getSelectionModel().getSelectedItem();
 				
-				List<Staff> lista = boEmpleado.listarEmpleadosTienda(store.getStoreId());
+				List<Staff> lista = boEmpleado.listarEmpleadosTienda(store);
 				for (Staff staff : lista){
 					data.add(staff);
 					
-				cCodigo.setCellValueFactory(new PropertyValueFactory<Staff, Byte>("CODIGO"));
+				cCodigo.setCellValueFactory(new PropertyValueFactory<Staff, Byte>("staffId"));
 				cCodigo.setMinWidth(100);
-				cNombre.setCellValueFactory(new PropertyValueFactory<Staff, String>("NOMBRE"));
+				cNombre.setCellValueFactory(new PropertyValueFactory<Staff, String>("firstName"));
 				cNombre.setMinWidth(100);
-				cApellido.setCellValueFactory(new PropertyValueFactory<Staff, String>("APELLIDO"));
+				cApellido.setCellValueFactory(new PropertyValueFactory<Staff, String>("lastName"));
 				cApellido.setMinWidth(100);
-				cHorario.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Date>("HORARIO"));
+				cHorario.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Date>("horaInicial"));
 				cHorario.setMinWidth(100);
-				cButtonEmpleados.setCellValueFactory(new PropertyValueFactory<Staff, Button>("INFORMACION"));
+				cButtonEmpleados.setCellValueFactory(new PropertyValueFactory<Staff, Button>(""));
 				tbEmpleado.setItems(data);
 
 				
