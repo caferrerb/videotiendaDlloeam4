@@ -200,4 +200,14 @@ public class Staff implements Serializable {
 				+ ", lastUpdate=" + lastUpdate + " ]";
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	
+	
 }
