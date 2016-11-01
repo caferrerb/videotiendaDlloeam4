@@ -6,5 +6,5 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 
 @Component
 public class BOUsuario extends BOGenerico<Usuario> {
-
+	
 }

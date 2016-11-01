@@ -80,10 +80,10 @@
                         <Label layoutX="56.0" layoutY="248.0" text="Rol" />
                         <ComboBox fx:id="cbRolUsuario" layoutX="110.0" layoutY="244.0" prefHeight="25.0" prefWidth="165.0" promptText="Seleccione un rol" />
                         <Button id="btnAsignar" layoutX="299.0" layoutY="244.0" mnemonicParsing="false" onAction="#asignarRol" text="Asignar" />
-                        <TableView layoutX="51.0" layoutY="296.0" prefHeight="165.0" prefWidth="329.0">
+                        <TableView fx:id="tablaRolUsuario" layoutX="51.0" layoutY="296.0" prefHeight="165.0" prefWidth="329.0">
                           <columns>
-                            <TableColumn prefWidth="163.0" text="Rol" />
-                              <TableColumn prefWidth="165.0" />
+                            <TableColumn fx:id="rolUsuarioCL" prefWidth="163.0" text="Rol" />
+                              <TableColumn fx:id="quitarRolCL" prefWidth="165.0" text="Quitar" />
                           </columns>
                         </TableView>
                         <GridPane layoutX="41.0" layoutY="36.0" prefHeight="90.0" prefWidth="376.0">

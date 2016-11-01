@@ -55,6 +55,12 @@
 		</query>
 	</named-query>
 	
+	<named-query name="UsuarioRol.ListarRolesPorUsuario">
+		<query>
+			SELECT usuR.rol FROM UsuarioRol usuR WHERE usuR.usuario.usuario=?1
+		</query>
+	</named-query>
+	
 	<named-query name="UsuarioRol.ListarPorRol">
 		<query>
 			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1

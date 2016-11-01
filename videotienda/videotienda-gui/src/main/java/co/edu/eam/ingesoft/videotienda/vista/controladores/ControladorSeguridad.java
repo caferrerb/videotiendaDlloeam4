@@ -71,6 +71,16 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 
 	ObservableList<Rol> roles;
 
+	// Declarar tabla y columnas de Usuario
+	@FXML
+	private TableView<Rol> tablaRolUsuario;
+	@FXML
+	private TableColumn<Rol, String> rolUsuarioCL;
+	@FXML
+	private TableColumn quitarRolCL;
+
+	ObservableList<Rol> rolesUsuario;
+
 	private Usuario usu;
 	private Staff empleado;
 
@@ -79,13 +89,26 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	 */
 	private List<Rol> listaRoles;
 
+	/**
+	 * Se declara una lista para usarla en la ventana
+	 */
+	private List<Rol> listaRolesUsuario;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		inicializarTabla();
 		llenarTablaRoles();
 		llenarComboRoles();
 		llenarComboEmpleados();
-		empleado = null;
+		usu = new Usuario();
+		empleado = new Staff();
+		cbEmpleado.setOnAction((event) -> {
+			Staff selectedEmpleado = cbEmpleado.getSelectionModel().getSelectedItem();
+			tfUsuario.setText(selectedEmpleado.getUsuario().getUsuario());
+			tfPassword.setText(selectedEmpleado.getUsuario().getPass());
+			usu = selectedEmpleado.getUsuario();
+			llenarTablaRolUsuario();
+		});
 	}
 
 	@FXML
@@ -112,24 +135,22 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		if (tfUsuario.getText().isEmpty() || tfPassword.getText().isEmpty()) {
 			notificar("Asignar usuario", "Debe completar los campos", TipoNotificacion.ERROR);
 		} else {
-			 if (cbEmpleado.getSelectionModel().getSelectedItem().equals("Elegir el empleado")) {
-			 notificar("Asignar usuario", "Debe seleccionar el empleado",
-			 TipoNotificacion.ERROR);
-			 } else {
-			empleado = (Staff) cbEmpleado.getSelectionModel().getSelectedItem();
-			boUsuario.crear(usu);
-			empleado.setUsuario(usu);
-			boEmpleado.editar(empleado);
-			notificar("Asignar usuario", "Usuario asignado con exito!", TipoNotificacion.INFO);
-			 }
+			if (cbEmpleado.getSelectionModel().getSelectedItem().equals("Elegir el empleado")) {
+				notificar("Asignar usuario", "Debe seleccionar el empleado", TipoNotificacion.ERROR);
+			} else {
+				empleado = (Staff) cbEmpleado.getSelectionModel().getSelectedItem();
+				boUsuario.crear(usu);
+				empleado.setUsuario(usu);
+				boEmpleado.editar(empleado);
+				notificar("Asignar usuario", "Usuario asignado con exito!", TipoNotificacion.INFO);
+			}
 		}
 	}
 
 	@FXML
 	public void asignarRol() {
 		if (cbRolUsuario.getSelectionModel().getSelectedItem().equals("Seleccione un rol")) {
-			notificar("Asignar rol al usuario", "Debe seleccionar el rol a asignar",
-					 TipoNotificacion.ERROR);			
+			notificar("Asignar rol al usuario", "Debe seleccionar el rol a asignar", TipoNotificacion.ERROR);
 		} else {
 			UsuarioRol usuarioRol = new UsuarioRol();
 			Rol rolCombo = cbRolUsuario.getSelectionModel().getSelectedItem();
@@ -146,23 +167,43 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		tablaRoles.setItems(roles);
 	}
 
+	@FXML
+	public void llenarTablaRolUsuario() {
+		listaRolesUsuario = boUsuarioRol.listarRolesPorUsuario(usu.getUsuario());
+		rolesUsuario.setAll(listaRolesUsuario);
+		tablaRolUsuario.setItems(rolesUsuario);
+	}
+
 	public void inicializarTabla() {
 		// Inicializar listas
 		roles = FXCollections.observableArrayList();
+		rolesUsuario = FXCollections.observableArrayList();
 
 		// Enlazar listas
 		tablaRoles.setItems(roles);
+		tablaRolUsuario.setItems(rolesUsuario);
 
 		// Enlazar columnas con atributos
 		idRolCL.setCellValueFactory(new PropertyValueFactory<Rol, Integer>("id"));
 		nombreRolCL.setCellValueFactory(new PropertyValueFactory<Rol, String>("descripcion"));
+		rolUsuarioCL.setCellValueFactory(new PropertyValueFactory<Rol, String>("Rol"));
 		eliminarRolCL.setSortable(false);
+		quitarRolCL.setSortable(false);
 
 		// Indicamos que muestre el ButtonCell creado mas abajo.
 		eliminarRolCL.setCellFactory(new Callback<TableColumn<Rol, Boolean>, TableCell<Rol, Boolean>>() {
 
 			public TableCell<Rol, Boolean> call(TableColumn<Rol, Boolean> p) {
 				return new ButtonCell(tablaRoles);
+			}
+
+		});
+
+		// Indicamos que muestre el ButtonCell creado mas abajo.
+		quitarRolCL.setCellFactory(new Callback<TableColumn<Rol, Boolean>, TableCell<Rol, Boolean>>() {
+
+			public TableCell<Rol, Boolean> call(TableColumn<Rol, Boolean> p) {
+				return new ButtonCell2(tablaRolUsuario);
 			}
 
 		});
@@ -208,6 +249,39 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 						roles.remove(num);
 						notificar("Eliminar Rol", "Rol eliminado con exito!", TipoNotificacion.INFO);
 					}
+				}
+			});
+		}
+
+		// Muestra un boton si la fila no es nula
+		@Override
+		protected void updateItem(Boolean t, boolean empty) {
+			super.updateItem(t, empty);
+			if (!empty) {
+				setGraphic(cellButton);
+			}
+		}
+
+	}
+
+	private class ButtonCell2 extends TableCell<Rol, Boolean> {
+
+		// boton a mostrar
+		final Button cellButton = new Button("Quitar");
+
+		ButtonCell2(final TableView tblView) {
+
+			cellButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent t) {
+					int num = getTableRow().getIndex();
+					// borramos el objeto obtenido de la fila
+					Rol r = listaRolesUsuario.get(num);
+					boUsuarioRol.eliminar(r.getId(), usu.getUsuario());
+					rolesUsuario.remove(num);
+					notificar("Quitar rol a usuario", "Se ha quitado el rol asignado anteriormente" + " a este usuario",
+							TipoNotificacion.INFO);
 				}
 			});
 		}
