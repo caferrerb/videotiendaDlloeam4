@@ -82,7 +82,8 @@
 	<named-query name="EmpleadosTienda.ListarTodos">
 	<query>
 			SELECT s FROM Staff s WHERE s.store=?1 
->>>>>>> branch 'master' o		
+			branch 'master' o	
+			</query>	
 		</named-query>
 	
 
