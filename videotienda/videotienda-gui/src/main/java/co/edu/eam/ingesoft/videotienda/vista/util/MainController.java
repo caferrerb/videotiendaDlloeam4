@@ -79,6 +79,9 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private Menu mnuAutorizacion;
+	
+	@FXML
+	private Menu menuItemReportes;
 
 	/**
 	 * item de iniciar sesion.
@@ -204,5 +207,10 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirAutorizacion(){		
 		agregarVentana("/fxml/Seguridad.fxml", ControladorSeguridad.class);
+	}
+	
+	@FXML
+	public void abrirGestionReportesVentasAlquiler(){
+		agregarVentana("/fxml/VentanaReportesVentasAlquiler.fxml", ControladorReporteVentaAlquiler.class);
 	}
 }
