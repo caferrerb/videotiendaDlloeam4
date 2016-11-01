@@ -59,13 +59,9 @@ public class Staff implements Serializable {
 	private Address address;
 
 	//bi-directional many-to-one association to Store
-<<<<<<< HEAD
+
 	@ManyToOne
 	@JoinColumn(name="store_id")
-=======
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="store_id", nullable=false)
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 	private Store store;
 
 	//bi-directional many-to-one association to Store
