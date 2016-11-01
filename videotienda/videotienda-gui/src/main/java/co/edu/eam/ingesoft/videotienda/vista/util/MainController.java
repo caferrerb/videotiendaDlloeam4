@@ -64,6 +64,12 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	private Menu mnuGeneros;
+	
+	/**
+	 * Menu equipos
+	 */
+	@FXML
+	private Menu menuCliente;
 
 	/**
 	 * Menu equipos
@@ -106,6 +112,9 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem mnuItemRoles;
+	
+	@FXML
+	private MenuItem menuItemTraslado;
 	
 	/**
 	 * Inicializacion de la ventana.
@@ -173,6 +182,11 @@ public class MainController implements Initializable {
 	public void abrirGEstionarCiudad(){
 		agregarVentana("/fxml/gestionarciudad.fxml", ControladorGestionarCIudad.class);
 		
+	}
+	
+	@FXML
+	public void abrirTrasladarCliente(){
+		agregarVentana("/fxml/VentanaTrasladarCiudadCliente.fxml", ControladorVentanaTrasladarCiudad.class);
 	}
 	
 	@FXML

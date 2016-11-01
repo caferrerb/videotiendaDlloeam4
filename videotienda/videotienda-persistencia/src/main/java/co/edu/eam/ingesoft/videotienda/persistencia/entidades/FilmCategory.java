@@ -33,12 +33,12 @@ public class FilmCategory implements Serializable {
 	private Date lastUpdate;
 
 	//bi-directional many-to-one association to Category
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="category_id", nullable=false, insertable=false, updatable=false)
 	private Category category;
 
 	//bi-directional many-to-one association to Film
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="film_id", nullable=false, insertable=false, updatable=false)
 	private Film film;
 

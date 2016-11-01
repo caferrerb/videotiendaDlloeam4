@@ -33,12 +33,12 @@ public class FilmActor implements Serializable {
 	private Date lastUpdate;
 
 	//bi-directional many-to-one association to Actor
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="actor_id", nullable=false, insertable=false, updatable=false)
 	private Actor actor;
 
 	//bi-directional many-to-one association to Film
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="film_id", nullable=false, insertable=false, updatable=false)
 	private Film film;
 	

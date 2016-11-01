@@ -44,6 +44,7 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		llenarComboCiudades();
+		cliente = null;
 	}
 	
 	/**
