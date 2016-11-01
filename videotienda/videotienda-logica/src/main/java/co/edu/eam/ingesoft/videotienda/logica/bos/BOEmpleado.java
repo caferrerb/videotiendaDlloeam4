@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 
 @Component
 public class BOEmpleado extends BOGenerico<Staff>{
@@ -28,8 +29,8 @@ public class BOEmpleado extends BOGenerico<Staff>{
 	 *         Fecha: 29/10/2016<br/>
 	 * @return
 	 */
-	public List<Staff> listarEmpleadosTienda(byte id){
-		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_EMPLEADOS_TIENDA,id);
+	public List<Staff> listarEmpleadosTienda(Store store){
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_EMPLEADOS_TIENDA,store);
 		
 	}
 }
