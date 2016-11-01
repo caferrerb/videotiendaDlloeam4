@@ -82,8 +82,8 @@
 	<named-query name="EmpleadosTienda.ListarTodos">
 	<query>
 			SELECT s FROM Staff s WHERE s.store=?1 
-		</query>
-		
+			branch 'master' o	
+			</query>	
 		</named-query>
 	
 
@@ -109,6 +109,7 @@
 		<query>
 			SELECT a FROM Acceso a
 		</query>
-	</named-query>
+		</named-query>
+
 
 </entity-mappings>

@@ -294,15 +294,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	}
 
 	@FXML
-	private void llamarVentana() throws IOException {
-
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/VentanaGestionEmpleadosSub.fxml"));
-		Parent root1 = (Parent) fxmlLoader.load();
-		Stage stage = new Stage();
-		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.setTitle("Horario empleado");
-		stage.setScene(new Scene(root1));
-		stage.show();
+	private void llamarVentana() {
+		
+		abrirVentana("/fxml/VentanaGestionEmpleadosSub.fxml", ControladorGestionarEmpleadoSub.class);
 
 	}
 }
