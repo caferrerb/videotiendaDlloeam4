@@ -60,7 +60,7 @@ public class Staff implements Serializable {
 
 	//bi-directional many-to-one association to Store
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="store_id")
+	@JoinColumn(name="store_id", nullable=false)
 	private Store store;
 
 	//bi-directional many-to-one association to Store
@@ -194,26 +194,18 @@ public class Staff implements Serializable {
 		this.store = store;
 	}
 
-	
 
-	/**
-	 * @return the usuario
-	 */
 	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	/**
-	 * @param usuario the usuario to set
-	 */
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
 	@Override
 	public String toString() {
-		return getFirstName() + " " + getLastName();
+		return staffId+" - "+ firstName;
 	}
-	
 
 }
