@@ -69,13 +69,13 @@ public class Film implements Serializable {
 	
 	//Lenguaje original de la pelicula
 	//bi-directional many-to-one association to Language
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="language_id", nullable=false)
 	private Language language1;
 
 	//Lenguaje de los subtitulos
 	//bi-directional many-to-one association to Language
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="original_language_id")
 	private Language language2;
 

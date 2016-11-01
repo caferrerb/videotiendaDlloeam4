@@ -61,7 +61,6 @@
 		</query>
 	</named-query>
 
-
 	<named-query name="Rol.ListarTodos">
 		<query>
 			SELECT r FROM Rol r
@@ -78,15 +77,16 @@
 	<named-query name="UsuarioRol.ListarPorRol">
 		<query>
 			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1
+			</query>
+			</named-query>
+	<named-query name="EmpleadosTienda.ListarTodos">
+	<query>
+			SELECT s FROM Staff s WHERE s.store=?1 
 		</query>
 		
 		</named-query>
-		<named-query name="EmpleadosTienda.ListarTodos">
-			<query>
-				SELECT s FROM Staff s WHERE s.store=?1
+	
 
-			</query>
-		</named-query>
 
 		<named-query name="datosTablaRental.Listar">
 			<query>
@@ -104,5 +104,11 @@
 
 			</query>
 		</named-query>
+		
+		<named-query name="Acceso.ListarTodos">
+		<query>
+			SELECT a FROM Acceso a
+		</query>
+	</named-query>
 
 </entity-mappings>
