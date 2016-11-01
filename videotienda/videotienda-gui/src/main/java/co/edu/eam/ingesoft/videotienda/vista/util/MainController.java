@@ -13,6 +13,8 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarP
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarTienda;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorSeguridad;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorReporteVentaAlquiler;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorVentanaTrasladarCiudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

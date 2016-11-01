@@ -23,7 +23,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="jBCrear" layoutX="339.0" layoutY="627.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" text="CREAR" textFill="WHITE">
+      <Button fx:id="jBCrear" layoutX="339.0" layoutY="627.0" mnemonicParsing="false" onAction="#crearPelicula" prefHeight="40.0" prefWidth="187.0" text="CREAR" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -38,18 +38,14 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <TitledPane fx:id="jPDatosBasicos" animated="false" layoutX="11.0" layoutY="66.0" prefHeight="523.0" prefWidth="713.0" text="Datos Basicos">
+      <TitledPane fx:id="jPDatosBasicos" animated="false" layoutX="11.0" layoutY="66.0" prefHeight="523.0" prefWidth="728.0" text="Datos Basicos">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="491.0" prefWidth="553.0">
                <children>
                   <Label layoutX="575.0" layoutY="278.0" prefHeight="21.0" prefWidth="82.0" text="Poratada:" />
-                  <ImageView fx:id="jPoster" fitHeight="151.0" fitWidth="151.0" layoutX="541.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
                   <Label layoutX="13.0" layoutY="19.0" prefHeight="21.0" prefWidth="99.0" text="ID de pelicula:" />
                   <Label layoutX="13.0" layoutY="347.0" prefHeight="21.0" prefWidth="88.0" text="Descripcion:" />
                   <TextArea fx:id="jTFescriptionj" layoutX="13.0" layoutY="380.0" prefHeight="97.0" prefWidth="333.0" />
-                  <Label layoutX="362.0" layoutY="67.0" prefHeight="21.0" prefWidth="138.0" text="Ultima actualizacion:" />
-                  <DatePicker fx:id="jLastUpdate" layoutX="510.0" layoutY="64.0" prefHeight="31.0" prefWidth="187.0" />
                   <TextField fx:id="jTFFilmID" layoutX="161.0" layoutY="14.0" prefHeight="31.0" prefWidth="187.0" />
                   <Label layoutX="13.0" layoutY="115.0" prefHeight="21.0" prefWidth="100.0" text="Clasificacion:" />
                   <TextField fx:id="jTFRating" layoutX="161.0" layoutY="110.0" prefHeight="31.0" prefWidth="187.0" />
@@ -60,18 +56,24 @@
                   <TextField fx:id="jTFRentalRate" layoutX="161.0" layoutY="251.0" prefHeight="31.0" prefWidth="187.0" />
                   <Label layoutX="12.0" layoutY="303.0" prefHeight="21.0" prefWidth="136.0" text="Costo de remplazo:" />
                   <TextField fx:id="jTFReplacementCost" layoutX="161.0" layoutY="298.0" prefHeight="31.0" prefWidth="187.0" />
-                  <Label layoutX="395.0" layoutY="19.0" prefHeight="21.0" prefWidth="99.0" text="Caracteristicas:" />
-                  <TextField fx:id="jTFFactures" layoutX="511.0" layoutY="14.0" prefHeight="31.0" prefWidth="187.0" />
+                  <Label layoutX="395.0" layoutY="19.0" prefHeight="21.0" prefWidth="119.0" text="Caracteristicas:" />
+                  <TextField fx:id="jTFFactures" layoutX="525.0" layoutY="14.0" prefHeight="31.0" prefWidth="187.0" />
                   <Label layoutX="11.0" layoutY="63.0" prefHeight="21.0" prefWidth="52.0" text="Titulo:" />
                   <TextField fx:id="jTFTitle" layoutX="78.0" layoutY="59.0" prefHeight="31.0" prefWidth="270.0" />
-                  <Label layoutX="432.0" layoutY="115.0" prefHeight="21.0" prefWidth="71.0" text="Lenguaje:" />
-                  <TextField fx:id="jTFLanguaje1" layoutX="511.0" layoutY="110.0" prefHeight="31.0" prefWidth="187.0" />
-                  <Label layoutX="351.0" layoutY="162.0" prefHeight="21.0" prefWidth="154.0" text="Lenguaje de subtitulos:" />
-                  <TextField fx:id="jTFLanguaje2" layoutX="511.0" layoutY="158.0" prefHeight="31.0" prefWidth="187.0" />
+                  <Label layoutX="438.0" layoutY="72.0" prefHeight="21.0" prefWidth="71.0" text="Lenguaje:" />
+                  <Label layoutX="351.0" layoutY="119.0" prefHeight="21.0" prefWidth="169.0" text="Lenguaje de subtitulos:" />
                   <DatePicker fx:id="jYearRelease" layoutX="161.0" layoutY="157.0" prefHeight="31.0" prefWidth="187.0" />
-                  <Label layoutX="362.0" layoutY="206.0" prefHeight="21.0" prefWidth="141.0" text="Duracion de pelicula:" />
-                  <TextField fx:id="jTFLength" layoutX="511.0" layoutY="201.0" />
-                  <Button fx:id="jBSeleccionImagen" layoutX="388.0" layoutY="342.0" mnemonicParsing="false" onAction="#abrirImagen" text="Seleccione Imagen:" />
+                  <Label layoutX="362.0" layoutY="167.0" prefHeight="21.0" prefWidth="160.0" text="Duracion de pelicula:" />
+                  <TextField fx:id="jTFLength" layoutX="525.0" layoutY="162.0" />
+                  <Button fx:id="jBSeleccionImagen" layoutX="369.0" layoutY="440.0" mnemonicParsing="false" onAction="#abrirImagen" text="Seleccione Imagen:" />
+                  <ComboBox fx:id="jCBLanguage1" layoutX="525.0" layoutY="66.0" prefHeight="31.0" prefWidth="187.0" />
+                  <ComboBox fx:id="jCBLanguage2" layoutX="525.0" layoutY="114.0" prefHeight="31.0" prefWidth="187.0" />
+                  <Pane layoutX="529.0" layoutY="298.0" prefHeight="170.0" prefWidth="187.0" style="-fx-background-color: gray;">
+                     <children>
+                        <ImageView fx:id="jPoster" fitHeight="151.0" fitWidth="151.0" layoutX="18.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                  </ImageView>
+                     </children>
+                  </Pane>
                </children>
             </AnchorPane>
         </content>
@@ -80,9 +82,9 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="443.0" prefWidth="664.0">
                <children>
-                  <Label layoutX="48.0" layoutY="30.0" prefHeight="21.0" prefWidth="54.0" text="Actores:" />
+                  <Label layoutX="34.0" layoutY="30.0" prefHeight="21.0" prefWidth="68.0" text="Actores:" />
                   <ComboBox fx:id="jCBActores" layoutX="138.0" layoutY="25.0" prefHeight="31.0" prefWidth="338.0" />
-                  <Label layoutX="31.0" layoutY="75.0" prefHeight="21.0" prefWidth="71.0" text="Personaje:" />
+                  <Label layoutX="16.0" layoutY="75.0" prefHeight="21.0" prefWidth="86.0" text="Personaje:" />
                   <TextField fx:id="jTFPersonaje" layoutX="138.0" layoutY="70.0" prefHeight="31.0" prefWidth="340.0" />
                   <Button fx:id="jCBAgregar" layoutX="567.0" layoutY="25.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="72.0" text="+">
                      <font>

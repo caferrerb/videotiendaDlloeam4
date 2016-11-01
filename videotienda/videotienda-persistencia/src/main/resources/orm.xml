@@ -48,7 +48,20 @@
 			SELECT s FROM Staff s
 		</query>
 	</named-query>
+	
+	<named-query name="Tienda.ListarTodos">
+	<query>
+			SELECT s FROM Store s
+		</query>
+	</named-query>
+	
+	<named-query name="Language.ListarTodos">
+	<query>
+			SELECT lag FROM Language lag
+		</query>
+	</named-query>
 
+<<<<<<< HEAD
 	<named-query name="Rol.ListarTodos">
 		<query>
 			SELECT r FROM Rol r
@@ -64,6 +77,11 @@
 	<named-query name="UsuarioRol.ListarPorRol">
 		<query>
 			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1
+=======
+	<named-query name="EmpleadosTienda.ListarTodos">
+	<query>
+			SELECT s FROM Staff s WHERE s.store=?1 
+>>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 		</query>
 	</named-query>
 
