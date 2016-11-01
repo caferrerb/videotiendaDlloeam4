@@ -107,7 +107,7 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 	private class ButtonCell extends TableCell<Film, Boolean> {
 
 		// boton a mostrar
-		final Button cellButton = new Button("Vendedr");
+		final Button cellButton = new Button("Vender");
 
 		ButtonCell(final TableView tblView) {
 
