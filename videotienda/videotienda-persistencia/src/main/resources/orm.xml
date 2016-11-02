@@ -31,6 +31,13 @@
 		</query>
 	</named-query>
 	
+    <!-- Consulta para buscar genero por nombre -->
+	<named-query name="Category.buscarPorNombre">
+		<query>
+			SELECT c FROM Category c WHERE c.name = ?1
+		</query>
+	</named-query>
+	
     <!-- Lista con todas las peliculas de un determinado genero -->
 	<named-query name="FilmCategory.listarPorCategoria">
 		<query>

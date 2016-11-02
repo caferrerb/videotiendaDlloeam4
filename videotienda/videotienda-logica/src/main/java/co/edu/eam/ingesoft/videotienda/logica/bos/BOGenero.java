@@ -5,11 +5,28 @@
 package co.edu.eam.ingesoft.videotienda.logica.bos;
 import java.util.List;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Category;
 
 @Component
 public class BOGenero extends BOGenerico<Category>{
+	/**
+	 * Registrar informacion de una categoria en la base de datos
+	 * @throws ExcepcionNegocio 
+	 */
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void crear(Category entidad){
+		List<Category> genero = dao.ejecutarNamedQuery(ConstantesNamedQueries.BUSCAR_GENERO_POR_NOMBRE, entidad.getName());
+		if(genero.size() > 0){
+			throw new ExcepcionNegocio("El genero "+entidad.getName()+" ya existe");
+		}else{
+			super.crear(entidad);
+		}
+	}
 	/**
 	 * Lista con todos los generos registrados en la bd
 	 * @return lista con todos los generos

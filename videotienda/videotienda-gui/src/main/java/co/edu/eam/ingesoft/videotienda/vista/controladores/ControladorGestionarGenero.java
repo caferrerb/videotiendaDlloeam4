@@ -4,10 +4,16 @@
  */
 package co.edu.eam.ingesoft.videotienda.vista.controladores;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOGenero;
+import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Category;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Customer;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
@@ -17,6 +23,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -28,6 +35,8 @@ import javafx.fxml.FXML;
 
 @Controller
 public class ControladorGestionarGenero extends BaseController implements Initializable{
+	@Autowired
+	private BOGenero bo;
 	/**
 	 * Componentes de la Ventana gestionar genero
 	 */
@@ -48,7 +57,24 @@ public class ControladorGestionarGenero extends BaseController implements Initia
 	 */
 	@FXML
 	public void crearGenero(){
-		
+		String name = tFnombreGenero.getText();
+		if(name.isEmpty()){
+			notificar("Falta Informacion", "Por favor ingrese el nombre del genero",  TipoNotificacion.ERROR);
+		}else{
+			try{
+				Category categoria = new Category();
+				Date date = new Date();
+				long time = date.getTime();
+				Timestamp lastUpdate = new Timestamp(time);
+				categoria.setLastUpdate(lastUpdate);
+				categoria.setName(name);
+				bo.crear(categoria);
+				notificar("Genero creado exitosamente", "Se ha creado el genero "+name+" correctamente",  TipoNotificacion.INFO);
+				limpiarCampos();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**
