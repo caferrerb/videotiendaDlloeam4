@@ -14,7 +14,7 @@
 
 	<named-query name="Film.listarNombrePelicula">
 		<query>
-			SELECT f FROM Film f WHERE f.title?1
+			SELECT f FROM Film f WHERE f.title like?1
 		</query>
 	</named-query>
 

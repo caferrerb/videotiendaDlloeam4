@@ -115,20 +115,21 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 
 				@Override
 				public void handle(ActionEvent t) {
-					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/venderPelicula.fxml"));
-					Parent root1;
-					try {
-						root1 = (Parent) fxmlLoader.load();
-						Stage stage = new Stage();
-						stage.initModality(Modality.APPLICATION_MODAL);
-						stage.setTitle("VENDER PELICULA");
-						stage.setScene(new Scene(root1));
-						stage.show();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
+					abrirVentana("/fxml/venderPelicula.fxml", ControladorvenderPelicula.class);
+//					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/venderPelicula.fxml"));
+//					Parent root1;
+//					try {
+//						root1 = (Parent) fxmlLoader.load();
+//						Stage stage = new Stage();
+//						stage.initModality(Modality.APPLICATION_MODAL);
+//						stage.setTitle("VENDER PELICULA");
+//						stage.setScene(new Scene(root1));
+//						stage.show();
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//					
 					int num = getTableRow().getIndex();
 					
 					// borramos el objeto obtenido de la fila
