@@ -17,9 +17,6 @@
 					<children>
 						<MenuBar prefHeight="25.0" prefWidth="673.9999755859375">
 							<menus>
-
-
-
 								<Menu fx:id="mnuInicio" mnemonicParsing="false" text="Inicio" />
 								<Menu fx:id="mnuPeliculas" mnemonicParsing="false" text="Peliculas">
                             <items>
@@ -40,7 +37,10 @@
                               	 <MenuItem id="ItemGestionarActores" fx:id="mnuItemGestionarActores" mnemonicParsing="false" onAction="#abrirGestionarActores" text="GestionarActores" />
                                 
                            </items></Menu>
-								<Menu fx:id="mnuGeneros" mnemonicParsing="false" onAction="#abrirGestionarGeneros" text="Generos" />
+								<Menu fx:id="mnuGeneros" mnemonicParsing="false" text="Generos">
+                           <items>
+                              <MenuItem id="ItemGestionarGenero" fx:id="mnuItemGestionarGenero" onAction="#abrirGestionarGenero" mnemonicParsing="false" text="Gestionar" />
+                           </items></Menu>
 							<Menu fx:id="mnuEmpleados" mnemonicParsing="false" text="Empleados">
 							
                            <items>

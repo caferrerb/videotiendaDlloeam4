@@ -1,101 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="699.0" text="Gestionar Generos" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="646.0">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutX="361.0" layoutY="57.0" prefHeight="413.0" prefWidth="381.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Peliculas">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="TbPeliculas" layoutY="6.0" prefHeight="370.0" prefWidth="381.0">
+                           <columns>
+                              <TableColumn prefWidth="146.0" text="Titulo" />
+                              <TableColumn prefWidth="74.0" text="Año" />
+                              <TableColumn minWidth="0.0" prefWidth="77.0" text="Idioma" />
+                              <TableColumn maxWidth="108.0" minWidth="0.0" prefWidth="82.0" text="Valor" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+            <Tab text="Actores">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="TbActores" layoutY="7.0" prefHeight="369.0" prefWidth="381.0">
+                           <columns>
+                              <TableColumn prefWidth="112.0" text="Nombres" />
+                              <TableColumn prefWidth="104.0" text="Apellidos" />
+                              <TableColumn minWidth="0.0" prefWidth="84.0" text="Ciudad" />
+                              <TableColumn maxWidth="99.0" minWidth="0.0" text="Pais" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <TableView fx:id="TbGeneros" layoutX="23.0" layoutY="167.0" prefHeight="295.0" prefWidth="304.0">
+         <columns>
+            <TableColumn prefWidth="48.0" text="ID" />
+            <TableColumn prefWidth="178.0" text="Nombre" />
+            <TableColumn prefWidth="76.0" text="Fecha" />
+            <TableColumn prefWidth="76.0" text="Fecha" />
+         </columns>
+      </TableView>
+      <HBox layoutX="21.0" layoutY="104.0" prefHeight="51.0" prefWidth="308.0">
          <children>
-            <Pane layoutX="356.0" layoutY="-1.0" prefHeight="375.0" />
-            <TabPane layoutX="364.0" prefHeight="375.0" prefWidth="333.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab text="Peliculas">
-                     <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <TableView fx:id="TbPeliculas" layoutY="6.0" prefHeight="333.0" prefWidth="327.0">
-                                 <columns>
-                                    <TableColumn prefWidth="125.0" text="Titulo" />
-                                    <TableColumn prefWidth="57.0" text="Año" />
-                                    <TableColumn minWidth="0.0" prefWidth="77.0" text="Idioma" />
-                                    <TableColumn maxWidth="67.0" minWidth="0.0" prefWidth="67.0" text="Valor" />
-                                 </columns>
-                              </TableView>
-                           </children></Pane>
-                     </content>
-                  </Tab>
-                <Tab text="Actores">
-                     <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <TableView fx:id="TbActores" layoutY="7.0" prefHeight="333.0" prefWidth="327.0">
-                                 <columns>
-                                    <TableColumn prefWidth="97.0" text="Nombres" />
-                                    <TableColumn prefWidth="85.0" text="Apellidos" />
-                                    <TableColumn minWidth="0.0" prefWidth="77.0" text="Ciudad" />
-                                    <TableColumn maxWidth="67.0" minWidth="0.0" prefWidth="67.0" text="Pais" />
-                                 </columns>
-                              </TableView>
-                           </children></Pane>
-                     </content>
-                  </Tab>
-              </tabs>
-            </TabPane>
-            <GridPane layoutX="29.0" layoutY="42.0" prefHeight="42.0" prefWidth="303.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="0.0" prefWidth="89.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="303.0" minWidth="10.0" prefWidth="214.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="Nombre:" />
-                  <TextField fx:id="tFnombreGenero" prefHeight="25.0" prefWidth="185.0" GridPane.columnIndex="1" />
-               </children>
-            </GridPane>
-            <Label layoutX="29.0" layoutY="23.0" text="Datos del Genero">
+            <Button fx:id="crearGenero" mnemonicParsing="false" onAction="#crearGenero" prefHeight="31.0" prefWidth="83.0" text="Crear">
                <font>
-                  <Font name="SansSerif Bold" size="14.0" />
+                  <Font name="SansSerif Bold" size="12.0" />
                </font>
-            </Label>
-            <HBox layoutX="29.0" layoutY="94.0" prefHeight="51.0" prefWidth="308.0">
-               <children>
-                  <Button fx:id="crearGenero" mnemonicParsing="false" onAction="#crearGenero" prefHeight="31.0" prefWidth="83.0" text="Crear">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="SansSerif Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="buscargenero" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#buscarGenero" prefHeight="31.0" prefWidth="83.0" text="Buscar">
-                     <font>
-                        <Font name="SansSerif Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="editarGenero" layoutX="103.0" layoutY="10.0" mnemonicParsing="false" onAction="#editarGenero" prefHeight="31.0" prefWidth="83.0" text="Editar">
-                     <font>
-                        <Font name="SansSerif Bold" size="12.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
-            <TableView fx:id="TbGeneros" layoutX="29.0" layoutY="153.0" prefHeight="200.0" prefWidth="304.0">
-              <columns>
-                <TableColumn prefWidth="48.0" text="ID" />
-                <TableColumn prefWidth="178.0" text="Nombre" />
-                  <TableColumn prefWidth="76.0" text="Fecha" />
-                  <TableColumn prefWidth="76.0" text="Fecha" />
-              </columns>
-            </TableView>
-         </children></AnchorPane>
-  </content>
-</TitledPane>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="buscargenero" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#buscarGenero" prefHeight="31.0" prefWidth="83.0" text="Buscar">
+               <font>
+                  <Font name="SansSerif Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="editarGenero" layoutX="103.0" layoutY="10.0" mnemonicParsing="false" onAction="#editarGenero" prefHeight="31.0" prefWidth="83.0" text="Editar">
+               <font>
+                  <Font name="SansSerif Bold" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <GridPane layoutX="24.0" layoutY="47.0" prefHeight="51.0" prefWidth="303.0">
+         <children>
+            <Label text="Nombre:" />
+            <TextField fx:id="tFnombreGenero" prefHeight="28.0" prefWidth="214.0" GridPane.columnIndex="1" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="0.0" prefWidth="89.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="303.0" minWidth="10.0" prefWidth="214.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Label layoutX="23.0" layoutY="25.0" text="Datos del Genero">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="361.0" layoutY="25.0" text="Listado por Genero:">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

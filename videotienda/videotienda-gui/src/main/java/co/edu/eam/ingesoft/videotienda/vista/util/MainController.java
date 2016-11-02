@@ -2,6 +2,7 @@ package co.edu.eam.ingesoft.videotienda.vista.util;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.ResourceBundle.Control;
 
 import org.springframework.context.ApplicationContext;
 
@@ -113,6 +114,9 @@ public class MainController implements Initializable {
 	private MenuItem menuItemGestionarPelicula;
 	
 	@FXML
+	private MenuItem mnuItemGestionarGenero;
+	
+	@FXML
 	private MenuItem mnuItemRoles;
 	
 	@FXML
@@ -217,7 +221,7 @@ public class MainController implements Initializable {
 	}
 
 	@FXML
-	public void abrirGestionarGeneros(){
+	public void abrirGestionarGenero(){
 		agregarVentana("/fxml/VentanaGestionarGenero.fxml", ControladorGestionarGenero.class);	
 	}
 	
