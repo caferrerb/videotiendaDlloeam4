@@ -85,6 +85,9 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private Menu mnuAutorizacion;
+	
+	@FXML
+	private Menu menuItemReportes;
 
 	/**
 	 * item de iniciar sesion.
@@ -133,14 +136,17 @@ public class MainController implements Initializable {
 	 * @param url,
 	 *            ruta del archivo xml de la vista.
 	 */
-	private void agregarVentana(String pagina, Class controller) {
+	public void agregarVentana(String pagina, Class controller) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(pagina));
 			 fxmlLoader.setResources(ResourceBundle.getBundle("i18n.mensajes"));
 			
 			BaseController control = fxmlLoader.<BaseController> getController();
+			
 			ApplicationContext context = ContextFactory.getContext();
-			fxmlLoader.setController(context.getBean(controller));
+			BaseController controlador =(BaseController) context.getBean(controller);
+			controlador.init(this);
+			fxmlLoader.setController(controlador);
 			AnchorPane cmdPane = (AnchorPane) fxmlLoader.load();
 			contenido.getChildren().setAll(cmdPane);
 
@@ -218,5 +224,10 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirAutorizacion(){		
 		agregarVentana("/fxml/Seguridad.fxml", ControladorSeguridad.class);
+	}
+	
+	@FXML
+	public void abrirGestionReportesVentasAlquiler(){
+		agregarVentana("/fxml/VentanaReportesVentasAlquiler.fxml", ControladorReporteVentaAlquiler.class);
 	}
 }

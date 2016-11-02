@@ -4,8 +4,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
 	version="2.0">
 
-
-
 	<named-query name="listarPeliculas">
 		<query>
 			SELECT f FROM Film f WHERE f.length=?1
@@ -14,7 +12,7 @@
 
 	<named-query name="Film.listarNombrePelicula">
 		<query>
-			SELECT f FROM Film f WHERE f.title=?1
+			SELECT f FROM Film f WHERE f.title like?1
 		</query>
 	</named-query>
 
@@ -77,38 +75,37 @@
 	<named-query name="UsuarioRol.ListarPorRol">
 		<query>
 			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1
-			</query>
-			</named-query>
-	<named-query name="EmpleadosTienda.ListarTodos">
-	<query>
-			SELECT s FROM Staff s WHERE s.store=?1 
 		</query>
-		
-		</named-query>
-	
+	</named-query>
+	<named-query name="EmpleadosTienda.ListarTodos">
+		<query>
+			SELECT s FROM Staff s WHERE s.store=?1
+		</query>
+	</named-query>
 
 
-		<named-query name="datosTablaRental.Listar">
-			<query>
-				SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN r.customer c
-				JOIN r.inventory i
-				JOIN i.film f WHERE i.store = ?1
-			</query>
-		</named-query>
+	<named-query name="datosTablaRental.Listar">
+		<query>
+			SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN r.customer c
+			JOIN r.inventory i
+			JOIN i.film f WHERE i.store = ?1
+		</query>
+	</named-query>
 
-		<named-query name="datosTablaVentas.Listar">
-			<query>
-				SELECT f.filmId, f.title, c.customerId, s.saleDate FROM Sale s JOIN
-				s.customer c JOIN s.film f
-				JOIN s.staff p WHERE p.store = ?1
+	<named-query name="datosTablaVentas.Listar">
+		<query>
+			SELECT f.filmId, f.title, c.customerId, s.saleDate FROM Sale s JOIN
+			s.customer c JOIN s.film f
+			JOIN s.staff p WHERE p.store = ?1
 
-			</query>
-		</named-query>
-		
-		<named-query name="Acceso.ListarTodos">
+		</query>
+	</named-query>
+
+	<named-query name="Acceso.ListarTodos">
 		<query>
 			SELECT a FROM Acceso a
 		</query>
 	</named-query>
+
 
 </entity-mappings>
