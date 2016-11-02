@@ -24,6 +24,11 @@
 		</query>
 	</named-query>
 
+	<named-query name="Category.listarCategorias">
+		<query>
+			SELECT c FROM Category c
+		</query>
+	</named-query>
 
 	<named-query name="Pais.listartodos">
 		<query>

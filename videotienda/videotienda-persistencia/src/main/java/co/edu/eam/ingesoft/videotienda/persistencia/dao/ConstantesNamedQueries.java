@@ -10,7 +10,11 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTARCIUDADES = "Ciudad.ListarTodos";
 
 	public static final String CONSULTA_LISTAREMPLEADOS = "Empleado.ListarTodos";
-
+	
+	/**
+	 * Consulta para listar todas las categorias (Generos)
+	 */
+	public static final String CONSULTA_LISTAR_GENEROS = "Category.listarCategorias";
 	/**
 	 * <<<<<<< HEAD consulta para listar datos de las peliculas por nombre de la
 	 * pelicula ======= consulta para listar datos de las peliculas.. >>>>>>>
