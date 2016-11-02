@@ -165,7 +165,7 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 
 	@FXML
 	private void crearPelicula()throws Exception{
-		jTFFilmID.setEditable(true);
+		
 		if(jTFFilmID.getText().isEmpty()||jTFRentalDuration.getText().isEmpty()||jTFRentalRate.getText().isEmpty()||
 				jTFReplacementCost.getText().isEmpty()||jTFTitle.getText().isEmpty()||jCBLanguage1.getValue()==null|| jCBLanguage2.getValue()==null){
 			
@@ -250,7 +250,6 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 	@FXML
 	public void buscarPelicula(){
 		
-		jTFFilmID.setEditable(true);
 		if(jTFFilmID.getText().isEmpty()){
 			notificar("¡INGRESE!", "Por favor ingrese el ID de la pelicula que desea buscar",  TipoNotificacion.ERROR);
 		}else{
@@ -299,7 +298,6 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 					notificar("¡ERROR!", "La pelicula con el id= ''"+idFilm+"'' (NO) se encuentra registrada",  TipoNotificacion.ERROR);
 				}else{
 					try{
-					jTFFilmID.setEditable(false);
 					Film film = new Film();
 					
 					film.setFilmId(Integer.parseInt(jTFFilmID.getText()));
@@ -311,16 +309,12 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 					Date anhoRealize = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
 					film.setReleaseYear(anhoRealize);
 					
-					/*portada de la pelicula*/
-					Image image = new Image("file:" + imgFile.getAbsolutePath());
-		            jPoster.setImage(image);
-		          
 		            //Lineas para crear la imagen en la bd
 		           
 		            byte[] imagen=new byte[(int)imgFile.length()];
 		    		FileInputStream fin=new FileInputStream(imgFile);
 		    		fin.read(imagen);
-		    		
+		    		film.setPoster(imagen);
 		    		
 					/*---------------------*/
 					/*Duracion de la renta de pelicula*/
@@ -334,7 +328,7 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 					film.setLanguage1(jCBLanguage1.getValue());
 					film.setLanguage2(jCBLanguage2.getValue());
 					film.setLength(Integer.parseInt(jTFLength.getText()));
-					film.setPoster(imagen);
+					
 					
 					boFilm.editar(film);
 					notificar("¡Pelicula Editada!", "Se ha editado la pelicula exitosamente",  TipoNotificacion.INFO);

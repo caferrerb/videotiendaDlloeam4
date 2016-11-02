@@ -28,7 +28,7 @@
                            </items></Menu>
                         <Menu fx:id="menuCliente" mnemonicParsing="false" text="Clientes">
                           <items>
-                              <MenuItem fx:id="menuItemTraslado" mnemonicParsing="false" onAction="#abrirTrasladarCliente" text="Trasladar Ciudad" /> 
+                             <!--   <MenuItem fx:id="menuItemTraslado" mnemonicParsing="false" onAction="#abrirTrasladarCliente" text="Trasladar Ciudad" /> -->
                           </items>
                         </Menu>
 								<Menu fx:id="mnuActores" mnemonicParsing="false" text="Actores">
@@ -65,7 +65,7 @@
                         </Menu>
                         <Menu fx:id="menuReportes" mnemonicParsing="false" text="Reportes">
                            <items>
-                              <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" /> 
+                           <!--   <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" /> -->
                            </items>
                         </Menu>
 							</menus>
