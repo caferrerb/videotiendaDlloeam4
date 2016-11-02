@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="46.0" layoutY="14.0" text="Tiendas" />
+      <TableView fx:id="tbPeliculasDeTiendaR" layoutX="39.0" layoutY="84.0" prefHeight="200.0" prefWidth="516.0">
+        <columns>
+          <TableColumn fx:id="cIDInventario" prefWidth="75.0" text="ID Inventario" />
+          <TableColumn fx:id="cTitulo" prefWidth="75.0" text="Titulo" />
+            <TableColumn fx:id="cCliente" prefWidth="75.0" text="Cliente" />
+            <TableColumn fx:id="cFecha" prefWidth="75.0" text="Fecha Prestamo" />
+            <TableColumn fx:id="cEntrega" prefWidth="107.0" text="Fecha Entrega" />
+            <TableColumn prefWidth="43.0" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="cbTienda" layoutX="106.0" layoutY="10.0" prefWidth="150.0" />
+   </children>
+</Pane>

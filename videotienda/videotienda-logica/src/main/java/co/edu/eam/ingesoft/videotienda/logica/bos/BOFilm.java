@@ -35,7 +35,7 @@ public class BOFilm extends BOGenerico<Film>{
 	 * @return
 	 */
 	public List<Film> listarPeliculas(String nombre){
-		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_POR_NOMBRE_PELICULA,nombre);
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_POR_NOMBRE_PELICULA,"%"+nombre+"%");
 	}
 	
 	

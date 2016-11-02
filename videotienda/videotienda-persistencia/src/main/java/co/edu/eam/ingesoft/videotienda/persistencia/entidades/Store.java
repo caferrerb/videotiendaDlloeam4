@@ -40,12 +40,12 @@ public class Store implements Serializable {
 	private List<Staff> staffs;
 
 	//bi-directional many-to-one association to Address
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="address_id", nullable=false)
 	private Address address;
 
 	//bi-directional many-to-one association to Staff
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="manager_staff_id")
 	private Staff staff;
 

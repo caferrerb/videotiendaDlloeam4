@@ -27,6 +27,10 @@
 		<class>co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental</class>
 		<class>co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff</class>
 		<class>co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store</class>
+		<class>co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario</class>
+		<class>co.edu.eam.ingesoft.videotienda.persistencia.entidades.UsuarioRol</class>
+		<class>co.edu.eam.ingesoft.videotienda.persistencia.entidades.Acceso</class>
+		<class>co.edu.eam.ingesoft.videotienda.persistencia.entidades.AccesoRol</class>
 
  
 	
