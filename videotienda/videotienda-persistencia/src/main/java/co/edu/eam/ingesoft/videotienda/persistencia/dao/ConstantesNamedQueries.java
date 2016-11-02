@@ -15,6 +15,17 @@ public class ConstantesNamedQueries {
 	 * Consulta para listar todas las categorias (Generos)
 	 */
 	public static final String CONSULTA_LISTAR_GENEROS = "Category.listarCategorias";
+	
+	/**
+	 * Consulta para Listar todas las peliculas de un determinado genero
+	 */
+	public static final String CONSULTA_LISTAR_FILM_POR_CATEGORIA = "FilmCategory.listarPorCategoria";
+	
+	/**
+	 * Consulta para Listar todos los actores que hallan trabajado en peliculas de un determinado genero
+	 */
+	public static final String CONSULTA_LISTAR_ACTOR_POR_CATEGORIA = "FilmActor.listarPorCategoriaActor";
+	
 	/**
 	 * <<<<<<< HEAD consulta para listar datos de las peliculas por nombre de la
 	 * pelicula ======= consulta para listar datos de las peliculas.. >>>>>>>

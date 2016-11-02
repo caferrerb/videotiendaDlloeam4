@@ -15,12 +15,32 @@
               <tabs>
                 <Tab text="Peliculas">
                      <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="TbPeliculas" layoutY="6.0" prefHeight="333.0" prefWidth="327.0">
+                                 <columns>
+                                    <TableColumn prefWidth="125.0" text="Titulo" />
+                                    <TableColumn prefWidth="57.0" text="Año" />
+                                    <TableColumn minWidth="0.0" prefWidth="77.0" text="Idioma" />
+                                    <TableColumn maxWidth="67.0" minWidth="0.0" prefWidth="67.0" text="Valor" />
+                                 </columns>
+                              </TableView>
+                           </children></Pane>
                      </content>
                   </Tab>
                 <Tab text="Actores">
                      <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="TbActores" layoutY="7.0" prefHeight="333.0" prefWidth="327.0">
+                                 <columns>
+                                    <TableColumn prefWidth="97.0" text="Nombres" />
+                                    <TableColumn prefWidth="85.0" text="Apellidos" />
+                                    <TableColumn minWidth="0.0" prefWidth="77.0" text="Ciudad" />
+                                    <TableColumn maxWidth="67.0" minWidth="0.0" prefWidth="67.0" text="Pais" />
+                                 </columns>
+                              </TableView>
+                           </children></Pane>
                      </content>
                   </Tab>
               </tabs>
@@ -45,7 +65,7 @@
             </Label>
             <HBox layoutX="29.0" layoutY="94.0" prefHeight="51.0" prefWidth="308.0">
                <children>
-                  <Button fx:id="crearGenero" onAction="#crearGenero" mnemonicParsing="false" prefHeight="31.0" prefWidth="83.0" text="Crear">
+                  <Button fx:id="crearGenero" mnemonicParsing="false" onAction="#crearGenero" prefHeight="31.0" prefWidth="83.0" text="Crear">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -53,12 +73,12 @@
                         <Font name="SansSerif Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buscargenero" onAction="#buscarGenero" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="83.0" text="Buscar">
+                  <Button fx:id="buscargenero" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#buscarGenero" prefHeight="31.0" prefWidth="83.0" text="Buscar">
                      <font>
                         <Font name="SansSerif Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="editarGenero" onAction="#editarGenero" layoutX="103.0" layoutY="10.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="83.0" text="Editar">
+                  <Button fx:id="editarGenero" layoutX="103.0" layoutY="10.0" mnemonicParsing="false" onAction="#editarGenero" prefHeight="31.0" prefWidth="83.0" text="Editar">
                      <font>
                         <Font name="SansSerif Bold" size="12.0" />
                      </font>
@@ -72,6 +92,7 @@
               <columns>
                 <TableColumn prefWidth="48.0" text="ID" />
                 <TableColumn prefWidth="178.0" text="Nombre" />
+                  <TableColumn prefWidth="76.0" text="Fecha" />
                   <TableColumn prefWidth="76.0" text="Fecha" />
               </columns>
             </TableView>

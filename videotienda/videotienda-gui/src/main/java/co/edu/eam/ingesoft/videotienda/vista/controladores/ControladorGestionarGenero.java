@@ -19,6 +19,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -33,6 +34,7 @@ public class ControladorGestionarGenero extends BaseController implements Initia
 	@FXML
 	private TextField tFnombreGenero;
 	
+	/* Tabla Generos */
 	@FXML
 	private TableView<Category> TbGeneros;
 	

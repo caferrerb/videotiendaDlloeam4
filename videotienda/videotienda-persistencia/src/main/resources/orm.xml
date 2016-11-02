@@ -23,13 +23,28 @@
 			SELECT f FROM Category f
 		</query>
 	</named-query>
-
+	
+    <!-- Lista con todas las categorias (Generos) -->
 	<named-query name="Category.listarCategorias">
 		<query>
 			SELECT c FROM Category c
 		</query>
 	</named-query>
-
+	
+    <!-- Lista con todas las peliculas de un determinado genero -->
+	<named-query name="FilmCategory.listarPorCategoria">
+		<query>
+			SELECT f.film FROM FilmCategory f WHERE f.category = ?1
+		</query>
+	</named-query>
+	
+    <!-- Lista con todos los actores que hallan trabajado en peliculas de un determinado genero (PREGUNTAR)-->
+	<named-query name="FilmActor.listarPorCategoriaActor">
+		<query>
+			SELECT f.actor FROM FilmActor f WHERE f.film = ?1
+		</query>
+	</named-query>
+	
 	<named-query name="Pais.listartodos">
 		<query>
 			SELECT c FROM Country c

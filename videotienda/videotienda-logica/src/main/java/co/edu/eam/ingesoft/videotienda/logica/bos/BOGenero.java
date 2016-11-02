@@ -17,4 +17,20 @@ public class BOGenero extends BOGenerico<Category>{
 	public List<Category> listarGeneros(){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_GENEROS);
 	}
+	
+	/**
+	 * Lista con todas las peliculas de un determinado genero
+	 * @return lista con todas las peliculas que tengan un determinado genero
+	 */
+	public List<Category> listarPeliculasPorGenero(Category c){
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_FILM_POR_CATEGORIA, c);
+	}
+	
+	/**
+	 * Lista con todos los actores que hallan trabajado en peliculas de un determinado genero
+	 * @return lista con todas los actores que hallan trabajado en peliculas de un determinado genero
+	 */
+	public List<Category> listarActoresPorGenero(Category c){
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_ACTOR_POR_CATEGORIA, c);
+	}
 }
