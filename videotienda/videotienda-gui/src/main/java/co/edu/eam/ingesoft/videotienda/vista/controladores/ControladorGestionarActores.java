@@ -108,12 +108,14 @@ public class ControladorGestionarActores extends BaseController implements Initi
 																	// seleccionada
 
 		if (imgFile != null) {
+<<<<<<< HEAD
 			if (imgFile.length() <= 200 * 1024) {
+=======
+			
+>>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 				Image image = new Image("file:" + imgFile.getAbsolutePath());
 				imgFoto.setImage(image); // Mostar la imagen
-			} else {
-				notificar("Crear Actor", "Supero el tamaño maximo de la foto que son 100k", TipoNotificacion.ERROR);
-			}
+			
 
 		}
 	}

@@ -19,18 +19,23 @@ public class BOFilm extends BOGenerico<Film>{
 
 //	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void crear(Film entidad) {
-		// TODO Auto-generated method stub
+	public void crear(Film entidad){
+		
 		super.crear(entidad);
 	}
 	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Film buscarPelicula(int id) {
+		
+		return super.buscar(id);
+	}
 	
 	/**
 	 * metodo que lista los datos de las peliculas
 	 * @return
 	 */
 	public List<Film> listarPeliculas(String nombre){
-		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_POR_NOMBRE_PELICULA,nombre);
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_POR_NOMBRE_PELICULA,"%"+nombre+"%");
 	}
 	
 	
