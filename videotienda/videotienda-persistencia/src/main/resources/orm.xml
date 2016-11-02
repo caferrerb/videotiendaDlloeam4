@@ -68,15 +68,15 @@
 			SELECT s FROM Staff s
 		</query>
 	</named-query>
-
+	
 	<named-query name="Tienda.ListarTodos">
-		<query>
+	<query>
 			SELECT s FROM Store s
 		</query>
 	</named-query>
-
+	
 	<named-query name="Language.ListarTodos">
-		<query>
+	<query>
 			SELECT lag FROM Language lag
 		</query>
 	</named-query>
@@ -86,50 +86,47 @@
 			SELECT r FROM Rol r
 		</query>
 	</named-query>
-
+	
 	<named-query name="UsuarioRol.ListarRolesPorUsuario">
 		<query>
-			SELECT usuR.rol FROM UsuarioRol usuR WHERE
-			usuR.usuario.usuario=?1
+			SELECT usuR.rol FROM UsuarioRol usuR WHERE usuR.usuario.usuario=?1
 		</query>
 	</named-query>
-
+	
 	<named-query name="UsuarioRol.ListarPorRol">
 		<query>
 			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1
-			</query>
-			</named-query>
-	<named-query name="EmpleadosTienda.ListarTodos">
-	<query>
-			SELECT s FROM Staff s WHERE s.store=?1 
-			branch 'master' o	
-			</query>	
-		</named-query>
-	
-
-
-		<named-query name="datosTablaRental.Listar">
-			<query>
-				SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN r.customer c
-				JOIN r.inventory i
-				JOIN i.film f WHERE i.store = ?1
-			</query>
-		</named-query>
-
-		<named-query name="datosTablaVentas.Listar">
-			<query>
-				SELECT f.filmId, f.title, c.customerId, s.saleDate FROM Sale s JOIN
-				s.customer c JOIN s.film f
-				JOIN s.staff p WHERE p.store = ?1
-
-			</query>
+		</query>
 		</named-query>
 		
-		<named-query name="Acceso.ListarTodos">
+	<named-query name="EmpleadosTienda.ListarTodos">
+		<query>
+			SELECT s FROM Staff s WHERE s.store=?1
+		</query>
+	</named-query>
+
+
+	<named-query name="datosTablaRental.Listar">
+		<query>
+			SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN r.customer c
+			JOIN r.inventory i
+			JOIN i.film f WHERE i.store = ?1
+		</query>
+	</named-query>
+
+	<named-query name="datosTablaVentas.Listar">
+		<query>
+			SELECT f.filmId, f.title, c.customerId, s.saleDate FROM Sale s JOIN
+			s.customer c JOIN s.film f
+			JOIN s.staff p WHERE p.store = ?1
+
+		</query>
+	</named-query>
+
+	<named-query name="Acceso.ListarTodos">
 		<query>
 			SELECT a FROM Acceso a
 		</query>
-		</named-query>
-
+	</named-query>
 
 </entity-mappings>
