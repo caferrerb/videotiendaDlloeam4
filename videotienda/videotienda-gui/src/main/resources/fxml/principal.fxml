@@ -31,12 +31,9 @@
                            </Menu>
                         <Menu fx:id="menuCliente" mnemonicParsing="false" text="Clientes">
                           <items>
-<<<<<<< HEAD
                          <!--    <MenuItem fx:id="menuItemTraslado" mnemonicParsing="false" onAction="#abrirTrasladarCliente" text="Trasladar Ciudad" />  -->
-=======
-                             <!--   <MenuItem fx:id="menuItemTraslado" mnemonicParsing="false" onAction="#abrirTrasladarCliente" text="Trasladar Ciudad" /> -->
 
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
+
                           </items>
                         </Menu>
 								<Menu fx:id="mnuActores" mnemonicParsing="false" text="Actores">
@@ -73,24 +70,20 @@
                         </Menu>
                         <Menu fx:id="menuReportes" mnemonicParsing="false" text="Reportes">
                            <items>
-<<<<<<< HEAD
+
                         <!--      <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" /> -->
-=======
 
                            <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" /> 
 
                                <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" />
 
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
+
                            </items>
                         </Menu>
 								
 
 							</menus>
 						</MenuBar>
-
-
-
 
 					</children>
 				</VBox>
