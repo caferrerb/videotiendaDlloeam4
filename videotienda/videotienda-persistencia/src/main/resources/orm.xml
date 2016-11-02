@@ -80,9 +80,6 @@
 		</named-query>
 		
 	<named-query name="EmpleadosTienda.ListarTodos">
-	<query>
-			SELECT s FROM Staff s WHERE s.store=?1 
-
 		<query>
 			SELECT s FROM Staff s WHERE s.store=?1
 		</query>
