@@ -59,8 +59,9 @@
 		<query>
 			SELECT lag FROM Language lag
 		</query>
-	</named-query>
 
+	</named-query>
+	
 	<named-query name="Rol.ListarTodos">
 		<query>
 			SELECT r FROM Rol r
@@ -78,13 +79,16 @@
 		<query>
 			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1
 		</query>
-	</named-query>
-	<named-query name="EmpleadosTienda.ListarTodos">
-		<query>
-			SELECT s FROM Staff s WHERE s.store=?1
-		</query>
-	</named-query>
 
+	</named-query>	
+
+	<named-query name="EmpleadosTienda.ListarTodos">
+
+	<query>
+			SELECT s FROM Staff s WHERE s.store=?1 
+	</query>
+		
+	</named-query>
 
 	<named-query name="datosTablaRental.Listar">
 		<query>
