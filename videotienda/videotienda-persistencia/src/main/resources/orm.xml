@@ -108,6 +108,12 @@
 			SELECT a FROM Acceso a
 		</query>
 	</named-query>
+	
+	<named-query name="listarDatosClientes">
+		<query>
+			SELECT c FROM Customer c WHERE c.customerId=?1
+		</query>
+		</named-query>
 
 
 </entity-mappings>
