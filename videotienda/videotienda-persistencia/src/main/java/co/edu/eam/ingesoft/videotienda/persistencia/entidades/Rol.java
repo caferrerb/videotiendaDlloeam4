@@ -22,7 +22,7 @@ public class Rol implements Serializable{
 	public static final String LISTAR_ROLES_USUARIO = "Rol.listarRolesUsuario";
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	//@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_ROL", length=12, nullable=false)
 	private int id;
 	
