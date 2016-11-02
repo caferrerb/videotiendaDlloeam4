@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,9 +165,9 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 
 	@FXML
 	private void crearPelicula()throws Exception{
-		
+		jTFFilmID.setEditable(true);
 		if(jTFFilmID.getText().isEmpty()||jTFRentalDuration.getText().isEmpty()||jTFRentalRate.getText().isEmpty()||
-				jTFReplacementCost.getText().isEmpty()||jTFTitle.getText().isEmpty()||jCBLanguage1.getValue().equals(null)|| jCBLanguage2.getValue().equals(null)){
+				jTFReplacementCost.getText().isEmpty()||jTFTitle.getText().isEmpty()||jCBLanguage1.getValue()==null|| jCBLanguage2.getValue()==null){
 			
 			notificar("¡INGRESE!", "Por favor ingrese todos los datos",  TipoNotificacion.ERROR);
 		}else{
@@ -193,6 +194,8 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		LocalDate date= jYearRelease.getValue();
 		Date anhoRealize = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		film.setReleaseYear(anhoRealize);
+		
+		
 		
 		/*portada de la pelicula*/
 		byte[] imagen=new byte[(int)imgFile.length()];
@@ -233,7 +236,7 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		jTFescriptionj.setText(null);
 		jTFRating.setText(null);
 		jYearRelease.setValue(null);
-		jPoster.setViewport(null);
+		jPoster.setImage(null);
 		jTFRentalDuration.setText(null);
 		jTFRentalRate.setText(null);
 		jTFReplacementCost.setText(null);
@@ -247,6 +250,7 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 	@FXML
 	public void buscarPelicula(){
 		
+		jTFFilmID.setEditable(true);
 		if(jTFFilmID.getText().isEmpty()){
 			notificar("¡INGRESE!", "Por favor ingrese el ID de la pelicula que desea buscar",  TipoNotificacion.ERROR);
 		}else{
@@ -257,8 +261,9 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			jTFFilmID.setText(fi.getFilmId()+"");
 			jTFescriptionj.setText(fi.getDescription());
 			jTFRating.setText(fi.getRating());
-			//jYearRelease.setValue(fi.getReleaseYear());
-			//jPoster.setViewport(null);
+			
+			jYearRelease.setValue(LocalDate.of(fi.getReleaseYear().getYear(), fi.getReleaseYear().getMonth(), fi.getReleaseYear().getDay()));
+			
 			jTFRentalDuration.setText(fi.getRentalDuration()+"");
 			jTFRentalRate.setText(fi.getRentalRate()+"");
 			jTFReplacementCost.setText(fi.getReplacementCost()+"");
@@ -268,8 +273,8 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			jPoster.setImage(im);
 			//Language lang1 = boLenguaje.buscar(fi.getLanguage1().getLanguageId());
 			//Language lang2 = boLenguaje.buscar(fi.getLanguage2().getLanguageId());
-			//jCBLanguage1.setValue(fi.getLanguage1());
-			//jCBLanguage2.setValue(fi.getLanguage2());
+			jCBLanguage1.setValue(fi.getLanguage1());
+			jCBLanguage2.setValue(fi.getLanguage2());
 			jTFLength.setText(fi.getLength()+"");
 			
 		}else{
@@ -278,5 +283,72 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		}
 		
 	}
+	}
+	
+	@FXML
+	private void editarPelicula()throws Exception{
+		
+		if(jTFFilmID.getText().isEmpty()){
+			notificar("¡ERROR!", "Para editar ingrese el ID de la pelicula y busquela ",  TipoNotificacion.ERROR);
+
+		}else{
+				
+				int idFilm=Integer.parseInt(jTFFilmID.getText());
+				Film fi = boFilm.buscar(idFilm);
+				if(fi==null){
+					notificar("¡ERROR!", "La pelicula con el id= ''"+idFilm+"'' (NO) se encuentra registrada",  TipoNotificacion.ERROR);
+				}else{
+					try{
+					jTFFilmID.setEditable(false);
+					Film film = new Film();
+					
+					film.setFilmId(Integer.parseInt(jTFFilmID.getText()));
+					film.setDescription(jTFescriptionj.getText());
+					film.setLastUpdate(new Timestamp(new Date().getTime()));
+					film.setRating(jTFRating.getText());
+					
+					LocalDate date= jYearRelease.getValue();
+					Date anhoRealize = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+					film.setReleaseYear(anhoRealize);
+					
+					/*portada de la pelicula*/
+					Image image = new Image("file:" + imgFile.getAbsolutePath());
+		            jPoster.setImage(image);
+		          
+		            //Lineas para crear la imagen en la bd
+		           
+		            byte[] imagen=new byte[(int)imgFile.length()];
+		    		FileInputStream fin=new FileInputStream(imgFile);
+		    		fin.read(imagen);
+		    		
+		    		
+					/*---------------------*/
+					/*Duracion de la renta de pelicula*/
+					byte duracionRenta= Byte.parseByte((jTFRentalDuration.getText()));
+					film.setRentalDuration(duracionRenta);
+					/*--------------------------------*/
+					film.setRentalRate(Double.parseDouble(jTFRentalRate.getText()));
+					film.setReplacementCost(Double.parseDouble(jTFReplacementCost.getText()));
+					film.setSpecialFeatures(jTFFactures.getText());
+					film.setTitle(jTFTitle.getText());
+					film.setLanguage1(jCBLanguage1.getValue());
+					film.setLanguage2(jCBLanguage2.getValue());
+					film.setLength(Integer.parseInt(jTFLength.getText()));
+					film.setPoster(imagen);
+					
+					boFilm.editar(film);
+					notificar("¡Pelicula Editada!", "Se ha editado la pelicula exitosamente",  TipoNotificacion.INFO);
+				
+				
+				
+			}catch (NumberFormatException ex){
+				
+				notificar("¡VERIFICAR!", "Por favor verifique que los datos de "
+						+ " (Duracion de alquiler, Tarifa de Alquiler,Costo de remplazo y duracion de pelicula)"
+						+ " solo contengan valores NUMERICOS",  TipoNotificacion.ERROR);
+			}
+		 }
+		}
+	
 	}
 }
