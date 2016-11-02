@@ -104,18 +104,12 @@ public class ControladorGestionarActores extends BaseController implements Initi
 				new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"));
 
 		imgFile = fileChooser.showOpenDialog(MainApp.getStage()); // Obtener la
-																	// imagen
-																	// seleccionada
 
 		if (imgFile != null) {
-<<<<<<< HEAD
 			if (imgFile.length() <= 200 * 1024) {
-=======
-			
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 				Image image = new Image("file:" + imgFile.getAbsolutePath());
 				imgFoto.setImage(image); // Mostar la imagen
-			
+			}
 
 		}
 	}

@@ -59,13 +59,9 @@
 		<query>
 			SELECT lag FROM Language lag
 		</query>
-<<<<<<< HEAD
-	</named-query>
 
-=======
 	</named-query>
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
-
+	
 	<named-query name="Rol.ListarTodos">
 		<query>
 			SELECT r FROM Rol r
@@ -83,23 +79,16 @@
 		<query>
 			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1
 		</query>
-<<<<<<< HEAD
+
 	</named-query>	
-=======
-	</named-query>
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
+
 	<named-query name="EmpleadosTienda.ListarTodos">
-<<<<<<< HEAD
+
 	<query>
 			SELECT s FROM Staff s WHERE s.store=?1 
-
-=======
-		<query>
-			SELECT s FROM Staff s WHERE s.store=?1
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
-		</query>
+	</query>
+		
 	</named-query>
-
 
 	<named-query name="datosTablaRental.Listar">
 		<query>
