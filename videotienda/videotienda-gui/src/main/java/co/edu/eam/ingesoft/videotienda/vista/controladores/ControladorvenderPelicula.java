@@ -28,6 +28,8 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	
 	@FXML
 	private TextField jtfNombreCliente;
+	@FXML
+	private TextField jtfIdPelicula;
 	
 	private Film film;
 	
