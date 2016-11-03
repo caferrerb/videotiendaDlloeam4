@@ -123,6 +123,9 @@ public class MainController implements Initializable {
 	@FXML
 	private MenuItem menuItemReportes;
 	
+	@FXML
+	private MenuItem menuItemGestionPrestamo;
+	
 	/**
 	 * Inicializacion de la ventana.
 	 */
