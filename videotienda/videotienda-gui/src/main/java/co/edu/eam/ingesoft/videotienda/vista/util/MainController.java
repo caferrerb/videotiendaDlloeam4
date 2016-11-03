@@ -101,6 +101,9 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem mIVenderPeliculas;
+	
+	@FXML
+	private MenuItem mIVerPeliculasRentadas;
 
 	@FXML
 	private AnchorPane contenido;
@@ -237,6 +240,8 @@ public class MainController implements Initializable {
 	
 	@FXML
 	public void abrirverpeliculasrentadas(){
-		agregarVentana("/fxml/perpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
+
+		agregarVentana("/fxml/verpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
+
 	}
 }

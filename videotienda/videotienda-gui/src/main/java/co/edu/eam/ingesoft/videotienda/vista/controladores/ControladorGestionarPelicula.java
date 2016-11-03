@@ -178,12 +178,16 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			notificar("¡ERROR!", "La clasificacion de la pelicula solo puede contener 1 LETRA",  TipoNotificacion.ERROR);
 		}else{
 		
+			
 		int idFilm=Integer.parseInt(jTFFilmID.getText());
 		Film fi = boFilm.buscar(idFilm);
 		if(fi!=null){
 			notificar("¡ERROR!", "La pelicula con el id= ''"+idFilm+"'' ya se encuentra registrada",  TipoNotificacion.ERROR);
 		}else{
 			
+		if(jPoster.getImage()==null){
+			notificar("¡INGRESE!", "Por favor ingrese el poster de la pelicula",  TipoNotificacion.ERROR);
+		}else{
 		Film film = new Film();
 			
 		film.setFilmId(Integer.parseInt(jTFFilmID.getText()));
@@ -198,6 +202,7 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		
 		
 		/*portada de la pelicula*/
+		
 		byte[] imagen=new byte[(int)imgFile.length()];
 		FileInputStream fin=new FileInputStream(imgFile);
 		fin.read(imagen);
@@ -219,6 +224,7 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		boFilm.crear(film);
 		notificar("¡Pelicula Creada!", "Se ha creado la pelicula exitosamente",  TipoNotificacion.INFO);
 		limpiarCampos();
+		}
 		}
 		}
 		}catch (NumberFormatException ex){
@@ -261,13 +267,17 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			jTFescriptionj.setText(fi.getDescription());
 			jTFRating.setText(fi.getRating());
 			
-			jYearRelease.setValue(LocalDate.of(fi.getReleaseYear().getYear(), fi.getReleaseYear().getMonth(), fi.getReleaseYear().getDay()));
+			//jYearRelease.setValue(LocalDate.of(fi.getReleaseYear().getYear(), fi.getReleaseYear().getMonth(), fi.getReleaseYear().getDay()));
+			DatePicker date = new DatePicker(LocalDate.of(fi.getReleaseYear().getYear(), fi.getReleaseYear().getMonth(), fi.getReleaseYear().getDay()));
+			jYearRelease.setValue(date.getValue());
 			
 			jTFRentalDuration.setText(fi.getRentalDuration()+"");
 			jTFRentalRate.setText(fi.getRentalRate()+"");
 			jTFReplacementCost.setText(fi.getReplacementCost()+"");
 			jTFFactures.setText(fi.getSpecialFeatures());
 			jTFTitle.setText(fi.getTitle());
+			
+			
 			Image im=new Image(new ByteArrayInputStream(fi.getPoster()));
 			jPoster.setImage(im);
 			//Language lang1 = boLenguaje.buscar(fi.getLanguage1().getLanguageId());
@@ -291,13 +301,17 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			notificar("¡ERROR!", "Para editar ingrese el ID de la pelicula y busquela ",  TipoNotificacion.ERROR);
 
 		}else{
-				
+			
 				int idFilm=Integer.parseInt(jTFFilmID.getText());
 				Film fi = boFilm.buscar(idFilm);
 				if(fi==null){
 					notificar("¡ERROR!", "La pelicula con el id= ''"+idFilm+"'' (NO) se encuentra registrada",  TipoNotificacion.ERROR);
 				}else{
 					try{
+					if(jPoster.getImage()==null){
+						notificar("¡INGRESE!", "Por favor ingrese el poster de la pelicula",  TipoNotificacion.ERROR);
+					}else{
+						
 					Film film = new Film();
 					
 					film.setFilmId(Integer.parseInt(jTFFilmID.getText()));
@@ -310,11 +324,12 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 					film.setReleaseYear(anhoRealize);
 					
 		            //Lineas para crear la imagen en la bd
-		           
-		            byte[] imagen=new byte[(int)imgFile.length()];
-		    		FileInputStream fin=new FileInputStream(imgFile);
-		    		fin.read(imagen);
-		    		film.setPoster(imagen);
+		          
+		        	  
+		        	   byte[] imagen=new byte[(int)imgFile.length()];
+			    		FileInputStream fin=new FileInputStream(imgFile);
+			    		fin.read(imagen);
+			    		film.setPoster(imagen);
 		    		
 					/*---------------------*/
 					/*Duracion de la renta de pelicula*/
@@ -333,8 +348,8 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 					boFilm.editar(film);
 					notificar("¡Pelicula Editada!", "Se ha editado la pelicula exitosamente",  TipoNotificacion.INFO);
 				
-				
-				
+					}
+					
 			}catch (NumberFormatException ex){
 				
 				notificar("¡VERIFICAR!", "Por favor verifique que los datos de "
@@ -343,6 +358,25 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			}
 		 }
 		}
-	
+	}
+	@FXML
+	private void eliminarPelicula(){
+		
+		if(jTFFilmID.getText().isEmpty()){
+			notificar("¡ERROR!", "Para eliminar ingrese el ID de la pelicula ",  TipoNotificacion.ERROR);
+
+		}else{
+			int idFilm=Integer.parseInt(jTFFilmID.getText());
+			Film fi = boFilm.buscar(idFilm);
+			if(fi==null){
+				notificar("¡ERROR!", "La pelicula con el id= ''"+idFilm+"'' (NO) se encuentra registrada",  TipoNotificacion.ERROR);
+			}else{
+				
+				boFilm.eliminar(fi.getFilmId());
+				limpiarCampos();
+				notificar("¡EXITO!", "La pelicula ''"+idFilm+"'' se ha eliminado exitosamente",  TipoNotificacion.INFO);
+			}
+				
+		}
 	}
 }

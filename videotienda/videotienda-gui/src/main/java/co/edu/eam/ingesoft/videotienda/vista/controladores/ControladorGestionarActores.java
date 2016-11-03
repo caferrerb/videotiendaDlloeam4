@@ -108,10 +108,12 @@ public class ControladorGestionarActores extends BaseController implements Initi
 																	// seleccionada
 
 		if (imgFile != null) {
-			
+			if (imgFile.length() <= 100 * 1024) {
 				Image image = new Image("file:" + imgFile.getAbsolutePath());
 				imgFoto.setImage(image); // Mostar la imagen
-			
+			} else {
+				notificar("Crear Actor", "Supero el tamaño maximo de la foto que son 100k", TipoNotificacion.ERROR);
+			}
 
 		}
 	}
