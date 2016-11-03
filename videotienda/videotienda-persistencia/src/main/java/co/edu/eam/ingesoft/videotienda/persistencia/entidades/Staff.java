@@ -195,11 +195,7 @@ public class Staff implements Serializable {
 
 	@Override
 	public String toString() {
-<<<<<<< HEAD
 		return staffId +"-"+firstName ;
-=======
-		return getFirstName();
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 	}
 
 	public Usuario getUsuario() {
