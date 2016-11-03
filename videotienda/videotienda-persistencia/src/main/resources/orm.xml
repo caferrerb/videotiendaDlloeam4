@@ -119,5 +119,10 @@
 		</query>
 		</named-query>
 
+	<named-query name="FilmActor.ListarTodos">
+		<query>
+			SELECT fa FROM FilmActor fa  WHERE fa.film.filmId=?1
+		</query>
+		</named-query>
 
 </entity-mappings>
