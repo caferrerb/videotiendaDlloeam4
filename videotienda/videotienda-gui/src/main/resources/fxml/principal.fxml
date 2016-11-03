@@ -73,9 +73,7 @@
 
                         <!--      <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" /> -->
 
-                           <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" /> 
-
-                               <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" />
+                           <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" />
 
 
                            </items>
