@@ -19,7 +19,8 @@ public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="address_id", unique=true, nullable=false)
+	@Column(name="address_id", nullable=false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int addressId;
 
 	@Column(nullable=false, length=50)
@@ -31,10 +32,10 @@ public class Address implements Serializable {
 	@Column(nullable=false, length=20)
 	private String district;
 
-	@Column(name="last_update", nullable=false)
+	@Column(name="last_update")
 	private Timestamp lastUpdate;
 
-	@Column(nullable=false, length=20)
+	@Column(name="phone", length=20)
 	private String phone;
 
 	@Column(name="postal_code", length=10)
@@ -56,6 +57,8 @@ public class Address implements Serializable {
 	//bi-directional many-to-one association to Store
 	@OneToMany
 	private List<Store> stores;
+
+
 
 	public Address() {
 	}

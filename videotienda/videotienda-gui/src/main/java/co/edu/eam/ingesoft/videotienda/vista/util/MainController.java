@@ -87,9 +87,6 @@ public class MainController implements Initializable {
 	@FXML
 	private Menu mnuAutorizacion;
 	
-	@FXML
-	private Menu menuItemReportes;
-
 	/**
 	 * item de iniciar sesion.
 	 */
@@ -122,6 +119,12 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem menuItemTraslado;
+	
+	@FXML
+	private MenuItem menuItemVerPeliculasRentadas;
+	
+	@FXML
+	private MenuItem menuItemReportes;
 	
 	/**
 	 * Inicializacion de la ventana.
@@ -237,6 +240,8 @@ public class MainController implements Initializable {
 	
 	@FXML
 	public void abrirverpeliculasrentadas(){
+
 		agregarVentana("/fxml/verpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
+
 	}
 }
