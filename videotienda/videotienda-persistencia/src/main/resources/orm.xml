@@ -84,6 +84,13 @@
 			SELECT s FROM Staff s WHERE s.store=?1
 		</query>
 	</named-query>
+	
+	<named-query name="InventarioTienda.ListarTodos">
+		<query>
+			SELECT i FROM Inventory i WHERE i.store=?1
+		</query>
+	</named-query>
+	
 
 
 	<named-query name="datosTablaRental.Listar">

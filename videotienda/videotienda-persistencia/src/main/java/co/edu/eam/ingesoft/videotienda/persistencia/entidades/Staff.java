@@ -195,9 +195,7 @@ public class Staff implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Staff [staffId=" + staffId + ", active=" + active + ", email="
-				+ email + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", lastUpdate=" + lastUpdate + " ]";
+		return getFirstName();
 	}
 
 	public Usuario getUsuario() {

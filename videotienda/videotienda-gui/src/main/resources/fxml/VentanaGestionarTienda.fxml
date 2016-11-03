@@ -98,7 +98,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="bCrear" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="CREAR" />
+            <Button fx:id="bCrear" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="CREAR" onAction="#crear"/>
             <Button fx:id="bEditar" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="EDITAR" GridPane.columnIndex="1" />
             <Button fx:id="bBuscar" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="BUSCAR" GridPane.columnIndex="2" onAction="#buscar"/>
          </children>
