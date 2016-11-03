@@ -49,4 +49,15 @@ public class ConstantesNamedQueries {
 	 * Consulta para listar todos las pantallas
 	 */
 	public static final String CONSULTA_LISTAR_PANTALLAS="Acceso.ListarTodos";
+	
+	/**
+	 * Consulta para validar si el usuario y password ingresados son correctos
+	 */
+	public static final String CONSULTA_VALIDAR_USUARIO="Usuario.BuscarUsuario";
+
+	/**
+	 * Consulta que lista todos accesos rol de un rol
+	 */
+	public static final String CONSULTA_LISTAR_ACCESOS_ROL="AccesoRol.ListarPantallasRol";
+	
 }
