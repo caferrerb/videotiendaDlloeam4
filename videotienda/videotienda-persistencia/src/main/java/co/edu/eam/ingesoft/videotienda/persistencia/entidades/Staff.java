@@ -195,7 +195,7 @@ public class Staff implements Serializable {
 
 	@Override
 	public String toString() {
-		return getFirstName();
+		return staffId +"-"+firstName ;
 	}
 
 	public Usuario getUsuario() {
@@ -206,6 +206,5 @@ public class Staff implements Serializable {
 		this.usuario = usuario;
 	}
 
-	
 	
 }

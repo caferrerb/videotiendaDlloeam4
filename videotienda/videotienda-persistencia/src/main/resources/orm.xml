@@ -95,7 +95,8 @@
 
 	<named-query name="datosTablaRental.Listar">
 		<query>
-			SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN r.customer c
+			SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN
+			r.customer c
 			JOIN r.inventory i
 			JOIN i.film f WHERE i.store = ?1
 		</query>
@@ -103,7 +104,8 @@
 
 	<named-query name="datosTablaVentas.Listar">
 		<query>
-			SELECT f.filmId, f.title, c.customerId, s.saleDate FROM Sale s JOIN
+			SELECT f.filmId, f.title, c.customerId, s.saleDate FROM Sale s
+			JOIN
 			s.customer c JOIN s.film f
 			JOIN s.staff p WHERE p.store = ?1
 
@@ -113,6 +115,19 @@
 	<named-query name="Acceso.ListarTodos">
 		<query>
 			SELECT a FROM Acceso a
+		</query>
+	</named-query>
+
+	<named-query name="Usuario.BuscarUsuario">
+		<query>
+			SELECT usu FROM Usuario usu WHERE usu=?1
+		</query>
+	</named-query>
+
+	<named-query name="AccesoRol.ListarPantallasRol">
+		<query>
+			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
+
 		</query>
 	</named-query>
 

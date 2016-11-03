@@ -5,10 +5,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="627.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.eam.ingesoft.videotienda.vista.util.MainController">
+<AnchorPane prefHeight="627.0" prefWidth="1055.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="co.edu.eam.ingesoft.videotienda.vista.util.MainController">
 	<!-- TODO Add Nodes -->
 	<children>
-		<BorderPane prefHeight="600" prefWidth="800" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<BorderPane prefHeight="600" prefWidth="800"
+			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<bottom>
 				<ToolBar />
 			</bottom>
@@ -22,76 +26,87 @@
 
 								<Menu fx:id="mnuInicio" mnemonicParsing="false" text="Inicio" />
 								<Menu fx:id="mnuPeliculas" mnemonicParsing="false" text="Peliculas">
-                            <items>
-                              <MenuItem id="mIVenderPeliculas" fx:id="menuItemVenderPeliculas" mnemonicParsing="false" onAction="#abrirGestionarVenta" text="VenderPeliculas" />
-                              <MenuItem fx:id="menuItemGestionarPelicula" mnemonicParsing="false" onAction="#abrirGestionarPeliculas" text="Gestionar Pelicula" />
-                             <!--    <MenuItem id="mIVerPeliculasRentadas" fx:id="menuItemVerPeliculasRentadas" mnemonicParsing="false" onAction="#abrirverpeliculasrentadas" text="Ver Peliculas Rentadas" /> -->
-                           </items>
-                           
-                           </Menu>
-                        <Menu fx:id="menuCliente" mnemonicParsing="false" text="Clientes">
-                          <items>
-                         <!--    <MenuItem fx:id="menuItemTraslado" mnemonicParsing="false" onAction="#abrirTrasladarCliente" text="Trasladar Ciudad" />  -->
-
-
-                          </items>
-                        </Menu>
+									<items>
+										<MenuItem id="mIVenderPeliculas" fx:id="menuItemVenderPeliculas"
+											mnemonicParsing="false" onAction="#abrirGestionarVenta" text="VenderPeliculas" />
+										<MenuItem fx:id="menuItemGestionarPelicula"
+											mnemonicParsing="false" onAction="#abrirGestionarPeliculas"
+											text="Gestionar Pelicula" />	
+									</items>
+								</Menu>
+								<Menu fx:id="menuCliente" mnemonicParsing="false" text="Clientes">
+									<items>
+										<MenuItem fx:id="menuItemTraslado" mnemonicParsing="false" 
+											onAction="#abrirTrasladarCliente" text="Trasladar Ciudad" />
+									</items>
+								</Menu>
 								<Menu fx:id="mnuActores" mnemonicParsing="false" text="Actores">
-                           <items>
-                              	 <MenuItem id="ItemGestionarActores" fx:id="mnuItemGestionarActores" mnemonicParsing="false" onAction="#abrirGestionarActores" text="GestionarActores" />
-                                
-                           </items></Menu>
+									<items>
+										<MenuItem id="ItemGestionarActores" fx:id="mnuItemGestionarActores"
+											mnemonicParsing="false" onAction="#abrirGestionarActores"
+											text="GestionarActores" />
+
+									</items>
+								</Menu>
 								<Menu fx:id="mnuGeneros" mnemonicParsing="false" text="Generos" />
-							<Menu fx:id="mnuEmpleados" mnemonicParsing="false" text="Empleados">
-							
-                           <items>
-                              <MenuItem fx:id="mnuItemGestionarEmpleado" mnemonicParsing="false" onAction="#abrirGestionarEmpleados" text="GestionarEmpleado" />
-                           </items></Menu>
+								<Menu fx:id="mnuEmpleados" mnemonicParsing="false" text="Empleados">
+
+									<items>
+										<MenuItem fx:id="mnuItemGestionarEmpleado"
+											mnemonicParsing="false" onAction="#abrirGestionarEmpleados"
+											text="GestionarEmpleado" />
+									</items>
+								</Menu>
 
 								<Menu fx:id="mnuSucursales" mnemonicParsing="false" text="Sucursales" />
 
 								<Menu fx:id="mnuPrestamos" mnemonicParsing="false" text="Prestamos" />
-                        <Menu mnemonicParsing="false" text="Parametrizacion">
-                          <items>
-                            <MenuItem mnemonicParsing="false" text="Action 1" />
-                              <MenuItem fx:id="mnuItemGestionarCiudad" mnemonicParsing="false" onAction="#abrirGEstionarCiudad" text="Ciudad" />
-                            
-                          </items>
-                        </Menu>
-                        <Menu fx:id="mnuTiendas" mnemonicParsing="false" text="Tiendas">
-                          <items>
-                            <MenuItem fx:id="menuItemGestionarTiendas" mnemonicParsing="false" onAction="#abrirGestionarTienda" text="Gestionar Tiendas" />
-                          </items>
-                        </Menu>
-                        <Menu fx:id="mnuAutorizacion" mnemonicParsing="false" text="Autorizacion">
-                          <items>
-                            <MenuItem fx:id="mnuItemRoles" mnemonicParsing="false" onAction="#abrirAutorizacion" text="Roles" />
-                          </items>
-                        </Menu>
-                        <Menu fx:id="menuReportes" mnemonicParsing="false" text="Reportes">
-                           <items>
+								<Menu mnemonicParsing="false" text="Parametrizacion">
+									<items>
+										<MenuItem mnemonicParsing="false" text="Action 1" />
+										<MenuItem fx:id="mnuItemGestionarCiudad"
+											mnemonicParsing="false" onAction="#abrirGEstionarCiudad"
+											text="Ciudad" />
 
-                        <!--      <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" /> -->
-
-                           <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" />
-
-
-                           </items>
-                        </Menu>
-								
+									</items>
+								</Menu>
+								<Menu fx:id="mnuTiendas" mnemonicParsing="false" text="Tiendas">
+									<items>
+										<MenuItem fx:id="menuItemGestionarTiendas"
+											mnemonicParsing="false" onAction="#abrirGestionarTienda"
+											text="Gestionar Tiendas" />
+									</items>
+								</Menu>
+								<Menu fx:id="mnuAutorizacion" mnemonicParsing="false"
+									text="Autorizacion">
+									<items>
+										<MenuItem fx:id="mnuItemRoles" mnemonicParsing="false"
+											onAction="#abrirAutorizacion" text="Roles" />
+									</items>
+								</Menu>
+								<Menu fx:id="menuReportes" mnemonicParsing="false" text="Reportes">
+									<items>
+										<!-- <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" 
+											onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" 
+											/> -->
+									</items>
+								</Menu>
 
 							</menus>
 						</MenuBar>
-
 					</children>
 				</VBox>
 			</top>
 			<center>
-				<BorderPane prefHeight="525.0" prefWidth="1055.0" BorderPane.alignment="CENTER">
+				<BorderPane prefHeight="525.0" prefWidth="1055.0"
+					BorderPane.alignment="CENTER">
 					<top>
-						<Pane prefHeight="73.0" prefWidth="1055.0" style="-fx-background-color: black; -fx-background-image: ;" BorderPane.alignment="CENTER">
+						<Pane prefHeight="73.0" prefWidth="1055.0"
+							style="-fx-background-color: black; -fx-background-image: ;"
+							BorderPane.alignment="CENTER">
 							<children>
-								<Label layoutX="14.0" layoutY="20.0" prefHeight="38.0" prefWidth="302.0" text="Videotienda" textFill="#ffffff">
+								<Label layoutX="14.0" layoutY="20.0" prefHeight="38.0"
+									prefWidth="302.0" text="Videotienda" textFill="#ffffff">
 									<font>
 										<Font size="31.0" />
 									</font>
@@ -100,9 +115,11 @@
 						</Pane>
 					</top>
 					<center>
-						<ScrollPane fx:id="mnuItemAutorizacion" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+						<ScrollPane fx:id="mnuItemAutorizacion" prefHeight="200.0"
+							prefWidth="200.0" BorderPane.alignment="CENTER">
 							<content>
-								<AnchorPane fx:id="contenido" prefHeight="200.0" prefWidth="200.0" />
+								<AnchorPane fx:id="contenido" prefHeight="200.0"
+									prefWidth="200.0" />
 							</content>
 						</ScrollPane>
 					</center>
