@@ -31,10 +31,7 @@
 											mnemonicParsing="false" onAction="#abrirGestionarVenta" text="VenderPeliculas" />
 										<MenuItem fx:id="menuItemGestionarPelicula"
 											mnemonicParsing="false" onAction="#abrirGestionarPeliculas"
-											text="Gestionar Pelicula" />
-								<!-- <MenuItem id="mIVerPeliculasRentadas" fx:id="menuItemVerPeliculasRentadas"
-											mnemonicParsing="false" onAction="#abrirverpeliculasrentadas"
-											text="Ver Peliculas Rentadas" /> -->		
+											text="Gestionar Pelicula" />	
 									</items>
 								</Menu>
 								<Menu fx:id="menuCliente" mnemonicParsing="false" text="Clientes">

@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -83,9 +84,8 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		llenarComboPaises();	
+		llenarComboPaises();
 	}
-	
 
 	@FXML
 	private void llenarComboPaises() {
@@ -104,15 +104,11 @@ public class ControladorGestionarActores extends BaseController implements Initi
 				new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"));
 
 		imgFile = fileChooser.showOpenDialog(MainApp.getStage()); // Obtener la
-																	// imagen
-																	// seleccionada
 
 		if (imgFile != null) {
-			if (imgFile.length() <= 100 * 1024) {
+			if (imgFile.length() <= 200 * 1024) {
 				Image image = new Image("file:" + imgFile.getAbsolutePath());
 				imgFoto.setImage(image); // Mostar la imagen
-			} else {
-				notificar("Crear Actor", "Supero el tamaño maximo de la foto que son 100k", TipoNotificacion.ERROR);
 			}
 
 		}
@@ -132,7 +128,6 @@ public class ControladorGestionarActores extends BaseController implements Initi
 				fin.read(bites);
 
 				Actor act = new Actor();
-
 				act.setActorId((Integer.parseInt(tfDocumento.getText())));
 				act.setFirstName(tfNombre.getText());
 				act.setLastName(tfApellido.getText());
@@ -152,64 +147,91 @@ public class ControladorGestionarActores extends BaseController implements Initi
 	}
 
 	@FXML
-	public void editarActores() {
-		Actor act = new Actor();
-		act.setActorId(Integer.parseInt(tfDocumento.getText()));
-		act.setFirstName(tfNombre.getText());
-		act.setLastName(tfApellido.getText());
-		act.setCountry((Country) cbCiudad.getValue());
+	public void editarActores() throws ExcepcionNegocio, IOException {
+		
+		if (imgFile == null || tfApellido.getText().isEmpty() || tfNombre.getText().isEmpty()) {
 
-		boActores.editar(act);
-		notificar("Editar Actor", "El Actor se edito correctamente", TipoNotificacion.INFO);
-	}
-
-	@FXML
-	public void buscarActores() {
-		if (tfDocumento != null) {
-			Actor ac = boActores.buscar(Integer.parseInt(tfDocumento.getText()));
-			tfNombre.setText(ac.getFirstName());
-			tfApellido.setText(ac.getLastName());
-			cbCiudad.setValue(ac.getCountry());
-			Image im=new Image(new ByteArrayInputStream(ac.getPhoto()));
-			imgFoto.setImage(im);
+			notificar("Editar Actor", "Verifique que todos los campos esten llenos y haya cargado una imagen ",
+					TipoNotificacion.ERROR);
 
 		} else {
-			notificar("Buscar Actor", "Verifique que este buscado por numero de documento", TipoNotificacion.ERROR);
+		
+		byte[] bites = new byte[(int) imgFile.length()];
+		FileInputStream fin = new FileInputStream(imgFile);
+		fin.read(bites);
+		
+			Actor act = new Actor();
+			act.setActorId(Integer.parseInt(tfDocumento.getText()));
+			act.setFirstName(tfNombre.getText());
+			act.setLastName(tfApellido.getText());
+			act.setCountry((Country) cbCiudad.getValue());
+			act.setPhoto(bites);
+
+			boActores.editar(act);
+			notificar("Editar Actor", "El Actor se edito correctamente", TipoNotificacion.INFO);
+			limpiar();
 		}
 
 	}
 
 	@FXML
+	public void buscarActores() {
+		
+	if(tfDocumento == null){
+		notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
+	}else if(tfDocumento.getText().isEmpty()){
+		notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
+	}else{
+		Actor ac = boActores.buscar(Integer.parseInt(tfDocumento.getText()));
+		if (ac != null) {
+			tfNombre.setText(ac.getFirstName());
+			tfApellido.setText(ac.getLastName());
+			cbCiudad.setValue(ac.getCountry());
+			Image im = new Image(new ByteArrayInputStream(ac.getPhoto()));
+			imgFoto.setImage(im);
+		}else{
+			limpiar();
+			notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
+		}
+	}
+	}
+
+	@FXML
 	public void eliminarActores() {
+		
+		if (tfDocumento == null) {
+
+			notificar("Eliminar Actor", "Primero busque antes de eliminar ",
+					TipoNotificacion.ERROR);
+
+		} else if(tfDocumento.getText().isEmpty()){
+			notificar("Eliminar Actor", "Primero busque antes de eliminar ",TipoNotificacion.ERROR);
+		}else{
 		boActores.eliminar(Integer.parseInt(tfDocumento.getText()));
 		notificar("Eliminar Actor", "El actor se elimino correctamente", TipoNotificacion.INFO);
 		limpiar();
+		}
 	}
 
 	@FXML
 	public void limpiar() {
 		tfNombre.setText(null);
-		tfDocumento.setText(null);
+		tfDocumento.setText("");
 		tfApellido.setText(null);
 		cbCiudad.setValue(null);
 		imgFoto.setImage(null);
 
 	}
-	
-	
-	
-	@FXML
-    private void mostrarVentanaPelicula() throws IOException {
 
-		String fxmlFile = "/fxml/VentanaGestionarPeliculas.fxml";
-		FXMLLoader loader = new FXMLLoader();
-		Parent rootNode = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
-		
-		Scene scene = new Scene(rootNode, 1000, 690);
-		scene.getStylesheets().add("/styles/styles.css");
-    }
-	
-	
-	 
+//	@FXML
+//	private void mostrarVentanaPelicula() throws IOException {
+//
+//		String fxmlFile = "/fxml/VentanaGestionarPeliculas.fxml";
+//		FXMLLoader loader = new FXMLLoader();
+//		Parent rootNode = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
+//
+//		Scene scene = new Scene(rootNode, 1000, 690);
+//		scene.getStylesheets().add("/styles/styles.css");
+//	}
 
 }
