@@ -25,13 +25,14 @@
                             <items>
                               <MenuItem id="mIVenderPeliculas" fx:id="menuItemVenderPeliculas" mnemonicParsing="false" onAction="#abrirGestionarVenta" text="VenderPeliculas" />
                               <MenuItem fx:id="menuItemGestionarPelicula" mnemonicParsing="false" onAction="#abrirGestionarPeliculas" text="Gestionar Pelicula" />
-                               <MenuItem id="mIVerPeliculasRentadas" fx:id="menuItemVerPeliculasRentadas" mnemonicParsing="false" onAction="#abrirverpeliculasrentadas" text="Ver Peliculas Rentadas" />
+                             <!--    <MenuItem id="mIVerPeliculasRentadas" fx:id="menuItemVerPeliculasRentadas" mnemonicParsing="false" onAction="#abrirverpeliculasrentadas" text="Ver Peliculas Rentadas" /> -->
                            </items>
                            
                            </Menu>
                         <Menu fx:id="menuCliente" mnemonicParsing="false" text="Clientes">
                           <items>
-                             <!--   <MenuItem fx:id="menuItemTraslado" mnemonicParsing="false" onAction="#abrirTrasladarCliente" text="Trasladar Ciudad" /> -->
+                         <!--    <MenuItem fx:id="menuItemTraslado" mnemonicParsing="false" onAction="#abrirTrasladarCliente" text="Trasladar Ciudad" />  -->
+
 
                           </items>
                         </Menu>
@@ -70,9 +71,12 @@
                         <Menu fx:id="menuReportes" mnemonicParsing="false" text="Reportes">
                            <items>
 
+                        <!--      <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" /> -->
+
                            <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" /> 
 
                                <MenuItem fx:id="menuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="ReportesVentaAlquiler" />
+
 
                            </items>
                         </Menu>
@@ -80,9 +84,6 @@
 
 							</menus>
 						</MenuBar>
-
-
-
 
 					</children>
 				</VBox>
