@@ -6,16 +6,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane layoutX="361.0" layoutY="57.0" prefHeight="413.0" prefWidth="381.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="408.0" layoutY="61.0" prefHeight="436.0" prefWidth="381.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Peliculas">
                <content>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
+                  <Pane prefHeight="408.0" prefWidth="381.0">
                      <children>
-                        <TableView fx:id="TbPeliculas" layoutY="6.0" prefHeight="370.0" prefWidth="381.0">
+                        <TableView fx:id="TbPeliculas" layoutY="6.0" prefHeight="397.0" prefWidth="381.0">
                            <columns>
                               <TableColumn prefWidth="146.0" text="Titulo" />
                               <TableColumn prefWidth="74.0" text="Año" />
@@ -31,7 +30,7 @@
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="TbActores" layoutY="7.0" prefHeight="369.0" prefWidth="381.0">
+                        <TableView fx:id="TbActores" layoutY="7.0" prefHeight="396.0" prefWidth="381.0">
                            <columns>
                               <TableColumn prefWidth="112.0" text="Nombres" />
                               <TableColumn prefWidth="104.0" text="Apellidos" />
@@ -45,15 +44,14 @@
             </Tab>
          </tabs>
       </TabPane>
-      <TableView fx:id="TbGeneros" layoutX="23.0" layoutY="167.0" prefHeight="295.0" prefWidth="304.0">
+      <TableView fx:id="TbGeneros" layoutX="23.0" layoutY="195.0" prefHeight="298.0" prefWidth="337.0">
          <columns>
             <TableColumn prefWidth="48.0" text="ID" />
             <TableColumn prefWidth="178.0" text="Nombre" />
             <TableColumn prefWidth="76.0" text="Fecha" />
-            <TableColumn prefWidth="76.0" text="Fecha" />
          </columns>
       </TableView>
-      <HBox layoutX="21.0" layoutY="104.0" prefHeight="51.0" prefWidth="308.0">
+      <HBox layoutX="23.0" layoutY="143.0" prefHeight="37.0" prefWidth="308.0">
          <children>
             <Button fx:id="crearGenero" mnemonicParsing="false" onAction="#crearGenero" prefHeight="31.0" prefWidth="83.0" text="Crear">
                <font>
@@ -78,10 +76,10 @@
             </Button>
          </children>
       </HBox>
-      <GridPane layoutX="24.0" layoutY="47.0" prefHeight="51.0" prefWidth="303.0">
+      <GridPane layoutX="24.0" layoutY="47.0" prefHeight="51.0" prefWidth="337.0">
          <children>
             <Label text="Nombre:" />
-            <TextField fx:id="tFnombreGenero" prefHeight="28.0" prefWidth="214.0" GridPane.columnIndex="1" />
+            <TextField fx:id="tFnombreGenero" prefHeight="28.0" prefWidth="196.0" GridPane.columnIndex="1" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="0.0" prefWidth="89.0" />
@@ -96,10 +94,24 @@
             <Font name="SansSerif Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="361.0" layoutY="25.0" text="Listado por Genero:">
+      <Label layoutX="408.0" layoutY="29.0" text="Listado por Genero:">
          <font>
             <Font name="SansSerif Bold" size="14.0" />
          </font>
       </Label>
+      <ComboBox fx:id="CbGeneros" layoutX="560.0" layoutY="25.0" prefHeight="25.0" prefWidth="183.0" />
+      <GridPane fx:id="nuevoNombre" layoutX="24.0" layoutY="84.0" prefHeight="58.0" prefWidth="337.0">
+         <children>
+            <Label text="Nuevo Nombre:" />
+            <TextField fx:id="tFnuevoNombreGenero" prefHeight="28.0" prefWidth="214.0" GridPane.columnIndex="1" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="0.0" prefWidth="149.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="303.0" minWidth="10.0" prefWidth="188.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
    </children>
 </AnchorPane>

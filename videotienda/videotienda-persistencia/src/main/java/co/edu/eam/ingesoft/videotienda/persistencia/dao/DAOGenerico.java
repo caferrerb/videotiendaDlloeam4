@@ -153,11 +153,7 @@ public class DAOGenerico implements Serializable {
 	 * @return registro actualizado
 	 */
 	public <T> T actualizar(T updatedInstance) {
-
-		
-
 		T obj = entityManager.merge(updatedInstance);
-
 		return obj;
 	}
 

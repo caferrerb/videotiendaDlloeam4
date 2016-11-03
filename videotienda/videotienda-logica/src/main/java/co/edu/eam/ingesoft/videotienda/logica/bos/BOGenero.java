@@ -28,6 +28,30 @@ public class BOGenero extends BOGenerico<Category>{
 		}
 	}
 	/**
+	 * Editar la informacion de un genero
+	 */
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void editar(Category genero){
+		Category b = buscarPorNombre(genero.getName());
+		if(b != null){
+			throw new ExcepcionNegocio("Ya hay un genero con el nombre "+genero.getName());
+		}else{
+			super.editar(genero);
+		}
+	}
+	/**
+	 * Buscar un genero por nombre
+	 * @return la categoria encontrada de lo contrario null
+	 */
+	public Category buscarPorNombre(String name){
+		List<Category> lista = dao.ejecutarNamedQuery(ConstantesNamedQueries.BUSCAR_GENERO_POR_NOMBRE, name);
+		if(lista.size() > 0){
+			return lista.get(0);
+		}else{
+			return null;
+		}
+	}
+	/**
 	 * Lista con todos los generos registrados en la bd
 	 * @return lista con todos los generos
 	 */
