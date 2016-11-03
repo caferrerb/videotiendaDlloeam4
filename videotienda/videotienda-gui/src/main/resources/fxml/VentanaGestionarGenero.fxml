@@ -16,10 +16,10 @@
                      <children>
                         <TableView fx:id="TbPeliculas" layoutY="6.0" prefHeight="397.0" prefWidth="381.0">
                            <columns>
-                              <TableColumn prefWidth="146.0" text="Titulo" />
-                              <TableColumn prefWidth="74.0" text="Año" />
-                              <TableColumn minWidth="0.0" prefWidth="77.0" text="Idioma" />
-                              <TableColumn maxWidth="108.0" minWidth="0.0" prefWidth="82.0" text="Valor" />
+                              <TableColumn fx:id="TbPeliculasTitulo" prefWidth="146.0" text="Titulo" />
+                              <TableColumn fx:id="TbPeliculasYear" prefWidth="74.0" text="Año" />
+                              <TableColumn fx:id="TbPeliculasIdioma" minWidth="0.0" prefWidth="77.0" text="Idioma" />
+                              <TableColumn fx:id="TbPeliculasValor" maxWidth="108.0" minWidth="0.0" prefWidth="82.0" text="Valor" />
                            </columns>
                         </TableView>
                      </children>
@@ -32,10 +32,10 @@
                      <children>
                         <TableView fx:id="TbActores" layoutY="7.0" prefHeight="396.0" prefWidth="381.0">
                            <columns>
-                              <TableColumn prefWidth="112.0" text="Nombres" />
-                              <TableColumn prefWidth="104.0" text="Apellidos" />
-                              <TableColumn minWidth="0.0" prefWidth="84.0" text="Ciudad" />
-                              <TableColumn maxWidth="99.0" minWidth="0.0" text="Pais" />
+                              <TableColumn fx:id="TbActoresNombres" prefWidth="112.0" text="Nombres" />
+                              <TableColumn fx:id="TbActoresApellidos" prefWidth="104.0" text="Apellidos" />
+                              <TableColumn fx:id="TbActoresCiudad" minWidth="0.0" prefWidth="84.0" text="Ciudad" />
+                              <TableColumn fx:id="TbActoresPais" maxWidth="99.0" minWidth="0.0" text="Pais" />
                            </columns>
                         </TableView>
                      </children>
@@ -46,9 +46,9 @@
       </TabPane>
       <TableView fx:id="TbGeneros" layoutX="23.0" layoutY="195.0" prefHeight="298.0" prefWidth="337.0">
          <columns>
-            <TableColumn prefWidth="48.0" text="ID" />
-            <TableColumn prefWidth="178.0" text="Nombre" />
-            <TableColumn prefWidth="76.0" text="Fecha" />
+            <TableColumn fx:id="TbGenerosID" prefWidth="48.0" text="ID" />
+            <TableColumn fx:id="TbGenerosNombre" prefWidth="151.0" text="Nombre" />
+            <TableColumn fx:id="TbGenerosFecha" prefWidth="136.0" text="Fecha" />
          </columns>
       </TableView>
       <HBox layoutX="23.0" layoutY="143.0" prefHeight="37.0" prefWidth="308.0">
@@ -99,7 +99,7 @@
             <Font name="SansSerif Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="CbGeneros" layoutX="560.0" layoutY="25.0" prefHeight="25.0" prefWidth="183.0" />
+      <ComboBox fx:id="CbGeneros" onAction="#cambioCombo" layoutX="560.0" layoutY="25.0" prefHeight="25.0" prefWidth="183.0" />
       <GridPane fx:id="nuevoNombre" layoutX="24.0" layoutY="84.0" prefHeight="58.0" prefWidth="337.0">
          <children>
             <Label text="Nuevo Nombre:" />
