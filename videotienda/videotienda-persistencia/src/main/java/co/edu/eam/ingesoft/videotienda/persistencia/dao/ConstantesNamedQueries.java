@@ -49,4 +49,6 @@ public class ConstantesNamedQueries {
 	 * Consulta para listar todos las pantallas
 	 */
 	public static final String CONSULTA_LISTAR_PANTALLAS="Acesso.ListarTodos";
+	
+	public static final String CONSULTAR_DATOS_CLIENTE ="listarDatosClientes";
 }

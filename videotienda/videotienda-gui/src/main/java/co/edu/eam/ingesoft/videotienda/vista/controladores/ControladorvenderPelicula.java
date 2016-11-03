@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ import javafx.scene.control.TextField;
 @Controller
 public class ControladorvenderPelicula extends BaseController implements Initializable  {
 
-//	@Autowired
-//	private BOCustomer boCustomer;
+
+	@Autowired
 	private BOCustomer boCus;
 	
 	@FXML
@@ -29,13 +30,26 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	
 	@FXML
 	public void buscarCliente(){
-		Customer cliente = boCus.buscar(jtfIdCliente.getText());
-		
-		if (cliente != null) {
-			jtfNombreCliente.setText(cliente.getFirstName());
-			} else {
-			notificar("gestionar Buscar", "No existe este empleado", TipoNotificacion.ERROR);
+		try {
+			System.out.println("Buscando");
+			
+			int idCliente = Integer.parseInt(jtfIdCliente.getText());
+			List<Customer> cus = boCus.listaBucarCliente(idCliente);
+			for (int i = 0; i < cus.size(); i++) {
+				if(cus != null){
+					jtfNombreCliente.setText(cus.get(i).getFirstName());
+				}
+			}
+			
+//			List<Customer> cliente = boCus.listaBucarCliente(idCliente);
+//			if(cliente != null){
+//				jtfNombreCliente.setText(((Customer) cliente).getFirstName());
+//			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	@Override

@@ -63,6 +63,7 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 	public void buscarPelicula(){
 		System.out.println("buscando...");
 		try {
+			data.clear();
 			String nomPelicula = jtfTitulo.getText();
 			List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
 			for (int i = 0; i < pelicula.size(); i++) {
@@ -115,34 +116,10 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 
 				@Override
 				public void handle(ActionEvent t) {
+					
 					abrirVentana("/fxml/venderPelicula.fxml", ControladorvenderPelicula.class);
-//					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/venderPelicula.fxml"));
-//					Parent root1;
-//					try {
-//						root1 = (Parent) fxmlLoader.load();
-//						Stage stage = new Stage();
-//						stage.initModality(Modality.APPLICATION_MODAL);
-//						stage.setTitle("VENDER PELICULA");
-//						stage.setScene(new Scene(root1));
-//						stage.show();
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					
 					int num = getTableRow().getIndex();
 					
-					// borramos el objeto obtenido de la fila
-//					Film r = data.get(num);
-//					if(boPelicula.listarPeliculas(r.getTitle()).size()!= 0){
-//						notificar("Eliminar Rol", "No se puede eliminar el rol," + "ya que alguien lo tiene asignado",
-//								TipoNotificacion.ERROR);
-//
-//					} else {
-//						System.out.println("i dont know");
-//						boRol.eliminar(r.getId());
-//						roles.remove(num);
-//						notificar("Eliminar Rol", "Rol eliminado con exito!", TipoNotificacion.INFO);
 //					}
 				}
 			});
