@@ -112,11 +112,7 @@
 		</query>
 	</named-query>
 
-	<named-query name="Acceso.ListarTodos">
-		<query>
-			SELECT a FROM Acceso a
-		</query>
-	</named-query>
+	
 
 	<named-query name="Usuario.BuscarUsuario">
 		<query>
