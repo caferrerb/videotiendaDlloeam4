@@ -109,9 +109,13 @@
 			s.customer c JOIN s.film f
 			JOIN s.staff p WHERE p.store = ?1
 		</query>
-	</named-query>
+		</named-query>
+	<named-query name="listarDatosClientes">
+		<query>
+			SELECT c FROM Customer c WHERE c.customerId=?1
 
-	
+		</query>
+	</named-query>
 
 	<named-query name="Usuario.BuscarUsuario">
 		<query>

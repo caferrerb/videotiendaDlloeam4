@@ -66,7 +66,8 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 			data.clear();
 			String nomPelicula = jtfTitulo.getText();
 			List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
-			for (int i = 0; i < pelicula.size(); i++) {
+			for ( int i = 0; i < pelicula.size(); i++) {
+				final Film f=pelicula.get(i);
 				data.add(pelicula.get(i));
 				jcolumnaGenero.setCellValueFactory(new PropertyValueFactory<Film, String>(""));
 				jcolumnaGenero.setMinWidth(100);
@@ -80,7 +81,7 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 				jcolumnaboton.setCellFactory(new Callback<TableColumn<Film, Boolean>, TableCell<Film, Boolean>>() {
 
 					public TableCell<Film, Boolean> call(TableColumn<Film, Boolean> p) {
-						return new ButtonCell(jttablacontenidoPelicula);
+						return new ButtonCell(jttablacontenidoPelicula,f);
 					}
 
 				});
@@ -109,14 +110,14 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 
 		// boton a mostrar
 		final Button cellButton = new Button("Vender");
-
-		ButtonCell(final TableView tblView) {
-
+		private Film film;
+		ButtonCell(final TableView tblView,Film f) {
+			this.film=film;
 			cellButton.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent t) {
-					
+					guardarEnSesion("peliculavender", film);
 					abrirVentana("/fxml/venderPelicula.fxml", ControladorvenderPelicula.class);
 					int num = getTableRow().getIndex();
 					

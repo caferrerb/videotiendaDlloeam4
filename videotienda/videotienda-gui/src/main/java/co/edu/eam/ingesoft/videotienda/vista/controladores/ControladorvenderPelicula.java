@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOCustomer;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Customer;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.FXML;
@@ -27,6 +28,8 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	
 	@FXML
 	private TextField jtfNombreCliente;
+	
+	private Film film;
 	
 	@FXML
 	public void buscarCliente(){
@@ -55,7 +58,7 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+		film=(Film) obtenerValor("peliculavender");
 	}
 
 }
