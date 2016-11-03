@@ -58,6 +58,8 @@ public class Address implements Serializable {
 	@OneToMany
 	private List<Store> stores;
 
+
+
 	public Address() {
 	}
 

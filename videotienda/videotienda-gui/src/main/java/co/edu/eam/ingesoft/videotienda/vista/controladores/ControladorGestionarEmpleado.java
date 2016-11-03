@@ -8,21 +8,14 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import javax.swing.JOptionPane;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
-
 import co.edu.eam.ingesis.gestorlab.gui.MainApp;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOCiudad;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BODireccion;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOEmpleado;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOTienda;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuario;
-import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
-import co.edu.eam.ingesoft.videotienda.main.ContextFactory;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Address;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
@@ -32,22 +25,16 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 @Controller
 public class ControladorGestionarEmpleado extends BaseController implements Initializable {
@@ -132,6 +119,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			direccion.setPhone(TFTelefono.getText());
 			direccion.setPostalCode(TFCodigoPos.getText());
 			// Empleado
+			
 			empleado.setAddress(direccion);
 			empleado.setStaffId((byte) Integer.parseInt(TFIdEmpleado.getText()));
 			empleado.setEmail(TfEmail.getText());
@@ -230,17 +218,18 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				CheckActivo.setSelected(true);
 			}
 
-			// JOptionPane.showMessageDialog(null, Integer.valueOf(empleado.getAddress()));
+			// JOptionPane.showMessageDialog(null,
+			// Integer.valueOf(empleado.getAddress()));
 
-			 boDireccion.buscar(Integer.valueOf(empleado.getAddress().getAddressId()));
-			 TFIdDireccion.setText(Integer.toString(empleado.getAddress().getAddressId()));
-			 TFDireccionA.setText(empleado.getAddress().getAddress());
-			 TFDdireccionB.setText(empleado.getAddress().getAddress2());
-			 CBCiudad.setValue(empleado.getAddress().getCity());
-			 TFDepartamento.setText(empleado.getAddress().getDistrict());
-			 TFUlltimaActualizacionDir.setText(empleado.getAddress().getLastUpdate().toString());
-			 TFTelefono.setText(empleado.getAddress().getPhone());
-			 TFCodigoPos.setText(empleado.getAddress().getPostalCode());
+			boDireccion.buscar(Integer.valueOf(empleado.getAddress().getAddressId()));
+			TFIdDireccion.setText(Integer.toString(empleado.getAddress().getAddressId()));
+			TFDireccionA.setText(empleado.getAddress().getAddress());
+			TFDdireccionB.setText(empleado.getAddress().getAddress2());
+			CBCiudad.setValue(empleado.getAddress().getCity());
+			TFDepartamento.setText(empleado.getAddress().getDistrict());
+			TFUlltimaActualizacionDir.setText(empleado.getAddress().getLastUpdate().toString());
+			TFTelefono.setText(empleado.getAddress().getPhone());
+			TFCodigoPos.setText(empleado.getAddress().getPostalCode());
 		} else {
 			notificar("gestionar Buscar", "No existe este empleado", TipoNotificacion.ERROR);
 		}
@@ -295,7 +284,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 
 	@FXML
 	private void llamarVentana() {
-		
+
 		abrirVentana("/fxml/VentanaGestionEmpleadosSub.fxml", ControladorGestionarEmpleadoSub.class);
 
 	}
