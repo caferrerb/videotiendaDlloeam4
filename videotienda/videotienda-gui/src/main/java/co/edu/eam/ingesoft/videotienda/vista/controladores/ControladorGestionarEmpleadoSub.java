@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOEmpleado;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOHoraioEmpleado;
+import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
@@ -75,23 +76,28 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 
 	@FXML
 	public void agregarHorario() {
+		try {
+			StaffSchedule horario = new StaffSchedule();
+			System.out.println("---------------------------------------------------------" + idEmpleado.getText()
+					+ CBDia.getSelectionModel().getSelectedItem() + horaFin.getSelectionModel().getSelectedItem()
+					+ horaIni.getSelectionModel().getSelectedItem());
 
-		StaffSchedule horario = new StaffSchedule();
-		System.out.println("---------------------------------------------------------" + idEmpleado.getText()
-				+ CBDia.getSelectionModel().getSelectedItem() + horaFin.getSelectionModel().getSelectedItem()
-				+ horaIni.getSelectionModel().getSelectedItem());
+			Staff empleado = boEmpleado.buscar((byte) Integer.parseInt(idEmpleado.getText()));
 
-		Staff empleado = boEmpleado.buscar((byte) Integer.parseInt(idEmpleado.getText()));
+			horario.setEmpleado(empleado);
 
-		horario.setEmpleado(empleado);
-		
-		//DayEnum di= CBDia.getSelectionModel().getSelectedItem();
-		//horario.setDia(di);
-		horario.setHoraFinal(Integer.parseInt(horaFin.getSelectionModel().getSelectedItem()));
-		horario.setHoraInicial(Integer.parseInt(horaIni.getSelectionModel().getSelectedItem()));
+			DayEnum di= CBDia.getSelectionModel().getSelectedItem();
+			horario.setDia(di);
+			horario.setHoraFinal(Integer.parseInt(horaFin.getSelectionModel().getSelectedItem()));
+			horario.setHoraInicial(Integer.parseInt(horaIni.getSelectionModel().getSelectedItem()));
 
-		boHorarioEmp.crearHorario(horario);
+			boHorarioEmp.crearHorario(horario);
 
-		notificar("gestionar Horario", "Horario agregado con exito", TipoNotificacion.INFO);
+			notificar("gestionar Horario", "Horario agregado con exito", TipoNotificacion.INFO);
+		} catch (ExcepcionNegocio e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

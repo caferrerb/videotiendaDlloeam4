@@ -119,7 +119,6 @@
 			SELECT usu FROM Usuario usu WHERE usu=?1
 		</query>
 	</named-query>
-
 	<named-query name="AccesoRol.ListarPantallasRol">
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1

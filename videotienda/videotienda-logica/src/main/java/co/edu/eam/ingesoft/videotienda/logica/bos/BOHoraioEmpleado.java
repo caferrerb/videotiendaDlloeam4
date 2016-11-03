@@ -3,6 +3,7 @@ package co.edu.eam.ingesoft.videotienda.logica.bos;
 
 import org.springframework.stereotype.Component;
 
+import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.uniquindio.videotienda.dtos.DayEnum;
 
@@ -14,8 +15,12 @@ public class BOHoraioEmpleado extends BOGenerico<StaffSchedule> {
 	 * Crea un horario para el empleado
 	 * @param horario
 	 */
-	public void crearHorario(StaffSchedule horario){
+	public void crearHorario(StaffSchedule horario) throws Exception{
+		if(horario.getHoraInicial()<horario.getHoraFinal() ){
 		super.crear(horario);
+		}else{
+			throw new ExcepcionNegocio("La hora final no puede ser menos a la hora inicial o igual");
+		}
 	}
 	
 	
@@ -29,7 +34,6 @@ public class BOHoraioEmpleado extends BOGenerico<StaffSchedule> {
 	public DayEnum[] listaDias() {
 		DayEnum[] dias = DayEnum.values();
 		for (int i = 0; i < dias.length; i++) {
-
 			return dias;
 		}
 		return null;
