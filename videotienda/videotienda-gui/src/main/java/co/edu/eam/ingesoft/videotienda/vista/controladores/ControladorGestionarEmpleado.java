@@ -112,7 +112,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
 			direccion.setAddress(TFDireccionA.getText());
 			direccion.setAddress2(TFDdireccionB.getText());
-			direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
+			//direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
 			direccion.setCity(ciudad);
 			direccion.setDistrict(TFDepartamento.getText());
 			direccion.setLastUpdate(new Timestamp(new Date().getTime()));
