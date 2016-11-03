@@ -108,7 +108,6 @@
 			JOIN
 			s.customer c JOIN s.film f
 			JOIN s.staff p WHERE p.store = ?1
-
 		</query>
 	</named-query>
 
