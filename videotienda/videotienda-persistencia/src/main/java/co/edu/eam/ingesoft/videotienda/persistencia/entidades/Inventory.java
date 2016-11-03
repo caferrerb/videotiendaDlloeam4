@@ -39,7 +39,7 @@ public class Inventory implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="film_id", nullable=false)
 	private Film film;
-
+	
 	//bi-directional many-to-one association to Store
 	@ManyToOne
 	@JoinColumn(name="store_id", nullable=false)

@@ -16,6 +16,7 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarV
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorSeguridad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorReporteVentaAlquiler;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorVentanaTrasladarCiudad;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorVerPeliculasRentadas;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -103,6 +104,9 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem mIVenderPeliculas;
+	
+	@FXML
+	private MenuItem mIVerPeliculasRentadas;
 
 	@FXML
 	private AnchorPane contenido;
@@ -229,5 +233,10 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirGestionReportesVentasAlquiler(){
 		agregarVentana("/fxml/VentanaReportesVentasAlquiler.fxml", ControladorReporteVentaAlquiler.class);
+	}
+	
+	@FXML
+	public void abrirverpeliculasrentadas(){
+		agregarVentana("/fxml/verpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
 	}
 }
