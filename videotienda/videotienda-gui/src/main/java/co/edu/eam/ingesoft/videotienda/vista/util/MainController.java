@@ -144,7 +144,7 @@ public class MainController implements Initializable {
 	private MenuItem menuItemVerPeliculasRentadas;
 
 	@FXML
-	private MenuItem menuItemReportes;
+	private MenuItem MenuItemReportes;
 
 	@FXML
 	private MenuItem menuItemGestionPrestamo;
