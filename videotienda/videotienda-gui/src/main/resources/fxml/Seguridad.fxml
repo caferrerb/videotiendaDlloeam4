@@ -45,11 +45,11 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button id="btnAgregar" layoutX="331.0" layoutY="64.0" mnemonicParsing="false" text="Agregar" />
-                        <TableView layoutX="47.0" layoutY="149.0" prefHeight="259.0" prefWidth="352.0">
+                        <Button id="btnAgregar" layoutX="331.0" layoutY="64.0" mnemonicParsing="false" onAction="#agregarPantalla" text="Agregar" />
+                        <TableView fx:id="tablaPantallaRol" layoutX="47.0" layoutY="149.0" prefHeight="259.0" prefWidth="352.0">
                           <columns>
-                            <TableColumn prefWidth="133.0" text="Rol" />
-                            <TableColumn prefWidth="114.0" text="Pantalla" />
+                            <TableColumn fx:id="rolPantallaCL" prefWidth="133.0" text="Rol" />
+                            <TableColumn fx:id="pantallaCL" prefWidth="114.0" text="Pantalla" />
                           </columns>
                         </TableView>
                         <GridPane layoutX="40.0" layoutY="42.0" prefHeight="93.0" prefWidth="284.0">

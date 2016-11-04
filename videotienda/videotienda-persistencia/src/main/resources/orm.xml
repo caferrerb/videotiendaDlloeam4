@@ -130,5 +130,12 @@
 
 		</query>
 	</named-query>
+	
+	<named-query name="AccesoRol.ListarAccesoRol">
+		<query>
+			SELECT accR FROM AccesoRol accR
+
+		</query>
+	</named-query>
 
 </entity-mappings>

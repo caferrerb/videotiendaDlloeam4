@@ -67,9 +67,18 @@ public class Acceso implements Serializable{
 		this.nombre = nombre;
 	}
 
+	
+	public String getPantalla() {
+		return pantalla;
+	}
+
+	public void setPantalla(String pantalla) {
+		this.pantalla = pantalla;
+	}
+
 	@Override
 	public String toString() {
-		return pantalla;
+		return nombre;
 	}
 	
 	
