@@ -24,8 +24,8 @@
 								<Menu fx:id="mnuPeliculas" mnemonicParsing="false" text="Peliculas">
 									<items>
 										<MenuItem id="mIVenderPeliculas" fx:id="menuItemVenderPeliculas" mnemonicParsing="false" onAction="#abrirGestionarVenta" text="VenderPeliculas" />
-										<MenuItem fx:id="menuItemGestionarPelicula" mnemonicParsing="false" onAction="#abrirGestionarPeliculas" text="Gestionar Pelicula" />
-                             			 <MenuItem id="mIVerPeliculasRentadas" fx:id="menuItemVerPeliculaRentada" mnemonicParsing="false" onAction="#abrirverpeliculasrentadas" text="Ver Pelicula Rentada" />	
+										<MenuItem fx:id="menuItemGestionarPelicula" mnemonicParsing="false" onAction="#abrirGestionarPeliculas" text="Gestionar Pelicula" />	
+									<MenuItem id="mIVerPeliculasRentadas" fx:id="menuItemVerPeliculaRentada" mnemonicParsing="false" onAction="#abrirverpeliculasrentadas" text="Ver Pelicula Rentada" />
 									</items>
 								</Menu>
 								<Menu fx:id="menuCliente" mnemonicParsing="false" text="Clientes">
@@ -46,6 +46,7 @@
 										<MenuItem fx:id="mnuItemGestionarEmpleado" mnemonicParsing="false" onAction="#abrirGestionarEmpleados" text="GestionarEmpleado" />
 									</items>
 								</Menu>
+                        <Menu fx:id="mnuPrestamos" mnemonicParsing="false" text="Prestamos" />
 
 								<Menu fx:id="mnuSucursales" mnemonicParsing="false" text="Sucursales" />
 
@@ -54,8 +55,8 @@
                               <MenuItem onAction="#abrirGestionarPrestamos" fx:id="menuItemGestionPrestamo" mnemonicParsing="false" text="Gestion Prestamos" />
                            </items></Menu>
 								<Menu mnemonicParsing="false" text="Parametrizacion">
+								<Menu fx:id="mnuParametrizacion" mnemonicParsing="false" text="Parametrizacion">
 									<items>
-										<MenuItem mnemonicParsing="false" text="Action 1" />
 										<MenuItem fx:id="mnuItemGestionarCiudad" mnemonicParsing="false" onAction="#abrirGEstionarCiudad" text="Ciudad" />
 
 									</items>

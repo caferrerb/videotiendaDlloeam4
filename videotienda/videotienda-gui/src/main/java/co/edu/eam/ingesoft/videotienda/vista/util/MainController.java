@@ -1,12 +1,20 @@
 package co.edu.eam.ingesoft.videotienda.vista.util;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOAccesoRol;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuarioRol;
 import co.edu.eam.ingesoft.videotienda.main.ContextFactory;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.AccesoRol;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
@@ -19,6 +27,7 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorReporteVen
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorVentanaTrasladarCiudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorVerPeliculasRentadas;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.LoginUsuarioController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -47,59 +56,69 @@ public class MainController implements Initializable {
 	 * Menu equipos
 	 */
 	@FXML
-	private Menu mnuInicio;
+	public Menu mnuInicio;
+
+	/**
+	 * Menu prestamos
+	 */
+	@FXML
+	public Menu mnuPrestamos;
+	
+	/**
+	 * Menu peliculas
+	 */
+	@FXML
+	public Menu mnuPeliculas;
+
+	/**
+	 * Menu reportes
+	 */
+	@FXML
+	public Menu menuReportes;
+	
+	@FXML
+	public Menu mnuTiendas;
+	
+	/**
+	 * Menu actores
+	 */
+	@FXML
+	public Menu mnuActores;
+
+	/**
+	 * Menu generos
+	 */
+	@FXML
+	public Menu mnuGeneros;
 
 	/**
 	 * Menu equipos
 	 */
 	@FXML
-	private Menu mnuPeliculas;
+	public Menu menuCliente;
 
-	/**
-	 * Menu equipos
-	 */
 	@FXML
-	private Menu mnuActores;
-
-	/**
-	 * Menu equipos
-	 */
-	@FXML
-	private Menu mnuGeneros;
+	public Menu mnuParametrizacion;
 	
 	/**
 	 * Menu equipos
 	 */
 	@FXML
-	private Menu menuCliente;
+	public Menu mnuEmpleados;
 
-	/**
-	 * Menu equipos
-	 */
 	@FXML
-	private Menu mnuEmpleados;
+	public Menu mnuAutorizacion;
 
-	/**
-	 * Menu equipos
-	 */
-	@FXML
-	private Menu mnuPrestamos;
-	
-	@FXML
-	private Menu mnuAutorizacion;
-	
 	/**
 	 * item de iniciar sesion.
 	 */
-	@FXML
-	private MenuItem mnuSucursales;
-	
+
 	@FXML
 	private MenuItem mnuItemGestionarCiudad;
-	
+
 	@FXML
 	private MenuItem mnuItemGestionarActores;
-	
+
 	@FXML
 	private MenuItem mIVenderPeliculas;
 	
@@ -111,33 +130,32 @@ public class MainController implements Initializable {
 
 	@FXML
 	private MenuItem mnuItemGestionarEmpleado;
-	
+
 	@FXML
 	private MenuItem menuItemGestionarPelicula;
-	
+
 	@FXML
 	private MenuItem mnuItemRoles;
-	
+
 	@FXML
 	private MenuItem menuItemTraslado;
-	
+
 	@FXML
 	private MenuItem menuItemVerPeliculasRentadas;
-	
+
 	@FXML
 	private MenuItem menuItemReportes;
-	
+
 	@FXML
 	private MenuItem menuItemGestionPrestamo;
 	
 	/**
 	 * Inicializacion de la ventana.
 	 */
-
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		esconderMenus();
-		agregarVentana("/fxml/crearpelicula.fxml",CrearPeliculaController.class);
+//		esconderMenus();
+		agregarVentana("/fxml/Login.fxml", LoginUsuarioController.class);
 
 	}
 
@@ -150,12 +168,12 @@ public class MainController implements Initializable {
 	public void agregarVentana(String pagina, Class controller) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(pagina));
-			 fxmlLoader.setResources(ResourceBundle.getBundle("i18n.mensajes"));
-			
+			fxmlLoader.setResources(ResourceBundle.getBundle("i18n.mensajes"));
+
 			BaseController control = fxmlLoader.<BaseController> getController();
-			
+
 			ApplicationContext context = ContextFactory.getContext();
-			BaseController controlador =(BaseController) context.getBean(controller);
+			BaseController controlador = (BaseController) context.getBean(controller);
 			controlador.init(this);
 			fxmlLoader.setController(controlador);
 			AnchorPane cmdPane = (AnchorPane) fxmlLoader.load();
@@ -177,12 +195,17 @@ public class MainController implements Initializable {
 	 *         Fecha: 19/10/2015<br/>
 	 */
 	public void esconderMenus() {
-		// mnuEquipos.setVisible(false);
-		// mnuUsuarios.setVisible(false);
-		// mnuPrestamos.setVisible(false);
-		// mnuMultas.setVisible(false);
-		// mnuMonitores.setVisible(false);
-		// mnuItemIniciarSesion.setVisible(true);
+		mnuInicio.setVisible(false);
+		mnuPeliculas.setVisible(false);
+		mnuActores.setVisible(false);
+		mnuGeneros.setVisible(false);
+		menuCliente.setVisible(false);
+		mnuEmpleados.setVisible(false);
+		mnuAutorizacion.setVisible(false);
+		mnuParametrizacion.setVisible(false);
+		menuReportes.setVisible(false);
+		mnuTiendas.setVisible(false);
+		mnuPrestamos.setVisible(false);
 	}
 
 	/**
@@ -192,58 +215,58 @@ public class MainController implements Initializable {
 	 *         email: caferrerb@gmail.com <br/>
 	 *         Fecha: 19/10/2015<br/>
 	 */
-	public void mostrarMenus() {
+	public void mostrarMenus(){
 
 	}
+
 	@FXML
-	public void abrirGEstionarCiudad(){
+	public void abrirGEstionarCiudad() {
 		agregarVentana("/fxml/gestionarciudad.fxml", ControladorGestionarCIudad.class);
-		
 	}
-	
+
 	@FXML
-	public void abrirTrasladarCliente(){
+	public void abrirTrasladarCliente() {
 		agregarVentana("/fxml/VentanaTrasladarCiudadCliente.fxml", ControladorVentanaTrasladarCiudad.class);
 	}
-	
+
 	@FXML
-	public void abrirGestionarActores(){
+	public void abrirGestionarActores() {
 		agregarVentana("/fxml/GestionarActores.fxml", ControladorGestionarActores.class);
-	
+
 	}
-	
+
 	@FXML
-	public void abrirGestionarVenta(){
+	public void abrirGestionarVenta() {
 		agregarVentana("/fxml/GestionarVentaPeliculas.fxml", ControladorGestionarVenta.class);
 	}
 
 	@FXML
-	public void abrirGestionarEmpleados(){
-		agregarVentana("/fxml/VentanaGestionEmpleados.fxml", ControladorGestionarEmpleado.class);	
+	public void abrirGestionarEmpleados() {
+		agregarVentana("/fxml/VentanaGestionEmpleados.fxml", ControladorGestionarEmpleado.class);
 	}
-	
+
 	@FXML
-	public void abrirGestionarPeliculas(){
+	public void abrirGestionarPeliculas() {
 		agregarVentana("/fxml/VentanaGestionarPeliculas.fxml", ControladorGestionarPelicula.class);
 	}
-	
+
 	@FXML
-	public void abrirGestionarTienda(){		
+	public void abrirGestionarTienda() {
 		agregarVentana("/fxml/VentanaGestionarTienda.fxml", ControladorGestionarTienda.class);
 	}
-	
+
 	@FXML
-	public void abrirAutorizacion(){		
+	public void abrirAutorizacion() {
 		agregarVentana("/fxml/Seguridad.fxml", ControladorSeguridad.class);
 	}
-	
+
 	@FXML
-	public void abrirGestionReportesVentasAlquiler(){
+	public void abrirGestionReportesVentasAlquiler() {
 		agregarVentana("/fxml/VentanaReportesVentasAlquiler.fxml", ControladorReporteVentaAlquiler.class);
 	}
-	
+
 	@FXML
-	public void abrirverpeliculasrentadas(){
+	public void abrirverpeliculasrentadas() {
 
 		agregarVentana("/fxml/verpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
 

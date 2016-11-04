@@ -128,6 +128,14 @@
 			SELECT fa FROM FilmActor fa WHERE fa.film.filmId=?1
 		</query>
 	</named-query>
+	
+	<named-query name="Sale.PeliculasCliente">
+		<query>
+			SELECT s.film FROM Sale s 
+			WHERE s.customer = ?1
+		</query>
+	</named-query>
+	
 
 
 
@@ -140,6 +148,13 @@
 	<named-query name="AccesoRol.ListarPantallasRol">
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
+
+		</query>
+	</named-query>
+	
+	<named-query name="AccesoRol.ListarAccesoRol">
+		<query>
+			SELECT accR FROM AccesoRol accR
 
 		</query>
 	</named-query>
