@@ -60,6 +60,7 @@ public class ControladorVerPeliculasRentadas<Date>  extends BaseController imple
 	
 	@FXML 
 	private TableColumn<Rental, Button> cEntrega;
+	private TableColumn<Store,Button> prueba;
 	
 	
 	
@@ -70,8 +71,6 @@ public class ControladorVerPeliculasRentadas<Date>  extends BaseController imple
 	}
 	
 	private void cargarComboTienda(){
-		cbTienda.getItems().add(null);
-		
 		List<Store>lista=boTienda.listarTiendas();
 		for(Store store: lista){
 			cbTienda.getItems().add(store);
@@ -81,16 +80,19 @@ public class ControladorVerPeliculasRentadas<Date>  extends BaseController imple
 	@FXML
 	public void cargarTablaPeliculas(){
 		try{
-			
+//			prueba = new TableColumn<>("Accion");
+//			Button button = new Button("Hola"); 
+//			prueba.setCellFactory(button);
+//			tbPeliculasDeTiendaR.getColumns().addAll(prueba);
 //			if(cbTienda.getSelectionModel().getSelectedIndex()==0){
 //			//	mostrarMensaje(AlertType.INFORMATION,null,null, "No tiene peliculas rentadas");
 //			}else{
 //				Store store= cbTienda.getSelectionModel().getSelectedItem();
 //			}
-			ObservableList<Rol> data = FXCollections.observableArrayList(
-					new Rol(1, "Uno"),
-					new Rol(2, "Dos")
-					);
+//			ObservableList<Rol> data = FXCollections.observableArrayList(
+//					new Rol(1, "Uno"),
+//					new Rol(2, "Dos")
+//					);
 			
 		}catch(Exception e1){
 			

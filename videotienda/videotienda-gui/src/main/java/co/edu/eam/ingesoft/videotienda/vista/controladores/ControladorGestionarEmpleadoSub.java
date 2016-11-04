@@ -78,15 +78,16 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 	public void agregarHorario() {
 		try {
 			StaffSchedule horario = new StaffSchedule();
-			System.out.println("---------------------------------------------------------" + idEmpleado.getText()
-					+ CBDia.getSelectionModel().getSelectedItem() + horaFin.getSelectionModel().getSelectedItem()
+			System.out.println("---------------------------------------------------------" + "\n" + idEmpleado.getText()
+					+ "\n" + CBDia.getSelectionModel().getSelectedItem() + "\n"
+					+ horaFin.getSelectionModel().getSelectedItem() + "\n"
 					+ horaIni.getSelectionModel().getSelectedItem());
 
 			Staff empleado = boEmpleado.buscar((byte) Integer.parseInt(idEmpleado.getText()));
 
 			horario.setEmpleado(empleado);
 
-			DayEnum di= CBDia.getSelectionModel().getSelectedItem();
+			DayEnum di = CBDia.getSelectionModel().getSelectedItem();
 			horario.setDia(di);
 			horario.setHoraFinal(Integer.parseInt(horaFin.getSelectionModel().getSelectedItem()));
 			horario.setHoraInicial(Integer.parseInt(horaIni.getSelectionModel().getSelectedItem()));
@@ -94,8 +95,7 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 			boHorarioEmp.crearHorario(horario);
 
 			notificar("gestionar Horario", "Horario agregado con exito", TipoNotificacion.INFO);
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
