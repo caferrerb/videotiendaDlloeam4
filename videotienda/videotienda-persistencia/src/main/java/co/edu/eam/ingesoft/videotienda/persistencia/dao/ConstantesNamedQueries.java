@@ -62,6 +62,8 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAR_FILM_ACTOR_POR_ID_FILM="FilmActor.ListarTodos";
 
 	public static final String CONSULTAR_DATOS_CLIENTE ="listarDatosClientes";
+	
+	public static final String CONSULTA_FILM_POR_ACTOR ="listarPeliculasPorActor";
 
 	
 	/**

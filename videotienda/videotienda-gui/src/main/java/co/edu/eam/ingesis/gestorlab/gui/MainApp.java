@@ -1,5 +1,4 @@
 package co.edu.eam.ingesis.gestorlab.gui;
-
 import javax.naming.Context;
 
 import org.springframework.context.ApplicationContext;
