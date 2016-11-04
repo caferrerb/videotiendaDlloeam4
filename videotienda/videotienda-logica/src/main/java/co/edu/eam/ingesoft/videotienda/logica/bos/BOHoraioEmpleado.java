@@ -1,7 +1,11 @@
 package co.edu.eam.ingesoft.videotienda.logica.bos;
 
 
+import javax.swing.JOptionPane;
+
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
@@ -15,11 +19,12 @@ public class BOHoraioEmpleado extends BOGenerico<StaffSchedule> {
 	 * Crea un horario para el empleado
 	 * @param horario
 	 */
-	public void crearHorario(StaffSchedule horario) throws Exception{
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void crearHorario(StaffSchedule horario){
 		if(horario.getHoraInicial()<horario.getHoraFinal() ){
 		super.crear(horario);
 		}else{
-			throw new ExcepcionNegocio("La hora final no puede ser menos a la hora inicial o igual");
+			JOptionPane.showMessageDialog(null,"La hora final no puede ser menos a la hora inicial o igual");
 		}
 	}
 	

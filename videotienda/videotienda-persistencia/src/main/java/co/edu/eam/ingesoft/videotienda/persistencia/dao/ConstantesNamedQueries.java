@@ -14,7 +14,7 @@ public class ConstantesNamedQueries {
 	/**
 	 * Obtiene las peliculas alquiladas por un cliente
 	 */
-	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Sale.PeliculasCliente";
+	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Rental.PeliculasCliente";
 
 	/**
 	 * <<<<<<< HEAD consulta para listar datos de las peliculas por nombre de la

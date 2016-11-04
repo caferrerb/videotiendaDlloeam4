@@ -118,6 +118,9 @@
 	<named-query name="listarDatosClientes">
 		<query>
 			SELECT c FROM Customer c WHERE c.customerId=?1
+
+
+
 		</query>
 	</named-query>
 
@@ -126,14 +129,17 @@
 			SELECT fa FROM FilmActor fa WHERE fa.film.filmId=?1
 		</query>
 	</named-query>
+
+
 	
-	<named-query name="Sale.PeliculasCliente">
+	
+	<named-query name="Rental.PeliculasCliente">
 		<query>
-			SELECT s.film FROM Sale s 
-			WHERE s.customer = ?1
-		</query>
+			SELECT r FROM Rental r 
+			WHERE r.customer = ?1
+		
+	</query>
 	</named-query>
-	
 
 
 
@@ -149,6 +155,8 @@
 
 		</query>
 	</named-query>
+
+
 	
 	<named-query name="AccesoRol.ListarAccesoRol">
 		<query>
