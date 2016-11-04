@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOAcceso;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOAccesoRol;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOEmpleado;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BORol;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuario;
@@ -111,10 +112,12 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		empleado = new Staff();
 		cbEmpleado.setOnAction((event) -> {
 			Staff selectedEmpleado = cbEmpleado.getSelectionModel().getSelectedItem();
+			if(selectedEmpleado.getUsuario()!=null){
 			tfUsuario.setText(selectedEmpleado.getUsuario().getUsuario());
 			tfPassword.setText(selectedEmpleado.getUsuario().getPass());
 			usu = selectedEmpleado.getUsuario();
 			llenarTablaRolUsuario();
+			}
 		});
 	}
 
@@ -136,7 +139,6 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	@FXML
 	public void establecerUsuario() {
 
-		// Usuario usu = new Usuario();
 		usu.setUsuario(tfUsuario.getText());
 		usu.setPass(tfPassword.getText());
 		if (tfUsuario.getText().isEmpty() || tfPassword.getText().isEmpty()) {
@@ -163,7 +165,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 			Rol rolCombo = cbRolUsuario.getSelectionModel().getSelectedItem();
 			usuarioRol.setRol(rolCombo);
 			usuarioRol.setUsuario(usu);
-			boUsuarioRol.crear(usuarioRol);
+			boUsuarioRol.editar(usuarioRol);
 		}
 	}
 
