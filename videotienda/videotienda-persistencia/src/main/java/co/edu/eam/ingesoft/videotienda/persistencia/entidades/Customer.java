@@ -13,12 +13,13 @@ import java.util.List;
  * The persistent class for the customer database table.
  * 
  */
+
 @Entity
 @Table(name="customer")
 @NamedQuery(name="Customer.findAll", query="SELECT c FROM Customer c")
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@Column(name="customer_id", unique=true, nullable=false)
 	private int customerId;

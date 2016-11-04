@@ -52,7 +52,7 @@ public class Staff implements Serializable {
 	private List<Rental> rentals;
 
 	//bi-directional many-to-one association to Address
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="address_id", nullable=false)
 	private Address address;
 
