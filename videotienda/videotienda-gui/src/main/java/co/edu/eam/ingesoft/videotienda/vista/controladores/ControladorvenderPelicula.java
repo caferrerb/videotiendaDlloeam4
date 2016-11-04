@@ -38,7 +38,6 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	public void buscarCliente() {
 		try {
 			System.out.println("Buscando");
-//			Sale fecha = new Sale();
 			int idCliente = Integer.parseInt(jtfIdCliente.getText());
 			List<Customer> cus = boCus.listaBucarCliente(idCliente);
 			for (int i = 0; i < cus.size(); i++) {
@@ -51,6 +50,18 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 					notificar("¡ERROR!", "El cliente no se encuentra registrado",  TipoNotificacion.ERROR);
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@FXML
+	public void venderPelicula(){
+		try {
+			Sale vender = new Sale();
+			Customer idCus = boCus.buscar(jtfIdCliente.getText());
+			vender.setCustomer(idCus);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
