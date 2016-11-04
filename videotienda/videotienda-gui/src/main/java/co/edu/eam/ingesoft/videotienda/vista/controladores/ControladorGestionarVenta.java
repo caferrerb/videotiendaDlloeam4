@@ -112,7 +112,7 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 		final Button cellButton = new Button("Vender");
 		private Film film;
 		ButtonCell(final TableView tblView,Film f) {
-			this.film=film;
+			this.film=f;
 			cellButton.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override

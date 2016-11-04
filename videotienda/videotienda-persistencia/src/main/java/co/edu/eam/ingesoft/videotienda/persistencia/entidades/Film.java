@@ -39,6 +39,7 @@ public class Film implements Serializable {
 	@Column(name="last_update", nullable=false)
 	private Timestamp lastUpdate;
 
+	
 	private int length;
 
 	@Column(length=1)
@@ -236,11 +237,9 @@ public class Film implements Serializable {
 		this.poster = poster;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return title;
+		return getTitle();
 	}
 
 }
