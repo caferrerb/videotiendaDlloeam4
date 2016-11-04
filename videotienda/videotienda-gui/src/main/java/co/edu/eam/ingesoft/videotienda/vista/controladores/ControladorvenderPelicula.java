@@ -44,7 +44,7 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 			for (int i = 0; i < cus.size(); i++) {
 				if (cus != null) {
 					jtfNombreCliente.setText(cus.get(i).getFirstName());
-					fecha.
+//					fecha.
 					
 					// jtfIdPelicula.setText(film.getFilmId());
 				}
