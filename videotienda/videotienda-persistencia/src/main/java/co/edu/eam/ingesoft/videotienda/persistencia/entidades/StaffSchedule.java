@@ -44,14 +44,7 @@ public class StaffSchedule {
 		
 	}
 
-	public StaffSchedule(int idStaffSchedule, Staff empleado, DayEnum dia, int horaInicial, int horaFinal) {
-		super();
-		this.idStaffSchedule = idStaffSchedule;
-		this.empleado = empleado;
-		this.dia = dia;
-		this.horaInicial = horaInicial;
-		this.horaFinal = horaFinal;
-	}
+
 
 	/**
 	 * @return the idStaffSchedule

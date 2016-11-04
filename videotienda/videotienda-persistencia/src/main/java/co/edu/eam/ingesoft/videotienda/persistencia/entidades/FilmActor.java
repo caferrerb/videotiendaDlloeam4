@@ -81,6 +81,22 @@ public class FilmActor implements Serializable {
 		this.film = film;
 	}
 
+	
+	
+	/**
+	 * @return the caracter
+	 */
+	public String getCaracter() {
+		return caracter;
+	}
+
+	/**
+	 * @param caracter the caracter to set
+	 */
+	public void setCaracter(String caracter) {
+		this.caracter = caracter;
+	}
+
 	@Override
 	public String toString() {
 		return "FilmActor [id=" + id + ", lastUpdate=" + lastUpdate

@@ -22,19 +22,26 @@ import org.springframework.stereotype.Controller;
 import co.edu.eam.ingesis.gestorlab.gui.MainApp;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOActores;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOFilm;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOFilmActor;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOLanguage;
 import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.FilmActor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Language;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -48,6 +55,9 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 
 	@Autowired
 	private BOFilm boFilm;
+	
+	@Autowired
+	private BOFilmActor boFilmActor;
 	
 	@Autowired
 	private BOActores boActores;
@@ -94,11 +104,24 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 	@FXML
 	private ComboBox<Language> jCBLanguage2;
 	
-	@FXML
-	private ComboBox<Actor> jCBActores;
-	
 	private  File imgFile;
 	
+	/*---------- VENTANA TABLA ----------*/
+	
+	@FXML
+	private TextField jTFPersonaje;
+	@FXML
+	private ComboBox<Actor> jCBActores;
+	@FXML
+	private TableView<FilmActor> tabla;	
+	@FXML
+	private TableColumn<FilmActor, Actor> columnaActor;	
+	@FXML
+	private TableColumn<FilmActor, String> columnaPersonaje;		
+	@FXML
+	private TableColumn columnaBotones;	
+	@FXML
+	private ObservableList<FilmActor> data = FXCollections.observableArrayList();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -207,6 +230,7 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		FileInputStream fin=new FileInputStream(imgFile);
 		fin.read(imagen);
 		film.setPoster(imagen);
+		fin.close();
 		
 		/*---------------------*/
 		/*Duracion de la renta de pelicula*/
@@ -254,7 +278,7 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 	}
 	
 	@FXML
-	public void buscarPelicula(){
+	public void buscarPelicula()throws Exception{
 		
 		if(jTFFilmID.getText().isEmpty()){
 			notificar("¡INGRESE!", "Por favor ingrese el ID de la pelicula que desea buscar",  TipoNotificacion.ERROR);
@@ -268,8 +292,8 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			jTFRating.setText(fi.getRating());
 			
 			//jYearRelease.setValue(LocalDate.of(fi.getReleaseYear().getYear(), fi.getReleaseYear().getMonth(), fi.getReleaseYear().getDay()));
-			DatePicker date = new DatePicker(LocalDate.of(fi.getReleaseYear().getYear(), fi.getReleaseYear().getMonth(), fi.getReleaseYear().getDay()));
-			jYearRelease.setValue(date.getValue());
+			//DatePicker date = new DatePicker(LocalDate.of(fi.getReleaseYear().getYear(), fi.getReleaseYear().getMonth(), fi.getReleaseYear().getDay()));
+			//jYearRelease.setValue(date.getValue());
 			
 			jTFRentalDuration.setText(fi.getRentalDuration()+"");
 			jTFRentalRate.setText(fi.getRentalRate()+"");
@@ -277,15 +301,14 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			jTFFactures.setText(fi.getSpecialFeatures());
 			jTFTitle.setText(fi.getTitle());
 			
-			
-			Image im=new Image(new ByteArrayInputStream(fi.getPoster()));
-			jPoster.setImage(im);
-			//Language lang1 = boLenguaje.buscar(fi.getLanguage1().getLanguageId());
-			//Language lang2 = boLenguaje.buscar(fi.getLanguage2().getLanguageId());
 			jCBLanguage1.setValue(fi.getLanguage1());
 			jCBLanguage2.setValue(fi.getLanguage2());
 			jTFLength.setText(fi.getLength()+"");
 			
+			Image im=new Image(new ByteArrayInputStream(fi.getPoster()));
+			jPoster.setImage(im); 
+	        
+		
 		}else{
 			notificar("¡ERROR!", "La pelicula con el ID= ''"+idFilm+"'' (NO) se encuentra registrada",  TipoNotificacion.ERROR);
 
@@ -307,10 +330,18 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 				if(fi==null){
 					notificar("¡ERROR!", "La pelicula con el id= ''"+idFilm+"'' (NO) se encuentra registrada",  TipoNotificacion.ERROR);
 				}else{
-					try{
-					if(jPoster.getImage()==null){
-						notificar("¡INGRESE!", "Por favor ingrese el poster de la pelicula",  TipoNotificacion.ERROR);
+					
+					if(jTFFilmID.getText().isEmpty()||jTFRentalDuration.getText().isEmpty()||jTFRentalRate.getText().isEmpty()||
+							jTFReplacementCost.getText().isEmpty()||jTFTitle.getText().isEmpty()||jCBLanguage1.getValue()==null|| 
+							jCBLanguage2.getValue()==null ||  jYearRelease.getValue()==null){
+						
+						notificar("¡INGRESE!", "Por favor ingrese todos los datos",  TipoNotificacion.ERROR);
 					}else{
+						if(jPoster.getImage()==null){
+							notificar("¡INGRESE!", "Por favor ingrese el poster de la pelicula",  TipoNotificacion.ERROR);
+						}else{
+					try{
+					
 						
 					Film film = new Film();
 					
@@ -322,15 +353,15 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 					LocalDate date= jYearRelease.getValue();
 					Date anhoRealize = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
 					film.setReleaseYear(anhoRealize);
-					
-		            //Lineas para crear la imagen en la bd
-		          
-		        	  
-		        	   byte[] imagen=new byte[(int)imgFile.length()];
-			    		FileInputStream fin=new FileInputStream(imgFile);
-			    		fin.read(imagen);
-			    		film.setPoster(imagen);
-		    		
+			       
+				    
+				    	byte[] imagen=new byte[(int)imgFile.length()];
+						FileInputStream fin=new FileInputStream(imgFile);
+						fin.read(imagen);
+						film.setPoster(imagen);
+						fin.close();
+				   
+					 
 					/*---------------------*/
 					/*Duracion de la renta de pelicula*/
 					byte duracionRenta= Byte.parseByte((jTFRentalDuration.getText()));
@@ -347,17 +378,19 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 					
 					boFilm.editar(film);
 					notificar("¡Pelicula Editada!", "Se ha editado la pelicula exitosamente",  TipoNotificacion.INFO);
-				
-					}
 					
+						
 			}catch (NumberFormatException ex){
 				
 				notificar("¡VERIFICAR!", "Por favor verifique que los datos de "
 						+ " (Duracion de alquiler, Tarifa de Alquiler,Costo de remplazo y duracion de pelicula)"
 						+ " solo contengan valores NUMERICOS",  TipoNotificacion.ERROR);
 			}
-		 }
+			}
+			}
 		}
+		}
+		
 	}
 	@FXML
 	private void eliminarPelicula(){
@@ -377,6 +410,50 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 				notificar("¡EXITO!", "La pelicula ''"+idFilm+"'' se ha eliminado exitosamente",  TipoNotificacion.INFO);
 			}
 				
+		}
+	}
+	
+	@FXML
+	private void agregarActorFilm(){
+		
+		if(jTFFilmID.getText().isEmpty()|| jTFPersonaje.getText().isEmpty()||jCBActores.getValue()==null){
+			notificar("¡INGRESE!", "Por favor ingrese (ID de pelicula , Actor  y su personaje)",  TipoNotificacion.ERROR);
+		}else{
+		try {
+			
+			String personaje = jTFPersonaje.getText();
+			Actor actor = jCBActores.getValue();
+			int idFilm=Integer.parseInt(jTFFilmID.getText());
+			Film film = boFilm.buscar(idFilm);
+			
+			FilmActor fiAc = new FilmActor();
+			fiAc.setActor(actor);
+			fiAc.setFilm(film);
+			fiAc.setLastUpdate(new Timestamp(new Date().getTime()));
+			fiAc.setCaracter(personaje);
+			
+			boFilmActor.crear(fiAc);
+			agregarActorFilmTabla();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	}
+	
+	@FXML
+	private void agregarActorFilmTabla(){
+		
+		int idFilm=Integer.parseInt(jTFFilmID.getText());
+		List<FilmActor> filmsActors = boFilmActor.listarFilmesActores(idFilm);
+		for (int i = 0; i < filmsActors.size(); i++) {
+			
+			data.add(filmsActors.get(i));
+			columnaActor.setCellValueFactory(new PropertyValueFactory<FilmActor, Actor>("firstName "+"lastName"));
+			columnaActor.setMinWidth(100);
+			columnaPersonaje.setCellValueFactory(new PropertyValueFactory<FilmActor, String>("caracter"));
+			columnaPersonaje.setMinWidth(100);
+			
 		}
 	}
 }

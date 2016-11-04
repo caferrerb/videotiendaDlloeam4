@@ -24,7 +24,8 @@
 								<Menu fx:id="mnuPeliculas" mnemonicParsing="false" text="Peliculas">
 									<items>
 										<MenuItem id="mIVenderPeliculas" fx:id="menuItemVenderPeliculas" mnemonicParsing="false" onAction="#abrirGestionarVenta" text="VenderPeliculas" />
-										<MenuItem fx:id="menuItemGestionarPelicula" mnemonicParsing="false" onAction="#abrirGestionarPeliculas" text="Gestionar Pelicula" />	
+										<MenuItem fx:id="menuItemGestionarPelicula" mnemonicParsing="false" onAction="#abrirGestionarPeliculas" text="Gestionar Pelicula" />
+                             			 <MenuItem id="mIVerPeliculasRentadas" fx:id="menuItemVerPeliculaRentada" mnemonicParsing="false" onAction="#abrirverpeliculasrentadas" text="Ver Pelicula Rentada" />	
 									</items>
 								</Menu>
 								<Menu fx:id="menuCliente" mnemonicParsing="false" text="Clientes">

@@ -115,7 +115,17 @@
 			JOIN
 			s.customer c JOIN s.film f
 			JOIN s.staff p WHERE p.store = ?1
+		</query>
+	</named-query>
+	<named-query name="listarDatosClientes">
+		<query>
+			SELECT c FROM Customer c WHERE c.customerId=?1
+		</query>
+	</named-query>
 
+	<named-query name="FilmActor.ListarTodos">
+		<query>
+			SELECT fa FROM FilmActor fa WHERE fa.film.filmId=?1
 		</query>
 	</named-query>
 
@@ -125,13 +135,26 @@
 		<query>
 			SELECT usu FROM Usuario usu WHERE usu=?1
 		</query>
+		
 	</named-query>
-
 	<named-query name="AccesoRol.ListarPantallasRol">
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
 
 		</query>
 	</named-query>
+	
+	
+	<named-query name="datosTablaFilmRentada">
+		<query>
+			SELECT i.inventoryId, i.film.title, c.cfirstName, r.rentalDate,
+			 r.returnDate  FROM Rental r JOIN r.customer c 
+			JOIN r.inventory i
+			WHERE i.store = ?1
+
+		</query>
+	</named-query>
+	
+	
 
 </entity-mappings>

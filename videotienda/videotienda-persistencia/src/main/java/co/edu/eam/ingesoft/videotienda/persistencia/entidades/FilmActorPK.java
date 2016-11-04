@@ -18,6 +18,7 @@ public class FilmActorPK implements Serializable {
 	@Column(name="film_id",  nullable=false)
 	private int filmId;
 
+	
 	public FilmActorPK() {
 	}
 	public int getActorId() {
