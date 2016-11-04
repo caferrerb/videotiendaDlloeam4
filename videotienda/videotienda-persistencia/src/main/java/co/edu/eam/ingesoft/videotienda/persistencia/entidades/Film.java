@@ -39,6 +39,7 @@ public class Film implements Serializable {
 	@Column(name="last_update", nullable=false)
 	private Timestamp lastUpdate;
 
+	
 	private int length;
 
 	@Column(length=1)
@@ -236,17 +237,9 @@ public class Film implements Serializable {
 		this.poster = poster;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Film [filmId=" + filmId + ", description=" + description
-				+ ", lastUpdate=" + lastUpdate + ", length=" + length
-				+ ", rating=" + rating + ", releaseYear=" + releaseYear
-				+ ", rentalDuration=" + rentalDuration + ", rentalRate="
-				+ rentalRate + ", replacementCost=" + replacementCost
-				+ ", specialFeatures=" + specialFeatures + ", title=" + title
-				+ ", language1=" + language1 + ", language2=" + language2 + "]";
+		return getTitle();
 	}
 
 }

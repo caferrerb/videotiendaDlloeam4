@@ -108,8 +108,7 @@ public class Inventory implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Inventory [inventoryId=" + inventoryId + ", lastUpdate="
-				+ lastUpdate + ", film=" + film + ", store=" + store + "]";
+		return inventoryId+"";
 	}
 
 }

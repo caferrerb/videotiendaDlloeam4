@@ -133,11 +133,7 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", active=" + active
-				+ ", createDate=" + createDate + ", email=" + email
-				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", lastUpdate=" + lastUpdate + ", address=" + address
-				+ ", store=" + store + "]";
+		return firstName;
 	}
 
 }
