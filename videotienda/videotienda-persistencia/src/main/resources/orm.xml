@@ -151,7 +151,7 @@
 		</query>
 	</named-query>
 	
-	
+	<!-- 
 	<named-query name="datosTablaFilmRentada">
 		<query>
 			SELECT i.inventoryId, i.film.title, c.cfirstName, r.rentalDate,
@@ -161,7 +161,7 @@
 
 		</query>
 	</named-query>
-	
+	 -->
 	
 
 </entity-mappings>

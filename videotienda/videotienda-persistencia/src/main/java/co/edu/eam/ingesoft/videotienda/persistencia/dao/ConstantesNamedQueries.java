@@ -62,8 +62,18 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTAR_DATOS_CLIENTE ="listarDatosClientes";
 
 	/**
-	 * Consulta que lista todos accesosrol existentes
+	 * Consulta que lista todos accesosrol de un rol determinado
 	 */
 	public static final String CONSULTA_LISTAR_TODO_ACCESOS_ROL="AccesoRol.ListarAccesoRol";
+	
+	/**
+	 * Consulta que lista todos accesosrol existentes
+	 */
+	public static final String CONSULTA_LISTAR_ACCESOS_ROL="AccesoRol.ListarPantallasRol";
+	
+	/**
+	 * Consulta que lista todos accesosrol existentes
+	 */
+	public static final String CONSULTA_VALIDAR_USUARIO="Usuario.BuscarUsuario";
 	
 }
