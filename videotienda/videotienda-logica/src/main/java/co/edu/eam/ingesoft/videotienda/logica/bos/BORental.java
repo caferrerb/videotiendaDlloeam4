@@ -2,6 +2,8 @@ package co.edu.eam.ingesoft.videotienda.logica.bos;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
@@ -12,6 +14,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
  * 		   email:cristiansinisterra@hotmail.com<br/>
  *		   Fecha 04/11/2016
  */
+@Component
 public class BORental extends BOGenerico<Store> {
 	
 	/**
