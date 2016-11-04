@@ -97,8 +97,6 @@ public class LoginUsuarioController extends BaseController implements Initializa
 					for (AccesoRol accesoRol : accesosRol) {
 
 						for (Menu men : menus) {
-							System.out.println(
-									"HAHAHAHAH " + men.getText() + "jjajajajja" + accesoRol.getAcceso().getNombre());
 							if (accesoRol.getAcceso().getNombre().equals(men.getText())) {
 								men.setVisible(true);
 

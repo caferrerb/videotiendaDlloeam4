@@ -5,9 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -19,15 +16,19 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Sale;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
-import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 @Controller
 public class ControladorReporteVentaAlquiler extends BaseController implements Initializable {
@@ -37,7 +38,7 @@ public class ControladorReporteVentaAlquiler extends BaseController implements I
 
 	@FXML
 	private Button jBbuscar;
-	
+
 	@FXML
 	private ComboBox<Store> jcbstore;
 
@@ -57,24 +58,56 @@ public class ControladorReporteVentaAlquiler extends BaseController implements I
 	// falta estado
 	// datos tabla venta
 	@FXML
-	private TableColumn<Film, Integer> ColumnaVentaIdPelicula;
+	private TableColumn<Sale, Integer> ColumnaVentaIdPelicula;
 	@FXML
-	private TableColumn<Film, String> ColumnaVentaTitulo;
+	private TableColumn<Sale, String> ColumnaVentaTitulo;
 	@FXML
-	private TableColumn<Customer, Integer> ColumnaVentaCliente;
+	private TableColumn<Sale, String> ColumnaVentaCliente;
 	@FXML
 	private TableColumn<Sale, Date> ColumnaVentaFecha;
 
-	ObservableList<Rental> listaRenta;
-	ObservableList<Sale> listaVenta;
+	@FXML
+	private final ObservableList<Rental> listaRenta = FXCollections.observableArrayList();
+
+	@FXML
+	private final ObservableList<Sale> listaSale = FXCollections.observableArrayList();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		configurarTAblaVentas();
+
 		llenarComboTiendas();
+		eventoAccionCombo();
 
 	}
 
-	@FXML
+	private void configurarTAblaVentas() {
+		ColumnaVentaIdPelicula
+				.setCellValueFactory(new Callback<CellDataFeatures<Sale, Integer>, ObservableValue<Integer>>() {
+					@Override
+					public ObservableValue<Integer> call(CellDataFeatures<Sale, Integer> data) {
+						return new SimpleObjectProperty<>(data.getValue().getFilm().getFilmId());
+					}
+				});
+
+		ColumnaVentaTitulo.setCellValueFactory(new Callback<CellDataFeatures<Sale, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<Sale, String> data) {
+				return new SimpleObjectProperty<>(data.getValue().getFilm().getTitle());
+			}
+		});
+
+		ColumnaVentaCliente
+				.setCellValueFactory(new Callback<CellDataFeatures<Sale, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Sale, String> data) {
+						return new SimpleObjectProperty<>(data.getValue().getCustomer().getFirstName());
+					}
+				});
+		ColumnaVentaFecha.setCellValueFactory(new PropertyValueFactory<Sale, Date>("saleDate"));
+	}
+
 	private void llenarComboTiendas() {
 		List<Store> lista = boReportes.listarTiendas();
 		for (Store store : lista) {
@@ -84,26 +117,25 @@ public class ControladorReporteVentaAlquiler extends BaseController implements I
 
 	@FXML
 	public void eventoAccionCombo() {
-		if (jcbstore.getSelectionModel().getSelectedIndex() != 0) {
+		jcbstore.setOnAction((event) -> {
 			Store s = jcbstore.getSelectionModel().getSelectedItem();
 			llenarTablaRenta(s);
 			llenarTablaVenta(s);
-		} else {
-			notificar("NOTIFICACION", "seleccione una tienda del combo", TipoNotificacion.ERROR);
 
-		}
+		});
 	}
 
 	@FXML
 	public void llenarTablaRenta(Store s) {
 		List<Rental> lista = boReportes.listarTablaRental(s);
-		for (Rental rental : lista) {
-			listaRenta.add(rental);
+		for (int i = 0; i < lista.size(); i++) {
+			listaRenta.add(lista.get(i));
 			ColumnaAlquilerIdInventario
-					.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("ID INVENTARIO"));
-			ColumnaAlquilerTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("TITULO"));
-			ColumnaAlquilerCliente.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("CLIENTE"));
+					.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("inventoryId"));
+			ColumnaAlquilerTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+			ColumnaAlquilerCliente.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("firstName"));
 			TBAlquiler.setItems(listaRenta);
+
 		}
 
 	}
@@ -111,13 +143,11 @@ public class ControladorReporteVentaAlquiler extends BaseController implements I
 	@FXML
 	public void llenarTablaVenta(Store s) {
 		List<Sale> lista = boReportes.listarTablaVenta(s);
-		for (Sale sale : lista) {
-			listaVenta.add(sale);
-			ColumnaVentaIdPelicula.setCellValueFactory(new PropertyValueFactory<Film, Integer>("ID PELICULA"));
-			ColumnaVentaTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("TITULO"));
-			ColumnaVentaCliente.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("CLIENTE"));
-			ColumnaVentaFecha.setCellValueFactory(new PropertyValueFactory<Sale, Date>("FECHA"));
-			TBVenta.setItems(listaVenta);
+
+		for (int i = 0; i < lista.size(); i++) {
+			listaSale.add(lista.get(i));
+
 		}
+		TBVenta.setItems(listaSale);
 	}
 }
