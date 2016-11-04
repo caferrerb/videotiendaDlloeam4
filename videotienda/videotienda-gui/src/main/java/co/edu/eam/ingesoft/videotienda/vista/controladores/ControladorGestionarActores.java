@@ -220,10 +220,10 @@ public class ControladorGestionarActores extends BaseController implements Initi
 			 data.add(pelicula.get(i));
 			
 			
-			 tablaTitulo.setCellValueFactory(new PropertyValueFactory<Film,String>("Titulo"));
+			 tablaTitulo.setCellValueFactory(new PropertyValueFactory<Film,String>("title"));
 			 tablaTitulo.setMinWidth(100);
 			 
-			 tablaAnio.setCellValueFactory(new PropertyValueFactory<Film,DateTime>("Año"));
+			 tablaAnio.setCellValueFactory(new PropertyValueFactory<Film,DateTime>("lastUpdate"));
 			 tablaAnio.setMinWidth(100);
 			 
 			 tablaPersonaje.setCellValueFactory(new PropertyValueFactory<Film, String>("Personaje"));
