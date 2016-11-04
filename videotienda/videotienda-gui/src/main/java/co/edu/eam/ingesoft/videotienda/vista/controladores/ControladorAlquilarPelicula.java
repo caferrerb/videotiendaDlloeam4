@@ -75,7 +75,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		if (cliente != null){
 			tFNombre.setText(cliente.getFirstName() + " " + cliente.getLastName());
 			
-			Image img = new Image (new ByteArrayInputStream(cliente.get));
+			Image img = new Image (new ByteArrayInputStream(cliente.getPicture()));
 			PhFoto.setImage(img);
 		} else {
 			notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
