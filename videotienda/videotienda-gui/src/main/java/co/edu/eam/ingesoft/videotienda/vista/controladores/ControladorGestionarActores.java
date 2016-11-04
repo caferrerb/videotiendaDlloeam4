@@ -25,6 +25,7 @@ import com.sun.javafx.font.freetype.FTFactory;
 import co.edu.eam.ingesis.gestorlab.gui.MainApp;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOActores;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOFilm;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOFilmActor;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOPais;
 import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
@@ -69,6 +70,9 @@ public class ControladorGestionarActores extends BaseController implements Initi
 	
 	@Autowired
 	private BOFilm boPelicula;
+	
+//	@Autowired
+//	private BOFilmActor boFilmActor;
 
 	@Autowired
 	private BOPais boPais;
@@ -216,6 +220,7 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 			 try {
 			 List<Film> pelicula = boPelicula.listarPeliculas(tfDocumento.getText());
+			// List<FilmActor> filActor = boFilmActor.listarFilmesActores()
 			 for (int i = 0; i < pelicula.size(); i++) {
 			 data.add(pelicula.get(i));
 			
@@ -226,7 +231,7 @@ public class ControladorGestionarActores extends BaseController implements Initi
 			 tablaAnio.setCellValueFactory(new PropertyValueFactory<Film,DateTime>("lastUpdate"));
 			 tablaAnio.setMinWidth(100);
 			 
-			 tablaPersonaje.setCellValueFactory(new PropertyValueFactory<Film, String>("Personaje"));
+			 tablaPersonaje.setCellValueFactory(new PropertyValueFactory<Film, String>("caracter"));
 			 tablaPersonaje.setMinWidth(100);
 			
 			 tablaBoton.setCellFactory(new Callback<TableColumn<Film,

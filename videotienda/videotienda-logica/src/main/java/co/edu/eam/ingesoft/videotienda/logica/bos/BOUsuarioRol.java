@@ -3,15 +3,28 @@ package co.edu.eam.ingesoft.videotienda.logica.bos;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.UsuarioRol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.UsuarioRolPK;
 
 @Component
 public class BOUsuarioRol extends BOGenerico<UsuarioRol>{
 
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void crear(UsuarioRol entidad) {
+		Rol rol=dao.encontrarPorId(Rol.class, entidad.getRol().getId());
+		Usuario us=dao.encontrarPorId(Usuario.class, entidad.getUsuario().getUsuario());
+		entidad.setRol(rol);
+		entidad.setUsuario(us);
+		super.crear(entidad);
+	}
 	/**
 	 * Metodo que lista los usuarios de un rol determinado
 	 * @author Richard Vanegas<br/>

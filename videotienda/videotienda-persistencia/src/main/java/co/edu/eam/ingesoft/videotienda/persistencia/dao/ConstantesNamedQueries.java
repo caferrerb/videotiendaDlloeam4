@@ -10,6 +10,11 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTARCIUDADES = "Ciudad.ListarTodos";
 
 	public static final String CONSULTA_LISTAREMPLEADOS = "Empleado.ListarTodos";
+	
+	/**
+	 * Obtiene las peliculas alquiladas por un cliente
+	 */
+	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Rental.PeliculasCliente";
 
 	/**
 	 * <<<<<<< HEAD consulta para listar datos de las peliculas por nombre de la
@@ -17,6 +22,8 @@ public class ConstantesNamedQueries {
 	 * branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 	 */
 	public static final String CONSULTA_POR_NOMBRE_PELICULA = "Film.listarNombrePelicula";
+	
+	public static final String CONSULTA_LISTAR_PELICULAS_NOMBRES = "Film.listarPorNombrePelis";
 
 	/**
 	 * Consulta para listar todos los roles
@@ -57,5 +64,26 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTAR_DATOS_CLIENTE ="listarDatosClientes";
 	
 	public static final String CONSULTA_FILM_POR_ACTOR ="listarPeliculasPorActor";
+
+	
+	/**
+	 * Consulta para cargar todos los datos de la tabla de peliculas rentadas
+	 */
+	public static final String CONSULTA_TABLA_PELICULA_RENTADAS="datosTablaFilmRentada";
+	
+	public static final String CONSULTA_LISTAR_ACCESOS_ROL="AccesoRol.ListarPantallasRol";
+
+
+	/**
+	 * Consulta que lista todos accesosrol de un rol determinado
+	 */
+	public static final String CONSULTA_LISTAR_TODO_ACCESOS_ROL="AccesoRol.ListarAccesoRol";
+	
+	
+	/**
+	 * Consulta que lista todos accesosrol existentes
+	 */
+	public static final String CONSULTA_VALIDAR_USUARIO="Usuario.BuscarUsuario";
+	
 
 }
