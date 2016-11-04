@@ -12,6 +12,12 @@
 		</query>
 	</named-query>
 
+	<named-query name="Film.listarPorNombrePelis">
+		<query>
+			SELECT f FROM Film f
+		</query>
+	</named-query>
+
 	<named-query name="Film.listarNombrePelicula">
 		<query>
 			SELECT f FROM Film f WHERE f.title like?1
@@ -48,15 +54,15 @@
 			SELECT s FROM Staff s
 		</query>
 	</named-query>
-	
+
 	<named-query name="Tienda.ListarTodos">
-	<query>
+		<query>
 			SELECT s FROM Store s
 		</query>
 	</named-query>
-	
+
 	<named-query name="Language.ListarTodos">
-	<query>
+		<query>
 			SELECT lag FROM Language lag
 		</query>
 	</named-query>
@@ -66,31 +72,32 @@
 			SELECT r FROM Rol r
 		</query>
 	</named-query>
-	
+
 	<named-query name="UsuarioRol.ListarRolesPorUsuario">
 		<query>
-			SELECT usuR.rol FROM UsuarioRol usuR WHERE usuR.usuario.usuario=?1
+			SELECT usuR.rol FROM UsuarioRol usuR WHERE
+			usuR.usuario.usuario=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="UsuarioRol.ListarPorRol">
 		<query>
 			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1
 		</query>
-		</named-query>
-		
+	</named-query>
+
 	<named-query name="EmpleadosTienda.ListarTodos">
 		<query>
 			SELECT s FROM Staff s WHERE s.store=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="InventarioTienda.ListarTodos">
 		<query>
 			SELECT i FROM Inventory i WHERE i.store=?1
 		</query>
 	</named-query>
-	
+
 
 
 	<named-query name="datosTablaRental.Listar">
@@ -112,7 +119,7 @@
 		</query>
 	</named-query>
 
-	
+
 
 	<named-query name="Usuario.BuscarUsuario">
 		<query>

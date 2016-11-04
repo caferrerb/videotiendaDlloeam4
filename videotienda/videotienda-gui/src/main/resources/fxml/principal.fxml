@@ -50,7 +50,7 @@
 
 								<Menu fx:id="mnuPrestamos" mnemonicParsing="false" text="Prestamos">
                            <items>
-                              <MenuItem fx:id="menuItemGestionPrestamo" mnemonicParsing="false" text="Gestion Prestamos" />
+                              <MenuItem onAction="#abrirGestionarPrestamos" fx:id="menuItemGestionPrestamo" mnemonicParsing="false" text="Gestion Prestamos" />
                            </items></Menu>
 								<Menu mnemonicParsing="false" text="Parametrizacion">
 									<items>
