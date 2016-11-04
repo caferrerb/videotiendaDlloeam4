@@ -50,18 +50,12 @@ public class ConstantesNamedQueries {
 	/**
 	 * Consulta para listar todos las pantallas
 	 */
-	public static final String CONSULTA_LISTAR_PANTALLAS="Acceso.ListarTodos";
+	public static final String CONSULTA_LISTAR_PANTALLAS="Acesso.ListarTodos";
 	
-	/**
-	 * Consulta para validar si el usuario y password ingresados son correctos
-	 */
-	public static final String CONSULTA_VALIDAR_USUARIO="Usuario.BuscarUsuario";
+	public static final String CONSULTA_LISTAR_FILM_ACTOR_POR_ID_FILM="FilmActor.ListarTodos";
 
-	/**
-	 * Consulta que lista todos accesos rol de un rol
-	 */
-	public static final String CONSULTA_LISTAR_ACCESOS_ROL="AccesoRol.ListarPantallasRol";
-	
+	public static final String CONSULTAR_DATOS_CLIENTE ="listarDatosClientes";
+
 	/**
 	 * Consulta que lista todos accesosrol existentes
 	 */

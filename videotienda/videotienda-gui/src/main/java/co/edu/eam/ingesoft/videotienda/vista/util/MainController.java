@@ -120,6 +120,9 @@ public class MainController implements Initializable {
 
 	@FXML
 	private MenuItem mIVenderPeliculas;
+	
+	@FXML
+	private MenuItem mIVerPeliculasRentadas;
 
 	@FXML
 	private AnchorPane contenido;
@@ -208,7 +211,7 @@ public class MainController implements Initializable {
 	 *         email: caferrerb@gmail.com <br/>
 	 *         Fecha: 19/10/2015<br/>
 	 */
-	public void mostrarMenus(Usuario user) {
+	public void mostrarMenus(){
 
 	}
 
@@ -260,6 +263,8 @@ public class MainController implements Initializable {
 
 	@FXML
 	public void abrirverpeliculasrentadas() {
-		agregarVentana("/fxml/perpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
+
+		agregarVentana("/fxml/verpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
+
 	}
 }
