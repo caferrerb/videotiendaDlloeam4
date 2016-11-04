@@ -48,6 +48,13 @@
 								</Menu>
                         <Menu fx:id="mnuPrestamos" mnemonicParsing="false" text="Prestamos" />
 
+								<Menu fx:id="mnuSucursales" mnemonicParsing="false" text="Sucursales" />
+
+								<Menu fx:id="mnuPrestamos" mnemonicParsing="false" text="Prestamos">
+                           <items>
+                              <MenuItem onAction="#abrirGestionarPrestamos" fx:id="menuItemGestionPrestamo" mnemonicParsing="false" text="Gestion Prestamos" />
+                           </items></Menu>
+								<Menu mnemonicParsing="false" text="Parametrizacion"/>
 								<Menu fx:id="mnuParametrizacion" mnemonicParsing="false" text="Parametrizacion">
 									<items>
 										<MenuItem fx:id="mnuItemGestionarCiudad" mnemonicParsing="false" onAction="#abrirGEstionarCiudad" text="Ciudad" />
