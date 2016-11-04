@@ -152,6 +152,13 @@
 
 
 	
+	<named-query name="AccesoRol.ListarAccesoRol">
+		<query>
+			SELECT accR FROM AccesoRol accR
+
+		</query>
+	</named-query>
+	
 	
 	<named-query name="datosTablaFilmRentada">
 		<query>

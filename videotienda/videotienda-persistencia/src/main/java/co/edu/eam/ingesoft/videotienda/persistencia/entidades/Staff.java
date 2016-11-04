@@ -41,8 +41,6 @@ public class Staff implements Serializable {
 	@Lob
 	private byte[] picture;
 
-	
-
 	//bi-directional many-to-one association to Payment
 	@OneToMany
 	private List<Payment> payments;
@@ -191,7 +189,6 @@ public class Staff implements Serializable {
 	public void setStore(Store store) {
 		this.store = store;
 	}
-
 
 	@Override
 	public String toString() {
