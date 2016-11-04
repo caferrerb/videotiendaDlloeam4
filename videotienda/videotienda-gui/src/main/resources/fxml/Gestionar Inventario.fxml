@@ -21,7 +21,7 @@
             <TableView fx:id="jPTienda" editable="true" fixedCellSize="1.0" layoutX="19.0" layoutY="14.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="251.0" prefWidth="340.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Titulo" />
-                <TableColumn prefWidth="62.0" text="Cantidad" />
+                <TableColumn fx:id="JTCantidadPelisPorTienda" prefWidth="62.0" text="Cantidad" />
                   <TableColumn prefWidth="163.0" />
               </columns>
                <columnResizePolicy>
