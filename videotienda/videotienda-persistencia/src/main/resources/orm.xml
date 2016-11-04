@@ -96,8 +96,7 @@
 
 	<named-query name="datosTablaRental.Listar">
 		<query>
-			SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN
-			r.customer c
+			SELECT r FROM Rental r JOIN r.customer c
 			JOIN r.inventory i
 			JOIN i.film f WHERE i.store = ?1
 		</query>
@@ -105,8 +104,7 @@
 
 	<named-query name="datosTablaVentas.Listar">
 		<query>
-			SELECT f.filmId, f.title, c.customerId, s.saleDate FROM Sale s
-			JOIN
+			SELECT s FROM Sale s JOIN
 			s.customer c JOIN s.film f
 			JOIN s.staff p WHERE p.store = ?1
 		</query>
@@ -122,6 +120,14 @@
 			SELECT fa FROM FilmActor fa WHERE fa.film.filmId=?1
 		</query>
 	</named-query>
+	
+	<named-query name="Sale.PeliculasCliente">
+		<query>
+			SELECT s.film FROM Sale s 
+			WHERE s.customer = ?1
+		</query>
+	</named-query>
+	
 
 	<named-query name="Usuario.BuscarUsuario">
 		<query>
@@ -136,7 +142,14 @@
 		</query>
 	</named-query>
 	
+	<named-query name="AccesoRol.ListarAccesoRol">
+		<query>
+			SELECT accR FROM AccesoRol accR
+
+		</query>
+	</named-query>
 	
+	<!-- 
 	<named-query name="datosTablaFilmRentada">
 		<query>
 			SELECT i.inventoryId, f.title, c.cfirstName, r.rentalDate, r.returnDate  FROM Rental r JOIN r.customer c 
@@ -146,7 +159,7 @@
 
 		</query>
 	</named-query>
-	
+	 -->
 	
 
 </entity-mappings>
