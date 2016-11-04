@@ -27,10 +27,12 @@
                   <Label id="jlidCliente" fx:id="jlIdCliente" text="ID CLIENTE:" />
                   <Label id="jlNombre" fx:id="jlNombreCliente" text="NOMBRE:" GridPane.rowIndex="1" />
                   <TextField id="jtfNombreCliente" fx:id="jtfNombreCliente" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="ID EMPLEADO" GridPane.rowIndex="2" />
+                  <Label fx:id="jlIdEmpleado" text="ID EMPLEADO" GridPane.rowIndex="2" />
                   <TextField id="jtfNombreCliente" fx:id="jtfIdEmpleado" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="ID PELICULA" GridPane.rowIndex="3" />
+                  <Label fx:id="jlIdPelicula" text="ID PELICULA" GridPane.rowIndex="3" />
                   <TextField id="jtfNombreCliente" fx:id="jtfIdPelicula" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="jtfFecha" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="jlFecha" text="Fecha" GridPane.rowIndex="4" />
                </children>
             </GridPane>
             <ImageView id="jimagenPerfil" fx:id="jcampoFoto" fitHeight="150.0" fitWidth="200.0" layoutX="143.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">

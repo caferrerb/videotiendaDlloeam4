@@ -9,7 +9,9 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 
 @Component
 public class BOUsuario extends BOGenerico<Usuario> {
+
 	
+<<<<<<< HEAD
 //	public List<Usuario> buscarEntidad(Usuario usu){
 //		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_VALIDAR_USUARIO,usu);
 //	}
@@ -18,4 +20,9 @@ public class BOUsuario extends BOGenerico<Usuario> {
 //		return (Usuario) dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_VALIDAR_USUARIO,usu);
 //	}
 	
+=======
+	public List<Usuario> buscarEntidad(Usuario usu){
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_VALIDAR_USUARIO,usu);
+	}
+>>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 }
