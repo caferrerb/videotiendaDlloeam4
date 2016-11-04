@@ -220,8 +220,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 
 			// JOptionPane.showMessageDialog(null,
 			// Integer.valueOf(empleado.getAddress()));
-
-			boDireccion.buscar(Integer.valueOf(empleado.getAddress().getAddressId()));
+			
+			//boDireccion.buscar(Integer.valueOf(empleado.getAddress().getAddressId()));
+			
 			TFIdDireccion.setText(Integer.toString(empleado.getAddress().getAddressId()));
 			TFDireccionA.setText(empleado.getAddress().getAddress());
 			TFDdireccionB.setText(empleado.getAddress().getAddress2());

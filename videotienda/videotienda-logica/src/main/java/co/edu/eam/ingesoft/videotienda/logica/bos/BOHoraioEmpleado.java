@@ -1,6 +1,8 @@
 package co.edu.eam.ingesoft.videotienda.logica.bos;
 
 
+import javax.swing.JOptionPane;
+
 import org.springframework.stereotype.Component;
 
 import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
@@ -15,11 +17,11 @@ public class BOHoraioEmpleado extends BOGenerico<StaffSchedule> {
 	 * Crea un horario para el empleado
 	 * @param horario
 	 */
-	public void crearHorario(StaffSchedule horario) throws Exception{
+	public void crearHorario(StaffSchedule horario){
 		if(horario.getHoraInicial()<horario.getHoraFinal() ){
 		super.crear(horario);
 		}else{
-			throw new ExcepcionNegocio("La hora final no puede ser menos a la hora inicial o igual");
+			JOptionPane.showMessageDialog(null,"La hora final no puede ser menos a la hora inicial o igual");
 		}
 	}
 	

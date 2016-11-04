@@ -94,9 +94,8 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 			boHorarioEmp.crearHorario(horario);
 
 			notificar("gestionar Horario", "Horario agregado con exito", TipoNotificacion.INFO);
-		} catch (ExcepcionNegocio e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
