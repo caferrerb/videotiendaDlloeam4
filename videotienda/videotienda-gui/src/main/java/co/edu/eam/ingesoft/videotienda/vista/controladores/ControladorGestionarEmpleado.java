@@ -128,11 +128,14 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			empleado.setLastUpdate(new Timestamp(new Date().getTime()));
 
 			// Imagen del empleado
+			if(PhFoto != null){
 			byte[] imagen = new byte[(int) imgFile.length()];
 			FileInputStream emp = new FileInputStream(imgFile);
 			emp.read(imagen);
 			empleado.setPicture(imagen);
-
+			}else{
+				empleado.setPicture(null);
+			}
 			Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
 			empleado.setUsuario(usuario);
 
