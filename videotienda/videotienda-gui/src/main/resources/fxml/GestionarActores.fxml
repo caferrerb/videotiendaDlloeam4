@@ -65,17 +65,15 @@
          <content>
             <Pane layoutX="300.0" layoutY="1.0" prefHeight="434.0" prefWidth="442.0">
                <children>
-                  <TableView fx:id="tbListaPelicula" layoutX="34.0" layoutY="22.0" prefHeight="253.0" prefWidth="376.0">
+                  <TableView fx:id="tbListaPelicula" layoutX="34.0" layoutY="22.0" prefHeight="253.0" prefWidth="361.0">
                     <columns>
-                      <TableColumn prefWidth="63.0" text="Titulo" />
-                      <TableColumn prefWidth="64.0" text="Año" />
-                        <TableColumn prefWidth="81.0" text="Personaje" />
-                        <TableColumn prefWidth="62.0" text="..." />
-                        <TableColumn prefWidth="54.0" text="..." />
-                        <TableColumn prefWidth="51.0" text="..." />
+                      <TableColumn fx:id="tablaTitulo" prefWidth="100.0" text="Titulo" />
+                      <TableColumn fx:id="tablaAnio" prefWidth="81.0" text="Año" />
+                        <TableColumn fx:id="tablaPersonaje" prefWidth="104.0" text="Personaje" />
+                        <TableColumn fx:id="tablaBoton" prefWidth="75.0" text="..." />
                     </columns>
                   </TableView>
-                  <Button fx:id="btnVerPelicula" layoutX="280.0" layoutY="432.0" mnemonicParsing="false"  text="GestionarPelicula">
+                  <Button fx:id="btnVerPelicula" layoutX="280.0" layoutY="432.0" mnemonicParsing="false" text="GestionarPelicula">
                   
                      <font>
                         <Font name="System Bold Italic" size="12.0" />

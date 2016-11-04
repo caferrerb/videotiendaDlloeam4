@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -28,9 +29,12 @@ import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Country;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.MainController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,12 +43,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
  * @author GAR-T
@@ -79,7 +87,19 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@FXML
 	private Button btnBuscarImagen;
+	
+	@FXML
+	private TableColumn<Film, String> tablaTitulo;	
+	
+	@FXML
+	private TableColumn<Film, DateTime> tablaAnio;
+	
+	@FXML
+	private TableColumn<Film, String> tablaPersonaje;
 
+	@FXML
+	private TableColumn  tablaBoton;
+	
 	private File imgFile;
 
 	@Override
@@ -183,6 +203,39 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
 	}else{
 		Actor ac = boActores.buscar(Integer.parseInt(tfDocumento.getText()));
+		
+//		try {
+//			String nomPelicula = jtfTitulo.getText();
+//			List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
+//			for (int i = 0; i < pelicula.size(); i++) {
+//				data.add(pelicula.get(i));
+//				jcolumnaGenero.setCellValueFactory(new PropertyValueFactory<Film, String>(""));
+//				jcolumnaGenero.setMinWidth(100);
+//				jcolumnaTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+//				jcolumnaTitulo.setMinWidth(100);
+//				jcolumnaLong.setCellValueFactory(new PropertyValueFactory<Film, Integer>("length"));
+//				jcolumnaLong.setMinWidth(100);
+//				jcolumnaPrecio.setCellValueFactory(new PropertyValueFactory<Film, Double>("rentalRate"));
+//				jcolumnaPrecio.setMinWidth(100);
+//				
+//				jcolumnaboton.setCellFactory(new Callback<TableColumn<Film, Boolean>, TableCell<Film, Boolean>>() {
+//
+//					public TableCell<Film, Boolean> call(TableColumn<Film, Boolean> p) {
+//						return new ButtonCell(jttablacontenidoPelicula);
+//					}
+//
+//				});
+//				
+//				jttablacontenidoPelicula.setItems(data);
+//				
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		
+		
+		
 		if (ac != null) {
 			tfNombre.setText(ac.getFirstName());
 			tfApellido.setText(ac.getLastName());
@@ -223,15 +276,34 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	}
 
-//	@FXML
-//	private void mostrarVentanaPelicula() throws IOException {
-//
-//		String fxmlFile = "/fxml/VentanaGestionarPeliculas.fxml";
-//		FXMLLoader loader = new FXMLLoader();
-//		Parent rootNode = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
-//
-//		Scene scene = new Scene(rootNode, 1000, 690);
-//		scene.getStylesheets().add("/styles/styles.css");
-//	}
+	private class ButtonCell extends TableCell<Film, Boolean> {
+
+		// boton a mostrar
+		final Button cellButton = new Button("Vender");
+
+		ButtonCell(final TableView tblView) {
+
+			cellButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent t) {
+					abrirVentana("/fxml/venderPelicula.fxml", ControladorvenderPelicula.class);					
+					int num = getTableRow().getIndex();
+					
+				}
+			});
+		}
+
+		// Muestra un boton si la fila no es nula
+		@Override
+		protected void updateItem(Boolean t, boolean empty) {
+			super.updateItem(t, empty);
+			if (!empty) {
+				setGraphic(cellButton);
+			}
+		}
+
+	}
+
 
 }
