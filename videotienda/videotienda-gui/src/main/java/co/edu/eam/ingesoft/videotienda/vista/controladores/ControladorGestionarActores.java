@@ -24,6 +24,7 @@ import com.sun.javafx.font.freetype.FTFactory;
 
 import co.edu.eam.ingesis.gestorlab.gui.MainApp;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOActores;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOFilm;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOPais;
 import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
@@ -33,6 +34,8 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.MainController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -63,6 +66,9 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@Autowired
 	private BOActores boActores;
+	
+	@Autowired
+	private BOFilm boPelicula;
 
 	@Autowired
 	private BOPais boPais;
@@ -87,20 +93,24 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@FXML
 	private Button btnBuscarImagen;
-	
+
 	@FXML
-	private TableColumn<Film, String> tablaTitulo;	
-	
+	private TableColumn<Film, String> tablaTitulo;
+
 	@FXML
 	private TableColumn<Film, DateTime> tablaAnio;
-	
+
 	@FXML
 	private TableColumn<Film, String> tablaPersonaje;
 
 	@FXML
-	private TableColumn  tablaBoton;
+	private TableColumn tablaBoton;
 	
+	@FXML
+	private ObservableList<Film> data = FXCollections.observableArrayList();
+
 	private File imgFile;
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -168,18 +178,18 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@FXML
 	public void editarActores() throws ExcepcionNegocio, IOException {
-		
+
 		if (imgFile == null || tfApellido.getText().isEmpty() || tfNombre.getText().isEmpty()) {
 
 			notificar("Editar Actor", "Verifique que todos los campos esten llenos y haya cargado una imagen ",
 					TipoNotificacion.ERROR);
 
 		} else {
-		
-		byte[] bites = new byte[(int) imgFile.length()];
-		FileInputStream fin = new FileInputStream(imgFile);
-		fin.read(bites);
-		
+
+			byte[] bites = new byte[(int) imgFile.length()];
+			FileInputStream fin = new FileInputStream(imgFile);
+			fin.read(bites);
+
 			Actor act = new Actor();
 			act.setActorId(Integer.parseInt(tfDocumento.getText()));
 			act.setFirstName(tfNombre.getText());
@@ -196,73 +206,72 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@FXML
 	public void buscarActores() {
-		
-	if(tfDocumento == null){
-		notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
-	}else if(tfDocumento.getText().isEmpty()){
-		notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
-	}else{
-		Actor ac = boActores.buscar(Integer.parseInt(tfDocumento.getText()));
-		
-//		try {
-//			String nomPelicula = jtfTitulo.getText();
-//			List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
-//			for (int i = 0; i < pelicula.size(); i++) {
-//				data.add(pelicula.get(i));
-//				jcolumnaGenero.setCellValueFactory(new PropertyValueFactory<Film, String>(""));
-//				jcolumnaGenero.setMinWidth(100);
-//				jcolumnaTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-//				jcolumnaTitulo.setMinWidth(100);
-//				jcolumnaLong.setCellValueFactory(new PropertyValueFactory<Film, Integer>("length"));
-//				jcolumnaLong.setMinWidth(100);
-//				jcolumnaPrecio.setCellValueFactory(new PropertyValueFactory<Film, Double>("rentalRate"));
-//				jcolumnaPrecio.setMinWidth(100);
-//				
-//				jcolumnaboton.setCellFactory(new Callback<TableColumn<Film, Boolean>, TableCell<Film, Boolean>>() {
-//
-//					public TableCell<Film, Boolean> call(TableColumn<Film, Boolean> p) {
-//						return new ButtonCell(jttablacontenidoPelicula);
-//					}
-//
-//				});
-//				
-//				jttablacontenidoPelicula.setItems(data);
-//				
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		
-		
-		
-		
-		if (ac != null) {
-			tfNombre.setText(ac.getFirstName());
-			tfApellido.setText(ac.getLastName());
-			cbCiudad.setValue(ac.getCountry());
-			Image im = new Image(new ByteArrayInputStream(ac.getPhoto()));
-			imgFoto.setImage(im);
-		}else{
-			limpiar();
+
+		if (tfDocumento == null) {
 			notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
+		} else if (tfDocumento.getText().isEmpty()) {
+			notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
+		} else {
+			Actor ac = boActores.buscar(Integer.parseInt(tfDocumento.getText()));
+
+			 try {
+			 List<Film> pelicula = boPelicula.listarPeliculas(tfDocumento.getText());
+			 for (int i = 0; i < pelicula.size(); i++) {
+			 data.add(pelicula.get(i));
+			
+			
+			 tablaTitulo.setCellValueFactory(new PropertyValueFactory<Film,String>("Titulo"));
+			 tablaTitulo.setMinWidth(100);
+			 
+			 tablaAnio.setCellValueFactory(new PropertyValueFactory<Film,DateTime>("Año"));
+			 tablaAnio.setMinWidth(100);
+			 
+			 tablaPersonaje.setCellValueFactory(new PropertyValueFactory<Film, String>("Personaje"));
+			 tablaPersonaje.setMinWidth(100);
+			
+			 tablaBoton.setCellFactory(new Callback<TableColumn<Film,
+			 Boolean>, TableCell<Film, Boolean>>() {
+			
+			 public TableCell<Film, Boolean> call(TableColumn<Film, Boolean>
+			 p) {
+			 return new ButtonCell(tbListaPelicula);
+			 }
+			
+			 });
+			
+			 tbListaPelicula.setItems(data);
+			
+			 }
+			 } catch (Exception e) {
+			 e.printStackTrace();
+			 }
+
+			if (ac != null) {
+				tfNombre.setText(ac.getFirstName());
+				tfApellido.setText(ac.getLastName());
+				cbCiudad.setValue(ac.getCountry());
+				Image im = new Image(new ByteArrayInputStream(ac.getPhoto()));
+				imgFoto.setImage(im);
+			} else {
+				limpiar();
+				notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
+			}
 		}
-	}
 	}
 
 	@FXML
 	public void eliminarActores() {
-		
+
 		if (tfDocumento == null) {
 
-			notificar("Eliminar Actor", "Primero busque antes de eliminar ",
-					TipoNotificacion.ERROR);
+			notificar("Eliminar Actor", "Primero busque antes de eliminar ", TipoNotificacion.ERROR);
 
-		} else if(tfDocumento.getText().isEmpty()){
-			notificar("Eliminar Actor", "Primero busque antes de eliminar ",TipoNotificacion.ERROR);
-		}else{
-		boActores.eliminar(Integer.parseInt(tfDocumento.getText()));
-		notificar("Eliminar Actor", "El actor se elimino correctamente", TipoNotificacion.INFO);
-		limpiar();
+		} else if (tfDocumento.getText().isEmpty()) {
+			notificar("Eliminar Actor", "Primero busque antes de eliminar ", TipoNotificacion.ERROR);
+		} else {
+			boActores.eliminar(Integer.parseInt(tfDocumento.getText()));
+			notificar("Eliminar Actor", "El actor se elimino correctamente", TipoNotificacion.INFO);
+			limpiar();
 		}
 	}
 
@@ -287,9 +296,9 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 				@Override
 				public void handle(ActionEvent t) {
-					abrirVentana("/fxml/venderPelicula.fxml", ControladorvenderPelicula.class);					
+					abrirVentana("/fxml/VentanaGestionarPeliculas.fxml", ControladorGestionarPelicula.class);
 					int num = getTableRow().getIndex();
-					
+
 				}
 			});
 		}
@@ -304,6 +313,5 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		}
 
 	}
-
 
 }

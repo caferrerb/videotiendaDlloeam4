@@ -19,20 +19,20 @@
       <Label layoutX="475.0" layoutY="448.0" text="Total por Venta:" />
       <TextField id="jTtotalPrestamo" layoutX="110.0" layoutY="477.0" />
       <TextField id="jTtotalVenta" layoutX="452.0" layoutY="477.0" />
-      <TableView id="TBAlquiler" layoutX="46.0" layoutY="220.0" prefHeight="200.0" prefWidth="298.0">
+      <TableView id="TBAlquiler" layoutX="46.0" layoutY="220.0" prefHeight="200.0" prefWidth="309.0">
         <columns>
           <TableColumn fx:id="ColumnaAlquilerIdInventario" prefWidth="95.0" text="ID INVENTARIO" />
           <TableColumn fx:id="ColumnaAlquilerTitulo" prefWidth="55.0" text="TITULO" />
             <TableColumn fx:id="ColumnaAlquilerCliente" prefWidth="75.0" text="CLIENTE" />
-            <TableColumn fx:id="ColumnaAlquilerEstado" prefWidth="75.0" text="ESTADO" />
+            <TableColumn fx:id="ColumnaAlquilerEstado" prefWidth="82.0" text="ESTADO" />
         </columns>
       </TableView>
-      <TableView layoutX="383.0" layoutY="220.0" prefHeight="200.0" prefWidth="298.0">
+      <TableView layoutX="372.0" layoutY="220.0" prefHeight="200.0" prefWidth="309.0">
         <columns>
           <TableColumn fx:id="ColumnaVentaIdPelicula" prefWidth="75.0" text="ID PELICULA" />
           <TableColumn fx:id="ColumnaVentaTitulo" prefWidth="75.0" text="TITULO" />
             <TableColumn fx:id="ColumnaVentaCliente" prefWidth="75.0" text="CLIENTE" />
-            <TableColumn id="TBVenta" fx:id="ColumnaVentaFecha" prefWidth="75.0" text="FECHA" />
+            <TableColumn id="TBVenta" fx:id="ColumnaVentaFecha" prefWidth="83.0" text="FECHA" />
         </columns>
       </TableView>
    </children>
