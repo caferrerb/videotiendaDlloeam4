@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Category;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 /**
  * Clase respondable de la logica de la pelicula
@@ -38,5 +39,8 @@ public class BOFilm extends BOGenerico<Film>{
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_POR_NOMBRE_PELICULA,"%"+nombre+"%");
 	}
 	
+	public List<Category> listarCategorias(){
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_CATEGORIAS_FILM);
+	}
 	
 }

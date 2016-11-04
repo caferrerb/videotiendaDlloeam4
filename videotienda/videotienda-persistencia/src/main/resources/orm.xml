@@ -61,7 +61,7 @@
 		</query>
 	</named-query>
 
-	<named-query name="Rol.ListarTodos">
+	 <named-query name="Rol.ListarTodos">
 		<query>
 			SELECT r FROM Rol r
 		</query>
@@ -113,28 +113,36 @@
 	<named-query name="listarDatosClientes">
 		<query>
 			SELECT c FROM Customer c WHERE c.customerId=?1
+		</query>
+	</named-query>
 
-<<<<<<< HEAD
 	<named-query name="FilmActor.ListarTodos">
 		<query>
 			SELECT fa FROM FilmActor fa  WHERE fa.film.filmId=?1
 		</query>
 		</named-query>
-=======
-		</query>
-	</named-query>
 
-	<named-query name="Usuario.BuscarUsuario">
+		
+
+	 <named-query name="Usuario.BuscarUsuario">
 		<query>
 			SELECT usu FROM Usuario usu WHERE usu=?1
 		</query>
 	</named-query>
+	
 	<named-query name="AccesoRol.ListarPantallasRol">
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
 
 		</query>
 	</named-query>
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
+	
+	<named-query name="Category.listarTodas">
+		<query>
+			SELECT ca FROM Category ca
+
+		</query>
+	</named-query>
+
 
 </entity-mappings>
