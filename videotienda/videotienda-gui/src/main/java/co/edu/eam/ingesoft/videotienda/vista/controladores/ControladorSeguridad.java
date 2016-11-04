@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOAcceso;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOAccesoRol;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOEmpleado;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BORol;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuario;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuarioRol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Acceso;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.AccesoRol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
@@ -47,6 +49,9 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	private BOUsuario boUsuario;
 	@Autowired
 	private BOAcceso boAcceso;
+	
+	@Autowired
+	private BOAccesoRol boAccesoRol;
 
 	@FXML
 	private TextField tfNombreRol;
@@ -87,6 +92,16 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 
 	ObservableList<Rol> rolesUsuario;
 
+	// Declarar tabla y columnas de Acceso rol !
+	@FXML
+	private TableView<AccesoRol> tablaPantallaRol;
+	@FXML
+	private TableColumn<Rol, String> rolPantallaCL;
+	@FXML
+	private TableColumn<Acceso, String> pantallaCL;
+
+	ObservableList<AccesoRol> accesoRoles;
+	
 	private Usuario usu;
 	private Staff empleado;
 
@@ -99,11 +114,18 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	 * Se declara una lista para usarla en la ventana
 	 */
 	private List<Rol> listaRolesUsuario;
+	
+	/**
+	 * Se declara una lista para usarla en la ventana
+	 */
+	private List<AccesoRol> listaAccesoRol;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		inicializarTabla();
 		llenarTablaRoles();
+		llenarTablaRolPantalla();
 		llenarComboRoles();
 		llenarComboPantallas();
 		llenarComboEmpleados();
@@ -111,10 +133,15 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		empleado = new Staff();
 		cbEmpleado.setOnAction((event) -> {
 			Staff selectedEmpleado = cbEmpleado.getSelectionModel().getSelectedItem();
-			tfUsuario.setText(selectedEmpleado.getUsuario().getUsuario());
-			tfPassword.setText(selectedEmpleado.getUsuario().getPass());
-			usu = selectedEmpleado.getUsuario();
-			llenarTablaRolUsuario();
+			if (selectedEmpleado.getUsuario() != null) {
+				tfUsuario.setText(selectedEmpleado.getUsuario().getUsuario());
+				tfPassword.setText(selectedEmpleado.getUsuario().getPass());
+				usu = selectedEmpleado.getUsuario();
+				llenarTablaRolUsuario();
+			} else {
+				tfUsuario.setText(null);
+				tfPassword.setText(null);
+			}
 		});
 	}
 
@@ -129,6 +156,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 
 			boRol.crear(rol);
 			notificar("Crear Rol", "Rol creado con exito!", TipoNotificacion.INFO);
+			llenarComboRoles();
 			llenarTablaRoles();
 		}
 	}
@@ -136,7 +164,6 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	@FXML
 	public void establecerUsuario() {
 
-		// Usuario usu = new Usuario();
 		usu.setUsuario(tfUsuario.getText());
 		usu.setPass(tfPassword.getText());
 		if (tfUsuario.getText().isEmpty() || tfPassword.getText().isEmpty()) {
@@ -164,6 +191,22 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 			usuarioRol.setRol(rolCombo);
 			usuarioRol.setUsuario(usu);
 			boUsuarioRol.crear(usuarioRol);
+			llenarTablaRolUsuario();
+		}
+	}
+	
+	@FXML
+	public void agregarPantalla() {
+		if (cbRoles.getSelectionModel().getSelectedItem().equals("Seleccione un rol")) {
+			notificar("Asignar rol al usuario", "Debe seleccionar el rol a asignar", TipoNotificacion.ERROR);
+		} else {
+			AccesoRol accesoRol = new AccesoRol();
+			Acceso acceCombo = cbPantalla.getSelectionModel().getSelectedItem();
+			Rol rolCombo = cbRolUsuario.getSelectionModel().getSelectedItem();
+			accesoRol.setRol(rolCombo);
+			accesoRol.setAcceso(acceCombo);
+			boAccesoRol.crear(accesoRol);
+			llenarTablaRolPantalla();
 		}
 	}
 
@@ -181,19 +224,30 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		tablaRolUsuario.setItems(rolesUsuario);
 	}
 
+	@FXML
+	public void llenarTablaRolPantalla() {
+		listaAccesoRol = boAccesoRol.listar();
+		accesoRoles.setAll(listaAccesoRol);
+		tablaPantallaRol.setItems(accesoRoles);
+	}
+	
 	public void inicializarTabla() {
 		// Inicializar listas
 		roles = FXCollections.observableArrayList();
 		rolesUsuario = FXCollections.observableArrayList();
+		accesoRoles = FXCollections.observableArrayList();
 
 		// Enlazar listas
 		tablaRoles.setItems(roles);
 		tablaRolUsuario.setItems(rolesUsuario);
+		tablaPantallaRol.setItems(accesoRoles);
 
 		// Enlazar columnas con atributos
 		idRolCL.setCellValueFactory(new PropertyValueFactory<Rol, Integer>("id"));
 		nombreRolCL.setCellValueFactory(new PropertyValueFactory<Rol, String>("descripcion"));
 		rolUsuarioCL.setCellValueFactory(new PropertyValueFactory<Rol, String>("Rol"));
+		pantallaCL.setCellValueFactory(new PropertyValueFactory<Acceso,String>("Pantalla"));
+		rolPantallaCL.setCellValueFactory(new PropertyValueFactory<Rol,String>("Rol"));
 		eliminarRolCL.setSortable(false);
 		quitarRolCL.setSortable(false);
 
@@ -231,7 +285,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 			cbPantalla.getItems().add(acceso);
 		}
 	}
-	
+
 	private void llenarComboEmpleados() {
 		List<Staff> lista = boEmpleado.listarEmpleados();
 		for (Staff emp : lista) {

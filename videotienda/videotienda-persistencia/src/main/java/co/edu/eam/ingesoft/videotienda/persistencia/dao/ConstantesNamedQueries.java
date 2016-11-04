@@ -10,6 +10,11 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTARCIUDADES = "Ciudad.ListarTodos";
 
 	public static final String CONSULTA_LISTAREMPLEADOS = "Empleado.ListarTodos";
+	
+	/**
+	 * Obtiene las peliculas alquiladas por un cliente
+	 */
+	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Sale.PeliculasCliente";
 
 	/**
 	 * <<<<<<< HEAD consulta para listar datos de las peliculas por nombre de la
@@ -51,4 +56,14 @@ public class ConstantesNamedQueries {
 	 * Consulta para listar todos las pantallas
 	 */
 	public static final String CONSULTA_LISTAR_PANTALLAS="Acesso.ListarTodos";
+	
+	public static final String CONSULTA_LISTAR_FILM_ACTOR_POR_ID_FILM="FilmActor.ListarTodos";
+
+	public static final String CONSULTAR_DATOS_CLIENTE ="listarDatosClientes";
+
+	/**
+	 * Consulta que lista todos accesosrol existentes
+	 */
+	public static final String CONSULTA_LISTAR_TODO_ACCESOS_ROL="AccesoRol.ListarAccesoRol";
+	
 }

@@ -14,5 +14,4 @@ public class BOAcceso extends BOGenerico<Acceso>{
 		
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PANTALLAS);
 	}
-	
 }

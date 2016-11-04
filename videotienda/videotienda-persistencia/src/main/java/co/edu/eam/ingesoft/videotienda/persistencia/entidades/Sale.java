@@ -77,7 +77,7 @@ public class Sale implements Serializable{
 	}
 
 	public Film getFilm() {
-		return film;
+		return film; 
 	}
 
 	public void setFilm(Film film) {
