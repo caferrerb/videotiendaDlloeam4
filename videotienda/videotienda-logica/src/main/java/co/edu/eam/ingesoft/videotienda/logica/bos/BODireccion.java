@@ -25,7 +25,7 @@ public class BODireccion extends BOGenerico<Address>{
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void editarDireccion(Address direccion) {
-		super.crear(direccion);
+		super.editar(direccion);
 	}
 	
 }

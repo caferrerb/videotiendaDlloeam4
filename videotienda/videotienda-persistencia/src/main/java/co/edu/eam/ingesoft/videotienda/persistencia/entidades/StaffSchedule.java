@@ -32,26 +32,19 @@ public class StaffSchedule {
 	@Column(name="dia")
 	private DayEnum dia;
 	
-	@Temporal(TemporalType.TIME)
-	@Column(name="HORA_INICIAL")
-	private Date horaInicial;
 	
-	@Temporal(TemporalType.TIME)
+	@Column(name="HORA_INICIAL")
+	private int horaInicial;
+	
+	
 	@Column(name="HORA_FINAL")
-	private Date horaFinal;
+	private int horaFinal;
 	
 	public StaffSchedule() {
 		
 	}
 
-	public StaffSchedule(int idStaffSchedule, Staff empleado, DayEnum dia, Date horaInicial, Date horaFinal) {
-		super();
-		this.idStaffSchedule = idStaffSchedule;
-		this.empleado = empleado;
-		this.dia = dia;
-		this.horaInicial = horaInicial;
-		this.horaFinal = horaFinal;
-	}
+
 
 	/**
 	 * @return the idStaffSchedule
@@ -98,28 +91,28 @@ public class StaffSchedule {
 	/**
 	 * @return the horaInicial
 	 */
-	public Date getHoraInicial() {
+	public int getHoraInicial() {
 		return horaInicial;
 	}
 
 	/**
 	 * @param horaInicial the horaInicial to set
 	 */
-	public void setHoraInicial(Date horaInicial) {
+	public void setHoraInicial(int horaInicial) {
 		this.horaInicial = horaInicial;
 	}
 
 	/**
 	 * @return the horaFinal
 	 */
-	public Date getHoraFinal() {
+	public int getHoraFinal() {
 		return horaFinal;
 	}
 
 	/**
 	 * @param horaFinal the horaFinal to set
 	 */
-	public void setHoraFinal(Date horaFinal) {
+	public void setHoraFinal(int horaFinal) {
 		this.horaFinal = horaFinal;
 	}
 

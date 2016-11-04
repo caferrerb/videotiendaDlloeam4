@@ -36,12 +36,12 @@ public class Inventory implements Serializable {
 	private Date lastUpdate;
 
 	//bi-directional many-to-one association to Film
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="film_id", nullable=false)
 	private Film film;
-
+	
 	//bi-directional many-to-one association to Store
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="store_id", nullable=false)
 	private Store store;
 

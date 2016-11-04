@@ -34,6 +34,8 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAR_TIENDAS = "Tienda.ListarTodos";
 
 	public static final String CONSULTA_LISTAR_EMPLEADOS_TIENDA = "EmpleadosTienda.ListarTodos";
+	
+	public static final String CONSULTA_LISTAR_INVENTARIO_TIENDA = "InventarioTienda.ListarTodos";
 
 	/**
 	 * consulta que lista los datos de la tabla rentas en la ventana reporte
@@ -44,4 +46,11 @@ public class ConstantesNamedQueries {
 	 * consulta que lista los datos de la tabla ventas en la ventana reporte
 	 */
 	public static final String CONSULTA_LISTAR_DATOS_VENTA = "datosTablaVentas.Listar";
+	
+	/**
+	 * Consulta para listar todos las pantallas
+	 */
+	public static final String CONSULTA_LISTAR_PANTALLAS="Acesso.ListarTodos";
+	
+	public static final String CONSULTAR_DATOS_CLIENTE ="listarDatosClientes";
 }

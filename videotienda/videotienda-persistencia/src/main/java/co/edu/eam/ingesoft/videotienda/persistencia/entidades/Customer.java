@@ -13,12 +13,13 @@ import java.util.List;
  * The persistent class for the customer database table.
  * 
  */
+
 @Entity
 @Table(name="customer")
 @NamedQuery(name="Customer.findAll", query="SELECT c FROM Customer c")
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@Column(name="customer_id", unique=true, nullable=false)
 	private int customerId;
@@ -43,12 +44,12 @@ public class Customer implements Serializable {
 	private Timestamp lastUpdate;
 
 	//bi-directional many-to-one association to Address
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="address_id", nullable=false)
 	private Address address;
 
 	//bi-directional many-to-one association to Store
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="store_id", nullable=false)
 	private Store store;
 

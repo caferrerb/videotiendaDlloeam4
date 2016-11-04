@@ -16,6 +16,7 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarV
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorSeguridad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorReporteVentaAlquiler;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorVentanaTrasladarCiudad;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorVerPeliculasRentadas;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.CrearPeliculaController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,6 +65,12 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	private Menu mnuGeneros;
+	
+	/**
+	 * Menu equipos
+	 */
+	@FXML
+	private Menu menuCliente;
 
 	/**
 	 * Menu equipos
@@ -79,7 +86,7 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private Menu mnuAutorizacion;
-
+	
 	/**
 	 * item de iniciar sesion.
 	 */
@@ -94,6 +101,9 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem mIVenderPeliculas;
+	
+	@FXML
+	private MenuItem mIVerPeliculasRentadas;
 
 	@FXML
 	private AnchorPane contenido;
@@ -106,6 +116,15 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem mnuItemRoles;
+	
+	@FXML
+	private MenuItem menuItemTraslado;
+	
+	@FXML
+	private MenuItem menuItemVerPeliculasRentadas;
+	
+	@FXML
+	private MenuItem menuItemReportes;
 	
 	/**
 	 * Inicializacion de la ventana.
@@ -124,14 +143,17 @@ public class MainController implements Initializable {
 	 * @param url,
 	 *            ruta del archivo xml de la vista.
 	 */
-	private void agregarVentana(String pagina, Class controller) {
+	public void agregarVentana(String pagina, Class controller) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(pagina));
 			 fxmlLoader.setResources(ResourceBundle.getBundle("i18n.mensajes"));
 			
 			BaseController control = fxmlLoader.<BaseController> getController();
+			
 			ApplicationContext context = ContextFactory.getContext();
-			fxmlLoader.setController(context.getBean(controller));
+			BaseController controlador =(BaseController) context.getBean(controller);
+			controlador.init(this);
+			fxmlLoader.setController(controlador);
 			AnchorPane cmdPane = (AnchorPane) fxmlLoader.load();
 			contenido.getChildren().setAll(cmdPane);
 
@@ -176,6 +198,11 @@ public class MainController implements Initializable {
 	}
 	
 	@FXML
+	public void abrirTrasladarCliente(){
+		agregarVentana("/fxml/VentanaTrasladarCiudadCliente.fxml", ControladorVentanaTrasladarCiudad.class);
+	}
+	
+	@FXML
 	public void abrirGestionarActores(){
 		agregarVentana("/fxml/GestionarActores.fxml", ControladorGestionarActores.class);
 	
@@ -204,5 +231,17 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirAutorizacion(){		
 		agregarVentana("/fxml/Seguridad.fxml", ControladorSeguridad.class);
+	}
+	
+	@FXML
+	public void abrirGestionReportesVentasAlquiler(){
+		agregarVentana("/fxml/VentanaReportesVentasAlquiler.fxml", ControladorReporteVentaAlquiler.class);
+	}
+	
+	@FXML
+	public void abrirverpeliculasrentadas(){
+
+		agregarVentana("/fxml/verpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
+
 	}
 }

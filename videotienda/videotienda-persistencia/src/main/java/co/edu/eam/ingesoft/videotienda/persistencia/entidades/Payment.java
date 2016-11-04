@@ -42,17 +42,17 @@ public class Payment implements Serializable {
 	private Date paymentDate;
 
 	//bi-directional many-to-one association to Customer
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="customer_id", nullable=false)
 	private Customer customer;
 
 	//bi-directional many-to-one association to Rental
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="rental_id")
 	private Rental rental;
 
 	//bi-directional many-to-one association to Staff
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="staff_id", nullable=false)
 	private Staff staff;
 

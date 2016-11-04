@@ -7,10 +7,13 @@ import java.util.ResourceBundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOAcceso;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOAccesoRol;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOEmpleado;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BORol;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuario;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuarioRol;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Acceso;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
@@ -43,11 +46,15 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	private BOUsuarioRol boUsuarioRol;
 	@Autowired
 	private BOUsuario boUsuario;
+	@Autowired
+	private BOAcceso boAcceso;
 
 	@FXML
 	private TextField tfNombreRol;
 	@FXML
 	private ComboBox<Rol> cbRoles;
+	@FXML
+	private ComboBox<Acceso> cbPantalla;
 	// Asignar usuario.
 	@FXML
 	private TextField tfUsuario;
@@ -99,15 +106,18 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		inicializarTabla();
 		llenarTablaRoles();
 		llenarComboRoles();
+		llenarComboPantallas();
 		llenarComboEmpleados();
 		usu = new Usuario();
 		empleado = new Staff();
 		cbEmpleado.setOnAction((event) -> {
 			Staff selectedEmpleado = cbEmpleado.getSelectionModel().getSelectedItem();
+			if(selectedEmpleado.getUsuario()!=null){
 			tfUsuario.setText(selectedEmpleado.getUsuario().getUsuario());
 			tfPassword.setText(selectedEmpleado.getUsuario().getPass());
 			usu = selectedEmpleado.getUsuario();
 			llenarTablaRolUsuario();
+			}
 		});
 	}
 
@@ -129,7 +139,6 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	@FXML
 	public void establecerUsuario() {
 
-		// Usuario usu = new Usuario();
 		usu.setUsuario(tfUsuario.getText());
 		usu.setPass(tfPassword.getText());
 		if (tfUsuario.getText().isEmpty() || tfPassword.getText().isEmpty()) {
@@ -156,7 +165,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 			Rol rolCombo = cbRolUsuario.getSelectionModel().getSelectedItem();
 			usuarioRol.setRol(rolCombo);
 			usuarioRol.setUsuario(usu);
-			boUsuarioRol.crear(usuarioRol);
+			boUsuarioRol.editar(usuarioRol);
 		}
 	}
 
@@ -218,6 +227,13 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		}
 	}
 
+	private void llenarComboPantallas() {
+		List<Acceso> lista = boAcceso.listar();
+		for (Acceso acceso : lista) {
+			cbPantalla.getItems().add(acceso);
+		}
+	}
+	
 	private void llenarComboEmpleados() {
 		List<Staff> lista = boEmpleado.listarEmpleados();
 		for (Staff emp : lista) {
