@@ -55,5 +55,11 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAR_FILM_ACTOR_POR_ID_FILM="FilmActor.ListarTodos";
 
 	public static final String CONSULTAR_DATOS_CLIENTE ="listarDatosClientes";
-
+	
+	/**
+	 * Consulta para cargar todos los datos de la tabla de peliculas rentadas
+	 */
+	public static final String CONSULTA_TABLA_PELICULA_RENTADAS="datosTablaFilmRentada";
+	
+	public static final String CONSULTA_LISTAR_ACCESOS_ROL="AccesoRol.ListarPantallasRol";
 }
