@@ -117,6 +117,14 @@
 			SELECT a FROM Acceso a
 		</query>
 	</named-query>
+	
+	<named-query name="Sale.PeliculasCliente">
+		<query>
+			SELECT s.film FROM Sale s 
+			WHERE s.customer = ?1
+		</query>
+	</named-query>
+	
 
 	<named-query name="Usuario.BuscarUsuario">
 		<query>
