@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -21,6 +22,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 @Controller
@@ -50,12 +53,15 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	@FXML
 	private AnchorPane iDAlquilarPelicula;
 	
+	@FXML
+	private ImageView PhFoto;
+	
 	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		 
+		 llenarComboPeliculas();
 	}
 	
 	
@@ -68,6 +74,9 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		Customer cliente = boCliente.buscar(identificacion);
 		if (cliente != null){
 			tFNombre.setText(cliente.getFirstName() + " " + cliente.getLastName());
+			
+			Image img = new Image (new ByteArrayInputStream(cliente.get));
+			PhFoto.setImage(img);
 		} else {
 			notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
 		}

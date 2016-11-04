@@ -240,13 +240,7 @@ public class Film implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Film [filmId=" + filmId + ", description=" + description
-				+ ", lastUpdate=" + lastUpdate + ", length=" + length
-				+ ", rating=" + rating + ", releaseYear=" + releaseYear
-				+ ", rentalDuration=" + rentalDuration + ", rentalRate="
-				+ rentalRate + ", replacementCost=" + replacementCost
-				+ ", specialFeatures=" + specialFeatures + ", title=" + title
-				+ ", language1=" + language1 + ", language2=" + language2 + "]";
+		return title;
 	}
 
 }
