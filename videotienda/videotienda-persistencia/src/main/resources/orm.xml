@@ -155,11 +155,8 @@
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
 		</query>
-
 	</named-query>
 
-		</query>
-	</named-query>
 	
 	<named-query name="AccesoRol.ListarAccesoRol">
 		<query>
