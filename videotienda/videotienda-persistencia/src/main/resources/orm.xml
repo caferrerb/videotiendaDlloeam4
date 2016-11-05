@@ -201,6 +201,12 @@
 			SELECT  st FROM StaffSchedule st WHERE st.empleado = ?1
 		</query>
 	</named-query>
+	
+	<named-query name="StaffSchedule.ListaHorarios">
+		<query>
+			SELECT st FROM StaffSchedule st
+		</query>
+	</named-query>
 
 	<named-query name="Category.listarTodas">
 		<query>

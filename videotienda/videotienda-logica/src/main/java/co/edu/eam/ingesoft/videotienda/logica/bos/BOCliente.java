@@ -46,7 +46,7 @@ public class BOCliente extends BOGenerico<Customer> {
 	@org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED)
 	public void trasladar(Customer cliente, City ciudad, String dir) throws ExcepcionNegocio {
 		List<Rental> peliculasCliente = peliculasCliente(cliente);
-		if (peliculasCliente != null) {
+		if (peliculasCliente.size() != 0) {
 			throw new ExcepcionNegocio("No se puede trasladar porque tiene películas prestadas");
 		} else {
 			if (cliente == null) {
