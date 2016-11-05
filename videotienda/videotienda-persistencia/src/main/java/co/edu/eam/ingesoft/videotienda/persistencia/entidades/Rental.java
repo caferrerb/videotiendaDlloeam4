@@ -65,8 +65,7 @@ public class Rental implements Serializable {
 	@JoinColumn(name="staff_id", nullable=false)
 	private Staff staff;
 
-	public Rental() {
-	}
+	
 
 	public int getRentalId() {
 		return this.rentalId;

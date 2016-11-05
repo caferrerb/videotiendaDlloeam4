@@ -43,7 +43,7 @@ public class FilmActor implements Serializable {
 	private Film film;
 	
 	
-	@Column(name="caracter", nullable=false)
+	@Column(name="caracter",  nullable=false, insertable=false, updatable=false)
 	private String caracter;
 
 	public FilmActor() {

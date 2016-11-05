@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javax.swing.event.TableColumnModelListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import co.edu.eam.ingesoft.videotienda.logica.bos.BORental;
@@ -66,9 +67,12 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 	@FXML
 	private TableColumn<Rental, Date> cEntrega;
 
+	@FXML
 	private TableColumn<Store, Button> prueba;
 
-	ObservableList<Rental> filmRentadas;
+	@FXML
+	private final ObservableList<Rental> filmRentadas= FXCollections.observableArrayList();
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
