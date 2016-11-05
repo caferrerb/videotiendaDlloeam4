@@ -48,15 +48,15 @@
 			SELECT s FROM Staff s
 		</query>
 	</named-query>
-	
+
 	<named-query name="Tienda.ListarTodos">
-	<query>
+		<query>
 			SELECT s FROM Store s
 		</query>
 	</named-query>
-	
+
 	<named-query name="Language.ListarTodos">
-	<query>
+		<query>
 			SELECT lag FROM Language lag
 		</query>
 	</named-query>
@@ -66,32 +66,38 @@
 			SELECT r FROM Rol r
 		</query>
 	</named-query>
-	
+
 	<named-query name="UsuarioRol.ListarRolesPorUsuario">
 		<query>
-			SELECT usuR.rol FROM UsuarioRol usuR WHERE usuR.usuario.usuario=?1
+			SELECT usuR.rol FROM UsuarioRol usuR WHERE
+			usuR.usuario.usuario=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="UsuarioRol.ListarPorRol">
 		<query>
 			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1
 		</query>
-		</named-query>
-		
+	</named-query>
+
 	<named-query name="EmpleadosTienda.ListarTodos">
 		<query>
 			SELECT s FROM Staff s WHERE s.store=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="InventarioTienda.ListarTodos">
 		<query>
 			SELECT i FROM Inventory i WHERE i.store=?1
 		</query>
 	</named-query>
-	
 
+	<named-query name="Rental.PeliculasCliente">
+		<query>
+			SELECT r FROM Rental r 
+			WHERE r.customer = ?1
+		</query>
+	</named-query>
 
 	<named-query name="datosTablaRental.Listar">
 		<query>
@@ -111,7 +117,7 @@
 		</query>
 	</named-query>
 
-	
+
 
 	<named-query name="Usuario.BuscarUsuario">
 		<query>
@@ -124,22 +130,19 @@
 
 		</query>
 	</named-query>
-	
+
 	<named-query name="AccesoRol.ListarAccesoRol">
-  		<query>
-  			SELECT accR FROM AccesoRol accR
-  
-  		</query>
-  	</named-query>
-  	
+		<query>
+			SELECT accR FROM AccesoRol accR
+
+		</query>
+	</named-query>
+
 	<!-- <named-query name="datosTablaFilmRentada"> <query> SELECT i.inventoryId, 
 		f.title, c.cfirstName, r.rentalDate, r.returnDate FROM Rental r JOIN r.customer 
- 	c JOIN r.inventory i JOIN i.film f WHERE i.store = ?1 </query> </named-query> -->
-	
-	<!--  <named-query name="StaffSchedule.ListaHorasEmpleado">
- 		<query>
- 			SELECT SUM(horaInicial) StaffSchedule st WHERE st.empleado = ?1
-  		</query>
-  	</named-query>-->
+		c JOIN r.inventory i JOIN i.film f WHERE i.store = ?1 </query> </named-query> -->
+
+	<!-- <named-query name="StaffSchedule.ListaHorasEmpleado"> <query> SELECT 
+		SUM(horaInicial) StaffSchedule st WHERE st.empleado = ?1 </query> </named-query> -->
 
 </entity-mappings>
