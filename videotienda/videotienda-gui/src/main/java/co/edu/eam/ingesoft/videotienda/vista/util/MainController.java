@@ -144,7 +144,7 @@ public class MainController implements Initializable {
 	private MenuItem menuItemVerPeliculasRentadas;
 
 	@FXML
-	private MenuItem menuItemReportes;
+	private MenuItem MenuItemReportes;
 
 	@FXML
 	private MenuItem menuItemGestionPrestamo;
@@ -154,8 +154,8 @@ public class MainController implements Initializable {
 	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-//		esconderMenus();
-		agregarVentana("/fxml/Login.fxml", LoginUsuarioController.class);
+		//esconderMenus();
+		agregarVentana("/fxml/Inicio.fxml", LoginUsuarioController.class);
 
 	}
 
@@ -273,7 +273,13 @@ public class MainController implements Initializable {
 	}
 	
 	@FXML
+	public void abrirInicio() {
+		agregarVentana("/fxml/Inicio.fxml", LoginUsuarioController.class);
+	}
+	
+	@FXML
 	public void abrirGestionarPrestamos(){
 		agregarVentana("/fxml/AlquilarPelicula.fxml", ControladorAlquilarPelicula.class);
 	}
+	
 }

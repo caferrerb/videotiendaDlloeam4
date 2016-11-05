@@ -294,7 +294,6 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	}
 
 	private class ButtonCell extends TableCell<Rol, Boolean> {
-
 		// boton a mostrar
 		final Button cellButton = new Button("Borrar");
 

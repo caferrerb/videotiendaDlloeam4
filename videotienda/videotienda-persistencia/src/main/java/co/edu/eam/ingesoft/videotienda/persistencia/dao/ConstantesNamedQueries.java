@@ -14,7 +14,7 @@ public class ConstantesNamedQueries {
 	/**
 	 * Obtiene las peliculas alquiladas por un cliente
 	 */
-	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Sale.PeliculasCliente";
+	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Rental.PeliculasCliente";
 
 	/**
 	 * <<<<<<< HEAD consulta para listar datos de las peliculas por nombre de la
@@ -65,13 +65,18 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAR_DATOS_VENTA = "datosTablaVentas.Listar";
 	
 	/**
-	 * Consulta para listar todos las pantallas
+	 * Consulta para listar todos las pantallas  
 	 */
 	public static final String CONSULTA_LISTAR_PANTALLAS="Acesso.ListarTodos";
 	
 	public static final String CONSULTA_LISTAR_FILM_ACTOR_POR_ID_FILM="FilmActor.ListarTodos";
 
 	public static final String CONSULTAR_DATOS_CLIENTE ="listarDatosClientes";
+	
+
+	public static final String CONSULTA_CATEGORIAS_FILM ="Category.listarTodas";
+
+	public static final String CONSULTA_FILM_POR_ACTOR ="listarPeliculasPorActor";
 
 	
 	/**
@@ -92,6 +97,6 @@ public class ConstantesNamedQueries {
 	 * Consulta que lista todos accesosrol existentes
 	 */
 	public static final String CONSULTA_VALIDAR_USUARIO="Usuario.BuscarUsuario";
-	
+
 
 }

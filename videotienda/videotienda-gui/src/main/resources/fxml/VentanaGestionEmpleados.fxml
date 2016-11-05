@@ -93,33 +93,34 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Id Empleado">
+            <Label text="* Id Empleado">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
             <TextField fx:id="TFIdEmpleado" prefHeight="25.0" prefWidth="149.0" GridPane.rowIndex="1" />
-            <Label text="Nombre" GridPane.rowIndex="4">
+            <Label text="* Nombre" GridPane.rowIndex="4">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
             <TextField fx:id="TfPrimerNombre" prefHeight="25.0" prefWidth="189.0" GridPane.rowIndex="5" />
-            <Label text="Apellido" GridPane.rowIndex="6">
+            <Label text="* Apellido" GridPane.rowIndex="6">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
             <TextField fx:id="TfSegundoNombre" prefHeight="25.0" prefWidth="189.0" GridPane.rowIndex="7" />
-            <Label text="Email" GridPane.rowIndex="8">
+            <Label text="* Email" GridPane.rowIndex="8">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
             <TextField fx:id="TfEmail" GridPane.rowIndex="9" />
-            <CheckBox fx:id="CheckActivo" mnemonicParsing="false" text="Activo" GridPane.rowIndex="12">
+            <CheckBox fx:id="CheckActivo" mnemonicParsing="false" text="* Activo" GridPane.rowIndex="12">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -129,15 +130,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label text="Id direccion" GridPane.columnIndex="1">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-               <font>
-                  <Font name="Arial" size="14.0" />
-               </font>
-            </Label>
-            <Label text="Direccion 1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label text="* Direccion 1" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -145,7 +138,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label text="Direccion 2" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label text="* Direccion 2" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -153,7 +146,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label text="Ciudad" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <Label text="* Ciudad" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -161,7 +154,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label text="Departamento" GridPane.columnIndex="1" GridPane.rowIndex="8">
+            <Label text="* Departamento" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -169,7 +162,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label text="Ultima actualizacion" GridPane.columnIndex="1" GridPane.rowIndex="10">
+            <Label text="Ultima actualizacion" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -177,12 +170,12 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="CBCiudad" prefHeight="25.0" prefWidth="165.0" promptText="Seleccione una ciudad" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <ComboBox fx:id="CBCiudad" prefHeight="25.0" prefWidth="165.0" promptText="Seleccione una ciudad" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </ComboBox>
-            <Label text="Telefono" GridPane.columnIndex="1" GridPane.rowIndex="12">
+            <Label text="* Telefono" GridPane.columnIndex="1" GridPane.rowIndex="10">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -190,7 +183,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label text="Codigo postal" GridPane.columnIndex="1" GridPane.rowIndex="14">
+            <Label text="* Codigo postal" GridPane.columnIndex="1" GridPane.rowIndex="12">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -198,27 +191,22 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="TFIdDireccion" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="TFDireccionA" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="TFDireccionA" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="TFDdireccionB" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="TFDdireccionB" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <TextField fx:id="TFTelefono" GridPane.columnIndex="1" GridPane.rowIndex="11">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="TFTelefono" GridPane.columnIndex="1" GridPane.rowIndex="13">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="TFCodigoPos" GridPane.columnIndex="1" GridPane.rowIndex="15">
+            <TextField fx:id="TFCodigoPos" GridPane.columnIndex="1" GridPane.rowIndex="13">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -228,12 +216,12 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label text="Id Usuario" GridPane.rowIndex="2">
+            <Label text="* Id Usuario" GridPane.rowIndex="2">
                <font>
                   <Font name="Arial" size="14.0" />
                </font></Label>
             <TextField fx:id="TFIdUsuario" prefHeight="25.0" prefWidth="149.0" GridPane.rowIndex="3" />
-            <TextField fx:id="TFDepartamento" GridPane.columnIndex="1" GridPane.rowIndex="9">
+            <TextField fx:id="TFDepartamento" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
@@ -247,7 +235,7 @@
                </GridPane.margin>
             </ImageView>
             <TextField fx:id="TFFechaCreacion" editable="false" GridPane.rowIndex="11" />
-            <TextField fx:id="TFUlltimaActualizacionDir" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="11">
+            <TextField fx:id="TFUlltimaActualizacionDir" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="9">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>

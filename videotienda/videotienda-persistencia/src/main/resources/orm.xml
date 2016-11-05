@@ -140,16 +140,18 @@
 		</query>
 	</named-query>
 
+
 	<named-query name="FilmActor.ListarTodos">
 		<query>
 			SELECT fa FROM FilmActor fa WHERE fa.film.filmId=?1
 		</query>
 	</named-query>
 
-	<named-query name="Sale.PeliculasCliente">
+	<named-query name="Rental.PeliculasCliente">
 		<query>
-			SELECT s.film FROM Sale s
-			WHERE s.customer = ?1
+			SELECT r FROM Rental r
+			WHERE r.customer = ?1
+
 		</query>
 	</named-query>
 
@@ -162,10 +164,16 @@
 		</query>
 
 	</named-query>
+
 	<named-query name="AccesoRol.ListarPantallasRol">
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
+		</query>
+	</named-query>
 
+	<named-query name="listarPeliculasPorActor">
+		<query>
+			SELECT f FROM FilmActor fa JOIN fa.film f WHERE fa.actor = ?1
 		</query>
 	</named-query>
 
@@ -176,9 +184,21 @@
 		</query>
 	</named-query>
 
+
+	<named-query name="Acesso.ListarTodos">
+		<query>
+			SELECT acc FROM Acceso acc
+			
+        </query>
+	</named-query>
+
+	<named-query name="Category.listarTodas">
+		<query>
+			SELECT ca FROM Category ca
+		</query>
+	</named-query>
+
 	<!-- <named-query name="datosTablaFilmRentada"> <query> SELECT i.inventoryId, 
 		f.title, c.cfirstName, r.rentalDate, r.returnDate FROM Rental r JOIN r.customer 
-		c JOIN r.inventory i JOIN i.film f WHERE i.store = ?1 </query> </named-query> -->
-
-
+		c JOIN r.inventory i JOIN i.film f </query> </named-query> -->
 </entity-mappings>
