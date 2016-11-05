@@ -155,6 +155,7 @@
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
 		</query>
+		
 	</named-query>
 
 	
