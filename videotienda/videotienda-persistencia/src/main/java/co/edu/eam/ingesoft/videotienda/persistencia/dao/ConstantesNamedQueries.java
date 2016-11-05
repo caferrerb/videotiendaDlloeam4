@@ -24,6 +24,16 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_POR_NOMBRE_PELICULA = "Film.listarNombrePelicula";
 	
 	public static final String CONSULTA_LISTAR_PELICULAS_NOMBRES = "Film.listarPorNombrePelis";
+	
+	/**
+	 * Obtine la lista de prestamos de un cliente
+	 */
+	public static final String CONSULTA_LISTAR_PRESTAMOS_CLIENTE = "Rental.listarPrestamosClientes";
+	
+	/**
+	 * obtiene la fecha de entrega de un titulo 
+	 */
+	public static final String CONSULTA_FECHA_ENTREGA_PELICULA = "Rental.fechaEntregaPelicula";
 
 	/**
 	 * Consulta para listar todos los roles
@@ -55,7 +65,7 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAR_DATOS_VENTA = "datosTablaVentas.Listar";
 	
 	/**
-	 * Consulta para listar todos las pantallas
+	 * Consulta para listar todos las pantallas  
 	 */
 	public static final String CONSULTA_LISTAR_PANTALLAS="Acesso.ListarTodos";
 	
@@ -63,6 +73,9 @@ public class ConstantesNamedQueries {
 
 	public static final String CONSULTAR_DATOS_CLIENTE ="listarDatosClientes";
 	
+
+	public static final String CONSULTA_CATEGORIAS_FILM ="Category.listarTodas";
+
 	public static final String CONSULTA_FILM_POR_ACTOR ="listarPeliculasPorActor";
 
 	
@@ -84,6 +97,11 @@ public class ConstantesNamedQueries {
 	 * Consulta que lista todos accesosrol existentes
 	 */
 	public static final String CONSULTA_VALIDAR_USUARIO="Usuario.BuscarUsuario";
+
 	
+	/**
+	 * Suma las horas iniciales de un empleado n
+	 */
+	public static final String  CONSULTA_HORARIO_EMPLEADO = "StaffSchedule.ListaHorasEmpleado";
 
 }
