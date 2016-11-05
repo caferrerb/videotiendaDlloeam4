@@ -158,8 +158,7 @@
 
 	</named-query>
 
-		</query>
-	</named-query>
+		
 	
 	<named-query name="AccesoRol.ListarAccesoRol">
 		<query>
