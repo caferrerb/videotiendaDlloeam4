@@ -99,7 +99,6 @@ public class LoginUsuarioController extends BaseController implements Initializa
 						for (Menu men : menus) {
 							if (accesoRol.getAcceso().getNombre().equals(men.getText())) {
 								men.setVisible(true);
-
 							}
 						}
 					}

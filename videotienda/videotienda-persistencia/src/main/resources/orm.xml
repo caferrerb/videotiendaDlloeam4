@@ -149,6 +149,13 @@
 		</query>
 	</named-query>
 	
+	<named-query name="Acesso.ListarTodos">
+		<query>
+			SELECT acc FROM Acceso acc
+
+		</query>
+	</named-query>
+	
 	<!-- 
 	<named-query name="datosTablaFilmRentada">
 		<query>

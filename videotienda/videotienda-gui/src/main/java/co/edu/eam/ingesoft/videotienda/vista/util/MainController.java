@@ -150,8 +150,8 @@ public class MainController implements Initializable {
 	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-//		esconderMenus();
-		agregarVentana("/fxml/Login.fxml", LoginUsuarioController.class);
+		//esconderMenus();
+		agregarVentana("/fxml/Inicio.fxml", LoginUsuarioController.class);
 
 	}
 
@@ -265,6 +265,13 @@ public class MainController implements Initializable {
 	public void abrirverpeliculasrentadas() {
 
 		agregarVentana("/fxml/verpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
+
+	}
+	
+	@FXML
+	public void abrirInicio() {
+
+		agregarVentana("/fxml/Inicio.fxml", ControladorVerPeliculasRentadas.class);
 
 	}
 }

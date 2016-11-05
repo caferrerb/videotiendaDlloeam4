@@ -33,7 +33,11 @@
     -fx-base: #395bae;
 }
 
-
+#panelWelcome{
+	-fx-background-image: url("../imagenes/welcome.gif");
+	-fx-background-size: 100%;
+	
+}
 
 .main-panel {
     -fx-background-image: url("../images/background.jpg");
