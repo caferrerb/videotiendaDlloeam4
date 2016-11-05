@@ -66,27 +66,33 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 			data.clear();
 			String nomPelicula = jtfTitulo.getText();
 			List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
+			if(pelicula.isEmpty()){
+				notificar("¡ERROR!", "No se encuentran peliculas registradas con este nombre",  TipoNotificacion.ERROR);
+			}else{
 			for ( int i = 0; i < pelicula.size(); i++) {
-				final Film f=pelicula.get(i);
-				data.add(pelicula.get(i));
-				jcolumnaGenero.setCellValueFactory(new PropertyValueFactory<Film, String>(""));
-				jcolumnaGenero.setMinWidth(100);
-				jcolumnaTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-				jcolumnaTitulo.setMinWidth(100);
-				jcolumnaLong.setCellValueFactory(new PropertyValueFactory<Film, Integer>("length"));
-				jcolumnaLong.setMinWidth(100);
-				jcolumnaPrecio.setCellValueFactory(new PropertyValueFactory<Film, Double>("rentalRate"));
-				jcolumnaPrecio.setMinWidth(100);
 				
-				jcolumnaboton.setCellFactory(new Callback<TableColumn<Film, Boolean>, TableCell<Film, Boolean>>() {
+					final Film f=pelicula.get(i);
+					data.add(pelicula.get(i));
+					jcolumnaGenero.setCellValueFactory(new PropertyValueFactory<Film, String>(""));
+					jcolumnaGenero.setMinWidth(100);
+					jcolumnaTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+					jcolumnaTitulo.setMinWidth(100);
+					jcolumnaLong.setCellValueFactory(new PropertyValueFactory<Film, Integer>("length"));
+					jcolumnaLong.setMinWidth(100);
+					jcolumnaPrecio.setCellValueFactory(new PropertyValueFactory<Film, Double>("rentalRate"));
+					jcolumnaPrecio.setMinWidth(100);
+					
+					jcolumnaboton.setCellFactory(new Callback<TableColumn<Film, Boolean>, TableCell<Film, Boolean>>() {
 
-					public TableCell<Film, Boolean> call(TableColumn<Film, Boolean> p) {
-						return new ButtonCell(jttablacontenidoPelicula,f);
-					}
+						public TableCell<Film, Boolean> call(TableColumn<Film, Boolean> p) {
+							return new ButtonCell(jttablacontenidoPelicula,f);
+						}
 
-				});
-				
-				jttablacontenidoPelicula.setItems(data);
+					});
+					
+					jttablacontenidoPelicula.setItems(data);
+					
+				}
 				
 			}
 		} catch (Exception e) {

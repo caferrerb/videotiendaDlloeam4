@@ -90,14 +90,12 @@ public class ControladorReporteVentaAlquiler extends BaseController implements I
 						return new SimpleObjectProperty<>(data.getValue().getFilm().getFilmId());
 					}
 				});
-
 		ColumnaVentaTitulo.setCellValueFactory(new Callback<CellDataFeatures<Sale, String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<Sale, String> data) {
 				return new SimpleObjectProperty<>(data.getValue().getFilm().getTitle());
 			}
 		});
-
 		ColumnaVentaCliente
 				.setCellValueFactory(new Callback<CellDataFeatures<Sale, String>, ObservableValue<String>>() {
 					@Override
