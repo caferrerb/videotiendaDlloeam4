@@ -59,6 +59,14 @@ public class BaseController {
 	public Object obtenerValor(String nombre){
 		return sesion.get(nombre);
 	}
+	
+	/**
+	 * 
+	 * @param nombre
+	 */
+	public void borrarSesion(String nombre){
+		sesion.remove(nombre);
+	}
 
 	/**
 	 * Metodo para mostrar un mensaje al usuario.
