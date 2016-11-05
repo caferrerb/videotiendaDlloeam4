@@ -62,7 +62,7 @@ public class ControladorReporteVentaAlquiler extends BaseController implements I
 	@FXML
 	private TableColumn<Sale, String> ColumnaVentaTitulo;
 	@FXML
-	private TableColumn<Sale, Integer> ColumnaVentaCliente;
+	private TableColumn<Sale, String> ColumnaVentaCliente;
 	@FXML
 	private TableColumn<Sale, Date> ColumnaVentaFecha;
 
@@ -90,14 +90,19 @@ public class ControladorReporteVentaAlquiler extends BaseController implements I
 						return new SimpleObjectProperty<>(data.getValue().getFilm().getFilmId());
 					}
 				});
-
 		ColumnaVentaTitulo.setCellValueFactory(new Callback<CellDataFeatures<Sale, String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<Sale, String> data) {
 				return new SimpleObjectProperty<>(data.getValue().getFilm().getTitle());
 			}
 		});
-		ColumnaVentaCliente.setCellValueFactory(new PropertyValueFactory<Sale, Integer>("customer"));
+		ColumnaVentaCliente
+				.setCellValueFactory(new Callback<CellDataFeatures<Sale, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Sale, String> data) {
+						return new SimpleObjectProperty<>(data.getValue().getCustomer().getFirstName());
+					}
+				});
 		ColumnaVentaFecha.setCellValueFactory(new PropertyValueFactory<Sale, Date>("saleDate"));
 	}
 

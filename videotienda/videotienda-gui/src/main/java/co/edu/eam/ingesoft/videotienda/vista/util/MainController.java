@@ -19,6 +19,7 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarA
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorAlquilarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarTienda;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorSeguridad;
@@ -143,8 +144,11 @@ public class MainController implements Initializable {
 	private MenuItem menuItemVerPeliculasRentadas;
 
 	@FXML
-	private MenuItem menuItemReportes;
+	private MenuItem MenuItemReportes;
 
+	@FXML
+	private MenuItem menuItemGestionPrestamo;
+	
 	/**
 	 * Inicializacion de la ventana.
 	 */
@@ -270,8 +274,12 @@ public class MainController implements Initializable {
 	
 	@FXML
 	public void abrirInicio() {
-
-		agregarVentana("/fxml/Inicio.fxml", ControladorVerPeliculasRentadas.class);
-
+		agregarVentana("/fxml/Inicio.fxml", LoginUsuarioController.class);
 	}
+	
+	@FXML
+	public void abrirGestionarPrestamos(){
+		agregarVentana("/fxml/AlquilarPelicula.fxml", ControladorAlquilarPelicula.class);
+	}
+	
 }
