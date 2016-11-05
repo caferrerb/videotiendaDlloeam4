@@ -15,6 +15,7 @@ import co.edu.eam.ingesoft.videotienda.logica.bos.BOAlquilarPeliculas;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOCliente;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOFilm;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
@@ -23,6 +24,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Customer;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -92,7 +94,17 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		}
 
 	}
-
+	
+	@FXML
+	public void prestamosClientes(){
+//		int idCustomer = Integer.parseInt(tFIdentificacion.getText());
+//		
+//		List<Rental> listaPrestamos = boAlquiPelicula.listarPrestamoCliente(idCustomer);
+//		ObservableList<Rental> prestamos = prestamos.setAll(listaPrestamos);
+		
+	}
+    
+	@FXML
 	private void llenarComboPeliculas() {
 
 		List<Film> list = boAlquiPelicula.listarPeliculasNombres();
@@ -103,7 +115,8 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 			}
 		}
 	}
-
+    
+	@FXML
 	public void seleccionCombo() {
 
 		cBPeliculas.setOnAction((event) -> {
@@ -123,7 +136,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		});
 	}
 	
-	
+//	@FXML
 //	public void prestamo(){
 //		
 //		if(tFFechaEntrega.getText().isEmpty() || tFIdentificacion.getText().isEmpty()){
@@ -142,7 +155,8 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 //		
 //		
 //	}
-
+    
+	@FXML
 	public void borrarCampos() {
 		PhFoto.setImage(null);
 		tFIdentificacion.setText(null);
