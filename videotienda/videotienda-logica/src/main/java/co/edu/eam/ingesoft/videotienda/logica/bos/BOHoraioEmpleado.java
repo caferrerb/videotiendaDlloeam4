@@ -1,6 +1,8 @@
 package co.edu.eam.ingesoft.videotienda.logica.bos;
 
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import org.springframework.stereotype.Component;
@@ -21,7 +23,7 @@ public class BOHoraioEmpleado extends BOGenerico<StaffSchedule> {
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void crearHorario(StaffSchedule horario){
-		if(horario.getHoraInicial()<horario.getHoraFinal() ){
+		if(horario.getHoraInicial()<horario.getHoraFinal()){
 		super.crear(horario);
 		}else{
 			JOptionPane.showMessageDialog(null,"La hora final no puede ser menos a la hora inicial o igual");
@@ -49,5 +51,7 @@ public class BOHoraioEmpleado extends BOGenerico<StaffSchedule> {
 				"18", "19", "20", "21", "22", "23", "24" };
 		return hora;
 	}
+	
+	
 
 }
