@@ -162,11 +162,11 @@
 			SELECT usu FROM Usuario usu WHERE usu=?1
 		</query>
 	</named-query>
+	
 	<named-query name="AccesoRol.ListarPantallasRol">
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
 		</query>
-
 	</named-query>
 
 
@@ -182,12 +182,9 @@
 		</query>
 	</named-query>
 
-
-
 	<named-query name="AccesoRol.ListarAccesoRol">
 		<query>
 			SELECT accR FROM AccesoRol accR
-
 		</query>
 	</named-query>
 
@@ -196,16 +193,15 @@
 		<query>
 			SELECT acc FROM Acceso acc
 		</query>
-
 	</named-query>
 
 
 	<named-query name="datosTablaFilmRentada">
 		<query>
-			SELECT i.inventoryId,
-			f.title, c.cfirstName, r.rentalDate, r.returnDate FROM Rental r JOIN
+			SELECT i.inventoryId, f.title, c.cfirstName, r.rentalDate, r.returnDate FROM Rental r JOIN
 			r.customer
-			c JOIN r.inventory i JOIN i.film f WHERE i.store = ?1
+			c JOIN r.inventory 
+			i JOIN i.film f WHERE i.store = ?1
 		</query>
 	</named-query>
 
@@ -220,10 +216,8 @@
 		<query>
 			SELECT ca FROM Category ca
 		</query>
-
 	</named-query>
 
 
-
-
+	
 </entity-mappings>
