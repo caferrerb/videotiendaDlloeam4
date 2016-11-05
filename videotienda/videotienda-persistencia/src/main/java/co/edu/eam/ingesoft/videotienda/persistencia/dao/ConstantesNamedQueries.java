@@ -24,6 +24,16 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_POR_NOMBRE_PELICULA = "Film.listarNombrePelicula";
 	
 	public static final String CONSULTA_LISTAR_PELICULAS_NOMBRES = "Film.listarPorNombrePelis";
+	
+	/**
+	 * Obtine la lista de prestamos de un cliente
+	 */
+	public static final String CONSULTA_LISTAR_PRESTAMOS_CLIENTE = "Rental.listarPrestamosClientes";
+	
+	/**
+	 * obtiene la fecha de entrega de un titulo 
+	 */
+	public static final String CONSULTA_FECHA_ENTREGA_PELICULA = "Rental.fechaEntregaPelicula";
 
 	/**
 	 * Consulta para listar todos los roles
