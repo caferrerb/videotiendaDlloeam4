@@ -102,6 +102,6 @@ public class ConstantesNamedQueries {
 	/**
 	 * Suma las horas iniciales de un empleado n
 	 */
-	public static final String  SUMA_HORA_INICIAL = "StaffSchedule.ListaHorasEmpleado";
+	public static final String  CONSULTA_HORARIO_EMPLEADO = "StaffSchedule.ListaHorasEmpleado";
 
 }
