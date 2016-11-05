@@ -21,19 +21,28 @@ import co.edu.eam.ingesoft.videotienda.logica.bos.BOTienda;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuario;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Address;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
+import co.edu.uniquindio.videotienda.dtos.DayEnum;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -77,7 +86,15 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	private ComboBox<Store> comboBoxSelecTienda;
 	@FXML
 	private TableView<StaffSchedule> TbHorario;
-
+	@FXML
+	private TableColumn<StaffSchedule, DayEnum> TBDia;
+	@FXML
+	private TableColumn<StaffSchedule, Integer> TBHorario;
+	@FXML
+	private TableColumn TBOpciones;
+	@FXML
+	private ObservableList<Film> data = FXCollections.observableArrayList();
+	
 	@FXML
 	private TextField TFDireccionA;
 	@FXML
@@ -226,12 +243,6 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			if (empleado.getActive() == true) {
 				CheckActivo.setSelected(true);
 			}
-
-//			JOptionPane.showMessageDialog(null, empleado.getAddress().getAddressId());
-//
-//			Address dir = boDireccion.buscar(empleado.getAddress().getAddressId());
-
-			// TFIdDireccion.setText(Integer.toString(empleado.getAddress().getAddressId()));
 			TFDireccionA.setText(empleado.getAddress().getAddress());
 			TFDdireccionB.setText(empleado.getAddress().getAddress2());
 			 CBCiudad.setValue(empleado.getAddress().getCity());
@@ -239,10 +250,29 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			 TFUlltimaActualizacionDir.setText(empleado.getAddress().getLastUpdate().toString());
 			 TFTelefono.setText(empleado.getAddress().getPhone());
 			 TFCodigoPos.setText(empleado.getAddress().getPostalCode());
-		} else {
-			notificar("gestionar Buscar", "No existe este empleado", TipoNotificacion.ERROR);
-		}
-	}
+			 
+			 List<StaffSchedule> listahorarioEmple = null;
+
+//				for (int i = 0; i < listahorarioEmple.size(); i++) {
+//
+//					data.add(listahorarioEmple.get(i));
+//					TBDia.setCellValueFactory(new PropertyValueFactory<StaffSchedule, DayEnum>("dia"));
+//					TBHorario.setMinWidth(100);
+//					TBDia.setCellValueFactory(new PropertyValueFactory<StaffSchedule, DayEnum>("horaInicial"));
+//					TBHorario.setMinWidth(100);
+//
+//					TBOpciones.setCellFactory(
+//							new Callback<TableColumn<StaffSchedule, Boolean>, TableCell<StaffSchedule, Boolean>>() {
+//								public TableCell<StaffSchedule, Boolean> call(TableColumn<StaffSchedule, Boolean> p) {
+//									return new ButtonCell(TbHorario);
+//								}
+//
+//							});
+//					TbHorario.setItems(data);
+//				}
+			}			 
+		} 
+	
 
 	private void llenarComboCiudad() {
 		List<City> lista = boCiudad.listarCiudades();
@@ -297,4 +327,79 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		abrirVentana("/fxml/VentanaGestionEmpleadosSub.fxml", ControladorGestionarEmpleadoSub.class);
 
 	}
+	
+	
+	/**
+	 * Boton tabla 1
+	 * @author CAMILO
+	 *
+	 */
+	private class ButtonCell extends TableCell<StaffSchedule, Boolean> {
+
+		// boton a mostrar
+		final Button cellButton = new Button("Vender");
+		private StaffSchedule StaffSchedule;
+
+		ButtonCell(final TableView tblView) {
+			cellButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent t) {
+			
+					abrirVentana("/VentanaGestionEmpleadosSub.fxml", ControladorGestionarEmpleadoSub.class);
+					int num = getTableRow().getIndex();
+
+					// }
+				}
+			});
+		}
+
+		// Muestra un boton si la fila no es nula
+		@Override
+		protected void updateItem(Boolean t, boolean empty) {
+			super.updateItem(t, empty);
+			if (!empty) {
+				setGraphic(cellButton);
+			}
+		}
+	}
+	
+	/**
+	 * Boton tabla 2
+	 * @author CAMILO
+	 *
+	 */
+	private class ButtonCellB extends TableCell<StaffSchedule, Boolean> {
+
+		// boton a mostrar
+		final Button cellButton = new Button("Vender");
+		private StaffSchedule StaffSchedule;
+
+		ButtonCellB(final TableView tblView) {
+			cellButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent t) {
+			
+					abrirVentana("/fxml/venderPelicula.fxml", ControladorvenderPelicula.class);
+					int num = getTableRow().getIndex();
+
+					// }
+				}
+			});
+		}
+
+		// Muestra un boton si la fila no es nula
+		@Override
+		protected void updateItem(Boolean t, boolean empty) {
+			super.updateItem(t, empty);
+			if (!empty) {
+				setGraphic(cellButton);
+			}
+		}
+	}
+	
+	
+	
+	
 }
