@@ -11,7 +11,7 @@
 			SELECT f FROM Film f WHERE f.length=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="Film.listarPorNombrePelis">
 		<query>
 			SELECT f FROM Film f
@@ -169,78 +169,61 @@
 
 	</named-query>
 
-<<<<<<< HEAD
-		<named-query name="listarPeliculasPorActor">
+
+	<named-query name="listarPeliculasPorActor">
 		<query>
 			SELECT f FROM FilmActor fa JOIN fa.film f WHERE fa.actor = ?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="listarFilmActorPorActor">
 		<query>
 			SELECT fa FROM FilmActor fa WHERE fa.actor = ?1
 		</query>
 	</named-query>
 
-	
-=======
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
+
+
 	<named-query name="AccesoRol.ListarAccesoRol">
 		<query>
 			SELECT accR FROM AccesoRol accR
 
 		</query>
 	</named-query>
-<<<<<<< HEAD
-	
-<<<<<<< HEAD
-<!--  	<named-query name="datosTablaFilmRentada">
-=======
-<!-- 	<named-query name="datosTablaFilmRentada">
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
-		<query>
-			SELECT i.inventoryId, f.title, c.cfirstName, r.rentalDate, r.returnDate  FROM Rental r JOIN r.customer c 
-			JOIN r.inventory i
-			JOIN i.film f
-			WHERE i.store = ?1
-=======
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 
 
 	<named-query name="Acesso.ListarTodos">
 		<query>
 			SELECT acc FROM Acceso acc
 		</query>
-<<<<<<< HEAD
-	</named-query> -->
-=======
+
 	</named-query>
 
-	<!-- <named-query name="datosTablaFilmRentada"> <query> SELECT i.inventoryId, 
-		f.title, c.cfirstName, r.rentalDate, r.returnDate FROM Rental r JOIN r.customer 
-		c JOIN r.inventory i JOIN i.film f WHERE i.store = ?1 </query> </named-query> -->
+
+	<named-query name="datosTablaFilmRentada">
+		<query>
+			SELECT i.inventoryId,
+			f.title, c.cfirstName, r.rentalDate, r.returnDate FROM Rental r JOIN
+			r.customer
+			c JOIN r.inventory i JOIN i.film f WHERE i.store = ?1
+		</query>
+	</named-query>
 
 	<named-query name="StaffSchedule.ListaHorasEmpleado">
 		<query>
-			SELECT  st FROM StaffSchedule st WHERE st.empleado = ?1
+			SELECT st FROM StaffSchedule st WHERE st.empleado = ?1
 		</query>
 	</named-query>
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
+
 
 	<named-query name="Category.listarTodas">
 		<query>
 			SELECT ca FROM Category ca
 		</query>
-<<<<<<< HEAD
-	</named-query> -->
 
-=======
 	</named-query>
 
 
-	<!-- <named-query name="datosTablaFilmRentada"> <query> SELECT i.inventoryId, 
-		f.title, c.cfirstName, r.rentalDate, r.returnDate FROM Rental r JOIN r.customer 
-		c JOIN r.inventory i JOIN i.film f </query> </named-query> -->
->>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
+
 
 </entity-mappings>
