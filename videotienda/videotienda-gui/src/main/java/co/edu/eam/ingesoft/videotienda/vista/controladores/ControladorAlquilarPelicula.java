@@ -93,10 +93,10 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 	private void llenarComboPeliculas() {
 
-		List<Film> lista = pelicula.listarPeliculasNombres();
-		for (Film pelicula : lista) {
+		List<Film> list = pelicula.listarPeliculasNombres();
+		for (Film pelicula : list) {
 			cBPeliculas.getItems().add(pelicula);
-			if (!lista.isEmpty()){
+			if (!list.isEmpty()){
 				cBPeliculas.getSelectionModel().selectFirst();
 			}
 		}
