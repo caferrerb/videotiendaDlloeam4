@@ -88,6 +88,8 @@ public class Sale implements Serializable{
 	public String toString() {
 		return saleDate+"";
 	}
+
+
 	
 	
 	

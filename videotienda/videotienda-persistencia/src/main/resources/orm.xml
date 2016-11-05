@@ -117,6 +117,13 @@
 		</query>
 	</named-query>
 
+	<named-query name="Rental.PeliculasCliente">
+		<query>
+			SELECT r FROM Rental r 
+			WHERE r.customer = ?1
+		</query>
+	</named-query>
+
 	<named-query name="datosTablaRental.Listar">
 		<query>
 			SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN
@@ -134,6 +141,7 @@
 			JOIN s.staff p WHERE p.store = ?1
 		</query>
 	</named-query>
+
 
 	<named-query name="listarDatosClientes">
 		<query>
@@ -156,6 +164,7 @@
 		</query>
 	</named-query>
 
+
 	<named-query name="Usuario.BuscarUsuario">
 		<query>
 			SELECT usu FROM Usuario usu WHERE usu=?1
@@ -166,6 +175,12 @@
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
 		</query>
 
+	</named-query>
+
+	<named-query name="listarFilmActorPorActor">
+		<query>
+			SELECT fa FROM FilmActor fa WHERE fa.actor = ?1
+		</query>
 	</named-query>
 
 	<named-query name="AccesoRol.ListarAccesoRol">
@@ -186,6 +201,8 @@
 		f.title, c.cfirstName, r.rentalDate, r.returnDate FROM Rental r JOIN r.customer 
 		c JOIN r.inventory i JOIN i.film f WHERE i.store = ?1 </query> </named-query> -->
 
+	<!-- <named-query name="StaffSchedule.ListaHorasEmpleado"> <query> SELECT 
+		SUM(horaInicial) StaffSchedule st WHERE st.empleado = ?1 </query> </named-query> -->
 	<named-query name="StaffSchedule.ListaHorasEmpleado">
 		<query>
 			SELECT  st FROM StaffSchedule st WHERE st.empleado = ?1

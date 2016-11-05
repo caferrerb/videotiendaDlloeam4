@@ -34,7 +34,7 @@ public class BOHoraioEmpleado extends BOGenerico<StaffSchedule> {
 				hora += listaH.get(i).getHoraFinal() - listaH.get(i).getHoraInicial();
 				horaB = hora + (horario.getHoraFinal() - horario.getHoraInicial());
 			}
-			if (horaB < 17) {
+			if (horaB < 48) {
 				super.crear(horario);
 			} else {
 				throw new ExcepcionNegocio(
