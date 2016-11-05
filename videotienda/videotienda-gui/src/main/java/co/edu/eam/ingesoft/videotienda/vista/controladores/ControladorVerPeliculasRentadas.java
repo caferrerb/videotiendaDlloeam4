@@ -68,7 +68,10 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 	private TableColumn<Rental, Date> cEntrega;
 
 	@FXML
-	private TableColumn<Store, Button> prueba;
+	private TableColumn cBoton;
+	
+	@FXML
+	private TableColumn cBoton1;
 
 	@FXML
 	private final ObservableList<Rental> filmRentadas= FXCollections.observableArrayList();
