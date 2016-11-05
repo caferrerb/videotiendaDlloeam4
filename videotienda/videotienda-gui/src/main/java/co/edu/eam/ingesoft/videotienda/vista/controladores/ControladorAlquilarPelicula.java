@@ -76,6 +76,12 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	
 	@FXML
 	private DatePicker dFechaEntrega;
+	
+	List<Rental> listaPrestamos;
+	
+	ObservableList<Rental> prestamos;
+	
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -93,9 +99,9 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 			Customer cliente = boCliente.buscar(identificacion);
 			if (cliente != null) {
 				tFNombre.setText(cliente.getFirstName() + " " + cliente.getLastName());
-
 				Image img = new Image(new ByteArrayInputStream(cliente.getPicture()));
 				PhFoto.setImage(img);
+				prestamosClientes();
 
 			} else {
 				notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
@@ -106,11 +112,10 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 	@FXML
 	public void prestamosClientes() {
-		// int idCustomer = Integer.parseInt(tFIdentificacion.getText());
-		//
-		// List<Rental> listaPrestamos =
-		// boAlquiPelicula.listarPrestamoCliente(idCustomer);
-		// ObservableList<Rental> prestamos = prestamos.setAll(listaPrestamos);
+		int idCustomer = Integer.parseInt(tFIdentificacion.getText());
+		listaPrestamos = boAlquiPelicula.listarPrestamoCliente(idCustomer);
+		prestamos.setAll(listaPrestamos);
+		tTPrestamos.setItems(prestamos);
 
 	}
 
