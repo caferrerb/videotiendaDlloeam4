@@ -65,7 +65,6 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	@FXML
 	public void buscarCliente() {
 		try {
-			System.out.println("Buscando");
 			int idCliente = Integer.parseInt(jtfIdCliente.getText());
 			List<Customer> cus = boCus.listaBucarCliente(idCliente);
 			for (int i = 0; i < cus.size(); i++) {
