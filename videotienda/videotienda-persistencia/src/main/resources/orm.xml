@@ -118,13 +118,6 @@
 		</query>
 	</named-query>
 
-	<named-query name="Rental.PeliculasCliente">
-		<query>
-			SELECT r FROM Rental r 
-			WHERE r.customer = ?1
-		</query>
-	</named-query>
-
 	<named-query name="datosTablaRental.Listar">
 		<query>
 			SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN
