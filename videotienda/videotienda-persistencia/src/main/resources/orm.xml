@@ -115,8 +115,6 @@
 		</query>
 	</named-query>
 
-
-
 	<named-query name="datosTablaRental.Listar">
 		<query>
 			SELECT r FROM Rental r JOIN r.customer c
@@ -154,9 +152,6 @@
 
 		</query>
 	</named-query>
-
-
-
 
 	<named-query name="Usuario.BuscarUsuario">
 		<query>

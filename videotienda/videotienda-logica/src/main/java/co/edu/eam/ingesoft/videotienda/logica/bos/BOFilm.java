@@ -46,13 +46,7 @@ public class BOFilm extends BOGenerico<Film>{
 	public List<Film> listarPeliculasPorActor(int id){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_FILM_POR_ACTOR);
 	}
-	/**
-	 * metodo que lista las peliculas por su nombre
-	 * @return
-	 */
-	public List<Film> listarPeliculasNombres(){
-		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_NOMBRES);
-	}
+	
 
 	
 }
