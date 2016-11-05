@@ -144,9 +144,10 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 //	}
 
 	public void borrarCampos() {
+		PhFoto.setImage(null);
 		tFIdentificacion.setText(null);
 		tFNombre.setText(null);
-		PhFoto.setImage(null);
+		
 
 	}
 
