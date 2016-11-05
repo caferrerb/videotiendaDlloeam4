@@ -11,7 +11,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
@@ -32,9 +34,14 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Country;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.FilmActor;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Sale;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.MainController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,6 +58,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -67,12 +75,12 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@Autowired
 	private BOActores boActores;
-	
+
 	@Autowired
 	private BOFilm boPelicula;
-	
-//	@Autowired
-//	private BOFilmActor boFilmActor;
+
+	@Autowired
+	private BOFilmActor boFilmActor;
 
 	@Autowired
 	private BOPais boPais;
@@ -99,26 +107,29 @@ public class ControladorGestionarActores extends BaseController implements Initi
 	private Button btnBuscarImagen;
 
 	@FXML
-	private TableColumn<Film, String> tablaTitulo;
+	private TableColumn<FilmActor, String> tablaTitulo;
 
 	@FXML
-	private TableColumn<Film, DateTime> tablaAnio;
+	private TableColumn<FilmActor, Date> tablaAnio;
 
 	@FXML
-	private TableColumn<Film, String> tablaPersonaje;
+	private TableColumn<FilmActor, String> tablaPersonaje;
 
 	@FXML
 	private TableColumn tablaBoton;
-	
+
 	@FXML
-	private ObservableList<Film> data = FXCollections.observableArrayList();
+	private ObservableList<Film> dataPelicula = FXCollections.observableArrayList();
+
+	@FXML
+	private ObservableList<FilmActor> dataFilmActor = FXCollections.observableArrayList();
 
 	private File imgFile;
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		llenarComboPaises();
+
 	}
 
 	@FXML
@@ -143,12 +154,14 @@ public class ControladorGestionarActores extends BaseController implements Initi
 			if (imgFile.length() <= 200 * 1024) {
 				Image image = new Image("file:" + imgFile.getAbsolutePath());
 				imgFoto.setImage(image); // Mostar la imagen
+			} else {
+				notificar("Crear Actor", "La imagen supero el tamaño maximo de 100k", TipoNotificacion.ERROR);
 			}
 
 		}
 	}
 
-	public void crearActores() throws ExcepcionNegocio {
+	public void crearActores()  {
 
 		try {
 			if (imgFile == null || tfApellido.getText().isEmpty() || tfNombre.getText().isEmpty()) {
@@ -167,14 +180,17 @@ public class ControladorGestionarActores extends BaseController implements Initi
 				act.setLastName(tfApellido.getText());
 				act.setPhoto(bites);
 				act.setCountry((Country) cbCiudad.getValue());
-
+				
 				boActores.crear(act);
 				notificar("Crear Actor", "El Actor se ha creado exitosamente", TipoNotificacion.INFO);
 				limpiar();
 
 			}
 
-		} catch (IOException e) {
+		} catch (ExcepcionNegocio e) {
+			notificar("Crear Actor", "Este Actor ya se encuentra registrado", TipoNotificacion.ERROR);
+		}  catch (IOException e) {
+			
 			e.printStackTrace();
 		}
 
@@ -218,48 +234,24 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		} else {
 			Actor ac = boActores.buscar(Integer.parseInt(tfDocumento.getText()));
 
-			 try {
-			 List<Film> pelicula = boPelicula.listarPeliculas(tfDocumento.getText());
-			// List<FilmActor> filActor = boFilmActor.listarFilmesActores()
-			 for (int i = 0; i < pelicula.size(); i++) {
-			 data.add(pelicula.get(i));
-			
-			
-			 tablaTitulo.setCellValueFactory(new PropertyValueFactory<Film,String>("title"));
-			 tablaTitulo.setMinWidth(100);
-			 
-			 tablaAnio.setCellValueFactory(new PropertyValueFactory<Film,DateTime>("lastUpdate"));
-			 tablaAnio.setMinWidth(100);
-			 
-			 tablaPersonaje.setCellValueFactory(new PropertyValueFactory<Film, String>("caracter"));
-			 tablaPersonaje.setMinWidth(100);
-			
-			 tablaBoton.setCellFactory(new Callback<TableColumn<Film,
-			 Boolean>, TableCell<Film, Boolean>>() {
-			
-			 public TableCell<Film, Boolean> call(TableColumn<Film, Boolean>
-			 p) {
-			 return new ButtonCell(tbListaPelicula);
-			 }
-			
-			 });
-			
-			 tbListaPelicula.setItems(data);
-			
-			 }
-			 } catch (Exception e) {
-			 e.printStackTrace();
-			 }
-
 			if (ac != null) {
 				tfNombre.setText(ac.getFirstName());
 				tfApellido.setText(ac.getLastName());
 				cbCiudad.setValue(ac.getCountry());
 				Image im = new Image(new ByteArrayInputStream(ac.getPhoto()));
 				imgFoto.setImage(im);
-			} else {
-				limpiar();
-				notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
+
+				String id = tfDocumento.getText();
+				List<FilmActor> filmActores = boFilmActor.listarFilmActoresPorActor(ac);
+
+				dataFilmActor.clear();
+				for (int i = 0; i < filmActores.size(); i++) {
+					dataFilmActor.add(filmActores.get(i));
+				}
+				tbListaPelicula.setItems(dataFilmActor);
+
+				configurarTablaVentas();
+
 			}
 		}
 	}
@@ -293,7 +285,7 @@ public class ControladorGestionarActores extends BaseController implements Initi
 	private class ButtonCell extends TableCell<Film, Boolean> {
 
 		// boton a mostrar
-		final Button cellButton = new Button("Vender");
+		final Button cellButton = new Button("Ver Pelicula");
 
 		ButtonCell(final TableView tblView) {
 
@@ -317,6 +309,39 @@ public class ControladorGestionarActores extends BaseController implements Initi
 			}
 		}
 
+	}
+
+	private void configurarTablaVentas() {
+		tablaTitulo.setCellValueFactory(new Callback<CellDataFeatures<FilmActor, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<FilmActor, String> data) {
+				return new SimpleObjectProperty<>(data.getValue().getFilm().getTitle());
+			}
+		});
+
+		tablaTitulo.setMinWidth(100);
+
+		tablaAnio.setCellValueFactory(new Callback<CellDataFeatures<FilmActor, Date>, ObservableValue<Date>>() {
+			@Override
+			public ObservableValue<Date> call(CellDataFeatures<FilmActor, Date> data) {
+				return new SimpleObjectProperty<>(data.getValue().getFilm().getReleaseYear());
+			}
+		});
+		tablaPersonaje
+				.setCellValueFactory(new Callback<CellDataFeatures<FilmActor, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<FilmActor, String> data) {
+						return new SimpleObjectProperty<>(data.getValue().getCaracter());
+					}
+				});
+
+		tablaBoton.setCellFactory(new Callback<TableColumn<Film, Boolean>, TableCell<Film, Boolean>>() {
+
+			public TableCell<Film, Boolean> call(TableColumn<Film, Boolean> p) {
+				return new ButtonCell(tbListaPelicula);
+			}
+
+		});
 	}
 
 }

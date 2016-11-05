@@ -25,11 +25,15 @@ public class BOActores extends BOGenerico<Actor> {
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void crear(Actor entidad) {		
+	public void crear(Actor entidad)  {
+		Actor ac = buscar(entidad.getActorId());
+		if (ac != null) {
+				throw new ExcepcionNegocio("Este Actor ya se encuentra registrado");
+		} else {
 			super.crear(entidad);
 		}
-	
 
+	}
 
 	/**
 	 * metodo para listar autores

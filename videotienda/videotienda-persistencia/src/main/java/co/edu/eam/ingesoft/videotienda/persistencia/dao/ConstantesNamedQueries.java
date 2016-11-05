@@ -77,6 +77,8 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_CATEGORIAS_FILM ="Category.listarTodas";
 
 	public static final String CONSULTA_FILM_POR_ACTOR ="listarPeliculasPorActor";
+	
+	public static final String CONSULTA_FILMACTOR_POR_ACTOR = "listarFilmActorPorActor";
 
 	
 	/**
@@ -99,6 +101,7 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_VALIDAR_USUARIO="Usuario.BuscarUsuario";
 
 	
+
 	/**
 	 * Suma las horas iniciales de un empleado n
 	 */
