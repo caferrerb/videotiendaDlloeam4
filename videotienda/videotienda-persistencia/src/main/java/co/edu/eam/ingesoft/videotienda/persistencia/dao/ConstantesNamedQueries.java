@@ -64,6 +64,8 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTAR_DATOS_CLIENTE ="listarDatosClientes";
 	
 	public static final String CONSULTA_FILM_POR_ACTOR ="listarPeliculasPorActor";
+	
+	public static final String CONSULTA_FILMACTOR_POR_ACTOR = "listarFilmActorPorActor";
 
 	
 	/**
@@ -84,6 +86,7 @@ public class ConstantesNamedQueries {
 	 * Consulta que lista todos accesosrol existentes
 	 */
 	public static final String CONSULTA_VALIDAR_USUARIO="Usuario.BuscarUsuario";
+	
 	
 
 }
