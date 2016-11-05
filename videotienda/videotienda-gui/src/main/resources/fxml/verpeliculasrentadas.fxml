@@ -14,9 +14,10 @@
             <TableColumn fx:id="cCliente" prefWidth="75.0" text="Cliente" />
             <TableColumn fx:id="cFecha" prefWidth="75.0" text="Fecha Prestamo" />
             <TableColumn fx:id="cEntrega" prefWidth="107.0" text="Fecha Entrega" />
-            <TableColumn prefWidth="43.0" />
+            <TableColumn fx:id="cBoton" prefWidth="47.0" />
+            <TableColumn fx:id="cBoton1" prefWidth="47.0" />
         </columns>
       </TableView>
-      <ComboBox fx:id="cbTienda" layoutX="106.0" layoutY="10.0" prefWidth="150.0" />
+      <ComboBox fx:id="cbTienda" layoutX="106.0" layoutY="10.0" prefHeight="25.0" prefWidth="178.0" promptText="Seleccione una tienda" />
    </children>
 </AnchorPane>

@@ -64,8 +64,24 @@ public class Rental implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="staff_id", nullable=false)
 	private Staff staff;
+    
+	public Rental(){
+		
+	}
 
-	
+	/**
+	 * @param rentalId
+	 * @param rentalDate
+	 * @param returnDate
+	 * @param customer
+	 */
+	public Rental(int rentalId, Date rentalDate, Date returnDate, Customer customer) {
+		super();
+		this.rentalId = rentalId;
+		this.rentalDate = rentalDate;
+		this.returnDate = returnDate;
+		this.customer = customer;
+	}
 
 	public int getRentalId() {
 		return this.rentalId;

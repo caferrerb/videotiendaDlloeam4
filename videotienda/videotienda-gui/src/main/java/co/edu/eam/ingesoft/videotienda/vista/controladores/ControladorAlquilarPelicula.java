@@ -2,7 +2,9 @@ package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -93,10 +95,10 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 	private void llenarComboPeliculas() {
 
-		List<Film> list = pelicula.listarPeliculasNombres();
+		List<Film> list = boAlquiPelicula.listarPeliculasNombres();
 		for (Film pelicula : list) {
 			cBPeliculas.getItems().add(pelicula);
-			if (!list.isEmpty()){
+			if (!list.isEmpty()) {
 				cBPeliculas.getSelectionModel().selectFirst();
 			}
 		}
@@ -108,19 +110,44 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 			Film peliculaSelec = cBPeliculas.getSelectionModel().getSelectedItem();
 			String pelicula = peliculaSelec.getTitle();
 			if (pelicula != null) {
-				Rental fecha = boAlquiPelicula.renta(pelicula);
-				tFFechaEntrega.setText(fecha.getReturnDate() + "");
+				Rental fecha = boAlquiPelicula.fechaEntregaPelicula(pelicula);
+				if (fecha != null) {
+					tFFechaEntrega.setText(fecha.getReturnDate() + "");
+				} else {
+					notificar("Busqueda", "La pelicual que selecciono no tiene una fecha de entrega asignada", TipoNotificacion.ERROR);
+				}
 
 			} else {
 				tFFechaEntrega.setText(null);
 			}
 		});
 	}
+	
+	
+//	public void prestamo(){
+//		
+//		if(tFFechaEntrega.getText().isEmpty() || tFIdentificacion.getText().isEmpty()){
+//			notificar("Prestamo", "Debe llenar los campos para poder realizar el prestamo", TipoNotificacion.ERROR);
+//		}else{
+//			String idCustomer = tFIdentificacion.getText();
+//			Date fechaEntrega = tFFechaEntrega.getdat;
+//			GregorianCalendar fechaActu = new GregorianCalendar();
+//			Date fecha = new Date();
+//			fecha.setYear(Calendar.YEAR);
+//			fecha.setMonth(Calendar.MONTH);
+//			fecha.setDate(Calendar.DAY_OF_MONTH);
+//	
+//			Date fechaRenta =  fecha;
+//		}
+//		
+//		
+//	}
 
 	public void borrarCampos() {
+		PhFoto.setImage(null);
 		tFIdentificacion.setText(null);
 		tFNombre.setText(null);
-		PhFoto.setImage(null);
+		
 
 	}
 

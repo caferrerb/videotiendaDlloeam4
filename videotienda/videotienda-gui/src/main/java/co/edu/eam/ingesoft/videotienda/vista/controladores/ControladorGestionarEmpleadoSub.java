@@ -75,7 +75,7 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 	}
 
 	@FXML
-	public void agregarHorario() {
+	public void agregarHorario()throws Exception {
 		try {
 			StaffSchedule horario = new StaffSchedule();
 			System.out.println("---------------------------------------------------------" + "\n" + idEmpleado.getText()
@@ -95,7 +95,10 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 			boHorarioEmp.crearHorario(horario);
 
 			notificar("gestionar Horario", "Horario agregado con exito", TipoNotificacion.INFO);
-		} catch (Exception e) {
+		}catch (ExcepcionNegocio ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
