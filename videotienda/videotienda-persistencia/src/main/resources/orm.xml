@@ -66,7 +66,6 @@
 			SELECT lag FROM Language lag
 		</query>
 	</named-query>
-
 	<named-query name="Rol.ListarTodos">
 		<query>
 			SELECT r FROM Rol r
@@ -104,7 +103,8 @@
 		<query>
 			SELECT r FROM Rental r JOIN r.customer c
 			JOIN r.inventory i
-			JOIN i.film f WHERE i.store = ?1
+			JOIN
+			i.film f WHERE i.store = ?1
 		</query>
 	</named-query>
 
@@ -112,13 +112,13 @@
 		<query>
 			SELECT s FROM Sale s JOIN
 			s.customer c JOIN s.film f
-			JOIN s.staff p WHERE p.store = ?1
+			JOIN s.staff
+			p WHERE p.store = ?1
 		</query>
 	</named-query>
 	<named-query name="listarDatosClientes">
 		<query>
 			SELECT c FROM Customer c WHERE c.customerId=?1
-
 
 
 		</query>
@@ -131,14 +131,13 @@
 	</named-query>
 
 
-	
-	
+
 	<named-query name="Rental.PeliculasCliente">
 		<query>
-			SELECT r FROM Rental r 
+			SELECT r FROM Rental r
 			WHERE r.customer = ?1
-		
-	</query>
+
+		</query>
 	</named-query>
 
 
@@ -147,7 +146,7 @@
 		<query>
 			SELECT usu FROM Usuario usu WHERE usu=?1
 		</query>
-		
+
 	</named-query>
 	<named-query name="AccesoRol.ListarPantallasRol">
 		<query>
@@ -157,25 +156,20 @@
 	</named-query>
 
 
-	
 	<named-query name="AccesoRol.ListarAccesoRol">
 		<query>
 			SELECT accR FROM AccesoRol accR
 
 		</query>
 	</named-query>
-	
-	<!-- 
-	<named-query name="datosTablaFilmRentada">
-		<query>
-			SELECT i.inventoryId, f.title, c.cfirstName, r.rentalDate, r.returnDate  FROM Rental r JOIN r.customer c 
-			JOIN r.inventory i
-			JOIN i.film f
-			WHERE i.store = ?1
 
+	<!-- <named-query name="datosTablaFilmRentada"> <query> SELECT i.inventoryId, 
+		f.title, c.cfirstName, r.rentalDate, r.returnDate FROM Rental r JOIN r.customer 
+		c JOIN r.inventory i JOIN i.film f WHERE i.store = ?1 </query> </named-query> -->
+
+	<named-query name="StaffSchedule.ListaHorasEmpleado">
+		<query>
+			SELECT SUM(horaInicial) StaffSchedule st WHERE st.empleado = ?1
 		</query>
 	</named-query>
-	 -->
-	
-
 </entity-mappings>

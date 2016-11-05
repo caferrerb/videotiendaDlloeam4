@@ -83,5 +83,9 @@ public class ConstantesNamedQueries {
 	 */
 	public static final String CONSULTA_VALIDAR_USUARIO="Usuario.BuscarUsuario";
 	
+	/**
+	 * Suma las horas iniciales de un empleado n
+	 */
+	public static final String  SUMA_HORA_INICIAL = "StaffSchedule.ListaHorasEmpleado";
 
 }
