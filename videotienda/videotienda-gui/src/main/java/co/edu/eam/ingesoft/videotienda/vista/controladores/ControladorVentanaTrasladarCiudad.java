@@ -37,9 +37,6 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 	@Autowired
 	private BOCliente boCliente;
 
-	@Autowired
-	private BODireccion boDir;
-
 	private Customer cliente;
 
 	@Autowired

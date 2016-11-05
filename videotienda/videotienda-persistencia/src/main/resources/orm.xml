@@ -11,7 +11,7 @@
 			SELECT f FROM Film f WHERE f.length=?1
 		</query>
 	</named-query>
-
+	
 	<named-query name="Film.listarPorNombrePelis">
 		<query>
 			SELECT f FROM Film f
@@ -30,6 +30,26 @@
 		</query>
 	</named-query>
 
+	<named-query name="Rental.listarPrestamosClientes">
+		<query>
+			SELECT f.title, s.storeId FROM Rental r
+			JOIN r.inventory i
+			JOIN
+			i.store s
+			JOIN i.film f
+			WHERE r.customer = ?1
+		</query>
+	</named-query>
+
+	<named-query name="Rental.fechaEntregaPelicula">
+		<query>
+			SELECT r FROM Rental r
+			JOIN r.inventory i
+			JOIN i.film f
+			WHERE
+			f.title = ?1
+		</query>
+	</named-query>
 
 	<named-query name="Pais.listartodos">
 		<query>
@@ -98,11 +118,10 @@
 		</query>
 	</named-query>
 
-
-
 	<named-query name="datosTablaRental.Listar">
 		<query>
-			SELECT r FROM Rental r JOIN r.customer c
+			SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN
+			r.customer c
 			JOIN r.inventory i
 			JOIN i.film f WHERE i.store = ?1
 		</query>
@@ -110,45 +129,47 @@
 
 	<named-query name="datosTablaVentas.Listar">
 		<query>
-			SELECT s FROM Sale s JOIN
+			SELECT f.filmId, f.title, c.customerId, s.saleDate FROM Sale s
+			JOIN
 			s.customer c JOIN s.film f
 			JOIN s.staff p WHERE p.store = ?1
 		</query>
 	</named-query>
+
 	<named-query name="listarDatosClientes">
 		<query>
 			SELECT c FROM Customer c WHERE c.customerId=?1
-			</query>
-</named-query>
+		</query>
+	</named-query>
 
 
 	<named-query name="FilmActor.ListarTodos">
 		<query>
-			SELECT fa FROM FilmActor fa  WHERE fa.film.filmId=?1
+			SELECT fa FROM FilmActor fa WHERE fa.film.filmId=?1
 		</query>
-		</named-query>
+	</named-query>
 
-	
 	<named-query name="Rental.PeliculasCliente">
 		<query>
-			SELECT r FROM Rental r 
+			SELECT r FROM Rental r
 			WHERE r.customer = ?1
-		
-	</query>
+
+		</query>
 	</named-query>
 
 	<named-query name="Usuario.BuscarUsuario">
 		<query>
 			SELECT usu FROM Usuario usu WHERE usu=?1
 		</query>
-		
 	</named-query>
 	<named-query name="AccesoRol.ListarPantallasRol">
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
 		</query>
+
 	</named-query>
 
+<<<<<<< HEAD
 		<named-query name="listarPeliculasPorActor">
 		<query>
 			SELECT f FROM FilmActor fa JOIN fa.film f WHERE fa.actor = ?1
@@ -162,22 +183,64 @@
 	</named-query>
 
 	
+=======
+>>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 	<named-query name="AccesoRol.ListarAccesoRol">
 		<query>
 			SELECT accR FROM AccesoRol accR
 
 		</query>
 	</named-query>
+<<<<<<< HEAD
 	
+<<<<<<< HEAD
 <!--  	<named-query name="datosTablaFilmRentada">
+=======
+<!-- 	<named-query name="datosTablaFilmRentada">
+>>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 		<query>
 			SELECT i.inventoryId, f.title, c.cfirstName, r.rentalDate, r.returnDate  FROM Rental r JOIN r.customer c 
 			JOIN r.inventory i
 			JOIN i.film f
 			WHERE i.store = ?1
+=======
+>>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 
+
+	<named-query name="Acesso.ListarTodos">
+		<query>
+			SELECT acc FROM Acceso acc
 		</query>
+<<<<<<< HEAD
+	</named-query> -->
+=======
+	</named-query>
+
+	<!-- <named-query name="datosTablaFilmRentada"> <query> SELECT i.inventoryId, 
+		f.title, c.cfirstName, r.rentalDate, r.returnDate FROM Rental r JOIN r.customer 
+		c JOIN r.inventory i JOIN i.film f WHERE i.store = ?1 </query> </named-query> -->
+
+	<named-query name="StaffSchedule.ListaHorasEmpleado">
+		<query>
+			SELECT  st FROM StaffSchedule st WHERE st.empleado = ?1
+		</query>
+	</named-query>
+>>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
+
+	<named-query name="Category.listarTodas">
+		<query>
+			SELECT ca FROM Category ca
+		</query>
+<<<<<<< HEAD
 	</named-query> -->
 
+=======
+	</named-query>
+
+
+	<!-- <named-query name="datosTablaFilmRentada"> <query> SELECT i.inventoryId, 
+		f.title, c.cfirstName, r.rentalDate, r.returnDate FROM Rental r JOIN r.customer 
+		c JOIN r.inventory i JOIN i.film f </query> </named-query> -->
+>>>>>>> branch 'master' of https://github.com/caferrerb/videotiendaDlloeam4.git
 
 </entity-mappings>

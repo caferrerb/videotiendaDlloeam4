@@ -8,6 +8,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import co.edu.eam.ingesis.gestorlab.gui.MainApp;
@@ -74,8 +77,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	private ComboBox<Store> comboBoxSelecTienda;
 	@FXML
 	private TableView<StaffSchedule> TbHorario;
-	@FXML
-	private TextField TFIdDireccion;
+
 	@FXML
 	private TextField TFDireccionA;
 	@FXML
@@ -112,14 +114,14 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
 			direccion.setAddress(TFDireccionA.getText());
 			direccion.setAddress2(TFDdireccionB.getText());
-			//direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
+			// direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
 			direccion.setCity(ciudad);
 			direccion.setDistrict(TFDepartamento.getText());
 			direccion.setLastUpdate(new Timestamp(new Date().getTime()));
 			direccion.setPhone(TFTelefono.getText());
 			direccion.setPostalCode(TFCodigoPos.getText());
 			// Empleado
-			
+
 			empleado.setAddress(direccion);
 			empleado.setStaffId((byte) Integer.parseInt(TFIdEmpleado.getText()));
 			empleado.setEmail(TfEmail.getText());
@@ -128,12 +130,12 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			empleado.setLastUpdate(new Timestamp(new Date().getTime()));
 
 			// Imagen del empleado
-			if(PhFoto != null){
-			byte[] imagen = new byte[(int) imgFile.length()];
-			FileInputStream emp = new FileInputStream(imgFile);
-			emp.read(imagen);
-			empleado.setPicture(imagen);
-			}else{
+			if (PhFoto != null) {
+				byte[] imagen = new byte[(int) imgFile.length()];
+				FileInputStream emp = new FileInputStream(imgFile);
+				emp.read(imagen);
+				empleado.setPicture(imagen);
+			} else {
 				empleado.setPicture(null);
 			}
 			Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
@@ -165,7 +167,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
 			direccion.setAddress(TFDireccionA.getText());
 			direccion.setAddress2(TFDdireccionB.getText());
-			direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
+			// direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
 			direccion.setCity(ciudad);
 			direccion.setDistrict(TFDepartamento.getText());
 			direccion.setLastUpdate(new Timestamp(new Date().getTime()));
@@ -212,7 +214,11 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		Staff empleado = boEmpleado.buscar((byte) Integer.parseInt(TFIdEmpleado.getText()));
 
 		if (empleado != null) {
-			TFIdUsuario.setText(empleado.getUsuario().getUsuario());
+			if (empleado.getUsuario() != null) {
+				TFIdUsuario.setText(empleado.getUsuario().getUsuario());
+			} else {
+				TFIdUsuario.setText(null);
+			}
 			TfPrimerNombre.setText(empleado.getFirstName());
 			TfSegundoNombre.setText(empleado.getLastName());
 			TfEmail.setText(empleado.getEmail());
@@ -221,19 +227,18 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				CheckActivo.setSelected(true);
 			}
 
-			// JOptionPane.showMessageDialog(null,
-			// Integer.valueOf(empleado.getAddress()));
-			
-			//boDireccion.buscar(Integer.valueOf(empleado.getAddress().getAddressId()));
-			
-			TFIdDireccion.setText(Integer.toString(empleado.getAddress().getAddressId()));
+//			JOptionPane.showMessageDialog(null, empleado.getAddress().getAddressId());
+//
+//			Address dir = boDireccion.buscar(empleado.getAddress().getAddressId());
+
+			// TFIdDireccion.setText(Integer.toString(empleado.getAddress().getAddressId()));
 			TFDireccionA.setText(empleado.getAddress().getAddress());
 			TFDdireccionB.setText(empleado.getAddress().getAddress2());
-			CBCiudad.setValue(empleado.getAddress().getCity());
-			TFDepartamento.setText(empleado.getAddress().getDistrict());
-			TFUlltimaActualizacionDir.setText(empleado.getAddress().getLastUpdate().toString());
-			TFTelefono.setText(empleado.getAddress().getPhone());
-			TFCodigoPos.setText(empleado.getAddress().getPostalCode());
+			 CBCiudad.setValue(empleado.getAddress().getCity());
+			 TFDepartamento.setText(empleado.getAddress().getDistrict());
+			 TFUlltimaActualizacionDir.setText(empleado.getAddress().getLastUpdate().toString());
+			 TFTelefono.setText(empleado.getAddress().getPhone());
+			 TFCodigoPos.setText(empleado.getAddress().getPostalCode());
 		} else {
 			notificar("gestionar Buscar", "No existe este empleado", TipoNotificacion.ERROR);
 		}
