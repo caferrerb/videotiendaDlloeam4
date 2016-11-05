@@ -31,6 +31,11 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAR_PRESTAMOS_CLIENTE = "Rental.listarPrestamosClientes";
 	
 	/**
+	 * obtiene los prestamos que esten repetidos
+	 */
+	public static final String CONSULTA_PRESTAMOS_REPETIDOS = "Rental.consultaRepetidos";
+	
+	/**
 	 * obtiene la fecha de entrega de un titulo 
 	 */
 	public static final String CONSULTA_FECHA_ENTREGA_PELICULA = "Rental.fechaEntregaPelicula";

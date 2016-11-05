@@ -11,9 +11,9 @@
          <children>
             <Label layoutX="25.0" layoutY="55.0" text="PELICULA :" />
             <Label layoutX="25.0" layoutY="132.0" text="FECHA ENTREGAR:" />
-            <Button fx:id="jBAgregar" layoutX="119.0" layoutY="184.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="119.0" text="AGREGAR" />
-            <TextField fx:id="tFFechaEntrega" layoutX="178.0" layoutY="127.0" />
+            <Button onAction="#prestamo" fx:id="jBPrestamo" layoutX="85.0" layoutY="183.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="209.0" text="REALIZAR PRESTAMO" />
             <ComboBox fx:id="cBPeliculas" layoutX="178.0" layoutY="50.0" prefHeight="27.0" prefWidth="167.0" />
+            <DatePicker fx:id="dFechaEntrega" layoutX="178.0" layoutY="127.0" />
          </children>
       </Pane>
       <GridPane layoutX="23.0" layoutY="31.0" prefHeight="192.0" prefWidth="403.0">

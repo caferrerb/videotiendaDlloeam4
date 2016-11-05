@@ -17,6 +17,15 @@
 			SELECT f FROM Film f
 		</query>
 	</named-query>
+	
+	<named-query name="Rental.consultaRepetidos">
+		<query>
+			SELECT r FROM Rental r
+			JOIN r.inventory i
+			JOIN i.film f
+			WHERE f = ?1
+		</query>
+	</named-query>
 
 	<named-query name="Film.listarNombrePelicula">
 		<query>
@@ -38,15 +47,6 @@
 			JOIN i.film f
 			JOIN r.customer c
 			WHERE c.customerId = ?1
-		</query>
-	</named-query>
-
-	<named-query name="Rental.fechaEntregaPelicula">
-		<query>
-			SELECT r FROM Rental r
-			JOIN r.inventory i
-			JOIN i.film f
-			WHERE f.title = ?1
 		</query>
 	</named-query>
 
