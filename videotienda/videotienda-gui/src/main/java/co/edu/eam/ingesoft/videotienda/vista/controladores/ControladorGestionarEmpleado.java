@@ -74,8 +74,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	private ComboBox<Store> comboBoxSelecTienda;
 	@FXML
 	private TableView<StaffSchedule> TbHorario;
-	@FXML
-	private TextField TFIdDireccion;
+
 	@FXML
 	private TextField TFDireccionA;
 	@FXML
@@ -165,7 +164,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
 			direccion.setAddress(TFDireccionA.getText());
 			direccion.setAddress2(TFDdireccionB.getText());
-			direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
+//			direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
 			direccion.setCity(ciudad);
 			direccion.setDistrict(TFDepartamento.getText());
 			direccion.setLastUpdate(new Timestamp(new Date().getTime()));
@@ -226,7 +225,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			
 			//boDireccion.buscar(Integer.valueOf(empleado.getAddress().getAddressId()));
 			
-			TFIdDireccion.setText(Integer.toString(empleado.getAddress().getAddressId()));
+			//TFIdDireccion.setText(Integer.toString(empleado.getAddress().getAddressId()));
 			TFDireccionA.setText(empleado.getAddress().getAddress());
 			TFDdireccionB.setText(empleado.getAddress().getAddress2());
 			CBCiudad.setValue(empleado.getAddress().getCity());
