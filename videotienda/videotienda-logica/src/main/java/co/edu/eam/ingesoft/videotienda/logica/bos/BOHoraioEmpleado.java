@@ -1,6 +1,8 @@
 package co.edu.eam.ingesoft.videotienda.logica.bos;
 
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import org.springframework.stereotype.Component;
@@ -49,6 +51,7 @@ public class BOHoraioEmpleado extends BOGenerico<StaffSchedule> {
 				"18", "19", "20", "21", "22", "23", "24" };
 		return hora;
 	}
-		
+	
+	
 
 }
