@@ -11,7 +11,7 @@
          <children>
             <Label layoutX="25.0" layoutY="55.0" text="PELICULA :" />
             <Label layoutX="25.0" layoutY="132.0" text="FECHA ENTREGAR:" />
-            <Button onAction="#prestamo" fx:id="jBPrestamo" layoutX="85.0" layoutY="183.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="209.0" text="REALIZAR PRESTAMO" />
+            <Button fx:id="jBPrestamo" layoutX="85.0" layoutY="183.0" mnemonicParsing="false" onAction="#prestamo" prefHeight="27.0" prefWidth="209.0" text="REALIZAR PRESTAMO" />
             <ComboBox fx:id="cBPeliculas" layoutX="178.0" layoutY="50.0" prefHeight="27.0" prefWidth="167.0" />
             <DatePicker fx:id="dFechaEntrega" layoutX="178.0" layoutY="127.0" />
          </children>
@@ -36,9 +36,9 @@
          <children>
             <TableView fx:id="tTPrestamos" layoutX="25.0" layoutY="44.0" prefHeight="564.0" prefWidth="346.0">
               <columns>
-                <TableColumn prefWidth="105.0" text="Titulo" />
-                <TableColumn prefWidth="121.0" text="Tienda" />
-                  <TableColumn prefWidth="119.0" />
+                <TableColumn fx:id="cCTitulo" prefWidth="105.0" text="Titulo" />
+                <TableColumn fx:id="cCTienda" prefWidth="121.0" text="Tienda" />
+                  <TableColumn fx:id="cCbotonEliminar" prefWidth="119.0" />
               </columns>
             </TableView>
          </children>

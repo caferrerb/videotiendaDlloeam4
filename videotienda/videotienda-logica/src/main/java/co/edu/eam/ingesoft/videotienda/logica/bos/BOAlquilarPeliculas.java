@@ -28,7 +28,19 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 	 *            el cliente el cual se busca
 	 * @return la lista
 	 */
-	public List<Rental> listarPrestamoCliente(int c) {
+	public List<Object[]> listarPrestamoCliente(int c) {
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PRESTAMOS_CLIENTE, c);
+
+	}
+	
+	/**
+	 * lista de los prestamos de un cliente
+	 * 
+	 * @param c
+	 *            el cliente el cual se busca
+	 * @return la lista
+	 */
+	public List<Rental> listarPrestaClientes(int c) {
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PRESTAMOS_CLIENTE, c);
 
 	}
