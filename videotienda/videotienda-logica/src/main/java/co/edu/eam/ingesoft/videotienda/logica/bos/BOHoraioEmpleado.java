@@ -83,8 +83,8 @@ public class BOHoraioEmpleado extends BOGenerico<StaffSchedule> {
 	 * Lista horario empleado
 	 * @return
 	 */
-	public List<StaffSchedule> lsitaHorario(){
-		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_HORARIO_EMPLEADO);
+	public List<StaffSchedule> ListaHorarios(){
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_HORARIO);
 	}
 	
 }
