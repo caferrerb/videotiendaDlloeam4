@@ -25,13 +25,13 @@
 		</query>
 	</named-query>
 
+
 	<named-query name="Rental.consultaRepetidos">
 		<query>
 			SELECT r FROM Rental r
 			JOIN r.inventory i
 			JOIN i.film f
-			WHERE f =
-			?1
+			WHERE f = ?1
 		</query>
 	</named-query>
 
@@ -49,10 +49,9 @@
 
 	<named-query name="Rental.listarPrestamosClientes">
 		<query>
-			SELECT f.title, s.storeId FROM Rental r
+			SELECT f.title, s.nombreTienda FROM Rental r
 			JOIN r.inventory i
-			JOIN
-			i.store s
+			JOIN i.store s
 			JOIN i.film f
 			JOIN r.customer c
 			WHERE c.customerId = ?1
@@ -62,7 +61,17 @@
 	<named-query name="Rental.PrestamosCliente">
 		<query>
 			SELECT r FROM Rental r
-			WHERE c.customer = ?1
+			JOIN r.customer c
+			WHERE c = ?1
+		</query>
+	</named-query>
+	
+	<named-query name="Rental.PeliculaPrestada">
+		<query>
+			SELECT r FROM Rental r
+			JOIN r.inventory i
+			JOIN i.film f
+			WHERE f.title = ?1
 		</query>
 	</named-query>
 

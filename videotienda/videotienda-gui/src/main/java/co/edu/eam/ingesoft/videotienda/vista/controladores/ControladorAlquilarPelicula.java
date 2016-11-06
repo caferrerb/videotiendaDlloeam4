@@ -57,6 +57,8 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	private BOCliente boCliente;
 	
 	private Rental presta;
+	
+	private Customer customer;
 
 	@Autowired
 	private BORental boRental;
@@ -89,27 +91,31 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	private DatePicker dFechaEntrega;
 
 	@FXML
-	private TableView<Rental> tTPrestamos;
+	private TableView<String> tTPrestamos;
 
 	@FXML
 	private TableColumn<Film, String> cCTitulo;
 
 	@FXML
-	private TableColumn<Store, Integer> cCTienda;
+	private TableColumn<Store, String> cCTienda;
 
 	@FXML
 	private TableColumn<Rental, Rental> cCbotonEliminar;
 
-	List<Rental> listaPrestamos;
+	List<String> listaPrestamos;
 
-	ObservableList<Rental> prestamosListar;
+	ObservableList<String> prestamosListar;
+	
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		//inicializarTabla();
+		customer = null;
 		llenarComboPeliculas();
-
+		
+        
 	}
 
 	@FXML
@@ -119,6 +125,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		} else {
 			int identificacion = Integer.parseInt(tFIdentificacion.getText());
 			Customer cliente = boCliente.buscar(identificacion);
+			customer = cliente;
 			if (cliente != null) {
 				tFNombre.setText(cliente.getFirstName() + " " + cliente.getLastName());
 				Image img = new Image(new ByteArrayInputStream(cliente.getPicture()));
@@ -175,8 +182,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 	@FXML
 	public void listarPrestamosClientes() {
-		int idCustomer = Integer.parseInt(tFIdentificacion.getText());
-		listaPrestamos = boAlquiPelicula.listarPrestaClientes(idCustomer);
+		listaPrestamos = boAlquiPelicula.listarPrestaClientes(customer);
 		prestamosListar.setAll(listaPrestamos);
 		tTPrestamos.setItems(prestamosListar);
 
@@ -191,7 +197,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 		// Enlazar columnas con atributos
 		cCTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-		cCTienda.setCellValueFactory(new PropertyValueFactory<Store, Integer>("storeId"));
+		cCTienda.setCellValueFactory(new PropertyValueFactory<Store, String>("nombreTienda"));
 		cCbotonEliminar.setSortable(false);
 
 		cCbotonEliminar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
@@ -213,12 +219,14 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 					@Override
 					public void handle(ActionEvent t) {
 						int num = getTableRow().getIndex();
+						//List<Rental> prestamos = boAlquiPelicula.listarPrestaClientes(customer);
 						// borramos el objeto obtenido de la fila
-						Rental p = listaPrestamos.get(num);
-						boRental.eliminar(p.getRentalId());
-						prestamosListar.remove(num);
-						notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
-								TipoNotificacion.INFO);
+						
+						//Rental p = listaPrestamos.get(num);
+//						boRental.eliminar(p.getRentalId());
+//						prestamosListar.remove(num);
+//						notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
+//								TipoNotificacion.INFO);
 
 					}
 				});
