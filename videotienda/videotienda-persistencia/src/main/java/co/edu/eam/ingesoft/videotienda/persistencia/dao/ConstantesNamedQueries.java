@@ -10,9 +10,16 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTARCIUDADES = "Ciudad.ListarTodos";
 
 	public static final String CONSULTA_LISTAREMPLEADOS = "Empleado.ListarTodos";
+	
+	/**
+	 * Lista los inventarios de una película
+	 * ?1: La película
+	 */
+	public static final String CONSULTA_LISTA_INVENTARIO_PELICULA = "Inventory.listarInventarioPelicula";
 
 	/**
 	 * Obtiene las peliculas alquiladas por un cliente
+	 * ?1: El cliente
 	 */
 	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Rental.PeliculasCliente";
 

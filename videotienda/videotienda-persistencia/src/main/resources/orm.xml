@@ -62,7 +62,7 @@
 	<named-query name="Rental.PrestamosCliente">
 		<query>
 			SELECT r FROM Rental r
-			WHERE c.customer = ?1
+			WHERE r.customer = ?1
 		</query>
 	</named-query>
 
