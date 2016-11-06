@@ -149,7 +149,7 @@ public class Rental implements Serializable {
 
 	@Override
 	public String toString() {
-		return inventory.getFilm().getTitle() + "" + inventory.getStore().getStoreId() ;
+		return rentalDate + "";
 	}
 
 }
