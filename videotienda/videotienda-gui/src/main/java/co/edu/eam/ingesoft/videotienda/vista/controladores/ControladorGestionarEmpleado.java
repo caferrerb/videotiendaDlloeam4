@@ -273,12 +273,12 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				tbFinal.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaFinal"));
 				tbFinal.setMinWidth(100);
 
-				TBOpciones.setCellValueFactory(
-						new Callback<TableColumn<StaffSchedule, Boolean>, TableCell<StaffSchedule, Boolean>>() {
-							public TableCell<StaffSchedule, Boolean> call(TableColumn<StaffSchedule, Boolean> p) {
-								return new ButtonCell(TbHorario);
-							}
-						});
+//				TBOpciones.setCellValueFactory(
+//						new Callback<TableColumn<StaffSchedule, Boolean>, TableCell<StaffSchedule, Boolean>>() {
+//							public TableCell<StaffSchedule, Boolean> call(TableColumn<StaffSchedule, Boolean> p) {
+//								return new ButtonCell(TbHorario);
+//							}
+//						});
 				TbHorario.setItems(data);
 			}
 		}else{
