@@ -26,17 +26,26 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Acceso;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Customer;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Inventory;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -46,6 +55,11 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 	@Autowired
 	private BOCliente boCliente;
+	
+	private Rental presta;
+
+	@Autowired
+	private BORental boRental;
 
 	@Autowired
 	private BOFilm pelicula;
@@ -66,26 +80,34 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	private TextField tFFechaEntrega;
 
 	@FXML
-	private TableView<Rental> tTPrestamos;
-
-	@FXML
 	private AnchorPane iDAlquilarPelicula;
 
 	@FXML
 	private ImageView PhFoto;
-	
+
 	@FXML
 	private DatePicker dFechaEntrega;
-	
+
+	@FXML
+	private TableView<Rental> tTPrestamos;
+
+	@FXML
+	private TableColumn<Film, String> cCTitulo;
+
+	@FXML
+	private TableColumn<Store, Integer> cCTienda;
+
+	@FXML
+	private TableColumn<Rental, Rental> cCbotonEliminar;
+
 	List<Rental> listaPrestamos;
-	
-	ObservableList<Rental> prestamos;
-	
-	
+
+	ObservableList<Rental> prestamosListar;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		//inicializarTabla();
 		llenarComboPeliculas();
 
 	}
@@ -101,21 +123,12 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 				tFNombre.setText(cliente.getFirstName() + " " + cliente.getLastName());
 				Image img = new Image(new ByteArrayInputStream(cliente.getPicture()));
 				PhFoto.setImage(img);
-				prestamosClientes();
+				listarPrestamosClientes();
 
 			} else {
 				notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
 			}
 		}
-
-	}
-
-	@FXML
-	public void prestamosClientes() {
-		int idCustomer = Integer.parseInt(tFIdentificacion.getText());
-		listaPrestamos = boAlquiPelicula.listarPrestamoCliente(idCustomer);
-		prestamos.setAll(listaPrestamos);
-		tTPrestamos.setItems(prestamos);
 
 	}
 
@@ -140,7 +153,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 			int idCliente = Integer.parseInt(tFIdentificacion.getText());
 			Film f = cBPeliculas.getSelectionModel().getSelectedItem();
 			LocalDate fechaEntrega = dFechaEntrega.getValue();
-			
+
 			try {
 				boAlquiPelicula.registrarPrestamo(idCliente, f, fechaEntrega);
 
@@ -160,4 +173,57 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 	}
 
+	@FXML
+	public void listarPrestamosClientes() {
+		int idCustomer = Integer.parseInt(tFIdentificacion.getText());
+		listaPrestamos = boAlquiPelicula.listarPrestaClientes(idCustomer);
+		prestamosListar.setAll(listaPrestamos);
+		tTPrestamos.setItems(prestamosListar);
+
+	}
+
+	public void inicializarTabla() {
+		// Inicializar listas
+		prestamosListar = FXCollections.observableArrayList();
+
+		// Enlazar listas
+		tTPrestamos.setItems(prestamosListar);
+
+		// Enlazar columnas con atributos
+		cCTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+		cCTienda.setCellValueFactory(new PropertyValueFactory<Store, Integer>("storeId"));
+		cCbotonEliminar.setSortable(false);
+
+		cCbotonEliminar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		cCbotonEliminar.setCellFactory(param -> new TableCell<Rental, Rental>() {
+			private final Button deleteButton = new Button("Retornar");
+
+			@Override
+			protected void updateItem(Rental prestamo, boolean empty) {
+				super.updateItem(prestamo, empty);
+
+				if (prestamo == null) {
+					setGraphic(null);
+					return;
+				}
+
+				setGraphic(deleteButton);
+				deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent t) {
+						int num = getTableRow().getIndex();
+						// borramos el objeto obtenido de la fila
+						Rental p = listaPrestamos.get(num);
+						boRental.eliminar(p.getRentalId());
+						prestamosListar.remove(num);
+						notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
+								TipoNotificacion.INFO);
+
+					}
+				});
+			}
+		});
+
+	}
 }
