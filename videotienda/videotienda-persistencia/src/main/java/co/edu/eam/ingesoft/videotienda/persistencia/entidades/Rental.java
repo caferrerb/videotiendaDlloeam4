@@ -47,7 +47,7 @@ public class Rental implements Serializable {
 	private Date returnDate;
 
 	//bi-directional many-to-one association to Payment
-	@OneToMany(mappedBy="rental")
+	@OneToMany(mappedBy="rental",fetch=FetchType.LAZY)
 	private List<Payment> payments;
 
 	//bi-directional many-to-one association to Customer
@@ -68,21 +68,6 @@ public class Rental implements Serializable {
 	public Rental(){
 		
 	}
-
-	
-	public Rental(int rentalId, Date lastUpdate, Date rentalDate, Date returnDate, List<Payment> payments,
-			Customer customer, Inventory inventory, Staff staff) {
-		super();
-		this.rentalId = rentalId;
-		this.lastUpdate = lastUpdate;
-		this.rentalDate = rentalDate;
-		this.returnDate = returnDate;
-		this.payments = payments;
-		this.customer = customer;
-		this.inventory = inventory;
-		this.staff = staff;
-	}
-
 
 	public int getRentalId() {
 		return this.rentalId;
