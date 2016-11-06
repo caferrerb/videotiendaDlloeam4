@@ -78,10 +78,6 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 	public void agregarHorario()throws Exception {
 		try {
 			StaffSchedule horario = new StaffSchedule();
-			System.out.println("---------------------------------------------------------" + "\n" + idEmpleado.getText()
-					+ "\n" + CBDia.getSelectionModel().getSelectedItem() + "\n"
-					+ horaFin.getSelectionModel().getSelectedItem() + "\n"
-					+ horaIni.getSelectionModel().getSelectedItem());
 
 			Staff empleado = boEmpleado.buscar((byte) Integer.parseInt(idEmpleado.getText()));
 
