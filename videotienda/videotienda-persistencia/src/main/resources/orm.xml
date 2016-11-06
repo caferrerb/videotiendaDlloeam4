@@ -165,17 +165,17 @@
 		</query>
 	</named-query>
 	
-	<!-- 
-	<named-query name="datosTablaFilmRentada">
-		<query>
-			SELECT i.inventoryId, f.title, c.cfirstName, r.rentalDate, r.returnDate  FROM Rental r JOIN r.customer c 
-			JOIN r.inventory i
-			JOIN i.film f
-			WHERE i.store = ?1
-
-		</query>
+	<named-query name="Sale.TotalVentas">
+	<query>
+	     SELECT SUM(f.rentalRate) FROM Rental r JOIN r.inventory i JOIN i.film f
+	      WHERE r.rentalDate BETWEEN  ?1 AND  ?2
+	</query>
 	</named-query>
-	 -->
 	
-
+	<named-query name= "Rental.TotalRentas">
+	<query>
+	      SELECT SUM(f.rentalRate)FROM Sale s JOIN s.film f WHERE s.saleDate BETWEEN ?1 AND ?2
+	</query>
+	</named-query>
+	
 </entity-mappings>
