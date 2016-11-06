@@ -9,7 +9,6 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 
 @Component
 public class BOUsuario extends BOGenerico<Usuario> {
-
 	
 	public List<Usuario> buscarEntidad(Usuario usu){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_VALIDAR_USUARIO,usu);

@@ -74,7 +74,8 @@ public class LoginUsuarioController extends BaseController implements Initializa
 			Usuario usu = new Usuario();
 			usu.setUsuario(tfUser.getText());
 			usu.setPass(tfPass.getText());
-			if (boUsuario.buscarEntidad(usu).size() == 0) {
+			if (boUsuario.buscarEntidad(usu).size() == 0||
+					!(boUsuario.buscarEntidad(usu).get(0).getPass().equals(tfPass.getText()))) {
 				notificar("LogIn", "El usuario o el password que ha ingresado no son correctos",
 						TipoNotificacion.ERROR);
 			} else {
@@ -99,11 +100,12 @@ public class LoginUsuarioController extends BaseController implements Initializa
 						for (Menu men : menus) {
 							if (accesoRol.getAcceso().getNombre().equals(men.getText())) {
 								men.setVisible(true);
-
 							}
 						}
 					}
 				}
+				mainController.abrirInicio();
+				mainController.btnCerrarSesion.setVisible(true);
 
 			}
 
@@ -113,5 +115,6 @@ public class LoginUsuarioController extends BaseController implements Initializa
 		}
 
 	}
+
 
 }

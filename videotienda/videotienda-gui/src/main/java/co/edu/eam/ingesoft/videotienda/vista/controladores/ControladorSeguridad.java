@@ -21,6 +21,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.UsuarioRol;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -49,7 +50,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	private BOUsuario boUsuario;
 	@Autowired
 	private BOAcceso boAcceso;
-	
+
 	@Autowired
 	private BOAccesoRol boAccesoRol;
 
@@ -70,7 +71,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	@FXML
 	private ComboBox<Rol> cbRolUsuario;
 	@FXML
-	private TableColumn eliminarRolCL;
+	private TableColumn<Rol, Rol> eliminarRolCL;
 
 	// Declarar tabla y columnas de ROL !
 	@FXML
@@ -88,7 +89,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	@FXML
 	private TableColumn<Rol, String> rolUsuarioCL;
 	@FXML
-	private TableColumn quitarRolCL;
+	private TableColumn<Rol, Rol> quitarRolCL;
 
 	ObservableList<Rol> rolesUsuario;
 
@@ -99,9 +100,11 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	private TableColumn<Rol, String> rolPantallaCL;
 	@FXML
 	private TableColumn<Acceso, String> pantallaCL;
+	@FXML
+	private TableColumn<AccesoRol, AccesoRol> eliminarPantallaCL;
 
 	ObservableList<AccesoRol> accesoRoles;
-	
+
 	private Usuario usu;
 	private Staff empleado;
 
@@ -114,7 +117,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	 * Se declara una lista para usarla en la ventana
 	 */
 	private List<Rol> listaRolesUsuario;
-	
+
 	/**
 	 * Se declara una lista para usarla en la ventana
 	 */
@@ -194,7 +197,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 			llenarTablaRolUsuario();
 		}
 	}
-	
+
 	@FXML
 	public void agregarPantalla() {
 		if (cbRoles.getSelectionModel().getSelectedItem().equals("Seleccione un rol")) {
@@ -202,10 +205,11 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		} else {
 			AccesoRol accesoRol = new AccesoRol();
 			Acceso acceCombo = cbPantalla.getSelectionModel().getSelectedItem();
-			Rol rolCombo = cbRolUsuario.getSelectionModel().getSelectedItem();
+			Rol rolCombo = cbRoles.getSelectionModel().getSelectedItem();
 			accesoRol.setRol(rolCombo);
 			accesoRol.setAcceso(acceCombo);
 			boAccesoRol.crear(accesoRol);
+			notificar("Asignar pantalla a rol", "Se ha asignado la pantalla correctamente", TipoNotificacion.INFO);
 			llenarTablaRolPantalla();
 		}
 	}
@@ -230,7 +234,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		accesoRoles.setAll(listaAccesoRol);
 		tablaPantallaRol.setItems(accesoRoles);
 	}
-	
+
 	public void inicializarTabla() {
 		// Inicializar listas
 		roles = FXCollections.observableArrayList();
@@ -246,29 +250,109 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		idRolCL.setCellValueFactory(new PropertyValueFactory<Rol, Integer>("id"));
 		nombreRolCL.setCellValueFactory(new PropertyValueFactory<Rol, String>("descripcion"));
 		rolUsuarioCL.setCellValueFactory(new PropertyValueFactory<Rol, String>("Rol"));
-		pantallaCL.setCellValueFactory(new PropertyValueFactory<Acceso,String>("Pantalla"));
-		rolPantallaCL.setCellValueFactory(new PropertyValueFactory<Rol,String>("Rol"));
+		rolPantallaCL.setCellValueFactory(new PropertyValueFactory<Rol, String>("Rol"));
+		pantallaCL.setCellValueFactory(new PropertyValueFactory<Acceso, String>("Pantalla"));
 		eliminarRolCL.setSortable(false);
 		quitarRolCL.setSortable(false);
+		eliminarPantallaCL.setSortable(false);
 
-		// Indicamos que muestre el ButtonCell creado mas abajo.
-		eliminarRolCL.setCellFactory(new Callback<TableColumn<Rol, Boolean>, TableCell<Rol, Boolean>>() {
+		eliminarRolCL.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		eliminarRolCL.setCellFactory(param -> new TableCell<Rol, Rol>() {
+			private final Button deleteButton = new Button("Eliminar");
 
-			public TableCell<Rol, Boolean> call(TableColumn<Rol, Boolean> p) {
-				return new ButtonCell(tablaRoles);
+			@Override
+			protected void updateItem(Rol rol, boolean empty) {
+				super.updateItem(rol, empty);
+
+				if (rol == null) {
+					setGraphic(null);
+					return;
+				}
+
+				setGraphic(deleteButton);
+				deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent t) {
+						int num = getTableRow().getIndex();
+						// borramos el objeto obtenido de la fila
+						Rol r = listaRoles.get(num);
+						if (boUsuarioRol.listarUsuarioPorRol(r.getId()).size() != 0) {
+							notificar("Eliminar Rol",
+									"No se puede eliminar el rol," + "ya que alguien lo tiene asignado",
+									TipoNotificacion.ERROR);
+
+						} else {
+							System.out.println("i dont know");
+							boRol.eliminar(r.getId());
+							roles.remove(num);
+							notificar("Eliminar Rol", "Rol eliminado con exito!", TipoNotificacion.INFO);
+						}
+					}
+				});
 			}
-
 		});
 
-		// Indicamos que muestre el ButtonCell creado mas abajo.
-		quitarRolCL.setCellFactory(new Callback<TableColumn<Rol, Boolean>, TableCell<Rol, Boolean>>() {
+		quitarRolCL.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		quitarRolCL.setCellFactory(param -> new TableCell<Rol, Rol>() {
+			private final Button deleteButton = new Button("Eliminar");
 
-			public TableCell<Rol, Boolean> call(TableColumn<Rol, Boolean> p) {
-				return new ButtonCell2(tablaRolUsuario);
+			@Override
+			protected void updateItem(Rol usuR, boolean empty) {
+				super.updateItem(usuR, empty);
+
+				if (usuR == null) {
+					setGraphic(null);
+					return;
+				}
+
+				setGraphic(deleteButton);
+				deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent t) {
+						int num = getTableRow().getIndex();
+						// borramos el objeto obtenido de la fila
+						Rol r = listaRolesUsuario.get(num);
+						boUsuarioRol.eliminar(r.getId(), usu.getUsuario());
+						rolesUsuario.remove(num);
+						notificar("Quitar rol a usuario",
+								"Se ha quitado el rol asignado anteriormente" + " a este usuario",
+								TipoNotificacion.INFO);
+					}
+
+				});
 			}
-
 		});
 
+		eliminarPantallaCL.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		eliminarPantallaCL.setCellFactory(param -> new TableCell<AccesoRol, AccesoRol>() {
+			private final Button deleteButton = new Button("Eliminar");
+
+			@Override
+			protected void updateItem(AccesoRol accR, boolean empty) {
+				super.updateItem(accR, empty);
+
+				if (accR == null) {
+					setGraphic(null);
+					return;
+				}
+
+				setGraphic(deleteButton);
+				deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent t) {
+						int num = getTableRow().getIndex();
+						// borramos el objeto obtenido de la fila
+						AccesoRol acc = listaAccesoRol.get(num);
+						boAccesoRol.eliminar(acc.getRol().getId(), acc.getAcceso().getId());
+						accesoRoles.remove(num);
+						notificar("Quitar acceso rol", "Se ha quitado el acceso a este rol", TipoNotificacion.INFO);
+					}
+				});
+			}
+		});
 	}
 
 	private void llenarComboRoles() {
@@ -292,77 +376,5 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 			cbEmpleado.getItems().add(emp);
 		}
 	}
-
-	private class ButtonCell extends TableCell<Rol, Boolean> {
-
-		// boton a mostrar
-		final Button cellButton = new Button("Borrar");
-
-		ButtonCell(final TableView tblView) {
-
-			cellButton.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent t) {
-					int num = getTableRow().getIndex();
-					// borramos el objeto obtenido de la fila
-					Rol r = listaRoles.get(num);
-					if (boUsuarioRol.listarUsuarioPorRol(r.getId()).size() != 0) {
-						notificar("Eliminar Rol", "No se puede eliminar el rol," + "ya que alguien lo tiene asignado",
-								TipoNotificacion.ERROR);
-
-					} else {
-						System.out.println("i dont know");
-						boRol.eliminar(r.getId());
-						roles.remove(num);
-						notificar("Eliminar Rol", "Rol eliminado con exito!", TipoNotificacion.INFO);
-					}
-				}
-			});
-		}
-
-		// Muestra un boton si la fila no es nula
-		@Override
-		protected void updateItem(Boolean t, boolean empty) {
-			super.updateItem(t, empty);
-			if (!empty) {
-				setGraphic(cellButton);
-			}
-		}
-
-	}
-
-	private class ButtonCell2 extends TableCell<Rol, Boolean> {
-
-		// boton a mostrar
-		final Button cellButton = new Button("Quitar");
-
-		ButtonCell2(final TableView tblView) {
-
-			cellButton.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent t) {
-					int num = getTableRow().getIndex();
-					// borramos el objeto obtenido de la fila
-					Rol r = listaRolesUsuario.get(num);
-					boUsuarioRol.eliminar(r.getId(), usu.getUsuario());
-					rolesUsuario.remove(num);
-					notificar("Quitar rol a usuario", "Se ha quitado el rol asignado anteriormente" + " a este usuario",
-							TipoNotificacion.INFO);
-				}
-			});
-		}
-
-		// Muestra un boton si la fila no es nula
-		@Override
-		protected void updateItem(Boolean t, boolean empty) {
-			super.updateItem(t, empty);
-			if (!empty) {
-				setGraphic(cellButton);
-			}
-		}
-
-	}
-
+	
 }

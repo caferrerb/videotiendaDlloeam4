@@ -20,12 +20,12 @@
 
 
 
-								<Menu fx:id="mnuInicio" mnemonicParsing="false" text="Inicio" />
+								<Menu fx:id="mnuInicio" mnemonicParsing="false" onAction="#abrirInicio" text="Inicio" />
 								<Menu fx:id="mnuPeliculas" mnemonicParsing="false" text="Peliculas">
 									<items>
 										<MenuItem id="mIVenderPeliculas" fx:id="menuItemVenderPeliculas" mnemonicParsing="false" onAction="#abrirGestionarVenta" text="VenderPeliculas" />
-										<MenuItem fx:id="menuItemGestionarPelicula" mnemonicParsing="false" onAction="#abrirGestionarPeliculas" text="Gestionar Pelicula" />	
-									<MenuItem id="mIVerPeliculasRentadas" fx:id="menuItemVerPeliculaRentada" mnemonicParsing="false" onAction="#abrirverpeliculasrentadas" text="Ver Pelicula Rentada" />
+										<MenuItem fx:id="menuItemGestionarPelicula" mnemonicParsing="false" onAction="#abrirGestionarPeliculas" text="Gestionar Pelicula" />
+										<MenuItem id="mIVerPeliculasRentadas" fx:id="menuItemVerPeliculaRentada" mnemonicParsing="false" onAction="#abrirverpeliculasrentadas" text="Ver Pelicula Rentada" />
 									</items>
 								</Menu>
 								<Menu fx:id="menuCliente" mnemonicParsing="false" text="Clientes">
@@ -46,15 +46,13 @@
 										<MenuItem fx:id="mnuItemGestionarEmpleado" mnemonicParsing="false" onAction="#abrirGestionarEmpleados" text="GestionarEmpleado" />
 									</items>
 								</Menu>
-                        <Menu fx:id="mnuPrestamos" mnemonicParsing="false" text="Prestamos" />
-
 								<Menu fx:id="mnuSucursales" mnemonicParsing="false" text="Sucursales" />
 
 								<Menu fx:id="mnuPrestamos" mnemonicParsing="false" text="Prestamos">
-                           <items>
-                              <MenuItem fx:id="menuItemGestionPrestamo" mnemonicParsing="false" onAction="#abrirGestionarPrestamos" text="Gestion Prestamos" />
-                           </items></Menu>
-								<Menu mnemonicParsing="false" text="Parametrizacion" />
+									<items>
+										<MenuItem fx:id="menuItemGestionPrestamo" mnemonicParsing="false" onAction="#abrirGestionarPrestamos" text="Gestion Prestamos" />
+									</items>
+								</Menu>
 								<Menu fx:id="mnuParametrizacion" mnemonicParsing="false" text="Parametrizacion">
 									<items>
 										<MenuItem fx:id="mnuItemGestionarCiudad" mnemonicParsing="false" onAction="#abrirGEstionarCiudad" text="Ciudad" />
@@ -72,9 +70,9 @@
 									</items>
 								</Menu>
 								<Menu fx:id="menuReportes" mnemonicParsing="false" text="Reportes">
-                           <items>
-                              <MenuItem fx:id="MenuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="VentasAlquiler" />
-                           </items>
+									<items>
+										<MenuItem fx:id="MenuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="VentasAlquiler" />
+									</items>
 								</Menu>
 
 							</menus>
@@ -92,6 +90,7 @@
 										<Font size="31.0" />
 									</font>
 								</Label>
+                        <Button fx:id="btnCerrarSesion" layoutX="857.0" layoutY="24.0" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesion" />
 							</children>
 						</Pane>
 					</top>

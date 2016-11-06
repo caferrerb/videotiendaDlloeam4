@@ -57,8 +57,6 @@ public class Acceso implements Serializable{
 		this.id = id;
 	}
 
-	
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -67,7 +65,6 @@ public class Acceso implements Serializable{
 		this.nombre = nombre;
 	}
 
-	
 	public String getPantalla() {
 		return pantalla;
 	}
@@ -80,12 +77,5 @@ public class Acceso implements Serializable{
 	public String toString() {
 		return nombre;
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 }

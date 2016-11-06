@@ -64,8 +64,9 @@ public class Rental implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="staff_id", nullable=false)
 	private Staff staff;
-
-	public Rental() {
+    
+	public Rental(){
+		
 	}
 
 	
