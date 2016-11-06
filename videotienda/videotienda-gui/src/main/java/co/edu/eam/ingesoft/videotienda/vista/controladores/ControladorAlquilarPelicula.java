@@ -116,7 +116,6 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		listaPrestamos = boAlquiPelicula.listarPrestamoCliente(idCustomer);
 		prestamos.setAll(listaPrestamos);
 		tTPrestamos.setItems(prestamos);
-
 	}
 
 	@FXML

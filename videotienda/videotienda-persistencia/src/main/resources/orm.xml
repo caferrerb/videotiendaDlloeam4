@@ -11,19 +11,27 @@
 			SELECT f FROM Film f WHERE f.length=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="Film.listarPorNombrePelis">
 		<query>
 			SELECT f FROM Film f
 		</query>
 	</named-query>
-	
+
+	<named-query name="Inventory.listarInventarioPelicula">
+		<query>
+			SELECT i FROM Inventory i
+			WHERE i.film = ?1
+		</query>
+	</named-query>
+
 	<named-query name="Rental.consultaRepetidos">
 		<query>
 			SELECT r FROM Rental r
 			JOIN r.inventory i
 			JOIN i.film f
-			WHERE f = ?1
+			WHERE f =
+			?1
 		</query>
 	</named-query>
 
@@ -43,7 +51,8 @@
 		<query>
 			SELECT f.title, s.storeId FROM Rental r
 			JOIN r.inventory i
-			JOIN i.store s
+			JOIN
+			i.store s
 			JOIN i.film f
 			JOIN r.customer c
 			WHERE c.customerId = ?1
@@ -122,7 +131,8 @@
 			SELECT r FROM Rental r JOIN
 			r.customer c
 			JOIN r.inventory i
-			JOIN i.film f WHERE i.store = ?1
+			JOIN
+			i.film f WHERE i.store = ?1
 		</query>
 	</named-query>
 
@@ -131,7 +141,8 @@
 			SELECT s FROM Sale s
 			JOIN
 			s.customer c JOIN s.film f
-			JOIN s.staff p WHERE p.store = ?1
+			JOIN s.staff
+			p WHERE p.store = ?1
 		</query>
 	</named-query>
 
@@ -175,7 +186,6 @@
 			SELECT fa FROM FilmActor fa WHERE fa.actor = ?1
 		</query>
 	</named-query>
-
 	<named-query name="AccesoRol.ListarAccesoRol">
 		<query>
 			SELECT accR FROM AccesoRol accR
@@ -193,21 +203,22 @@
 		SUM(horaInicial) StaffSchedule st WHERE st.empleado = ?1 </query> </named-query> -->
 	<named-query name="StaffSchedule.ListaHorasEmpleado">
 		<query>
-			SELECT  st FROM StaffSchedule st WHERE st.empleado = ?1
+			SELECT st FROM StaffSchedule st WHERE st.empleado = ?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="Sale.TotalVentas">
-	<query>
-	     SELECT SUM(f.rentalRate) FROM Rental r JOIN r.inventory i JOIN i.film f
-	      WHERE r.rentalDate BETWEEN  ?1 AND  ?2
-	</query>
+		<query>
+			SELECT SUM(f.rentalRate) FROM Rental r JOIN r.inventory i JOIN i.film f
+			WHERE r.rentalDate BETWEEN ?1 AND ?2
+		</query>
 	</named-query>
-	
-	<named-query name= "Rental.TotalRentas">
-	<query>
-	      SELECT SUM(f.rentalRate)FROM Sale s JOIN s.film f WHERE s.saleDate BETWEEN ?1 AND ?2
-	</query>
+
+	<named-query name="Rental.TotalRentas">
+		<query>
+			SELECT SUM(f.rentalRate)FROM Sale s JOIN s.film f WHERE s.saleDate BETWEEN
+			?1 AND ?2
+		</query>
 	</named-query>
 	<named-query name="StaffSchedule.ListaHorarios">
 		<query>
