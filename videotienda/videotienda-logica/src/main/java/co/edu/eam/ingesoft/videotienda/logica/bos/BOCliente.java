@@ -11,30 +11,42 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Address;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Customer;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
 
 @Component
 public class BOCliente extends BOGenerico<Customer> {
 
 	/**
-	 * Lista las películas rentadas de un cliente
-	 * @param c Cliente al cual se le listarán las películas
-	 * @return las lista de películas del cliente
+	 * Lista las rentas de un cliente
+	 * 
+	 * @param c
+	 *            Cliente al cual se le listarán las rentas
+	 * @return las lista de rentas del cliente
 	 */
-	public List<Film> peliculasCliente (Customer c){
-		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_CLIENTE,c);
+	public List<Rental> peliculasCliente(Customer c) {
+		if (c != null) {
+			return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_CLIENTE, c);
+		} else {
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Permite trasladar la ciudad a un cliente
-	 * @param cliente Cliente al cual se le va a trasladar la ciudad
-	 * @param ciudad Ciudad a la que se desea trasladar
-	 * @param dir La nueva dirección
-	 * @throws ExcepcionNegocio Si falla alguna operación
+	 * 
+	 * @param cliente
+	 *            Cliente al cual se le va a trasladar la ciudad
+	 * @param ciudad
+	 *            Ciudad a la que se desea trasladar
+	 * @param dir
+	 *            La nueva dirección
+	 * @throws ExcepcionNegocio
+	 *             Si falla alguna operación
 	 */
-	@org.springframework.transaction.annotation.Transactional(propagation=Propagation.REQUIRED)
-	public void trasladar (Customer cliente, City ciudad, String dir) throws ExcepcionNegocio{
-		List<Film> peliculasCliente = peliculasCliente(cliente);
-		if (!peliculasCliente.isEmpty()) {
+	@org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED)
+	public void trasladar(Customer cliente, City ciudad, String dir) throws ExcepcionNegocio {
+		List<Rental> peliculasCliente = peliculasCliente(cliente);
+		if (peliculasCliente.size() != 0) {
 			throw new ExcepcionNegocio("No se puede trasladar porque tiene películas prestadas");
 		} else {
 			if (cliente == null) {
@@ -52,5 +64,5 @@ public class BOCliente extends BOGenerico<Customer> {
 			}
 		}
 	}
-	
+
 }
