@@ -74,6 +74,12 @@
 										<MenuItem fx:id="MenuItemReportes" mnemonicParsing="false" onAction="#abrirGestionReportesVentasAlquiler" text="VentasAlquiler" />
 									</items>
 								</Menu>
+								
+								<Menu fx:id="menuEjemplo" mnemonicParsing="false" text="Ejemplo">
+									<items>
+										<MenuItem fx:id="menuItemEjemplo" mnemonicParsing="false" onAction="#abrirEjemplo" text="Ejemplo tabla con boton" />
+									</items>
+								</Menu>
 
 							</menus>
 						</MenuBar>

@@ -20,6 +20,7 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarC
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorAlquilarPelicula;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorEjemploTabla;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarTienda;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorSeguridad;
@@ -153,6 +154,9 @@ public class MainController implements Initializable {
 
 	@FXML
 	private MenuItem menuItemGestionPrestamo;
+	
+	@FXML
+	private MenuItem menuItemEjemplo; 
 	
 	public Button btnCerrarSesion;
 	
@@ -293,6 +297,11 @@ public class MainController implements Initializable {
 	public void cerrarSesion(){
 		agregarVentana("/fxml/Login.fxml", LoginUsuarioController.class);
 		esconderMenus();
+	}
+	
+	@FXML
+	public void abrirEjemplo(){
+		agregarVentana("/fxml/ejemplotabla.fxml", ControladorEjemploTabla.class);
 	}
 	
 }
