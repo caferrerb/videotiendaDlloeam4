@@ -67,15 +67,17 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 		try {
 			int idCliente = Integer.parseInt(jtfIdCliente.getText());
 			List<Customer> cus = boCus.listaBucarCliente(idCliente);
+			Customer regiCus = boCus.buscar(idCliente);
+			if (regiCus != null) {
 			for (int i = 0; i < cus.size(); i++) {
-				if (cus != null) {
+				
 					jtfNombreCliente.setText(cus.get(i).getFirstName());
 //					fecha.
 					
 					// jtfIdPelicula.setText(film.getFilmId());
-				}else{
-					notificar("¡ERROR!", "El cliente no se encuentra registrado",  TipoNotificacion.ERROR);
 				}
+			}else{
+				notificar("¡ERROR!", "El cliente no se encuentra registrado",  TipoNotificacion.ERROR);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
