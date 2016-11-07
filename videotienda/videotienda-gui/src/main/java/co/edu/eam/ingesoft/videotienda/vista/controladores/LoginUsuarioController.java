@@ -66,36 +66,6 @@ public class LoginUsuarioController extends BaseController implements Initializa
 	 *         email: richardvanegas8@gmail.com <br/>
 	 *         Fecha: 2/11/2016<br/>
 	 */
-
-//	@FXML
-//	public void login() {
-//
-//		try {
-//
-//			Usuario usu = new Usuario();
-//			usu.setUsuario(tfUser.getText());
-//			usu.setPass(tfPass.getText());
-//			if (boUsuario.buscarEntidad(usu).size() == 0) {
-//				notificar("LogIn", "El usuario o el password que ha ingresado no son correctos",
-//						TipoNotificacion.ERROR);
-//			} else {
-//
-//				List<Rol> roles = boUsuarioRol.listarRolesPorUsuario(usu.getUsuario());
-//				
-//				for (Rol rol : roles) {
-//					List<AccesoRol> accesosRol = boAccesoRol.listarPorRol(rol);
-//					
-//				}
-//				
-//			}
-//
-//		} catch (Exception e) {
-//
-//			e.printStackTrace();
-//		}
-//
-//	}
-
 	@FXML
 	public void login() {
 
@@ -104,7 +74,8 @@ public class LoginUsuarioController extends BaseController implements Initializa
 			Usuario usu = new Usuario();
 			usu.setUsuario(tfUser.getText());
 			usu.setPass(tfPass.getText());
-			if (boUsuario.buscarEntidad(usu).size() == 0) {
+			if (boUsuario.buscarEntidad(usu).size() == 0||
+					!(boUsuario.buscarEntidad(usu).get(0).getPass().equals(tfPass.getText()))) {
 				notificar("LogIn", "El usuario o el password que ha ingresado no son correctos",
 						TipoNotificacion.ERROR);
 			} else {
@@ -133,6 +104,8 @@ public class LoginUsuarioController extends BaseController implements Initializa
 						}
 					}
 				}
+				mainController.abrirInicio();
+				mainController.btnCerrarSesion.setVisible(true);
 
 			}
 

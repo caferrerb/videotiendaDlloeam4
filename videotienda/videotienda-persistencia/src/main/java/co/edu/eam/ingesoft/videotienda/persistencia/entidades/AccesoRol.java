@@ -21,13 +21,13 @@ public class AccesoRol implements Serializable{
 	 */
 
 	@Id
-	@ManyToOne
-	@JoinColumn(name = "ID_ROL", nullable = false, updatable = false, insertable = false)
+	@ManyToOne(cascade={})
+	@JoinColumn(name = "ID_ROL", nullable = false)
 	private Rol rol;
 	
 	@Id
-	@ManyToOne
-	@JoinColumn(name = "ID_ACCESO", nullable = false, updatable = false, insertable = false)
+	@ManyToOne(cascade={})
+	@JoinColumn(name = "ID_ACCESO", nullable = false)
 	private Acceso acceso;
 
 	/*

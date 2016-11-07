@@ -50,6 +50,7 @@ public class BOUsuarioRol extends BOGenerico<UsuarioRol>{
 		
 	}
 	
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void eliminar(int rol,String usuario){
 		UsuarioRolPK pk = new UsuarioRolPK();
 		pk.setRol(rol);

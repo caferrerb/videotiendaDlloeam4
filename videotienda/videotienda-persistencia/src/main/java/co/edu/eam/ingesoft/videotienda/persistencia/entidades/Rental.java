@@ -69,20 +69,6 @@ public class Rental implements Serializable {
 		
 	}
 
-	/**
-	 * @param rentalId
-	 * @param rentalDate
-	 * @param returnDate
-	 * @param customer
-	 */
-	public Rental(int rentalId, Date rentalDate, Date returnDate, Customer customer) {
-		super();
-		this.rentalId = rentalId;
-		this.rentalDate = rentalDate;
-		this.returnDate = returnDate;
-		this.customer = customer;
-	}
-
 	public int getRentalId() {
 		return this.rentalId;
 	}
@@ -163,10 +149,7 @@ public class Rental implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Rental [rentalId=" + rentalId + ", lastUpdate=" + lastUpdate
-				+ ", rentalDate=" + rentalDate + ", returnDate=" + returnDate
-				+ ", payments=" + payments + ", customer=" + customer
-				+ ", inventory=" + inventory + ", staff=" + staff + "]";
+		return rentalDate + "";
 	}
 
 }

@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="idGestionEmpleado" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="idGestionEmpleado" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="451.0" layoutY="26.0" prefHeight="90.0" prefWidth="235.0">
          <children>
@@ -37,11 +37,12 @@
             <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <TableView fx:id="TbHorario" layoutX="445.0" layoutY="134.0" prefHeight="200.0" prefWidth="246.0" style="-fx-background-radius: 10;">
+      <TableView fx:id="TbHorario" layoutX="431.0" layoutY="140.0" prefHeight="200.0" prefWidth="396.0" style="-fx-background-radius: 10;">
          <columns>
-            <TableColumn prefWidth="75.0" text="Dia" />
-            <TableColumn prefWidth="100.0" text="Horario" />
-            <TableColumn prefWidth="75.0" text="Opciones" />
+            <TableColumn fx:id="TBDia" prefWidth="75.0" text="Dia" />
+            <TableColumn fx:id="TBInicial" prefWidth="94.0" text="Hora Inicio" />
+            <TableColumn fx:id="tbFinal" prefWidth="109.0" text="Hora FInal" />
+            <TableColumn fx:id="TBOpciones" prefWidth="117.0" text="Opciones" />
          </columns>
       </TableView>
       <GridPane layoutX="431.0" layoutY="425.0">
@@ -211,12 +212,12 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </TextField>
-            <Label text="Foto" GridPane.rowIndex="13">
+            <Label text="* Foto" GridPane.rowIndex="13">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label text="* Id Usuario" GridPane.rowIndex="2">
+            <Label text="Id Usuario" GridPane.rowIndex="2">
                <font>
                   <Font name="Arial" size="14.0" />
                </font></Label>

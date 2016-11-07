@@ -50,6 +50,7 @@
                           <columns>
                             <TableColumn fx:id="rolPantallaCL" prefWidth="133.0" text="Rol" />
                             <TableColumn fx:id="pantallaCL" prefWidth="114.0" text="Pantalla" />
+                              <TableColumn fx:id="eliminarPantallaCL" prefWidth="104.0" text="Eliminar" />
                           </columns>
                         </TableView>
                         <GridPane layoutX="40.0" layoutY="42.0" prefHeight="93.0" prefWidth="284.0">
