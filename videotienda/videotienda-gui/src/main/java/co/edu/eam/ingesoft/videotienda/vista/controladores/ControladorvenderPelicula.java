@@ -101,6 +101,7 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 			boSale.crearSa(vender);
 			
 			notificar("¡NOTIFICACION!", "La venta se realizo exitosamente",  TipoNotificacion.INFO);
+			limpiarcampos();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -114,6 +115,13 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 		jtfIdPelicula.setText(String.valueOf(id));
 		borrarSesion("peliculavender");
 		
+	}
+	
+	public void limpiarcampos(){
+		jtfIdCliente.setText(null);
+		jtfIdEmpleado.setText(null);
+		jtfIdPelicula.setText(null);
+		jtfNombreCliente.setText(null);
 	}
 	
 
