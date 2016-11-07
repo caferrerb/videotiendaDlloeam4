@@ -59,7 +59,7 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 	private TableColumn<Film, String> cTitulo;
 
 	@FXML
-	private TableColumn<Customer, String> cCliente;
+	private TableColumn<Customer, Integer> cCliente;
 
 	@FXML
 	private TableColumn<Rental, Date> cFecha;
@@ -68,7 +68,7 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 	private TableColumn<Rental, Date> cEntrega;
 
 	@FXML
-	private TableColumn cBoton;
+	private TableColumn<Customer, Button> cBoton;
 	
 	@FXML
 	private TableColumn cBoton1;
@@ -80,6 +80,7 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		cargarComboTienda();
+		
 
 	}
 
@@ -90,6 +91,10 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 		}
 	}
 
+	/**
+	 * Metodo que carga la tabla de peliculas rentadas
+	 * @param store, tienda a la cua se le busca las peliculas rentadas
+	 */
 	@FXML
 	public void cargarTablaPeliculas(Store store) {
 		List<Rental> lista = boRental.listarTablaRental(store);
@@ -97,7 +102,7 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 			filmRentadas.add(rental);
 			cIDInventario.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("Id Inventario"));
 			cTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("Titulo Pelicula"));
-			cCliente.setCellValueFactory(new PropertyValueFactory<Customer, String>("Nombre Cliente"));
+			cCliente.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("Cliente"));
 			cFecha.setCellValueFactory(new PropertyValueFactory<Rental, Date>("Fecha Prestamo"));
 			cEntrega.setCellValueFactory(new PropertyValueFactory<Rental, Date>("Fecha Entrega"));
 			tbPeliculasDeTiendaR.setItems(filmRentadas);

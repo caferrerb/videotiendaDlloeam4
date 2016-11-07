@@ -19,5 +19,6 @@
         </columns>
       </TableView>
       <ComboBox fx:id="cbTienda" layoutX="106.0" layoutY="10.0" prefHeight="25.0" prefWidth="178.0" promptText="Seleccione una tienda" />
+      <Button fx:id="buscar" layoutX="322.0" layoutY="23.0" mnemonicParsing="false" onAction="#eventoSeleccionCombo" text="Buscar" />
    </children>
 </AnchorPane>

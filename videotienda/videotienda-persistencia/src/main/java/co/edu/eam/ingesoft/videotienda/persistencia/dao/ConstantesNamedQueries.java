@@ -80,7 +80,7 @@ public class ConstantesNamedQueries {
 	/**
 	 * Consulta para cargar todos los datos de la tabla de peliculas rentadas
 	 */
-	public static final String CONSULTA_TABLA_PELICULA_RENTADAS="datosTablaFilmRentada";
+	public static final String CONSULTA_TABLA_PELICULA_RENTADAS="Rental.datosTablaFilmRentada";
 	
 	public static final String CONSULTA_LISTAR_ACCESOS_ROL="AccesoRol.ListarPantallasRol";
 
