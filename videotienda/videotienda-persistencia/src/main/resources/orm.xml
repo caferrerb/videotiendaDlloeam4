@@ -59,7 +59,7 @@
 		<query>
 			SELECT r FROM Rental r
 			JOIN r.customer c
-			WHERE c = ?1
+			WHERE c.customerId = ?1
 		</query>
 	</named-query>
 	

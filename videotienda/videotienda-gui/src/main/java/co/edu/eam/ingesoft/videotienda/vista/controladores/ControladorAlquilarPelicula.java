@@ -130,7 +130,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 				tFNombre.setText(cliente.getFirstName() + " " + cliente.getLastName());
 				Image img = new Image(new ByteArrayInputStream(cliente.getPicture()));
 				PhFoto.setImage(img);
-				listarPrestamosClientes();
+				//listarPrestamosClientes();
 
 			} else {
 				notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
@@ -219,14 +219,14 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 					@Override
 					public void handle(ActionEvent t) {
 						int num = getTableRow().getIndex();
-						//List<Rental> prestamos = boAlquiPelicula.listarPrestaClientes(customer);
-						// borramos el objeto obtenido de la fila
-						
-						//Rental p = listaPrestamos.get(num);
+//						List<Rental> prestamos = boAlquiPelicula.listarPrestaClientes(customer);
+//						borramos el objeto obtenido de la fila
+//						
+//						Rental p = listaPrestamos.get(num);
 //						boRental.eliminar(p.getRentalId());
 //						prestamosListar.remove(num);
-//						notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
-//								TipoNotificacion.INFO);
+//					    notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
+//					    TipoNotificacion.INFO);
 
 					}
 				});

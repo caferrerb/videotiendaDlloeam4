@@ -46,16 +46,30 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 
 	}
 	
+	/**
+	 * 
+	 * @param f
+	 * @return
+	 */
 	private Inventory inventarioPelicula (Film f){
 		List<Inventory> lista = dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTA_INVENTARIO_PELICULA, f);
 		return lista.get(0);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private Staff empleado(){
 		List<Staff> lista = dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAREMPLEADOS);
 		return lista.get(0);
 	}
 	
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 */
 	public List<Rental> listarLosPrestamosCliente(Customer c){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_CLIENTE, c);
 	}
@@ -102,6 +116,12 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_NOMBRES);
 	}
 	
+	
+	/**
+	 * 
+	 * @param t
+	 * @return
+	 */
 	public List<Rental> listarPelicualsPrestadas(String t){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_PRESTADAS, t);
 	}
