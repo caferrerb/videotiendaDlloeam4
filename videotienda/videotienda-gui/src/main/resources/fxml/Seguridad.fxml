@@ -101,9 +101,9 @@
                               <Label text="Empleado" />
                               <ComboBox fx:id="cbEmpleado" prefHeight="25.0" prefWidth="266.0" promptText="Elegir el empleado" GridPane.columnIndex="1" />
                               <Label text="Password" GridPane.rowIndex="2" />
-                              <TextField fx:id="tfPassword" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label text="Usuario" GridPane.rowIndex="1" />
                               <TextField fx:id="tfUsuario" prefHeight="25.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <PasswordField fx:id="tfPassword" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <Button id="btnEstablecer" layoutX="181.0" layoutY="148.0" mnemonicParsing="false" onAction="#establecerUsuario" text="Establecer" />

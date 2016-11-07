@@ -166,10 +166,7 @@
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
 		</query>
-		</query>
-
-	</named-query>
-
+		
 	</named-query>
 
 	<named-query name="listarFilmActorPorActor">
