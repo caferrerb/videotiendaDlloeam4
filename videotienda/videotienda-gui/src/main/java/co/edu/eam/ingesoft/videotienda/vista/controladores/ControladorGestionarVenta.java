@@ -82,13 +82,13 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 					jcolumnaPrecio.setCellValueFactory(new PropertyValueFactory<Film, Double>("rentalRate"));
 					jcolumnaPrecio.setMinWidth(100);
 					
-//					jcolumnaboton.setCellFactory(new Callback<TableColumn<Film, Boolean>, TableCell<Film, Boolean>>() {
-//
-//						public TableCell<Film, Boolean> call(TableColumn<Film, Boolean> p) {
-//							return new ButtonCell(jttablacontenidoPelicula,f);
-//						}
-//
-//					});
+					jcolumnaboton.setCellFactory(new Callback<TableColumn<Film, Boolean>, TableCell<Film, Boolean>>() {
+
+						public TableCell<Film, Boolean> call(TableColumn<Film, Boolean> p) {
+							return new ButtonCell(jttablacontenidoPelicula,f);
+						}
+
+					});
 					
 					jttablacontenidoPelicula.setItems(data);
 					

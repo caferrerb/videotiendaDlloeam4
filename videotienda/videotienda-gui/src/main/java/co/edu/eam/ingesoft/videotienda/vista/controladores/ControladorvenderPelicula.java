@@ -78,6 +78,7 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 				}
 			}else{
 				notificar("¡ERROR!", "El cliente no se encuentra registrado",  TipoNotificacion.ERROR);
+//				abrirVentana(ventana, controlador);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
