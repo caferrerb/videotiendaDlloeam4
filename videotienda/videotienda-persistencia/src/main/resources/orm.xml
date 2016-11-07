@@ -51,8 +51,7 @@
 			JOIN r.inventory i
 			JOIN i.store s
 			JOIN i.film f
-			JOIN r.customer c
-			WHERE c.customerId = ?1
+			WHERE r.customer  = ?1
 		</query>
 	</named-query>
 	
