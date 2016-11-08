@@ -64,8 +64,9 @@ public class Rental implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="staff_id", nullable=false)
 	private Staff staff;
-
-	public Rental() {
+    
+	public Rental(){
+		
 	}
 
 	public int getRentalId() {
@@ -148,10 +149,7 @@ public class Rental implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Rental [rentalId=" + rentalId + ", lastUpdate=" + lastUpdate
-				+ ", rentalDate=" + rentalDate + ", returnDate=" + returnDate
-				+ ", payments=" + payments + ", customer=" + customer
-				+ ", inventory=" + inventory + ", staff=" + staff + "]";
+		return rentalDate + "";
 	}
 
 }

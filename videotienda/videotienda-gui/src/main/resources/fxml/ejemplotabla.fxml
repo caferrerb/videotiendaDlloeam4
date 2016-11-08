@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="474.0" prefWidth="568.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <TableView fx:id="tablaPeliculas" layoutX="84.0" layoutY="104.0" prefHeight="204.0" prefWidth="461.0">
+        <columns>
+          <TableColumn fx:id="colNom" prefWidth="156.0" text="Nombre" />
+          <TableColumn fx:id="colLeng" minWidth="0.0" prefWidth="114.0" text="Lenguaje" />
+            <TableColumn fx:id="colLong" minWidth="0.0" prefWidth="90.0" text="Duracion" />
+            <TableColumn fx:id="colBot" prefWidth="94.0" text="Accion" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

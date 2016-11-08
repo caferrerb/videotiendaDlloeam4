@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="T_ROL")
@@ -22,7 +23,7 @@ public class Rol implements Serializable{
 	public static final String LISTAR_ROLES_USUARIO = "Rol.listarRolesUsuario";
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_ROL", length=12, nullable=false)
 	private int id;
 	
@@ -45,12 +46,6 @@ public class Rol implements Serializable{
 	
 	}
 
-	/**
-	 * Getters and setters
-	 * @author Brayan Giraldo
-	 * Correo : giraldo97@outlook.com
-	 */
-	
 	public int getId() {
 		return id;
 	}

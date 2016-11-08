@@ -43,7 +43,7 @@ public class FilmActor implements Serializable {
 	private Film film;
 	
 	
-	@Column(name="caracter", nullable=false)
+	@Column(name="caracter",  nullable=false, insertable=false, updatable=false)
 	private String caracter;
 
 	public FilmActor() {
@@ -79,6 +79,22 @@ public class FilmActor implements Serializable {
 
 	public void setFilm(Film film) {
 		this.film = film;
+	}
+
+	
+	
+	/**
+	 * @return the caracter
+	 */
+	public String getCaracter() {
+		return caracter;
+	}
+
+	/**
+	 * @param caracter the caracter to set
+	 */
+	public void setCaracter(String caracter) {
+		this.caracter = caracter;
 	}
 
 	@Override

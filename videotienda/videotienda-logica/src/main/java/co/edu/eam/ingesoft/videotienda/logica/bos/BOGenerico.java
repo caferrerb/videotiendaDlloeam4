@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.videotienda.logica.bos;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.DAOGenerico;
 
 /**
@@ -64,7 +66,7 @@ public class BOGenerico<T> {
 	 *
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void crear(T entidad) {
+	public void crear(T entidad){
 		dao.persistir(entidad);
 	}
 
@@ -114,6 +116,20 @@ public class BOGenerico<T> {
 	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public T buscar(Object pk) {
 		return dao.encontrarPorId(getClase(), pk);
+	}
+	/**
+	 * 
+	 * Método que listar todos los regiustrode  una entidad <br>
+	 * 
+	 * @author Camilo Andres Ferrer Bustos<br>
+	 *         caferrerb@gmail.com<br>
+	 * 
+	 * @date 15/10/2016
+	 * @version 1.0
+	 *
+	 */
+	public List<T> listarTodos(){
+		return dao.ejecutarQuery("SELECT o FROM "+getClase().getSimpleName()+" o",null);
 	}
 
 	/**

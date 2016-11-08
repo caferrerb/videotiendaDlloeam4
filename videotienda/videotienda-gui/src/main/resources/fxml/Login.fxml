@@ -21,10 +21,10 @@
             <Label text="Usuario" />
             <Label text="Password" GridPane.rowIndex="1" />
             <TextField fx:id="tfUser" prefHeight="18.0" prefWidth="120.0" GridPane.columnIndex="1" />
-            <TextField fx:id="tfPass" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="tfPass" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="btnLogin" layoutX="131.0" layoutY="181.0" mnemonicParsing="false" text="Entrar" />
+      <Button id="btnLogin" layoutX="131.0" layoutY="181.0" mnemonicParsing="false" onAction="#login" text="Entrar" />
       <Label layoutX="121.0" layoutY="44.0" text="Video tienda" />
    </children>
 </AnchorPane>
