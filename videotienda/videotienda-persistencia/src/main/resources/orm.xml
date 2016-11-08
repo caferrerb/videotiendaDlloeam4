@@ -162,7 +162,7 @@
 			SELECT c FROM Customer c WHERE c.customerId=?1
 		</query>
 	</named-query>
-	
+		
 	<named-query name="FilmActor.ListarTodos">
 		<query>
 			SELECT fa FROM FilmActor fa WHERE fa.film.filmId=?1
@@ -194,7 +194,7 @@
 
 	</named-query>
 
-	<named-query name="Rental.TituloNombrePrestamos">
+<named-query name="Rental.TituloNombrePrestamos">
 		<query>
 			SELECT new co.edu.uniquindio.videotienda.dtos.PrestamoDTO(s.nombreTienda, f.title,r.rentalId) FROM Rental r
 			JOIN r.inventory i
@@ -294,6 +294,12 @@
 		<query>
 			SELECT SUM(f.rentalRate)FROM Sale s JOIN s.film f WHERE s.saleDate BETWEEN
 			?1 AND ?2
+		</query>
+	</named-query>
+	
+	<named-query name="Empleado.buscarEmpleadoPorUsuario">
+		<query>
+			SELECT s FROM Staff s WHERE s.usuario=?1
 		</query>
 	</named-query>
 
