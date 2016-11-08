@@ -319,8 +319,6 @@ public class ControladorGestionarActores extends BaseController implements Initi
 			}
 		});
 
-		tablaTitulo.setMinWidth(100);
-
 		tablaAnio.setCellValueFactory(new Callback<CellDataFeatures<FilmActor, Date>, ObservableValue<Date>>() {
 			@Override
 			public ObservableValue<Date> call(CellDataFeatures<FilmActor, Date> data) {

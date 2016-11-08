@@ -20,6 +20,7 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarC
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorAlquilarPelicula;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorEjemploTabla;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarTienda;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarVenta;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorSeguridad;
@@ -31,6 +32,7 @@ import co.edu.eam.ingesoft.videotienda.vista.controladores.LoginUsuarioControlle
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -78,6 +80,10 @@ public class MainController implements Initializable {
 	
 	@FXML
 	public Menu mnuTiendas;
+	
+	@FXML
+	public Menu mnuSucursales;
+	
 	
 	/**
 	 * Menu actores
@@ -149,13 +155,18 @@ public class MainController implements Initializable {
 	@FXML
 	private MenuItem menuItemGestionPrestamo;
 	
+	@FXML
+	private MenuItem menuItemEjemplo; 
+	
+	public Button btnCerrarSesion;
+	
 	/**
 	 * Inicializacion de la ventana.
 	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		//esconderMenus();
-		agregarVentana("/fxml/Inicio.fxml", LoginUsuarioController.class);
+//		esconderMenus();
+		agregarVentana("/fxml/Login.fxml", LoginUsuarioController.class);
 
 	}
 
@@ -206,6 +217,8 @@ public class MainController implements Initializable {
 		menuReportes.setVisible(false);
 		mnuTiendas.setVisible(false);
 		mnuPrestamos.setVisible(false);
+		mnuSucursales.setVisible(false);
+		btnCerrarSesion.setVisible(false);
 	}
 
 	/**
@@ -267,9 +280,7 @@ public class MainController implements Initializable {
 
 	@FXML
 	public void abrirverpeliculasrentadas() {
-
 		agregarVentana("/fxml/verpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
-
 	}
 	
 	@FXML
@@ -280,6 +291,17 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirGestionarPrestamos(){
 		agregarVentana("/fxml/AlquilarPelicula.fxml", ControladorAlquilarPelicula.class);
+	}
+	
+	@FXML
+	public void cerrarSesion(){
+		agregarVentana("/fxml/Login.fxml", LoginUsuarioController.class);
+		esconderMenus();
+	}
+	
+	@FXML
+	public void abrirEjemplo(){
+		agregarVentana("/fxml/ejemplotabla.fxml", ControladorEjemploTabla.class);
 	}
 	
 }

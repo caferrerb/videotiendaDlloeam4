@@ -73,7 +73,7 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 				
 					final Film f=pelicula.get(i);
 					data.add(pelicula.get(i));
-					jcolumnaGenero.setCellValueFactory(new PropertyValueFactory<Film, String>(""));
+					jcolumnaGenero.setCellValueFactory(new PropertyValueFactory<Film, String>("category"));
 					jcolumnaGenero.setMinWidth(100);
 					jcolumnaTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
 					jcolumnaTitulo.setMinWidth(100);

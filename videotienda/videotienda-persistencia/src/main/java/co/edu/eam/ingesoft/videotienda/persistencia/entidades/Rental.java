@@ -42,7 +42,7 @@ public class Rental implements Serializable {
 	@Column(name="rental_date", nullable=false)
 	private Date rentalDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="return_date")
 	private Date returnDate;
 
@@ -149,10 +149,7 @@ public class Rental implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Rental [rentalId=" + rentalId + ", lastUpdate=" + lastUpdate
-				+ ", rentalDate=" + rentalDate + ", returnDate=" + returnDate
-				+ ", payments=" + payments + ", customer=" + customer
-				+ ", inventory=" + inventory + ", staff=" + staff + "]";
+		return rentalDate + "";
 	}
 
 }
