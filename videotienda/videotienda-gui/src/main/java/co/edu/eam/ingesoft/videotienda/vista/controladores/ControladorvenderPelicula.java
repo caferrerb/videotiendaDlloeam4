@@ -113,7 +113,6 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 		film = (Film) obtenerValor("peliculavender");		
 		int id = film.getFilmId();
 		jtfIdPelicula.setText(String.valueOf(id));
-		borrarSesion("peliculavender");
 		
 	}
 	

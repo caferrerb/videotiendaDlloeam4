@@ -34,13 +34,14 @@
 			WHERE r.customer = ?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="Rental.consultaRepetidos">
 		<query>
 			SELECT r FROM Rental r
 			JOIN r.inventory i
 			JOIN i.film f
-			WHERE f = ?1
+			WHERE f =
+			?1
 		</query>
 	</named-query>
 
@@ -51,7 +52,7 @@
 			WHERE c.customerId = ?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="Inventory.listarInventarioPelicula">
 		<query>
 			SELECT i FROM Inventory i
@@ -138,19 +139,21 @@
 
 	<named-query name="datosTablaRental.Listar">
 		<query>
-			SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN
+			SELECT r FROM Rental r JOIN
 			r.customer c
 			JOIN r.inventory i
-			JOIN i.film f WHERE i.store = ?1
+			JOIN
+			i.film f WHERE i.store = ?1
 		</query>
 	</named-query>
 
 	<named-query name="datosTablaVentas.Listar">
 		<query>
-			SELECT f.filmId, f.title, c.customerId, s.saleDate FROM Sale s
+			SELECT s FROM Sale s
 			JOIN
 			s.customer c JOIN s.film f
-			JOIN s.staff p WHERE p.store = ?1
+			JOIN s.staff
+			p WHERE p.store = ?1
 		</query>
 	</named-query>
 
@@ -167,6 +170,13 @@
 		</query>
 	</named-query>
 
+	<named-query name="Rental.PeliculasRentadasCliente">
+		<query>
+			SELECT r FROM Rental r
+			WHERE r.customer = ?1
+		</query>
+	</named-query>
+	
 	<named-query name="Rental.PeliculasCliente">
 		<query>
 			SELECT r FROM Rental r
@@ -179,7 +189,8 @@
 		<query>
 			SELECT r.returnDate FROM Rental r
 			JOIN r.customer c
-			WHERE c.customerId = ?1
+			WHERE
+			c.customerId = ?1
 		</query>
 	</named-query>
 
@@ -248,11 +259,9 @@
 	</named-query>
 
 
-
 	<named-query name="StaffSchedule.ListaHorasEmpleado">
 		<query>
 			SELECT st FROM StaffSchedule st WHERE st.empleado = ?1
-
 		</query>
 
 	</named-query>
@@ -271,5 +280,20 @@
 		</query>
 	</named-query>
 
-	
+
+	<named-query name="Sale.TotalVentas">
+		<query>
+			SELECT SUM(f.rentalRate) FROM Rental r JOIN r.inventory i JOIN i.film f
+			WHERE r.rentalDate BETWEEN ?1 AND ?2
+		</query>
+	</named-query>
+
+	<named-query name="Rental.TotalRentas">
+		<query>
+			SELECT SUM(f.rentalRate)FROM Sale s JOIN s.film f WHERE s.saleDate BETWEEN
+			?1 AND ?2
+		</query>
+	</named-query>
+
+
 </entity-mappings>
