@@ -11,6 +11,8 @@ public class ConstantesNamedQueries {
 
 	public static final String CONSULTA_LISTAREMPLEADOS = "Empleado.ListarTodos";
 	
+	public static final String CONSULTA_BUSCAR_EMPLEADOS_POR_USUARIO = "Empleado.buscarEmpleadoPorUsuario";
+	
 	/**
 	 * Lista los inventarios de una pel�cula
 	 * ?1: La pel�cula

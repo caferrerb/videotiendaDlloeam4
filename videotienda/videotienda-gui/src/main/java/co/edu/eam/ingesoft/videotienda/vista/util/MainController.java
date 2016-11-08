@@ -1,20 +1,12 @@
 package co.edu.eam.ingesoft.videotienda.vista.util;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import co.edu.eam.ingesoft.videotienda.logica.bos.BOAccesoRol;
-import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuarioRol;
+
 import co.edu.eam.ingesoft.videotienda.main.ContextFactory;
-import co.edu.eam.ingesoft.videotienda.persistencia.entidades.AccesoRol;
-import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
-import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
-import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
@@ -33,7 +25,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
@@ -165,6 +156,7 @@ public class MainController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		boton();
 //		 esconderMenus();
+		
 		agregarVentana("/fxml/Login.fxml", LoginUsuarioController.class);
 
 	}

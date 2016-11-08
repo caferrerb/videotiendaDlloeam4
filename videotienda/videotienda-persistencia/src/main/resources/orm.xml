@@ -254,5 +254,11 @@
 			?1 AND ?2
 		</query>
 	</named-query>
+	
+	<named-query name="Empleado.buscarEmpleadoPorUsuario">
+		<query>
+			SELECT s FROM Staff s WHERE s.usuario=?1
+		</query>
+	</named-query>
 
 </entity-mappings>
