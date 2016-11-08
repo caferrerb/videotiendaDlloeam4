@@ -53,7 +53,7 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 
 	@FXML
 	private ComboBox<City> jCBCiudadTraslado;
-	
+
 	@FXML
 	private TextField jTFNuevaDir;
 
@@ -64,6 +64,7 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		llenarComboCiudades();
 		cliente = null;
+		jTFCiudadActual.setEditable(false);
 	}
 
 	/**
@@ -71,11 +72,13 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 	 */
 	private void llenarComboCiudades() {
 		List<City> listaCiudades = boCiudad.listarCiudades();
-		for (City city : listaCiudades) {
-			jCBCiudadTraslado.getItems().add(city);
-		}
-		if (!listaCiudades.isEmpty()){
-			jCBCiudadTraslado.getSelectionModel().selectFirst();
+		if (listaCiudades.size() != 0) {
+			for (City city : listaCiudades) {
+				jCBCiudadTraslado.getItems().add(city);
+			}
+			if (!listaCiudades.isEmpty()) {
+				jCBCiudadTraslado.getSelectionModel().selectFirst();
+			}
 		}
 	}
 
@@ -113,7 +116,7 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 		} catch (ExcepcionNegocio e) {
 			notificar("Traslado", e.getMessage(), TipoNotificacion.ERROR);
 		}
-		
+
 	}
 
 }
