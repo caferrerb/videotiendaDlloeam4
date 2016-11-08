@@ -151,7 +151,11 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	private TableColumn<Rol, Integer> idRolCL;
 
 	/**
-	 * TableColumn contiene la descripcion del rol
+	 * TableColumn contiene la descri
+	 * 
+	 * 
+	 * 
+	 * pcion del rol
 	 */
 	@FXML
 	private TableColumn<Rol, String> nombreRolCL;
