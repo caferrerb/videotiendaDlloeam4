@@ -150,8 +150,8 @@ public class ControladorEjemploTabla extends BaseController implements Initializ
 		try {
 			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
 			Map<String, Object> params=new HashMap<>();
-			params.put("test", "parametro prueba");
-			reporter.generarReporte(params, "/reportes/ejemplo.jrxml", "ejemplo");
+			params.put("idcat", 1);
+			reporter.generarReporte(params, "/reportes/peliculascat.jrxml", "PeliculasXCategoria");
 		} catch (Exception e) {
 			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
 		}
