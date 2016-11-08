@@ -216,9 +216,7 @@
 
 	</named-query>
 
-
-	
-	
+		
 	<named-query name="StaffSchedule.ListaHorarios">
 		<query>
 			SELECT st FROM StaffSchedule st

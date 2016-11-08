@@ -18,15 +18,20 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Inventory;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
+
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
 
@@ -68,19 +73,17 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 	private TableColumn<Rental, Date> cEntrega;
 
 	@FXML
-	private TableColumn<Customer, Button> cBoton;
-	
+	private TableColumn cBoton;
+
 	@FXML
 	private TableColumn cBoton1;
 
 	@FXML
-	private final ObservableList<Rental> filmRentadas= FXCollections.observableArrayList();
-
+	private final ObservableList<Rental> filmRentadas = FXCollections.observableArrayList();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		cargarComboTienda();
-		
 
 	}
 
@@ -93,7 +96,9 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 	/**
 	 * Metodo que carga la tabla de peliculas rentadas
-	 * @param store, tienda a la cua se le busca las peliculas rentadas
+	 * 
+	 * @param store,
+	 *            tienda a la cua se le busca las peliculas rentadas
 	 */
 	@FXML
 	public void cargarTablaPeliculas(Store store) {
@@ -105,20 +110,93 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 			cCliente.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("Cliente"));
 			cFecha.setCellValueFactory(new PropertyValueFactory<Rental, Date>("Fecha Prestamo"));
 			cEntrega.setCellValueFactory(new PropertyValueFactory<Rental, Date>("Fecha Entrega"));
-			tbPeliculasDeTiendaR.setItems(filmRentadas);
-		}
+			cBoton1.setCellFactory(new Callback<TableColumn<Rental, Boolean>, TableCell<Rental, Boolean>>() {
+				public TableCell<Rental, Boolean> call(TableColumn<Rental, Boolean> p) {
+					return new ButtonCell(tbPeliculasDeTiendaR);
+				}
 
+			});
+			cBoton.setCellFactory(new Callback<TableColumn<Rental, Boolean>, TableCell<Rental, Boolean>>() {
+				public TableCell<Rental, Boolean> call(TableColumn<Rental, Boolean> p) {
+					return new ButtonCell(tbPeliculasDeTiendaR);
+				}
+
+			});
+		
+		tbPeliculasDeTiendaR.setItems(filmRentadas);
 	}
+
+}
+
+
 	
+
 	@FXML
-	public void eventoSeleccionCombo(){
-		if(cbTienda.getSelectionModel().getSelectedIndex() != 0){
-			Store store=cbTienda.getSelectionModel().getSelectedItem();
+	public void eventoSeleccionCombo() {
+		if (cbTienda.getSelectionModel().getSelectedIndex() != 0) {
+			Store store = cbTienda.getSelectionModel().getSelectedItem();
 			cargarTablaPeliculas(store);
-			
-		}else{
+
+		} else {
 			notificar("NOTIFICACION", "Por favor selecione una tienda", TipoNotificacion.ERROR);
 		}
 	}
+	
+	/**
+	 * 
+	 * @author Cristian Sinisterra
+	 *
+	 */
+	private class ButtonCell extends TableCell<Rental, Boolean> {
+		// boton a mostrar
+		final Button cellButton = new Button("Entregar");
+
+		ButtonCell(final TableView tblView) {
+
+			cellButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent t) {
+					abrirVentana("/fxml/GestionarPrestamos.fxml.fxml", ControladorVerPeliculasRentadas.class);
+				}
+			});
+		}
+
+		// Muestra un boton si la fila no es nula
+		@Override
+		protected void updateItem(Boolean t, boolean empty) {
+			super.updateItem(t, empty);
+			if (!empty) {
+				setGraphic(cellButton);
+			}
+		}
+	}
+
+	
+	private class ButtonCell2 extends TableCell<Rental, Boolean> {
+		// boton a mostrar
+		final Button cellButton = new Button("Ver Cliente");
+
+		ButtonCell2(final TableView tblView) {
+
+			cellButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent t) {
+					abrirVentana("/fxml/GestionarPrestamos.fxml.fxml", ControladorVerPeliculasRentadas.class);
+				}
+			});
+		}
+
+		// Muestra un boton si la fila no es nula
+		@Override
+		protected void updateItem(Boolean t, boolean empty) {
+			super.updateItem(t, empty);
+			if (!empty) {
+				setGraphic(cellButton);
+			}
+		}
+	}
+
 	
 }

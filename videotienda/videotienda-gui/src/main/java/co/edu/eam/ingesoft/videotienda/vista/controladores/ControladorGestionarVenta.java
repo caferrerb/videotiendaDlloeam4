@@ -125,7 +125,7 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 				public void handle(ActionEvent t) {
 					guardarEnSesion("peliculavender", film);
 					abrirVentana("/fxml/venderPelicula.fxml", ControladorvenderPelicula.class);
-					int num = getTableRow().getIndex();
+				int num = getTableRow().getIndex();
 					
 //					}
 				}
