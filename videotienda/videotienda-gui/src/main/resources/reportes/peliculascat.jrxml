@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-08T07:45:16 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="peliculascat" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b2386e37-6613-42f6-bf77-f646d1498612">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="videotiendadb"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="277"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="712"/>
+	<parameter name="idcat" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT * FROM film_category fc JOIN 
+film f ON(f.film_id=fc.film_id) JOIN category c ON(fc.category_id=c.category_id) 
+WHERE fc.category_id=$P{idcat}]]>
+	</queryString>
+	<field name="category_id" class="java.lang.Integer"/>
+	<field name="film_id" class="java.lang.Integer"/>
+	<field name="last_update" class="java.sql.Timestamp"/>
+	<field name="COLUMN_4" class="java.lang.Integer"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="release_year" class="java.sql.Date"/>
+	<field name="language_id" class="java.lang.Integer"/>
+	<field name="original_language_id" class="java.lang.Integer"/>
+	<field name="rental_duration" class="java.lang.Integer"/>
+	<field name="rental_rate" class="java.math.BigDecimal"/>
+	<field name="length" class="java.lang.Integer"/>
+	<field name="replacement_cost" class="java.math.BigDecimal"/>
+	<field name="rating" class="java.lang.String"/>
+	<field name="special_features" class="java.lang.String"/>
+	<field name="COLUMN_16" class="java.sql.Timestamp"/>
+	<field name="category" class="java.lang.String"/>
+	<field name="poster" class="java.lang.Object"/>
+	<field name="COLUMN_19" class="java.lang.Integer"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="COLUMN_21" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="130" y="24" width="280" height="30" uuid="906b86f0-69e4-49c5-a60b-f33807f29203"/>
+				<textElement textAlignment="Center">
+					<font fontName="Al Nile" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peliculas por categoria]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="6d94c6e1-5305-4144-ba30-427859ce3283"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[film_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="100" height="30" uuid="e53fcdfa-7a9f-4bf2-bb97-c2a564a92de3"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="0" width="100" height="30" uuid="44f0b186-cfe6-40c0-9043-e44bc735dcd5"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[category]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="30" uuid="38988ea6-0af7-47c5-887e-1681e23ae8c4"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="23910f06-0105-45e5-8079-227975624d4b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{film_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="100" height="30" uuid="0e90f543-01e6-4f9b-9e19-865686b43c96"/>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="0" width="100" height="30" uuid="d52bdec8-0bc8-4a79-b580-f4255d5328f2"/>
+				<textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="58" splitType="Stretch">
+			<textField>
+				<reportElement x="350" y="12" width="100" height="30" uuid="6518b1cd-173f-475b-aa15-93f01e74ea61"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="450" y="12" width="100" height="30" uuid="44fdf520-5df3-4b42-b347-4bda63dbb4e1"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="100" y="12" width="100" height="30" uuid="71ab4603-d5bc-4fb6-be58-2a4e4df6b48a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

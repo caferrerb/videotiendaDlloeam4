@@ -158,7 +158,7 @@ public class Store implements Serializable {
 
 	@Override
 	public String toString() {
-		return storeId+"";
+		return nombreTienda;
 	}
 
 }
