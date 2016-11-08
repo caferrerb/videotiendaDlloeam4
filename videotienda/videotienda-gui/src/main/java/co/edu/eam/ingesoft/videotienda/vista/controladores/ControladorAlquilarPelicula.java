@@ -98,7 +98,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	private DatePicker dFechaEntrega;
 
 	@FXML
-	private TableView<Rental> tTPrestamos;
+	private TableView<Object[]> tTPrestamos;
 
 	@FXML
 	private TableColumn<Film, String> cCTitulo;
@@ -109,9 +109,9 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	@FXML
 	private TableColumn<Rental, Rental> cCbotonEliminar;
 
-	List<Rental> listaPrestamos;
+	List<Object[]> listaPrestamos;
 
-	ObservableList<Rental> prestamosListar;
+	ObservableList<Object[]> prestamosListar;
 	
 	
 
@@ -200,11 +200,12 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 	@FXML
 	public void listarPrestamosClientes() {
-		listaPrestamos = boAlquiPelicula.listarPrestamoCliente(customer);
+		int idCliente = Integer.parseInt(tFIdentificacion.getText());
+		listaPrestamos = boAlquiPelicula.listarLosPrestamosCliente(idCliente);
 		prestamosListar = FXCollections.observableArrayList();
-		 for (Rental rental : listaPrestamos) {
-			 prestamosListar.setAll(rental);
-		}
+		 for (Object[] objects : listaPrestamos) {
+			 prestamosListar.setAll(objects);
+		} 
 		
 		tTPrestamos.setItems(prestamosListar);
 
@@ -215,36 +216,36 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		cCTienda.setCellValueFactory(new PropertyValueFactory<Store, String>("nombreTienda"));
 		cCbotonEliminar.setSortable(false);
 
-		cCbotonEliminar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
-		cCbotonEliminar.setCellFactory(param -> new TableCell<Rental, Rental>() {
-			private final Button deleteButton = new Button("Retornar");
-
-			@Override
-			protected void updateItem(Rental prestamo, boolean empty) {
-				super.updateItem(prestamo, empty);
-
-				if (prestamo == null) {
-					setGraphic(null);
-					return;
-				}
-
-				setGraphic(deleteButton);
-				deleteButton.setOnAction(new EventHandler<ActionEvent>() {
-
-					@Override
-					public void handle(ActionEvent t) {
-						int num = getTableRow().getIndex();
-						//borramos el objeto obtenido de la fila
-						Rental p = listaPrestamos.get(num);
-						boRental.eliminar(p.getRentalId());
-						prestamosListar.remove(num);
-					    notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
-					    TipoNotificacion.INFO);
-
-					}
-				});
-			}
-		});
+//		cCbotonEliminar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+//		cCbotonEliminar.setCellFactory(param -> new TableCell<Rental, Rental>() {
+//			private final Button deleteButton = new Button("Retornar");
+//
+//			@Override
+//			protected void updateItem(Rental prestamo, boolean empty) {
+//				super.updateItem(prestamo, empty);
+//
+//				if (prestamo == null) {
+//					setGraphic(null);
+//					return;
+//				}
+//
+//				setGraphic(deleteButton);
+//				deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+//
+//					@Override
+//					public void handle(ActionEvent t) {
+//						int num = getTableRow().getIndex();
+//						//borramos el objeto obtenido de la fila
+//						Rental p = listaPrestamos.get(num);
+//						boRental.eliminar(p.getRentalId());
+//						prestamosListar.remove(num);
+//					    notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
+//					    TipoNotificacion.INFO);
+//
+//					}
+//				});
+//			}
+//		});
 
 	}
 }
