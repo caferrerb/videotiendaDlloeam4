@@ -46,12 +46,6 @@ public class Rol implements Serializable{
 	
 	}
 
-	/**
-	 * Getters and setters
-	 * @author Brayan Giraldo
-	 * Correo : giraldo97@outlook.com
-	 */
-	
 	public int getId() {
 		return id;
 	}

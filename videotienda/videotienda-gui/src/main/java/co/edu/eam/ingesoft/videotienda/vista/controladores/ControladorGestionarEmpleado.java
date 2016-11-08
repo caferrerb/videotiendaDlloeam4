@@ -47,7 +47,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
 
-
 @Controller
 public class ControladorGestionarEmpleado extends BaseController implements Initializable {
 
@@ -127,54 +126,77 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		llenarTienda();
 	}
 
+	public void limpiarCampos() {
+		TFIdEmpleado.setText(null);
+		TFIdUsuario.setText(null);
+		TfPrimerNombre.setText(null);
+		TfSegundoNombre.setText(null);
+		TfEmail.setText(null);
+		TFDireccionA.setText(null);
+		TFDdireccionB.setText(null);
+		TFDepartamento.setText(null);
+		TFTelefono.setText(null);
+		TFCodigoPos.setText(null);
+		CBCiudad.setSelectionModel(null);
+	}
+
 	@FXML
 	public void crearEmpleado() throws Exception {
 		try {
-			Staff empleado = new Staff();
-			Address direccion = new Address();
-			// Busca una ciudad por su id
-			City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
-			direccion.setAddress(TFDireccionA.getText());
-			direccion.setAddress2(TFDdireccionB.getText());
-			// direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
-			direccion.setCity(ciudad);
-			direccion.setDistrict(TFDepartamento.getText());
-			direccion.setLastUpdate(new Timestamp(new Date().getTime()));
-			direccion.setPhone(TFTelefono.getText());
-			direccion.setPostalCode(TFCodigoPos.getText());
-			// Empleado
+			if (TFIdEmpleado.getText() != null && TfPrimerNombre.getText() != null && TfSegundoNombre.getText() != null
+					&& TfEmail.getText() != null && TFDireccionA.getText() != null && TFDdireccionB.getText() != null
+					&& CBCiudad.getSelectionModel().getSelectedItem() != null && TFDepartamento.getText() != null
+					&& TFTelefono.getText() != null && TFCodigoPos.getText() != null
+					&& comboBoxSelecTienda.getSelectionModel().getSelectedItem() != null && PhFoto != null) {
+				Staff empleado = new Staff();
+				Address direccion = new Address();
+				// Busca una ciudad por su id
+				City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
+				direccion.setAddress(TFDireccionA.getText());
+				direccion.setAddress2(TFDdireccionB.getText());
+				// direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
+				direccion.setCity(ciudad);
+				direccion.setDistrict(TFDepartamento.getText());
+				direccion.setLastUpdate(new Timestamp(new Date().getTime()));
+				direccion.setPhone(TFTelefono.getText());
+				direccion.setPostalCode(TFCodigoPos.getText());
+				// Empleado
 
-			empleado.setAddress(direccion);
-			empleado.setStaffId((byte) Integer.parseInt(TFIdEmpleado.getText()));
-			empleado.setEmail(TfEmail.getText());
-			empleado.setFirstName(TfPrimerNombre.getText());
-			empleado.setLastName(TfSegundoNombre.getText());
-			empleado.setLastUpdate(new Timestamp(new Date().getTime()));
+				empleado.setAddress(direccion);
+				empleado.setStaffId((byte) Integer.parseInt(TFIdEmpleado.getText()));
+				empleado.setEmail(TfEmail.getText());
+				empleado.setFirstName(TfPrimerNombre.getText());
+				empleado.setLastName(TfSegundoNombre.getText());
+				empleado.setLastUpdate(new Timestamp(new Date().getTime()));
 
-			// Imagen del empleado
-			if (PhFoto != null) {
-				byte[] imagen = new byte[(int) imgFile.length()];
-				FileInputStream emp = new FileInputStream(imgFile);
-				emp.read(imagen);
-				empleado.setPicture(imagen);
+				// Imagen del empleado
+				if (PhFoto != null) {
+					byte[] imagen = new byte[(int) imgFile.length()];
+					FileInputStream emp = new FileInputStream(imgFile);
+					emp.read(imagen);
+					empleado.setPicture(imagen);
+				} else {
+					empleado.setPicture(null);
+				}
+				Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
+				empleado.setUsuario(usuario);
+
+				Store tienda = boTienda.buscar(comboBoxSelecTienda.getSelectionModel().getSelectedItem().getStoreId());
+				empleado.setStore(tienda);
+
+				if (CheckActivo.isSelected() == true) {
+					empleado.setActive(true);
+				} else {
+					empleado.setActive(false);
+				}
+				boDireccion.crearDireccion(direccion);
+				boEmpleado.crearEmpleado(empleado);
+
+				notificar("Gestionar empleado", "Empleado Creado con exito", TipoNotificacion.INFO);
+				limpiarCampos();
 			} else {
-				empleado.setPicture(null);
+				notificar("Gestionar camposEmpeleado", "Debe llenar los campos obligatorios", TipoNotificacion.ERROR);
 			}
-			Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
-			empleado.setUsuario(usuario);
-
-			Store tienda = boTienda.buscar(comboBoxSelecTienda.getSelectionModel().getSelectedItem().getStoreId());
-			empleado.setStore(tienda);
-
-			if (CheckActivo.isSelected() == true) {
-				empleado.setActive(true);
-			} else {
-				empleado.setActive(false);
-			}
-			boDireccion.crearDireccion(direccion);
-			boEmpleado.crearEmpleado(empleado);
-
-			notificar("Gestionar empleado", "Empleado Creado con exito", TipoNotificacion.INFO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -183,49 +205,60 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	@FXML
 	public void editarEmpleado() throws Exception {
 		try {
-			Staff empleado = new Staff();
-			Address direccion = new Address();
-			// Busca una ciudad por su id
-			City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
-			direccion.setAddress(TFDireccionA.getText());
-			direccion.setAddress2(TFDdireccionB.getText());
-			// direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
-			direccion.setCity(ciudad);
-			direccion.setDistrict(TFDepartamento.getText());
-			direccion.setLastUpdate(new Timestamp(new Date().getTime()));
-			direccion.setPhone(TFTelefono.getText());
-			direccion.setPostalCode(TFCodigoPos.getText());
-			// Empleado
-			empleado.setAddress(direccion);
-			empleado.setStaffId((byte) Integer.parseInt(TFIdEmpleado.getText()));
-			empleado.setEmail(TfEmail.getText());
-			empleado.setFirstName(TfPrimerNombre.getText());
-			empleado.setLastName(TfSegundoNombre.getText());
-			// cambiar CAPTURAR LA FECHA QUE SALE EN EL TEXFILE AL BUSCAR
-			empleado.setLastUpdate(new Timestamp(new Date().getTime()));
-			empleado.setAddress(direccion);
+			if (TFIdEmpleado.getText() != null && TfPrimerNombre.getText() != null && TfSegundoNombre.getText() != null
+					&& TfEmail.getText() != null && TFDireccionA.getText() != null && TFDdireccionB.getText() != null
+					&& CBCiudad.getSelectionModel().getSelectedItem() != null && TFDepartamento.getText() != null
+					&& TFTelefono.getText() != null && TFCodigoPos.getText() != null
+					&& comboBoxSelecTienda.getSelectionModel().getSelectedItem() != null && PhFoto != null) {
+				Staff empleado = new Staff();
+				Address direccion = new Address();
+				// Busca una ciudad por su id
+				City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
+				direccion.setAddress(TFDireccionA.getText());
+				direccion.setAddress2(TFDdireccionB.getText());
+				// direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
+				direccion.setCity(ciudad);
+				direccion.setDistrict(TFDepartamento.getText());
+				direccion.setLastUpdate(new Timestamp(new Date().getTime()));
+				direccion.setPhone(TFTelefono.getText());
+				direccion.setPostalCode(TFCodigoPos.getText());
+				// Empleado
+				empleado.setAddress(direccion);
+				empleado.setStaffId((byte) Integer.parseInt(TFIdEmpleado.getText()));
+				empleado.setEmail(TfEmail.getText());
+				empleado.setFirstName(TfPrimerNombre.getText());
+				empleado.setLastName(TfSegundoNombre.getText());
+				// cambiar CAPTURAR LA FECHA QUE SALE EN EL TEXFILE AL BUSCAR
+				empleado.setAddress(direccion);
 
-			// Imagen del empleado
-			byte[] imagen = new byte[(int) imgFile.length()];
-			FileInputStream emp = new FileInputStream(imgFile);
-			emp.read(imagen);
-			empleado.setPicture(imagen);
+				// Imagen del empleado
+				if (imgFile != null) {
+					byte[] imagen = new byte[(int) imgFile.length()];
+					FileInputStream emp = new FileInputStream(imgFile);
+					emp.read(imagen);
+					empleado.setPicture(imagen);
+				} else {
+					empleado.setPicture(null);
+				}
 
-			Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
-			empleado.setUsuario(usuario);
+				Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
+				empleado.setUsuario(usuario);
 
-			Store tienda = boTienda.buscar(comboBoxSelecTienda.getSelectionModel().getSelectedItem().getStoreId());
-			empleado.setStore(tienda);
+				Store tienda = boTienda.buscar(comboBoxSelecTienda.getSelectionModel().getSelectedItem().getStoreId());
+				empleado.setStore(tienda);
 
-			if (CheckActivo.isSelected() == true) {
-				empleado.setActive(true);
+				if (CheckActivo.isSelected() == true) {
+					empleado.setActive(true);
+				} else {
+					empleado.setActive(false);
+				}
+
+				boEmpleado.editarEmpleado(empleado);
+				boDireccion.editarDireccion(direccion);
+				notificar("Editar empleado", "Empleado editado con exito", TipoNotificacion.INFO);
 			} else {
-				empleado.setActive(false);
+				notificar("Gestionar camposEmpeleado", "Debe llenar los campos obligatorios", TipoNotificacion.ERROR);
 			}
-
-			boEmpleado.editarEmpleado(empleado);
-			boDireccion.editarDireccion(direccion);
-			notificar("Editar empleado", "Empleado editado con exito", TipoNotificacion.INFO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -233,56 +266,62 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 
 	@FXML
 	public void buscarEmpleado() {
-		Staff empleado = boEmpleado.buscar((byte) Integer.parseInt(TFIdEmpleado.getText()));
+		if (TFIdEmpleado.getText() != null) {
+			Staff empleado = boEmpleado.buscar((byte) Integer.parseInt(TFIdEmpleado.getText()));
 
-		if (empleado != null) {
-			if (empleado.getUsuario() != null) {
-				TFIdUsuario.setText(empleado.getUsuario().getUsuario());
-			} else {
-				TFIdUsuario.setText(null);
-			}
-			TfPrimerNombre.setText(empleado.getFirstName());
-			TfSegundoNombre.setText(empleado.getLastName());
-			TfEmail.setText(empleado.getEmail());
-			TFFechaCreacion.setText(empleado.getLastUpdate().toString());
-			if (empleado.getActive() == true) {
-				CheckActivo.setSelected(true);
-			}
-			TFDireccionA.setText(empleado.getAddress().getAddress());
-			TFDdireccionB.setText(empleado.getAddress().getAddress2());
-			CBCiudad.setValue(empleado.getAddress().getCity());
-			TFDepartamento.setText(empleado.getAddress().getDistrict());
-			TFUlltimaActualizacionDir.setText(empleado.getAddress().getLastUpdate().toString());
-			TFTelefono.setText(empleado.getAddress().getPhone());
-			TFCodigoPos.setText(empleado.getAddress().getPostalCode());
-
-			if(empleado.getPicture()!=null){
-				Image im=new Image(new ByteArrayInputStream(empleado.getPicture()));
-				PhFoto.setImage(im); 
+			if (empleado != null) {
+				if (empleado.getUsuario() != null) {
+					TFIdUsuario.setText(empleado.getUsuario().getUsuario());
+				} else {
+					TFIdUsuario.setText(null);
 				}
-			
-			List<StaffSchedule> listahorarioEmple = boHorario.listaHorario(empleado);
+				TfPrimerNombre.setText(empleado.getFirstName());
+				TfSegundoNombre.setText(empleado.getLastName());
+				TfEmail.setText(empleado.getEmail());
+				TFFechaCreacion.setText(empleado.getLastUpdate().toString());
+				if (empleado.getActive() == true) {
+					CheckActivo.setSelected(true);
+				}
+				TFDireccionA.setText(empleado.getAddress().getAddress());
+				TFDdireccionB.setText(empleado.getAddress().getAddress2());
+				CBCiudad.setValue(empleado.getAddress().getCity());
+				TFDepartamento.setText(empleado.getAddress().getDistrict());
+				TFUlltimaActualizacionDir.setText(empleado.getAddress().getLastUpdate().toString());
+				TFTelefono.setText(empleado.getAddress().getPhone());
+				TFCodigoPos.setText(empleado.getAddress().getPostalCode());
 
-			for (int i = 0; i < listahorarioEmple.size(); i++) {
+				if (empleado.getPicture() != null) {
+					Image im = new Image(new ByteArrayInputStream(empleado.getPicture()));
+					PhFoto.setImage(im);
+				}
 
-				data.add(listahorarioEmple.get(i));
-				TBDia.setCellValueFactory(new PropertyValueFactory<StaffSchedule, DayEnum>("dia"));
-				TBDia.setMinWidth(100);
-				TBInicial.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaInicial"));
-				TBInicial.setMinWidth(100);
-				tbFinal.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaFinal"));
-				tbFinal.setMinWidth(100);
+				List<StaffSchedule> listahorarioEmple = boHorario.listaHorario(empleado);
 
-//				TBOpciones.setCellValueFactory(
-//						new Callback<TableColumn<StaffSchedule, Boolean>, TableCell<StaffSchedule, Boolean>>() {
-//							public TableCell<StaffSchedule, Boolean> call(TableColumn<StaffSchedule, Boolean> p) {
-//								return new ButtonCell(TbHorario);
-//							}
-//						});
-				TbHorario.setItems(data);
+				for (int i = 0; i < listahorarioEmple.size(); i++) {
+
+					data.add(listahorarioEmple.get(i));
+					TBDia.setCellValueFactory(new PropertyValueFactory<StaffSchedule, DayEnum>("dia"));
+					TBDia.setMinWidth(100);
+					TBInicial.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaInicial"));
+					TBInicial.setMinWidth(100);
+					tbFinal.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaFinal"));
+					tbFinal.setMinWidth(100);
+
+					// TBOpciones.setCellValueFactory(
+					// new Callback<TableColumn<StaffSchedule, Boolean>,
+					// TableCell<StaffSchedule, Boolean>>() {
+					// public TableCell<StaffSchedule, Boolean>
+					// call(TableColumn<StaffSchedule, Boolean> p) {
+					// return new ButtonCell(TbHorario);
+					// }
+					// });
+					TbHorario.setItems(data);
+				}
+			} else {
+				notificar("Gestionar BuscarEmpleado", "El empleado no esta registrado", TipoNotificacion.ERROR);
 			}
-		}else{
-			notificar("Gestionar BuscarEmpleado", "El empleado no esta registrado", TipoNotificacion.ERROR);
+		} else {
+			notificar("Gestionar CampoBuscarEmpleado", "Debe proporcionar un ID del EMPLEADO para buscar", TipoNotificacion.ERROR);
 		}
 	}
 

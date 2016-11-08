@@ -212,12 +212,12 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </TextField>
-            <Label text="Foto" GridPane.rowIndex="13">
+            <Label text="* Foto" GridPane.rowIndex="13">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
-            <Label text="* Id Usuario" GridPane.rowIndex="2">
+            <Label text="Id Usuario" GridPane.rowIndex="2">
                <font>
                   <Font name="Arial" size="14.0" />
                </font></Label>

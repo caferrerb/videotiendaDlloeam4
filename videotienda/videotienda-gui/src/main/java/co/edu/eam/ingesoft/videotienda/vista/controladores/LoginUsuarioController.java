@@ -15,11 +15,11 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.AccesoRol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
-import co.edu.eam.ingesoft.videotienda.vista.util.MensajesGui;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 /**
@@ -42,7 +42,7 @@ public class LoginUsuarioController extends BaseController implements Initializa
 	 * Componente del password name.
 	 */
 	@FXML
-	private TextField tfPass;
+	private PasswordField tfPass;
 
 	@Autowired
 	private BOUsuario boUsuario;

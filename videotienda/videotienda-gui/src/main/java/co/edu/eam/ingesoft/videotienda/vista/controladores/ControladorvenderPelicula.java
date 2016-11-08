@@ -67,15 +67,18 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 		try {
 			int idCliente = Integer.parseInt(jtfIdCliente.getText());
 			List<Customer> cus = boCus.listaBucarCliente(idCliente);
+			Customer regiCus = boCus.buscar(idCliente);
+			if (regiCus != null) {
 			for (int i = 0; i < cus.size(); i++) {
-				if (cus != null) {
+				
 					jtfNombreCliente.setText(cus.get(i).getFirstName());
 //					fecha.
 					
 					// jtfIdPelicula.setText(film.getFilmId());
-				}else{
-					notificar("¡ERROR!", "El cliente no se encuentra registrado",  TipoNotificacion.ERROR);
 				}
+			}else{
+				notificar("¡ERROR!", "El cliente no se encuentra registrado",  TipoNotificacion.ERROR);
+				abrirVentana("/fxml/VentanaGestionEmpleados.fxml", ControladorGestionarEmpleado.class);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,6 +101,7 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 			boSale.crearSa(vender);
 			
 			notificar("¡NOTIFICACION!", "La venta se realizo exitosamente",  TipoNotificacion.INFO);
+			limpiarcampos();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -111,6 +115,13 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 		jtfIdPelicula.setText(String.valueOf(id));
 		borrarSesion("peliculavender");
 		
+	}
+	
+	public void limpiarcampos(){
+		jtfIdCliente.setText(null);
+		jtfIdEmpleado.setText(null);
+		jtfIdPelicula.setText(null);
+		jtfNombreCliente.setText(null);
 	}
 	
 
