@@ -21,13 +21,13 @@ public class UsuarioRol implements Serializable{
 	 */
 	
 	@Id
-	@ManyToOne
-	@JoinColumn(name = "ID_ROL", nullable = false, updatable = false, insertable = false)
+	@ManyToOne(cascade={})
+	@JoinColumn(name = "ID_ROL", nullable = false)
 	private Rol rol;
 	
 	@Id
-	@ManyToOne
-	@JoinColumn(name = "ID_USUARIO", nullable = false, updatable = false, insertable = false)
+	@ManyToOne(cascade={})
+	@JoinColumn(name = "ID_USUARIO", nullable = false)
 	private Usuario usuario;
 
 	/*

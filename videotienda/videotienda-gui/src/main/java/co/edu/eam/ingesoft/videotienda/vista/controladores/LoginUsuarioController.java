@@ -1,8 +1,12 @@
 package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOAccesoRol;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuario;
@@ -11,9 +15,11 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.AccesoRol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
-import co.edu.eam.ingesoft.videotienda.vista.util.MensajesGui;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Menu;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 /**
@@ -23,7 +29,8 @@ import javafx.scene.control.TextField;
  *         email: caferrerb@gmail.com <br/>
  *         Fecha: 18/10/2015<br/>
  */
-public class LoginUsuarioController extends BaseController {
+@Controller
+public class LoginUsuarioController extends BaseController implements Initializable {
 
 	/**
 	 * Componente del user name.
@@ -35,16 +42,22 @@ public class LoginUsuarioController extends BaseController {
 	 * Componente del password name.
 	 */
 	@FXML
-	private TextField tfPass;
+	private PasswordField tfPass;
 
 	@Autowired
 	private BOUsuario boUsuario;
-	
 	@Autowired
 	private BOAccesoRol boAccesoRol;
-	
 	@Autowired
 	private BOUsuarioRol boUsuarioRol;
+
+	private Usuario usu;
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		usu = new Usuario();
+	}
 
 	/**
 	 * Evento de login.
@@ -61,18 +74,42 @@ public class LoginUsuarioController extends BaseController {
 			Usuario usu = new Usuario();
 			usu.setUsuario(tfUser.getText());
 			usu.setPass(tfPass.getText());
-			if (boUsuario.buscarEntidad(usu).size() == 0) {
+			List<Usuario> lista = boUsuario.buscarEntidad(usu);
+			int list = lista.size();
+			if (list == 0||
+					!(lista.get(0).getPass().equals(tfPass.getText()))) {
 				notificar("LogIn", "El usuario o el password que ha ingresado no son correctos",
 						TipoNotificacion.ERROR);
 			} else {
-
 				List<Rol> roles = boUsuarioRol.listarRolesPorUsuario(usu.getUsuario());
+				List<Menu> menus = new ArrayList<>();
+				menus.add(mainController.mnuInicio);
+				menus.add(mainController.mnuPeliculas);
+				menus.add(mainController.menuCliente);
+				menus.add(mainController.mnuActores);
+				menus.add(mainController.mnuGeneros);
+				menus.add(mainController.mnuEmpleados);
+				menus.add(mainController.mnuPrestamos);
+				menus.add(mainController.mnuParametrizacion);
+				menus.add(mainController.mnuTiendas);
+				menus.add(mainController.mnuAutorizacion);
+				menus.add(mainController.menuReportes);
 				
 				for (Rol rol : roles) {
 					List<AccesoRol> accesosRol = boAccesoRol.listarPorRol(rol);
-					
+					for (AccesoRol accesoRol : accesosRol) {
+
+						for (Menu men : menus) {
+							if (accesoRol.getAcceso().getNombre().equals(men.getText())) {
+								men.setVisible(true);
+							}
+						}
+					}
 				}
-				
+				mainController.abrirInicio();
+				mainController.btnCerrarSesion.setVisible(true);
+				guardarEnSesion("empleadologin", lista.get(0));
+				//obtenerValor("empleadologin");
 			}
 
 		} catch (Exception e) {
@@ -81,5 +118,6 @@ public class LoginUsuarioController extends BaseController {
 		}
 
 	}
+
 
 }

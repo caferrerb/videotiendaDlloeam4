@@ -26,6 +26,9 @@ public class Customer implements Serializable {
 
 	@Column(nullable=false)
 	private boolean active;
+	
+	@Lob
+	private byte[] picture;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="create_date", nullable=false)
@@ -44,7 +47,7 @@ public class Customer implements Serializable {
 	private Timestamp lastUpdate;
 
 	//bi-directional many-to-one association to Address
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="address_id", nullable=false)
 	private Address address;
 
@@ -53,13 +56,25 @@ public class Customer implements Serializable {
 	@JoinColumn(name="store_id", nullable=false)
 	private Store store;
 
-	
-
 	public Customer() {
 	}
 
 	public int getCustomerId() {
 		return this.customerId;
+	}
+	
+	/**
+	 * @return the picture
+	 */
+	public byte[] getPicture() {
+		return picture;
+	}
+
+	/**
+	 * @param picture the picture to set
+	 */
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
 	}
 
 	public void setCustomerId(int customerId) {
@@ -134,11 +149,7 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", active=" + active
-				+ ", createDate=" + createDate + ", email=" + email
-				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", lastUpdate=" + lastUpdate + ", address=" + address
-				+ ", store=" + store + "]";
+		return firstName;
 	}
 
 }

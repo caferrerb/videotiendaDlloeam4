@@ -31,7 +31,8 @@
 		<class>co.edu.eam.ingesoft.videotienda.persistencia.entidades.UsuarioRol</class>
 		<class>co.edu.eam.ingesoft.videotienda.persistencia.entidades.Acceso</class>
 		<class>co.edu.eam.ingesoft.videotienda.persistencia.entidades.AccesoRol</class>
-
+		<class>co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule</class>
+		
  
 	
 	</persistence-unit>

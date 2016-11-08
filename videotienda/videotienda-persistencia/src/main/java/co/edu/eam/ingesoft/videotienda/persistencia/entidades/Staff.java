@@ -41,8 +41,6 @@ public class Staff implements Serializable {
 	@Lob
 	private byte[] picture;
 
-	
-
 	//bi-directional many-to-one association to Payment
 	@OneToMany
 	private List<Payment> payments;
@@ -52,7 +50,7 @@ public class Staff implements Serializable {
 	private List<Rental> rentals;
 
 	//bi-directional many-to-one association to Address
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="address_id", nullable=false)
 	private Address address;
 
@@ -192,10 +190,9 @@ public class Staff implements Serializable {
 		this.store = store;
 	}
 
-
 	@Override
 	public String toString() {
-		return staffId +"-"+firstName ;
+		return firstName ;
 	}
 
 	public Usuario getUsuario() {

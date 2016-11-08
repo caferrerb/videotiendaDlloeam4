@@ -77,8 +77,8 @@ public class ControladorGestionInventario extends BaseController implements Init
 	@FXML
 	private TableColumn<Film, Button> Info;
 	
-	@FXML
-	private llll JPDarDeBaja;
+//	@FXML
+//	private jjj JPDarDeBaja;
 	
 	@FXML
 	private final ObservableList<Film> data = FXCollections.observableArrayList();

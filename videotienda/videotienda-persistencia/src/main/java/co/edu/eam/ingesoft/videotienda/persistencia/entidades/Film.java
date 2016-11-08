@@ -39,6 +39,7 @@ public class Film implements Serializable {
 	@Column(name="last_update", nullable=false)
 	private Timestamp lastUpdate;
 
+	
 	private int length;
 
 	@Column(length=1)
@@ -78,7 +79,10 @@ public class Film implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="original_language_id")
 	private Language language2;
-
+	
+	@ManyToOne
+	@JoinColumn(name="category")
+	private Category category;
 
 	public Film() {
 	}
@@ -100,10 +104,11 @@ public class Film implements Serializable {
 	 * @param title
 	 * @param language1
 	 * @param language2
+	 * @param category
 	 */
 	public Film(int filmId, String description, Timestamp lastUpdate, int length, String rating, Date releaseYear,
 			byte[] poster, byte rentalDuration, double rentalRate, double replacementCost, String specialFeatures,
-			String title, Language language1, Language language2) {
+			String title, Language language1, Language language2, Category category) {
 		super();
 		this.filmId = filmId;
 		this.description = description;
@@ -119,7 +124,11 @@ public class Film implements Serializable {
 		this.title = title;
 		this.language1 = language1;
 		this.language2 = language2;
+		this.category = category;
 	}
+
+
+
 
 
 
@@ -237,16 +246,20 @@ public class Film implements Serializable {
 	}
 
 
+	
+	public Category getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Film [filmId=" + filmId + ", description=" + description
-				+ ", lastUpdate=" + lastUpdate + ", length=" + length
-				+ ", rating=" + rating + ", releaseYear=" + releaseYear
-				+ ", rentalDuration=" + rentalDuration + ", rentalRate="
-				+ rentalRate + ", replacementCost=" + replacementCost
-				+ ", specialFeatures=" + specialFeatures + ", title=" + title
-				+ ", language1=" + language1 + ", language2=" + language2 + "]";
+		return getTitle();
 	}
 
 }
