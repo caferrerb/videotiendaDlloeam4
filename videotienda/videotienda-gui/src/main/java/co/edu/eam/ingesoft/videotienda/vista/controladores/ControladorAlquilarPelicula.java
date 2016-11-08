@@ -181,7 +181,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 				listarPrestamosClientes();
 				jBPrestamo.setDisable(true);
 				jBBorrar.setDisable(false);
-				jBBuscar.setDisable(true);
+				jBBuscar.setDisable(false);
 			} catch (ExcepcionNegocio e) {
 				notificar("Prestamo", e.getMessage(), TipoNotificacion.ERROR);
 			}
