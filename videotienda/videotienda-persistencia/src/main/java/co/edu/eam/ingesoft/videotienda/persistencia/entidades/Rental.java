@@ -42,7 +42,7 @@ public class Rental implements Serializable {
 	@Column(name="rental_date", nullable=false)
 	private Date rentalDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="return_date")
 	private Date returnDate;
 

@@ -9,7 +9,7 @@
 			SELECT f FROM Film f WHERE f.length=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="Film.listarPorNombrePelis">
 		<query>
 			SELECT f FROM Film f
@@ -30,16 +30,36 @@
 
 	<named-query name="Rental.listarPrestamosClientes">
 		<query>
-			SELECT f.title, s.storeId FROM Rental r
-			JOIN r.inventory i
-			JOIN
-			i.store s
-			JOIN i.film f
+			SELECT r FROM Rental r
 			WHERE r.customer = ?1
 		</query>
 	</named-query>
+	
+	<named-query name="Rental.consultaRepetidos">
+		<query>
+			SELECT r FROM Rental r
+			JOIN r.inventory i
+			JOIN i.film f
+			WHERE f = ?1
+		</query>
+	</named-query>
 
-	<named-query name="Rental.fechaEntregaPelicula">
+	<named-query name="Rental.PrestamosCliente">
+		<query>
+			SELECT r FROM Rental r
+			JOIN r.customer c
+			WHERE c.customerId = ?1
+		</query>
+	</named-query>
+	
+	<named-query name="Inventory.listarInventarioPelicula">
+		<query>
+			SELECT i FROM Inventory i
+			WHERE i.film = ?1
+		</query>
+	</named-query>
+
+	<named-query name="Rental.PeliculaPrestada">
 		<query>
 			SELECT r FROM Rental r
 			JOIN r.inventory i
@@ -150,8 +170,27 @@
 	<named-query name="Rental.PeliculasCliente">
 		<query>
 			SELECT r FROM Rental r
-			WHERE r.customer = ?1
+			JOIN r.customer c
+			WHERE c.customerId = ?1
+		</query>
+	</named-query>
 
+	<named-query name="Rental.fechaEntregaCliente">
+		<query>
+			SELECT r.returnDate FROM Rental r
+			JOIN r.customer c
+			WHERE c.customerId = ?1
+		</query>
+	</named-query>
+
+	<named-query name="Rental.TituloNombrePrestamos">
+		<query>
+			SELECT s.nombreTienda, f.title FROM Rental r
+			JOIN r.inventory i
+			JOIN i.store s
+			JOIN i.film f
+			JOIN r.customer c
+			WHERE c.customerId = ?1
 		</query>
 	</named-query>
 
@@ -164,7 +203,7 @@
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
 		</query>
-		
+
 	</named-query>
 
 	<named-query name="listarFilmActorPorActor">
@@ -192,7 +231,7 @@
 
 	<named-query name="StaffSchedule.ListaHorasEmpleado">
 		<query>
-			SELECT  st FROM StaffSchedule st WHERE st.empleado = ?1
+			SELECT st FROM StaffSchedule st WHERE st.empleado = ?1
 		</query>
 	</named-query>
 

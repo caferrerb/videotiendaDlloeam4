@@ -12,8 +12,8 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAREMPLEADOS = "Empleado.ListarTodos";
 	
 	/**
-	 * Lista los inventarios de una película
-	 * ?1: La película
+	 * Lista los inventarios de una pelï¿½cula
+	 * ?1: La pelï¿½cula
 	 */
 	public static final String CONSULTA_LISTA_INVENTARIO_PELICULA = "Inventory.listarInventarioPelicula";
 
@@ -22,6 +22,12 @@ public class ConstantesNamedQueries {
 	 * ?1: El cliente
 	 */
 	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Rental.PeliculasCliente";
+	
+	/**
+	 * Obtiene las peliculas alquiladas por un cliente
+	 * ?1: El cliente
+	 */
+	public static final String CONSULTA_LISTAR_FECHAS_CLIENTE = "Rental.fechaEntregaCliente";
 
 	/**
 	 * consulta para listar datos de las peliculas por nombre de la pelicula 
@@ -39,6 +45,11 @@ public class ConstantesNamedQueries {
 	 * Obtine la lista de prestamos de un cliente
 	 */
 	public static final String CONSULTA_LISTAR_PRESTAMOS_CLIENTE = "Rental.listarPrestamosClientes";
+	
+	 /**
+	  * 
+	  */
+	public static final String CONSULTA_LISTAR_INFO_PRESTAMOS = "Rental.TituloNombrePrestamos";
 	
 	/**
 	 * obtiene los prestamos que esten repetidos
