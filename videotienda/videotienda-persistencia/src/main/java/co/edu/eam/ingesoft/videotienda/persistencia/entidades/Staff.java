@@ -192,7 +192,7 @@ public class Staff implements Serializable {
 
 	@Override
 	public String toString() {
-		return staffId +"-"+firstName ;
+		return firstName ;
 	}
 
 	public Usuario getUsuario() {

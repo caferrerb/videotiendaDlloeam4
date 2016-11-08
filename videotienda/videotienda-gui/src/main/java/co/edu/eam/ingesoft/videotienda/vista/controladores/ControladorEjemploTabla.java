@@ -1,8 +1,12 @@
 package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOFilm;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
+import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -31,6 +37,9 @@ public class ControladorEjemploTabla extends BaseController implements Initializ
 
 	@Autowired
 	private BOFilm boFilm;
+	
+	@Autowired
+	private DataSource ds;
 
 	@FXML
 	private TableColumn<Film, String> colNom;
@@ -134,6 +143,18 @@ public class ControladorEjemploTabla extends BaseController implements Initializ
 			}
 		};
 		colBot.setCellFactory(cellFactory);
+	}
+	@FXML
+	public void generarReporte(){
+		
+		try {
+			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+			Map<String, Object> params=new HashMap<>();
+			params.put("idcat", 1);
+			reporter.generarReporte(params, "/reportes/peliculascat.jrxml", "PeliculasXCategoria");
+		} catch (Exception e) {
+			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
+		}
 	}
 
 }
