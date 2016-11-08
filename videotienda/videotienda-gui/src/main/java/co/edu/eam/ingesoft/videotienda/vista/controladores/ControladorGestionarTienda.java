@@ -154,7 +154,6 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 				cHorario.setMinWidth(100);
 				cButtonEmpleados.setCellValueFactory(new PropertyValueFactory<Staff, Button>(""));
 				tbEmpleado.setItems(data);
-
 				
 			}
 		}		
@@ -242,6 +241,7 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 				Address address = new Address();
 				Store store = new Store();
 		
+				store.setAddress(address);
 				address.setAddress(tfDireccion.getText());
 				address.setAddress2(tfDireccion2.getText());
 				store.setStaff((Staff) cbEmpleado.getValue());

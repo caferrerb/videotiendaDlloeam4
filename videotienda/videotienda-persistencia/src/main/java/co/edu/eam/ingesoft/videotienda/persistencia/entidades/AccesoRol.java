@@ -64,13 +64,11 @@ public class AccesoRol implements Serializable{
 	public void setAcceso(Acceso acceso) {
 		this.acceso = acceso;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "AccesoRol [rol=" + rol + ", acceso=" + acceso + "]";
+	}
 	
 	
 	

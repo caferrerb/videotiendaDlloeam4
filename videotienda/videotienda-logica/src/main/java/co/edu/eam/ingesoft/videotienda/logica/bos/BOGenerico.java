@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.DAOGenerico;
 
 /**
@@ -65,7 +66,7 @@ public class BOGenerico<T> {
 	 *
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void crear(T entidad) {
+	public void crear(T entidad){
 		dao.persistir(entidad);
 	}
 
