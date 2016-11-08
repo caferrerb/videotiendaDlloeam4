@@ -25,5 +25,6 @@ public class BORental extends BOGenerico<Store> {
 	public List<Rental>listarTablaRental(Store store){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_TABLA_PELICULA_RENTADAS,store);
 	}
+	
 
 }
