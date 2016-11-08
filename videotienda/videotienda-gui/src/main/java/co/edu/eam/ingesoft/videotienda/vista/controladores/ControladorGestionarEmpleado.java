@@ -266,7 +266,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 
 	@FXML
 	public void buscarEmpleado() {
-		if (TFIdEmpleado.getText() != null) {
+		if (!TFIdEmpleado.getText().isEmpty()) {
 			Staff empleado = boEmpleado.buscar((byte) Integer.parseInt(TFIdEmpleado.getText()));
 
 			if (empleado != null) {
