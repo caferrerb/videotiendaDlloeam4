@@ -161,10 +161,11 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		}
 	}
 
-	public void crearActores()  {
+	public void crearActores() {
 
 		try {
-			if (imgFile == null || tfApellido.getText().isEmpty() || tfNombre.getText().isEmpty()) {
+			
+			if (imgFile == null || tfApellido.getText().isEmpty() || tfNombre.getText().isEmpty() || tfDocumento.getText().isEmpty()) {
 
 				notificar("Crear Actor", "Verifique que todos los campos esten llenos y haya cargado una imagen ",
 						TipoNotificacion.ERROR);
@@ -175,22 +176,27 @@ public class ControladorGestionarActores extends BaseController implements Initi
 				fin.read(bites);
 
 				Actor act = new Actor();
+				
 				act.setActorId((Integer.parseInt(tfDocumento.getText())));
 				act.setFirstName(tfNombre.getText());
 				act.setLastName(tfApellido.getText());
 				act.setPhoto(bites);
 				act.setCountry((Country) cbCiudad.getValue());
-				
-				boActores.crear(act);
-				notificar("Crear Actor", "El Actor se ha creado exitosamente", TipoNotificacion.INFO);
-				limpiar();
 
+				Actor actor = boActores.buscar(Integer.parseInt(tfDocumento.getText()));
+				if(actor == null){
+					boActores.crear(act);
+					notificar("Crear Actor", "El Actor se ha creado exitosamente", TipoNotificacion.INFO);
+					limpiar();
+				}else{
+					notificar("Crear Actor", "Este Actor con documento "+"'"+actor.getActorId()+"'"+" ya se encuentra registrado", TipoNotificacion.ERROR);
+				}
 			}
 
 		} catch (ExcepcionNegocio e) {
-			notificar("Crear Actor", "Este Actor ya se encuentra registrado", TipoNotificacion.ERROR);
-		}  catch (IOException e) {
 			
+		} catch (IOException e) {
+
 			e.printStackTrace();
 		}
 
@@ -229,8 +235,10 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 		if (tfDocumento == null) {
 			notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
+			limpiar();
 		} else if (tfDocumento.getText().isEmpty()) {
 			notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
+			limpiar();
 		} else {
 			Actor ac = boActores.buscar(Integer.parseInt(tfDocumento.getText()));
 
@@ -252,6 +260,9 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 				configurarTablaVentas();
 
+			}else{
+				notificar("Buscar Actor", "Este Actor no se encuentra registrado", TipoNotificacion.ERROR);
+				limpiar();
 			}
 		}
 	}
