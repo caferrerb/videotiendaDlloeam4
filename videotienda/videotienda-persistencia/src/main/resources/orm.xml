@@ -194,9 +194,9 @@
 
 	</named-query>
 
-	<named-query name="Rental.TituloNombrePrestamos">
+<named-query name="Rental.TituloNombrePrestamos">
 		<query>
-			SELECT s.nombreTienda, f.title FROM Rental r
+			SELECT new co.edu.uniquindio.videotienda.dtos.PrestamoDTO(s.nombreTienda, f.title,r.rentalId) FROM Rental r
 			JOIN r.inventory i
 			JOIN i.store s
 			JOIN i.film f
