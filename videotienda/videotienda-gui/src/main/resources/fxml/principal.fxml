@@ -45,7 +45,7 @@
 								</Menu>
                         <Menu fx:id="menuInventario" mnemonicParsing="false" text="Inventario">
                           <items>
-                            <MenuItem id="mIGestionInventario" fx:id="menuItemGestionarInventario" mnemonicParsing="false" onAction="#abrirGestionInventario" text="GestionarInventario" />
+                            <MenuItem id="mIGestionInventario" fx:id="menuItemGestionarInventario" mnemonicParsing="false" onAction="#abrirGestionInventario" text="Gestionar Inventario" />
                           </items>
                         </Menu>
 

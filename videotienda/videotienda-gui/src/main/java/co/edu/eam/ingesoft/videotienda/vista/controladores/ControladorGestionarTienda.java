@@ -237,19 +237,15 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 	 */
 	@FXML
 	public void crear(){
-	
-		
 				Address address = new Address();
 				Store store = new Store();
-		
 				address.setAddress(tfDireccion.getText());
 				address.setAddress2(tfDireccion2.getText());
 				store.setStaff((Staff) cbEmpleado.getValue());
 				address.setPostalCode(tfCodigoPostal.getText());
 				address.setDistrict(tfLocalidad.getText());
 				address.setCity((City) cbCiudad.getValue());
-				address.setPhone(tfTelefono.getText());
-				
+				address.setPhone(tfTelefono.getText());	
 				boDireccion.crear(address);
 				boTienda.crear(store);
 				notificar("Crear Tienda","La tienda se ha creado exitosamente", TipoNotificacion.INFO);

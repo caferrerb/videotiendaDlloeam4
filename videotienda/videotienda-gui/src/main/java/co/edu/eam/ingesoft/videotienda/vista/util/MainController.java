@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 
 import co.edu.eam.ingesoft.videotienda.main.ContextFactory;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionInventario;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
@@ -87,6 +88,10 @@ public class MainController implements Initializable {
 	@FXML
 	private Menu mnuAutorizacion;
 	
+	@FXML
+	private Menu menuInventario;
+
+	
 	/**
 	 * item de iniciar sesion.
 	 */
@@ -125,6 +130,9 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private MenuItem menuItemReportes;
+	
+	@FXML
+	private MenuItem menuItemGestionarInventario;
 	
 	/**
 	 * Inicializacion de la ventana.
@@ -239,8 +247,12 @@ public class MainController implements Initializable {
 	}
 	
 	@FXML
+	public void abrirGestionInventario(){
+		agregarVentana("/fxml/GestionarInventario.fxml", ControladorGestionInventario.class);
+	}
+	
+	@FXML
 	public void abrirverpeliculasrentadas(){
-
 		agregarVentana("/fxml/verpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
 
 	}

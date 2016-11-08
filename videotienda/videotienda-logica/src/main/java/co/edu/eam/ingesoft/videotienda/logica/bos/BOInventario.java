@@ -13,13 +13,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 @Component
 public class BOInventario extends BOGenerico<Inventory> {
 
-	/**
-	 * Metodo que lista el inventario de la tienda
-	 * @author Jhoan Sebastian Salazar Henao<br/>
-	 *         email: jsebastian48@hotmail.com <br/>
-	 *         Fecha: 2/11/2016<br/>
-	 * @return
-	 */
+
 	public List<Inventory> listarInventarioTienda(Store store){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_INVENTARIO_TIENDA,store);
 	}
