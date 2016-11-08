@@ -74,8 +74,10 @@ public class LoginUsuarioController extends BaseController implements Initializa
 			Usuario usu = new Usuario();
 			usu.setUsuario(tfUser.getText());
 			usu.setPass(tfPass.getText());
-			if (boUsuario.buscarEntidad(usu).size() == 0||
-					!(boUsuario.buscarEntidad(usu).get(0).getPass().equals(tfPass.getText()))) {
+			List<Usuario> lista = boUsuario.buscarEntidad(usu);
+			int list = lista.size();
+			if (list == 0||
+					!(lista.get(0).getPass().equals(tfPass.getText()))) {
 				notificar("LogIn", "El usuario o el password que ha ingresado no son correctos",
 						TipoNotificacion.ERROR);
 			} else {
@@ -106,7 +108,8 @@ public class LoginUsuarioController extends BaseController implements Initializa
 				}
 				mainController.abrirInicio();
 				mainController.btnCerrarSesion.setVisible(true);
-
+				guardarEnSesion("empleadologin", lista.get(0));
+				//obtenerValor("empleadologin");
 			}
 
 		} catch (Exception e) {
