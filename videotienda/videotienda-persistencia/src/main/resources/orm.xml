@@ -55,14 +55,6 @@
 		</query>
 	</named-query>
 	
-	<named-query name="Rental.PrestamosCliente">
-		<query>
-			SELECT r FROM Rental r
-			JOIN r.customer c
-			WHERE c.customerId = ?1
-		</query>
-	</named-query>
-	
 	<named-query name="Rental.PeliculaPrestada">
 		<query>
 			SELECT r FROM Rental r
@@ -152,10 +144,10 @@
 	<named-query name="datosTablaVentas.Listar">
 		<query>
 			SELECT s FROM Sale s
-			JOIN
-			s.customer c JOIN s.film f
-			JOIN s.staff
-			p WHERE p.store = ?1
+			JOIN s.customer c 
+			JOIN s.film f
+			JOIN s.staff p 
+			WHERE p.store = ?1
 		</query>
 	</named-query>
 
@@ -176,8 +168,26 @@
 	<named-query name="Rental.PeliculasCliente">
 		<query>
 			SELECT r FROM Rental r
+			JOIN r.customer c
+			WHERE c.customerId = ?1
+		</query>
+	</named-query>
+	
+	<named-query name="Rental.fechaEntregaCliente">
+		<query>
+			SELECT r.returnDate FROM Rental r
+			JOIN r.customer c
+			WHERE c.customerId = ?1
+		</query>
+	</named-query>
+	
+	<named-query name="Rental.TituloNombrePrestamos">
+		<query>
+			SELECT s.nombreTienda, f.title FROM Rental r
+			JOIN r.inventory i
+			JOIN i.store s
+			JOIN i.film f
 			WHERE r.customer = ?1
-
 		</query>
 	</named-query>
 

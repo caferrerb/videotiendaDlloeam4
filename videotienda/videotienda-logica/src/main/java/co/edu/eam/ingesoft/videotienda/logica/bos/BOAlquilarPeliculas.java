@@ -33,7 +33,7 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PRESTAMOS_CLIENTE, c);
 
 	}
-	
+
 	/**
 	 * lista de los prestamos de un cliente
 	 * 
@@ -45,42 +45,69 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PRESTAMOS_CLIENTE, c);
 
 	}
-	
+
 	/**
 	 * 
 	 * @param f
 	 * @return
 	 */
-	private Inventory inventarioPelicula (Film f){
+	private Inventory inventarioPelicula(Film f) {
 		List<Inventory> lista = dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTA_INVENTARIO_PELICULA, f);
 		return lista.get(0);
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	private Staff empleado(){
+	private Staff empleado() {
 		List<Staff> lista = dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAREMPLEADOS);
 		return lista.get(0);
 	}
-	
+
 	/**
 	 * 
 	 * @param c
 	 * @return
 	 */
-	public List<Rental> listarLosPrestamosCliente(Customer c){
+	public List<Rental> listarLosPrestamosCliente(Customer c) {
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_INFO_PRESTAMOS, c);
+	}
+
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 */
+	public List<Rental> listarPrestamosDeUnCLiente(int c) {
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_CLIENTE, c);
 	}
-	
-    /**
-     * 
-     * @param idCliente
-     * @param f
-     * @param fechaEntrega
-     * @throws ExcepcionNegocio
-     */
+
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 */
+	public List<Rental> listarFechaEntregaPrestamoCliente(int c) {
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_FECHAS_CLIENTE, c);
+	}
+
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 */
+	public List<String> listarInfoPrestamos(String c) {
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_INFO_PRESTAMOS, c);
+	}
+
+	/**
+	 * 
+	 * @param idCliente
+	 * @param f
+	 * @param fechaEntrega
+	 * @throws ExcepcionNegocio
+	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void registrarPrestamo(int idCliente, Film f, LocalDate fechaEntrega) throws ExcepcionNegocio {
 
@@ -94,13 +121,21 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 		Date fechaEntre = Date.from(fechaEntrega.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		prestamos.setReturnDate(fechaEntre);
 		prestamos.setLastUpdate(fechaActual);
-	    prestamos.setInventory(inventarioPelicula(f));
+		prestamos.setInventory(inventarioPelicula(f));
 		prestamos.setStaff(empleado());
 
 		List<Rental> lista = listarPrestamosRepetidos(f);
-		System.out.println(lista.size() + " La lista");
+		List<Rental> listaP = listarPrestamosDeUnCLiente(idCliente);
+		List<Rental> listaF = listarFechaEntregaPrestamoCliente(idCliente);
 		if (lista.size() == 0) {
-			crear(prestamos);
+			if (listaP.size() < 5) {
+
+				crear(prestamos);
+				System.out.println(fechaActual + " fechaActual");
+			} else {
+				throw new ExcepcionNegocio(
+						" El clienta al cual se le va a realizar el prestamo, ya tiene el limite de prestamos");
+			}
 		} else {
 			throw new ExcepcionNegocio(" Esta pelicula ya esta prestada ");
 		}
@@ -115,14 +150,13 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 	public List<Film> listarPeliculasNombres() {
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_NOMBRES);
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param t
 	 * @return
 	 */
-	public List<Rental> listarPelicualsPrestadas(String t){
+	public List<Rental> listarPelicualsPrestadas(String t) {
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_PRESTADAS, t);
 	}
 
