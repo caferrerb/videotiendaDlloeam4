@@ -88,7 +88,7 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 	 * @param c
 	 * @return
 	 */
-	public List<Rental> listarFechaEntregaPrestamoCliente(int c) {
+	public List<Date> listarFechaEntregaPrestamoCliente(int c) {
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_FECHAS_CLIENTE, c);
 	}
 
@@ -123,15 +123,28 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 		prestamos.setLastUpdate(fechaActual);
 		prestamos.setInventory(inventarioPelicula(f));
 		prestamos.setStaff(empleado());
-
+        
+		Date fActual = new Date();
+		fActual.getYear();
+		fActual.getMonth();
+		fActual.getDay();
+		
+		
+		
 		List<Rental> lista = listarPrestamosRepetidos(f);
 		List<Rental> listaP = listarPrestamosDeUnCLiente(idCliente);
-		List<Rental> listaF = listarFechaEntregaPrestamoCliente(idCliente);
+		List<Date> listaF = listarFechaEntregaPrestamoCliente(idCliente);
 		if (lista.size() == 0) {
 			if (listaP.size() < 5) {
-
-				crear(prestamos);
-				System.out.println(fechaActual + " fechaActual");
+//                for (int i = 0; i < listaF.size(); i++) {
+//                	Date fechaReturn = listaF.get(i);
+//					if(fechaReturn.before(fActual)){
+//						System.out.println(fechaReturn + "fechas");
+//						System.out.println(fActual + "fechas");
+//						
+//					}
+//				}
+                crear(prestamos);
 			} else {
 				throw new ExcepcionNegocio(
 						" El clienta al cual se le va a realizar el prestamo, ya tiene el limite de prestamos");

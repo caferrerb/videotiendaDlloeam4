@@ -56,7 +56,14 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	@Autowired
 	private BOCliente boCliente;
 	
-	private Rental presta;
+	@FXML
+	private Button jBPrestamo;
+	
+	@FXML
+	private Button jBBorrar;
+	
+	@FXML
+	private Button jBBuscar;
 	
 	private Customer customer;
 
@@ -115,6 +122,9 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		customer = null;
 		inicializarTabla();
 		llenarComboPeliculas();
+		tFNombre.setEditable(false);
+		jBPrestamo.setDisable(true);
+		jBBorrar.setDisable(true);
 		
         
 	}
@@ -132,6 +142,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 				Image img = new Image(new ByteArrayInputStream(cliente.getPicture()));
 				PhFoto.setImage(img);
 				listarPrestamosClientes();
+				jBPrestamo.setDisable(false);
 
 			} else {
 				notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
@@ -155,7 +166,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	@FXML
 	public void prestamo() {
 
-		if (tFIdentificacion.getText().isEmpty()) {
+		if (tFIdentificacion.getText().isEmpty() || dFechaEntrega.getValue() == null) {
 			notificar("Prestamo", "Debe llenar los campos para poder realizar el prestamo", TipoNotificacion.ERROR);
 		} else {
 			int idCliente = Integer.parseInt(tFIdentificacion.getText());
@@ -166,6 +177,9 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 				boAlquiPelicula.registrarPrestamo(idCliente, f, fechaEntrega);
 
 				notificar("Prestamo", "Se ha prestado la pelicula", TipoNotificacion.INFO);
+				jBPrestamo.setDisable(true);
+				jBBorrar.setDisable(false);
+				jBBuscar.setDisable(true);
 			} catch (ExcepcionNegocio e) {
 				notificar("Prestamo", e.getMessage(), TipoNotificacion.ERROR);
 			}
@@ -178,12 +192,16 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		PhFoto.setImage(null);
 		tFIdentificacion.setText(null);
 		tFNombre.setText(null);
-
+		cBPeliculas.getSelectionModel().select(1);
+		jBBorrar.setDisable(true);
+		jBBuscar.setDisable(false);
+		
 	}
 
 	@FXML
 	public void listarPrestamosClientes() {
-		listaPrestamos = boAlquiPelicula.listarLosPrestamosCliente(customer);
+		listaPrestamos = boAlquiPelicula.listarPrestamoCliente(customer);
+		prestamosListar = FXCollections.observableArrayList();
 		 for (Rental rental : listaPrestamos) {
 			 prestamosListar.setAll(rental);
 		}
@@ -193,13 +211,6 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	}
 
 	public void inicializarTabla() {
-		// Inicializar listas
-		prestamosListar = FXCollections.observableArrayList();
-
-		// Enlazar listas
-		tTPrestamos.setItems(prestamosListar);
-
-		// Enlazar columnas con atributos
 		cCTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
 		cCTienda.setCellValueFactory(new PropertyValueFactory<Store, String>("nombreTienda"));
 		cCbotonEliminar.setSortable(false);

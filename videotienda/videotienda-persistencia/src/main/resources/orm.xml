@@ -30,11 +30,7 @@
 
 	<named-query name="Rental.listarPrestamosClientes">
 		<query>
-			SELECT f.title, s.storeId FROM Rental r
-			JOIN r.inventory i
-			JOIN
-			i.store s
-			JOIN i.film f
+			SELECT r FROM Rental r
 			WHERE r.customer = ?1
 		</query>
 	</named-query>
@@ -183,8 +179,7 @@
 		<query>
 			SELECT r.returnDate FROM Rental r
 			JOIN r.customer c
-			WHERE
-			c.customerId = ?1
+			WHERE c.customerId = ?1
 		</query>
 	</named-query>
 
