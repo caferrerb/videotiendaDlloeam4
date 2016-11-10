@@ -2,7 +2,6 @@ package co.edu.eam.ingesoft.videotienda.logica.bos;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Inventory;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
-import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.uniquindio.videotienda.dtos.PrestamoDTO;
 
 @Component
