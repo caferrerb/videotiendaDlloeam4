@@ -11,17 +11,22 @@ public class ConstantesNamedQueries {
 
 	public static final String CONSULTA_LISTAREMPLEADOS = "Empleado.ListarTodos";
 	
+	public static final String CONSULTA_BUSCAR_EMPLEADOS_POR_USUARIO = "Empleado.buscarEmpleadoPorUsuario";
+	
 	/**
 	 * Lista los inventarios de una pel�cula
 	 * ?1: La pel�cula
 	 */
 	public static final String CONSULTA_LISTA_INVENTARIO_PELICULA = "Inventory.listarInventarioPelicula";
 
+
+	
+
 	/**
 	 * Obtiene las peliculas alquiladas por un cliente
-	 * ?1: El cliente
+	 *  El cliente
 	 */
-	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Rental.PeliculasCliente";
+	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Rental.PeliculasRentadasCliente";
 	
 	/**
 	 * Obtiene las peliculas alquiladas por un cliente
@@ -32,6 +37,7 @@ public class ConstantesNamedQueries {
 	/**
 	 * consulta para listar datos de las peliculas por nombre de la pelicula 
 	 */
+
 	public static final String CONSULTA_POR_NOMBRE_PELICULA = "Film.listarNombrePelicula";
 	
     /**
@@ -109,9 +115,14 @@ public class ConstantesNamedQueries {
 	/**
 	 * Consulta para cargar todos los datos de la tabla de peliculas rentadas
 	 */
-	public static final String CONSULTA_TABLA_PELICULA_RENTADAS = "datosTablaFilmRentada";
 
-	public static final String CONSULTA_LISTAR_ACCESOS_ROL = "AccesoRol.ListarPantallasRol";
+	public static final String CONSULTA_TABLA_PELICULA_RENTADAS="Rental.datosTablaFilmRentada";
+	
+	public static final String CONSULTA_LISTAR_ACCESOS_ROL="AccesoRol.ListarPantallasRol";
+
+
+
+
 
 	/**
 	 * Consulta que lista todos accesosrol de un rol determinado

@@ -116,16 +116,17 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 
 		// boton a mostrar
 		final Button cellButton = new Button("Vender");
-		private Film film;
+//		private Film film;
 		ButtonCell(final TableView tblView,Film f) {
-			this.film=f;
+//			this.film=f;
 			cellButton.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent t) {
-					guardarEnSesion("peliculavender", film);
+					Film f=getTableView().getItems().get(getIndex());
+					guardarEnSesion("peliculavender", f);
 					abrirVentana("/fxml/venderPelicula.fxml", ControladorvenderPelicula.class);
-					int num = getTableRow().getIndex();
+				int num = getTableRow().getIndex();
 					
 //					}
 				}
