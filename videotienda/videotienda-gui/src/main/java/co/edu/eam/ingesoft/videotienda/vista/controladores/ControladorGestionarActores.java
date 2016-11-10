@@ -139,13 +139,13 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	}
 	@FXML
-	public void generarReporteActor(){
+	public void generarReporteActor(){ 
 		
 		try {
 			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
 			Map<String, Object> params=new HashMap<>();
 			//params.put();
-			reporter.generarReporte(params, "/reportes/ReporteActores.jrxml", "Actores");
+			reporter.generarReporte(params, "/reportes/ReporteActores.jrxml", "Reporte Actores");
 		} catch (Exception e) {
 			notificar("Actor", "Error generando el reporte", TipoNotificacion.ERROR);
 		}
