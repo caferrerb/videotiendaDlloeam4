@@ -12,11 +12,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
+import javax.sql.DataSource;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.FilmActor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Sale;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.MainController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.beans.property.SimpleObjectProperty;
@@ -84,6 +88,9 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@Autowired
 	private BOPais boPais;
+	
+	@Autowired
+	private DataSource ds;
 
 	@FXML
 	private TextField tfDocumento;
@@ -131,6 +138,19 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		llenarComboPaises();
 
 	}
+	@FXML
+	public void generarReporteActor(){ 
+		
+		try {
+			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+			Map<String, Object> params=new HashMap<>();
+			//params.put();
+			reporter.generarReporte(params, "/reportes/ReporteActores.jrxml", "Reporte Actores");
+		} catch (Exception e) {
+			notificar("Actor", "Error generando el reporte", TipoNotificacion.ERROR);
+		}
+	}
+	
 
 	@FXML
 	private void llenarComboPaises() {
@@ -161,10 +181,11 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		}
 	}
 
-	public void crearActores()  {
+	public void crearActores() {
 
 		try {
-			if (imgFile == null || tfApellido.getText().isEmpty() || tfNombre.getText().isEmpty()) {
+			
+			if (imgFile == null || tfApellido.getText().isEmpty() || tfNombre.getText().isEmpty() || tfDocumento.getText().isEmpty()) {
 
 				notificar("Crear Actor", "Verifique que todos los campos esten llenos y haya cargado una imagen ",
 						TipoNotificacion.ERROR);
@@ -175,22 +196,27 @@ public class ControladorGestionarActores extends BaseController implements Initi
 				fin.read(bites);
 
 				Actor act = new Actor();
+				
 				act.setActorId((Integer.parseInt(tfDocumento.getText())));
 				act.setFirstName(tfNombre.getText());
 				act.setLastName(tfApellido.getText());
 				act.setPhoto(bites);
 				act.setCountry((Country) cbCiudad.getValue());
-				
-				boActores.crear(act);
-				notificar("Crear Actor", "El Actor se ha creado exitosamente", TipoNotificacion.INFO);
-				limpiar();
 
+				Actor actor = boActores.buscar(Integer.parseInt(tfDocumento.getText()));
+				if(actor == null){
+					boActores.crear(act);
+					notificar("Crear Actor", "El Actor se ha creado exitosamente", TipoNotificacion.INFO);
+					limpiar();
+				}else{
+					notificar("Crear Actor", "Este Actor con documento "+"'"+actor.getActorId()+"'"+" ya se encuentra registrado", TipoNotificacion.ERROR);
+				}
 			}
 
 		} catch (ExcepcionNegocio e) {
-			notificar("Crear Actor", "Este Actor ya se encuentra registrado", TipoNotificacion.ERROR);
-		}  catch (IOException e) {
 			
+		} catch (IOException e) {
+
 			e.printStackTrace();
 		}
 
@@ -229,8 +255,10 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 		if (tfDocumento == null) {
 			notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
+			limpiar();
 		} else if (tfDocumento.getText().isEmpty()) {
 			notificar("Buscar Actor", "Este actor no se encuentra registrado", TipoNotificacion.ERROR);
+			limpiar();
 		} else {
 			Actor ac = boActores.buscar(Integer.parseInt(tfDocumento.getText()));
 
@@ -252,6 +280,9 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 				configurarTablaVentas();
 
+			}else{
+				notificar("Buscar Actor", "Este Actor no se encuentra registrado", TipoNotificacion.ERROR);
+				limpiar();
 			}
 		}
 	}

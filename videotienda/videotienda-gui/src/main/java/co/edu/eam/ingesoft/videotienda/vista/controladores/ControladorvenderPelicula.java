@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JEditorPane;
+import javax.swing.JFormattedTextField;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,10 +59,11 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	@FXML
 	private TextField jtfFecha;
 	
-	
+	private Staff empleado;
 
 	private Film film;
-
+	
+	
 	@FXML
 	public void buscarCliente() {
 		try {
@@ -110,10 +112,13 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		film = (Film) obtenerValor("peliculavender");		
+		film = (Film) obtenerValor("peliculavender");
+		empleado = (Staff) obtenerValor("empleado"); 
 		int id = film.getFilmId();
+//		int idem = empleado.getStaffId();
+		System.out.println(empleado);	
 		jtfIdPelicula.setText(String.valueOf(id));
-		borrarSesion("peliculavender");
+//		jtfIdEmpleado.setText(String.valueOf(empleado.getStaffId()));
 		
 	}
 	
