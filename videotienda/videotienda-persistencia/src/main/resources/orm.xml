@@ -152,18 +152,17 @@
 			SELECT s FROM Sale s
 			JOIN
 			s.customer c JOIN s.film f
-			JOIN s.staff
-			p WHERE p.store = ?1
+			JOIN s.staff p WHERE p.store = ?1
 		</query>
 	</named-query>
 
+		
 	<named-query name="listarDatosClientes">
 		<query>
 			SELECT c FROM Customer c WHERE c.customerId=?1
 		</query>
 	</named-query>
-
-
+		
 	<named-query name="FilmActor.ListarTodos">
 		<query>
 			SELECT fa FROM FilmActor fa WHERE fa.film.filmId=?1
@@ -192,11 +191,12 @@
 			WHERE
 			c.customerId = ?1
 		</query>
+
 	</named-query>
 
-	<named-query name="Rental.TituloNombrePrestamos">
+<named-query name="Rental.TituloNombrePrestamos">
 		<query>
-			SELECT s.nombreTienda, f.title FROM Rental r
+			SELECT new co.edu.uniquindio.videotienda.dtos.PrestamoDTO(s.nombreTienda, f.title,r.rentalId) FROM Rental r
 			JOIN r.inventory i
 			JOIN i.store s
 			JOIN i.film f
@@ -204,31 +204,43 @@
 			WHERE c.customerId = ?1
 		</query>
 	</named-query>
-
+		
+		
 	<named-query name="Usuario.BuscarUsuario">
 		<query>
 			SELECT usu FROM Usuario usu WHERE usu=?1
 		</query>
 	</named-query>
+	
 	<named-query name="AccesoRol.ListarPantallasRol">
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
 		</query>
-
 	</named-query>
+
+
+	<named-query name="listarPeliculasPorActor">
+		<query>
+			SELECT f FROM FilmActor fa JOIN fa.film f WHERE fa.actor = ?1
+		</query>
+	</named-query>
+
+	
 
 	<named-query name="listarFilmActorPorActor">
 		<query>
 			SELECT fa FROM FilmActor fa WHERE fa.actor = ?1
 		</query>
+
 	</named-query>
+
+
+	
 	<named-query name="AccesoRol.ListarAccesoRol">
 		<query>
 			SELECT accR FROM AccesoRol accR
-
 		</query>
 	</named-query>
-
 
 	<named-query name="Acesso.ListarTodos">
 		<query>
@@ -236,17 +248,40 @@
 		</query>
 	</named-query>
 
+
+	<named-query name="Rental.datosTablaFilmRentada">
+		<query>
+			SELECT i.inventoryId, f.title, c.customerId, r.rentalDate, r.returnDate FROM Rental r JOIN
+			r.customer c 
+			JOIN r.inventory i 
+			JOIN i.film f WHERE i.store = ?1
+		</query>
+	</named-query>
+
+
+
+
 	<named-query name="StaffSchedule.ListaHorasEmpleado">
 		<query>
 			SELECT st FROM StaffSchedule st WHERE st.empleado = ?1
 		</query>
+
 	</named-query>
+
+		
+	<named-query name="StaffSchedule.ListaHorarios">
+		<query>
+			SELECT st FROM StaffSchedule st
+		</query>
+	</named-query>
+
 
 	<named-query name="Category.listarTodas">
 		<query>
 			SELECT ca FROM Category ca
 		</query>
 	</named-query>
+
 
 	<named-query name="Sale.TotalVentas">
 		<query>
@@ -261,5 +296,12 @@
 			?1 AND ?2
 		</query>
 	</named-query>
+	
+	<named-query name="Empleado.buscarEmpleadoPorUsuario">
+		<query>
+			SELECT s FROM Staff s WHERE s.usuario=?1
+		</query>
+	</named-query>
+
 
 </entity-mappings>

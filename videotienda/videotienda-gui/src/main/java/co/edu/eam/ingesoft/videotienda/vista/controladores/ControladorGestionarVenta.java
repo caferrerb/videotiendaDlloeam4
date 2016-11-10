@@ -135,7 +135,7 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 					Film f=getTableView().getItems().get(getIndex());
 					guardarEnSesion("peliculavender", f);
 					abrirVentana("/fxml/venderPelicula.fxml", ControladorvenderPelicula.class);
-					int num = getTableRow().getIndex();
+				int num = getTableRow().getIndex();
 					
 //					}
 				}

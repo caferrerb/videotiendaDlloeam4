@@ -2,7 +2,6 @@ package co.edu.eam.ingesoft.videotienda.logica.bos;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +16,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Inventory;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
-import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
+import co.edu.uniquindio.videotienda.dtos.PrestamoDTO;
 
 @Component
 public class BOAlquilarPeliculas extends BOGenerico<Rental> {
@@ -70,7 +69,7 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 	 * @param c
 	 * @return
 	 */
-	public List<Object[]> listarLosPrestamosCliente(int c) {
+	public List<PrestamoDTO> listarLosPrestamosCliente(int c) {
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_INFO_PRESTAMOS, c);
 	}
 
@@ -136,15 +135,14 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 		List<Date> listaF = listarFechaEntregaPrestamoCliente(idCliente);
 		if (lista.size() == 0) {
 			if (listaP.size() < 5) {
-//                for (int i = 0; i < listaF.size(); i++) {
-//                	Date fechaReturn = listaF.get(i);
-//					if(fechaReturn.before(fActual)){
-//						System.out.println(fechaReturn + "fechas");
-//						System.out.println(fActual + "fechas");
-//						
-//					}
-//				}
-                crear(prestamos);
+                for (int i = 0; i < listaF.size(); i++) {
+                	Date fechaReturn = listaF.get(i);
+					if(fechaReturn.after(fechaActual)){
+						 crear(prestamos);
+						
+					}
+				}
+               
 			} else {
 				throw new ExcepcionNegocio(
 						" El clienta al cual se le va a realizar el prestamo, ya tiene el limite de prestamos");

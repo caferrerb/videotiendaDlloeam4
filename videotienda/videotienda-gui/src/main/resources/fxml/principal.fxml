@@ -31,6 +31,7 @@
 								<Menu fx:id="menuCliente" mnemonicParsing="false" text="Clientes">
 									<items>
 										<MenuItem fx:id="menuItemTraslado" mnemonicParsing="false" onAction="#abrirTrasladarCliente" text="Trasladar Ciudad" />
+                              <MenuItem fx:id="menuItemGestionCliente" mnemonicParsing="false" onAction="#abrirGestionarClientes" text="Gestionar Clientes" />
 									</items>
 								</Menu>
 								<Menu fx:id="mnuActores" mnemonicParsing="false" text="Actores">
