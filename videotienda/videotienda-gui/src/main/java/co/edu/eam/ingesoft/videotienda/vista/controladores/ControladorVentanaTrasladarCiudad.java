@@ -65,6 +65,7 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 		llenarComboCiudades();
 		cliente = null;
 		jTFCiudadActual.setEditable(false);
+		jTFNombre.setEditable(false);
 	}
 
 	/**
