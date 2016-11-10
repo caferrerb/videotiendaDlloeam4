@@ -12,11 +12,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
+import javax.sql.DataSource;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.FilmActor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Sale;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.MainController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.beans.property.SimpleObjectProperty;
@@ -84,6 +88,9 @@ public class ControladorGestionarActores extends BaseController implements Initi
 
 	@Autowired
 	private BOPais boPais;
+	
+	@Autowired
+	private DataSource ds;
 
 	@FXML
 	private TextField tfDocumento;
@@ -131,6 +138,19 @@ public class ControladorGestionarActores extends BaseController implements Initi
 		llenarComboPaises();
 
 	}
+	@FXML
+	public void generarReporteActor(){
+		
+		try {
+			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+			Map<String, Object> params=new HashMap<>();
+			//params.put();
+			reporter.generarReporte(params, "/reportes/ReporteActores.jrxml", "Actores");
+		} catch (Exception e) {
+			notificar("Actor", "Error generando el reporte", TipoNotificacion.ERROR);
+		}
+	}
+	
 
 	@FXML
 	private void llenarComboPaises() {
