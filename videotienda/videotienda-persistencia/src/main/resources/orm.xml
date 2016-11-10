@@ -251,10 +251,11 @@
 
 	<named-query name="Rental.datosTablaFilmRentada">
 		<query>
-			SELECT i.inventoryId, f.title, c.customerId, r.rentalDate, r.returnDate FROM Rental r JOIN
+			SELECT r FROM Rental r JOIN
 			r.customer c 
 			JOIN r.inventory i 
 			JOIN i.film f WHERE i.store = ?1
+					
 		</query>
 	</named-query>
 
