@@ -95,7 +95,7 @@ public class Staff implements Serializable {
 	}
 
 	public String getFirstName() {
-		return this.firstName;
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
@@ -103,7 +103,7 @@ public class Staff implements Serializable {
 	}
 
 	public String getLastName() {
-		return this.lastName;
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
@@ -192,7 +192,7 @@ public class Staff implements Serializable {
 
 	@Override
 	public String toString() {
-		return staffId +"-"+firstName ;
+		return firstName ;
 	}
 
 	public Usuario getUsuario() {

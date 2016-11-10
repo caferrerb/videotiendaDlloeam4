@@ -25,6 +25,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
+import co.edu.uniquindio.videotienda.dtos.PrestamoDTO;
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Acceso;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
@@ -56,7 +57,14 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	@Autowired
 	private BOCliente boCliente;
 	
-	private Rental presta;
+	@FXML
+	private Button jBPrestamo;
+	
+	@FXML
+	private Button jBBorrar;
+	
+	@FXML
+	private Button jBBuscar;
 	
 	private Customer customer;
 
@@ -91,20 +99,20 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	private DatePicker dFechaEntrega;
 
 	@FXML
-	private TableView<String> tTPrestamos;
+	private TableView<PrestamoDTO> tTPrestamos;
 
 	@FXML
-	private TableColumn<Film, String> cCTitulo;
+	private TableColumn<PrestamoDTO, String> cCTitulo;
 
 	@FXML
-	private TableColumn<Store, String> cCTienda;
+	private TableColumn<PrestamoDTO, String> cCTienda;
 
 	@FXML
-	private TableColumn<Rental, Rental> cCbotonEliminar;
+	private TableColumn<PrestamoDTO, PrestamoDTO> cCbotonEliminar;
 
-	List<String> listaPrestamos;
+	List<PrestamoDTO> listaPrestamos;
 
-	ObservableList<String> prestamosListar;
+	ObservableList<PrestamoDTO> prestamosListar;
 	
 	
 
@@ -113,7 +121,11 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		// TODO Auto-generated method stub
 		//inicializarTabla();
 		customer = null;
+		inicializarTabla();
 		llenarComboPeliculas();
+		tFNombre.setEditable(false);
+		jBPrestamo.setDisable(true);
+		jBBorrar.setDisable(true);
 		
         
 	}
@@ -130,7 +142,8 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 				tFNombre.setText(cliente.getFirstName() + " " + cliente.getLastName());
 				Image img = new Image(new ByteArrayInputStream(cliente.getPicture()));
 				PhFoto.setImage(img);
-				//listarPrestamosClientes();
+				listarPrestamosClientes();
+				jBPrestamo.setDisable(false);
 
 			} else {
 				notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
@@ -154,7 +167,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	@FXML
 	public void prestamo() {
 
-		if (tFIdentificacion.getText().isEmpty()) {
+		if (tFIdentificacion.getText().isEmpty() || dFechaEntrega.getValue() == null) {
 			notificar("Prestamo", "Debe llenar los campos para poder realizar el prestamo", TipoNotificacion.ERROR);
 		} else {
 			int idCliente = Integer.parseInt(tFIdentificacion.getText());
@@ -165,6 +178,10 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 				boAlquiPelicula.registrarPrestamo(idCliente, f, fechaEntrega);
 
 				notificar("Prestamo", "Se ha prestado la pelicula", TipoNotificacion.INFO);
+				listarPrestamosClientes();
+				jBPrestamo.setDisable(true);
+				jBBorrar.setDisable(false);
+				jBBuscar.setDisable(true);
 			} catch (ExcepcionNegocio e) {
 				notificar("Prestamo", e.getMessage(), TipoNotificacion.ERROR);
 			}
@@ -177,35 +194,36 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		PhFoto.setImage(null);
 		tFIdentificacion.setText(null);
 		tFNombre.setText(null);
-
+		cBPeliculas.getSelectionModel().select(1);
+		jBBorrar.setDisable(true);
+		jBBuscar.setDisable(false);
+		
 	}
 
 	@FXML
 	public void listarPrestamosClientes() {
-		listaPrestamos = boAlquiPelicula.listarPrestaClientes(customer);
-		prestamosListar.setAll(listaPrestamos);
+		int idCliente = Integer.parseInt(tFIdentificacion.getText());
+		listaPrestamos = boAlquiPelicula.listarLosPrestamosCliente(idCliente);
+		prestamosListar = FXCollections.observableArrayList();
+		 for (PrestamoDTO dto : listaPrestamos) {
+			 prestamosListar.add(dto);
+		} 
+		
 		tTPrestamos.setItems(prestamosListar);
 
 	}
 
 	public void inicializarTabla() {
-		// Inicializar listas
-		prestamosListar = FXCollections.observableArrayList();
-
-		// Enlazar listas
-		tTPrestamos.setItems(prestamosListar);
-
-		// Enlazar columnas con atributos
-		cCTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-		cCTienda.setCellValueFactory(new PropertyValueFactory<Store, String>("nombreTienda"));
+		cCTitulo.setCellValueFactory(new PropertyValueFactory<PrestamoDTO, String>("titulo"));
+		cCTienda.setCellValueFactory(new PropertyValueFactory<PrestamoDTO, String>("nombreTienda"));
 		cCbotonEliminar.setSortable(false);
-
+		
 		cCbotonEliminar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
-		cCbotonEliminar.setCellFactory(param -> new TableCell<Rental, Rental>() {
+		cCbotonEliminar.setCellFactory(param -> new TableCell<PrestamoDTO, PrestamoDTO>() {
 			private final Button deleteButton = new Button("Retornar");
 
 			@Override
-			protected void updateItem(Rental prestamo, boolean empty) {
+			protected void updateItem(PrestamoDTO prestamo, boolean empty) {
 				super.updateItem(prestamo, empty);
 
 				if (prestamo == null) {
@@ -219,14 +237,12 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 					@Override
 					public void handle(ActionEvent t) {
 						int num = getTableRow().getIndex();
-//						List<Rental> prestamos = boAlquiPelicula.listarPrestaClientes(customer);
-//						borramos el objeto obtenido de la fila
-//						
-//						Rental p = listaPrestamos.get(num);
-//						boRental.eliminar(p.getRentalId());
-//						prestamosListar.remove(num);
-//					    notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
-//					    TipoNotificacion.INFO);
+						//borramos el objeto obtenido de la fila
+						PrestamoDTO p = getTableView().getItems().get(num);
+						boRental.eliminar(p.getIdPrestamos());
+						prestamosListar.remove(num);
+					    notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
+					    TipoNotificacion.INFO);
 
 					}
 				});

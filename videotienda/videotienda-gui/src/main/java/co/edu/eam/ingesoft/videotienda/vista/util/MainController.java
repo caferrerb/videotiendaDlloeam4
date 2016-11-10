@@ -166,6 +166,7 @@ public class MainController implements Initializable {
 	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		boton();
 //		esconderMenus();
 		agregarVentana("/fxml/Login.fxml", LoginUsuarioController.class);
 
@@ -303,6 +304,10 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirEjemplo(){
 		agregarVentana("/fxml/ejemplotabla.fxml", ControladorEjemploTabla.class);
+	}
+	
+	public void boton(){
+		mnuInicio.getItems().add(new MenuItem("Inicio"));
 	}
 	
 	@FXML
