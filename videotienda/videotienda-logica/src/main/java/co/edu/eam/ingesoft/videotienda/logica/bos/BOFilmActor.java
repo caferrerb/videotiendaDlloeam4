@@ -9,9 +9,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.eam.ingesoft.videotienda.logica.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.FilmActor;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.FilmActorPK;
 
 /**
  * @author TOSHIBAP55W
@@ -29,11 +31,30 @@ public class BOFilmActor extends BOGenerico<FilmActor>{
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_FILMACTOR_POR_ACTOR,ac);
 	}
 	
+	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void crear(FilmActor entidad){
 		
+		FilmActor fiAc= buscar(entidad.getId());
+		
+		if(fiAc!=null){
+			
+			throw new ExcepcionNegocio("Este actor ya tiene un personaje asignado en la pelicula con ID= ''"+entidad.getId()+"''.");
+			}
 		super.crear(entidad);
 	}
-	
+//	
+//	@Override
+//	@Transactional(propagation = Propagation.REQUIRED)
+//	public void editar(FilmActor entidad){
+//		
+//		FilmActor fiAc= buscar(entidad.getId());
+//		
+//		if(fiAc!=null){
+//			super.editar(entidad);
+//			}
+//		throw new ExcepcionNegocio("Este actor ya tiene un personaje asignado en la pelicula con ID= ''"+entidad.getId()+"''.");
+//
+//	}
 	
 }
