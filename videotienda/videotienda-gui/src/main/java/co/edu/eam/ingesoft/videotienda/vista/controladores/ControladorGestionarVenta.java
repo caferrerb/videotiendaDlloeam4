@@ -154,25 +154,16 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 	}
 	
 	@FXML
-	public void generarReportePe(){
-		
+	public void generarReportePe(){		
 		try {
-			if(jtfTitulo!= null){
-
+			if(!jtfTitulo.getText().isEmpty()){
 				GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
 				Map<String, Object> params=new HashMap<>();
-				String nomPelicula = jtfTitulo.getText();
-				List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
-				for(int i =0;i<pelicula.size();i++){
-					params.put("tituloPelicula",pelicula.get(i) );
-				}		
-				
+				params.put("tituloPelicula",jtfTitulo.getText());				
 				reporter.generarReporte(params, "/reportes/reportePeliculas.jrxml", "PeliculasXNombre");
-			}else{
-				notificar("Ejemplo", "Por favor buscar una pelicula", TipoNotificacion.ERROR);
+						
 			}
-			
-		} catch (Exception e) {
+			} catch (Exception e) {
 			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
 		}
 	}
