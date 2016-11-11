@@ -215,7 +215,7 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 				@Override
 				public void handle(ActionEvent t) {
 					Rental r = getTableView().getItems().get(getIndex());
-					guardarEnSesion("pelicula", r);
+					guardarEnSesion("pelicula", r.getCustomer());
 					abrirVentana("/fxml/AlquilarPelicula.fxml", ControladorAlquilarPelicula.class);
 				}
 			});
@@ -243,7 +243,7 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 				@Override
 				public void handle(ActionEvent t) {
 					Rental r = getTableView().getItems().get(getIndex());
-					guardarEnSesion("cliente", r);
+					guardarEnSesion("cliente", r.getCustomer());
 				
 					abrirVentana("/fxml/VentanaGestionarClientes.fxml", ControladorGestionarClientes.class);
 				}
