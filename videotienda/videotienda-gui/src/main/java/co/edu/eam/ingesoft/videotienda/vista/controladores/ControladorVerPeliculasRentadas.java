@@ -214,7 +214,9 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 				@Override
 				public void handle(ActionEvent t) {
-					abrirVentana("/fxml/GestionarPrestamos.fxml.fxml", ControladorVerPeliculasRentadas.class);
+					Rental r = getTableView().getItems().get(getIndex());
+					guardarEnSesion("pelicula", r);
+					abrirVentana("/fxml/AlquilarPelicula.fxml", ControladorAlquilarPelicula.class);
 				}
 			});
 		}
@@ -240,9 +242,10 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 				@Override
 				public void handle(ActionEvent t) {
-					//StaffSchedule c=getTableView().getItems().get(getIndex());
+					Rental r = getTableView().getItems().get(getIndex());
+					guardarEnSesion("cliente", r);
 				
-					abrirVentana("/fxml/GestionarPrestamos.fxml.fxml", ControladorVerPeliculasRentadas.class);
+					abrirVentana("/fxml/VentanaGestionarClientes.fxml", ControladorGestionarClientes.class);
 				}
 			});
 		}
@@ -262,7 +265,7 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 		try{
 			GeneradorReporte report= new GeneradorReporte(ds.getConnection());
 			Map<String, Object> params=new HashMap<>();
-			params.put("idTienda",Integer.parseInt(cbTienda.getSelectionModel().getSelectedItem().toString()) );
+			params.put("idTienda",(cbTienda.getSelectionModel().getSelectedItem().getStoreId()) );
 			report.generarReporte(params, "/reportes/peliculasrentadasportienda.jrxml", "PeliculasRentadasPorTienda");
 		}catch (Exception e){
 			notificar("Error", "Error generando el reporte", TipoNotificacion.ERROR);
