@@ -100,10 +100,10 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 					});
 					
 					jttablacontenidoPelicula.setItems(data);
-					generarReportePe();
+					
 				}
-				
-			}
+						}
+//			generarReportePe();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -154,18 +154,16 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 	}
 	
 	@FXML
-	public void generarReportePe(){
-		
+	public void generarReportePe(){		
 		try {
-			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
-			Map<String, Object> params=new HashMap<>();
-			String nomPelicula = jtfTitulo.getText();
-			List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
-				params.put("tituloPelicula",pelicula );
+			if(!jtfTitulo.getText().isEmpty()){
+				GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+				Map<String, Object> params=new HashMap<>();
+				params.put("tituloPelicula",jtfTitulo.getText());				
 				reporter.generarReporte(params, "/reportes/reportePeliculas.jrxml", "PeliculasXNombre");
-			
-			
-		} catch (Exception e) {
+						
+			}
+			} catch (Exception e) {
 			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
 		}
 	}
