@@ -25,6 +25,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
+import co.edu.uniquindio.videotienda.dtos.PrestamoDTO;
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Acceso;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
@@ -98,20 +99,20 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	private DatePicker dFechaEntrega;
 
 	@FXML
-	private TableView<Object[]> tTPrestamos;
+	private TableView<PrestamoDTO> tTPrestamos;
 
 	@FXML
-	private TableColumn<Film, String> cCTitulo;
+	private TableColumn<PrestamoDTO, String> cCTitulo;
 
 	@FXML
-	private TableColumn<Store, String> cCTienda;
+	private TableColumn<PrestamoDTO, String> cCTienda;
 
 	@FXML
-	private TableColumn<Rental, Rental> cCbotonEliminar;
+	private TableColumn<PrestamoDTO, PrestamoDTO> cCbotonEliminar;
 
-	List<Object[]> listaPrestamos;
+	List<PrestamoDTO> listaPrestamos;
 
-	ObservableList<Object[]> prestamosListar;
+	ObservableList<PrestamoDTO> prestamosListar;
 	
 	
 
@@ -177,6 +178,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 				boAlquiPelicula.registrarPrestamo(idCliente, f, fechaEntrega);
 
 				notificar("Prestamo", "Se ha prestado la pelicula", TipoNotificacion.INFO);
+				listarPrestamosClientes();
 				jBPrestamo.setDisable(true);
 				jBBorrar.setDisable(false);
 				jBBuscar.setDisable(true);
@@ -203,8 +205,8 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		int idCliente = Integer.parseInt(tFIdentificacion.getText());
 		listaPrestamos = boAlquiPelicula.listarLosPrestamosCliente(idCliente);
 		prestamosListar = FXCollections.observableArrayList();
-		 for (Object[] objects : listaPrestamos) {
-			 prestamosListar.setAll(objects);
+		 for (PrestamoDTO dto : listaPrestamos) {
+			 prestamosListar.add(dto);
 		} 
 		
 		tTPrestamos.setItems(prestamosListar);
@@ -212,40 +214,41 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	}
 
 	public void inicializarTabla() {
-		cCTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-		cCTienda.setCellValueFactory(new PropertyValueFactory<Store, String>("nombreTienda"));
+		cCTitulo.setCellValueFactory(new PropertyValueFactory<PrestamoDTO, String>("titulo"));
+		cCTienda.setCellValueFactory(new PropertyValueFactory<PrestamoDTO, String>("nombreTienda"));
 		cCbotonEliminar.setSortable(false);
+		
+		cCbotonEliminar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		cCbotonEliminar.setCellFactory(param -> new TableCell<PrestamoDTO, PrestamoDTO>() {
+			private final Button deleteButton = new Button("Retornar");
 
-//		cCbotonEliminar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
-//		cCbotonEliminar.setCellFactory(param -> new TableCell<Rental, Rental>() {
-//			private final Button deleteButton = new Button("Retornar");
-//
-//			@Override
-//			protected void updateItem(Rental prestamo, boolean empty) {
-//				super.updateItem(prestamo, empty);
-//
-//				if (prestamo == null) {
-//					setGraphic(null);
-//					return;
-//				}
-//
-//				setGraphic(deleteButton);
-//				deleteButton.setOnAction(new EventHandler<ActionEvent>() {
-//
-//					@Override
-//					public void handle(ActionEvent t) {
-//						int num = getTableRow().getIndex();
-//						//borramos el objeto obtenido de la fila
-//						Rental p = listaPrestamos.get(num);
-//						boRental.eliminar(p.getRentalId());
-//						prestamosListar.remove(num);
-//					    notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
-//					    TipoNotificacion.INFO);
-//
-//					}
-//				});
-//			}
-//		});
+			@Override
+			protected void updateItem(PrestamoDTO prestamo, boolean empty) {
+				super.updateItem(prestamo, empty);
+
+				if (prestamo == null) {
+					setGraphic(null);
+					return;
+				}
+
+				setGraphic(deleteButton);
+				deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent t) {
+						int num = getTableRow().getIndex();
+						//borramos el objeto obtenido de la fila
+						PrestamoDTO p = getTableView().getItems().get(num);
+						boRental.eliminar(p.getIdPrestamos());
+						prestamosListar.remove(num);
+						System.out.println(p.getIdPrestamos());
+					    notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
+					    TipoNotificacion.INFO);
+
+					}
+				});
+			}
+		});
 
 	}
 }
