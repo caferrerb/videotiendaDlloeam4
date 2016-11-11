@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-11-11T08:37:16 -->
+<!-- 2016-11-11T08:47:42 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePeliculas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3776af46-f391-48b1-a160-1b14ca87c099">
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="352"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="640"/>
@@ -34,7 +34,10 @@
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="32" splitType="Stretch">
+		<band height="37" splitType="Stretch">
+			<rectangle>
+				<reportElement x="50" y="0" width="471" height="31" uuid="acc190aa-ee7c-48c6-93d0-476068249b79"/>
+			</rectangle>
 			<staticText>
 				<reportElement x="70" y="0" width="100" height="30" forecolor="#5E4CE6" uuid="7667a4c5-8d4f-464c-94c3-b1cae888b1ba"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -70,7 +73,11 @@
 			<textField>
 				<reportElement x="70" y="40" width="100" height="30" uuid="5ee4e991-3327-4e1c-bddc-ce7faa6762a2"/>
 				<box>
-					<pen lineColor="#5E4CE6"/>
+					<pen lineWidth="1.0" lineColor="#5E4CE6"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#5E4CE6"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#5E4CE6"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
@@ -78,9 +85,13 @@
 				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="181" y="40" width="100" height="30" uuid="7de0ca6f-6e8e-43fb-9831-ccfaf4579f04"/>
+				<reportElement stretchType="RelativeToTallestObject" x="181" y="40" width="100" height="30" uuid="7de0ca6f-6e8e-43fb-9831-ccfaf4579f04"/>
 				<box>
-					<pen lineColor="#5E4CE6"/>
+					<pen lineWidth="1.0" lineColor="#5E4CE6"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#5E4CE6"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#5E4CE6"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
@@ -90,7 +101,11 @@
 			<textField>
 				<reportElement x="290" y="40" width="100" height="30" uuid="96ad63b7-4b32-4d72-94ea-22b6a90f7e9f"/>
 				<box>
-					<pen lineColor="#5E4CE6"/>
+					<pen lineWidth="1.0" lineColor="#5E4CE6"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#5E4CE6"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#5E4CE6"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
@@ -99,8 +114,12 @@
 			</textField>
 			<textField>
 				<reportElement x="400" y="40" width="100" height="30" uuid="dee0ff27-2e3c-40ae-87c3-75e713523686"/>
-				<box>
-					<pen lineColor="#5E4CE6"/>
+				<box leftPadding="0">
+					<pen lineWidth="1.0" lineColor="#5E4CE6"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#5E4CE6"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#5E4CE6"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
