@@ -42,7 +42,7 @@
                         <ComboBox fx:id="cbEmpleado" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField fx:id="tfLocalidad" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label text="TIENDA:" />
-                        <ComboBox fx:id="cbTiendas" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="cbTiendas" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="1" onAction="#limpiarCampos"/>
                      </children>
                   </GridPane>
                </children>
@@ -99,7 +99,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="bCrear" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="CREAR" onAction="#crear"/>
-            <Button fx:id="bEditar" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="EDITAR" GridPane.columnIndex="1" />
+            <Button fx:id="bEditar" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="EDITAR" GridPane.columnIndex="1" onAction="#editar"/>
             <Button fx:id="bBuscar" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="BUSCAR" GridPane.columnIndex="2" onAction="#buscar"/>
          </children>
       </GridPane>
