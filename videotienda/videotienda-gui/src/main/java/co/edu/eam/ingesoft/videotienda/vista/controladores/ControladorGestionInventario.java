@@ -23,6 +23,7 @@ import co.edu.eam.ingesoft.videotienda.logica.bos.BOTienda;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Inventory;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Sale;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
@@ -82,7 +83,7 @@ public class ControladorGestionInventario extends BaseController implements Init
 	private ComboBox<Store> JCBTienda;
 	
 	@FXML
-	private TableView<Inventory> jPTienda;
+	private TableView<Film> jPTienda;
 	
 	@FXML
 	private TableColumn<Film, String> colTitulo;
@@ -96,7 +97,7 @@ public class ControladorGestionInventario extends BaseController implements Init
 	
 	@FXML
 	private Pane JPDarDeBaja;
-	
+
 	@FXML
 	private final ObservableList<Film> data = FXCollections.observableArrayList();
 	
@@ -106,13 +107,41 @@ public class ControladorGestionInventario extends BaseController implements Init
 		
 	}
 
-	@FXML
-	private void llenarComboTiendas(){
-		JCBTienda.getItems().add(null);
+	/**
+	 * llena el combo con las tiendas
+	 */
+
+	private void llenarComboTiendas() {
 		List<Store> lista = boTienda.listarTiendas();
-		for (Store store : lista){
+		for (Store store : lista) {
 			JCBTienda.getItems().add(store);
 		}
+	}
+	
+	
+	/**
+	 * evento de accion del combo
+	 */
+	@FXML
+	public void eventoAccionCombo() {
+		JCBTienda.setOnAction((event) -> {
+			Store i = JCBTienda.getSelectionModel().getSelectedItem();
+			llenarTablaPeliculas(i);
+
+		});
+	}
+	
+	/**
+	 * llena la tabla venta
+	 * @param s la tienda a la que se le van a obtener los datos
+	 */
+	@FXML
+	public void llenarTablaPeliculas(Store s) {
+		List<Film> lista = boInventario.listarTablaPeliculas(s);
+		for (int i = 0; i < lista.size(); i++) {
+			data.add(lista.get(i));
+		}
+		jPTienda.setItems(data);
 	}
 	@FXML
 	private void mostrarPanelDarBaja() {
@@ -152,27 +181,16 @@ public class ControladorGestionInventario extends BaseController implements Init
 		}
 	}
 	
-	private void llenarTabla() {
-
-		List<Film> lista = boFilm.listarTodos();
-		ObservableList<Inventory> listaTabl = FXCollections.observableArrayList();
-		for (Film film : lista) {
-			listaTabl.add(film);
-		}
-		jPTienda.setItems(listaTabl);
-
-	}
 	
+
+	//private int cuentaCantidad(){
+		
+		
+	//}
 	
 	private void configurarTabla() {
 		colTitulo.setCellValueFactory(new PropertyValueFactory<>("title"));
-		colLeng.setCellValueFactory(new Callback<CellDataFeatures<Film, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Film, String> data) {
-				return new SimpleObjectProperty<>(data.getValue().getLanguage1().getName());
-			}
-		});
-		colLong.setCellValueFactory(new PropertyValueFactory<>("length"));
+		colInventario.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
 
 		Callback<TableColumn<Film, String>, TableCell<Film, String>> cellFactory = new Callback<TableColumn<Film, String>, TableCell<Film, String>>() {
 
@@ -209,7 +227,7 @@ public class ControladorGestionInventario extends BaseController implements Init
 				return cell;
 			}
 		};
-		colDarAlta.setCellFactory(cellFactory);
+		
 	}
 	
 

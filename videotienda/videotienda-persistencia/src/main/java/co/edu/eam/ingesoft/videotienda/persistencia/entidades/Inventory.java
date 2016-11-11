@@ -49,9 +49,13 @@ public class Inventory implements Serializable {
 	@OneToMany(mappedBy="inventory",fetch=FetchType.LAZY)
 	private List<Rental> rentals;
 	
+	
+	//bi-directional many-to-one association to dedobaja
 	@Column(name="DADOBAJA")
 	private boolean dadodeBaja;
 	
+	
+	//bi-directional many-to-one association to comentario
 	@Column(name="COMMENT")
 	private String comentario;
 	
