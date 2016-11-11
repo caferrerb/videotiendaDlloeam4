@@ -41,8 +41,6 @@ public class Staff implements Serializable {
 	@Lob
 	private byte[] picture;
 
-	
-
 	//bi-directional many-to-one association to Payment
 	@OneToMany
 	private List<Payment> payments;
@@ -97,7 +95,7 @@ public class Staff implements Serializable {
 	}
 
 	public String getFirstName() {
-		return this.firstName;
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
@@ -105,7 +103,7 @@ public class Staff implements Serializable {
 	}
 
 	public String getLastName() {
-		return this.lastName;
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
@@ -192,12 +190,9 @@ public class Staff implements Serializable {
 		this.store = store;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Staff [staffId=" + staffId + ", active=" + active + ", email="
-				+ email + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", lastUpdate=" + lastUpdate + " ]";
+		return firstName ;
 	}
 
 	public Usuario getUsuario() {
@@ -208,6 +203,5 @@ public class Staff implements Serializable {
 		this.usuario = usuario;
 	}
 
-	
 	
 }

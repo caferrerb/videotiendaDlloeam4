@@ -17,7 +17,11 @@ public class FilmActorPK implements Serializable {
 
 	@Column(name="film_id",  nullable=false)
 	private int filmId;
+	
+	@Column(name="caracter", nullable=false)
+	private String caracter;
 
+	
 	public FilmActorPK() {
 	}
 	public int getActorId() {
@@ -32,7 +36,18 @@ public class FilmActorPK implements Serializable {
 	public void setFilmId(int filmId) {
 		this.filmId = filmId;
 	}
-
+	/**
+	 * @return the caracter
+	 */
+	public String getCaracter() {
+		return caracter;
+	}
+	/**
+	 * @param caracter the caracter to set
+	 */
+	public void setCaracter(String caracter) {
+		this.caracter = caracter;
+	}
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;

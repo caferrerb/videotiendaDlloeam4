@@ -3,8 +3,11 @@ package co.edu.eam.ingesoft.videotienda.logica.bos;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 
 /**
@@ -25,6 +28,12 @@ public class BOTienda extends BOGenerico<Store>{
 	 */
 	public List<Store> listarTiendas(){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_TIENDAS);
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void crear(Store store){
+		super.crear(store);
 	}
 	
 }

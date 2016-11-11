@@ -30,17 +30,67 @@ public class Sale implements Serializable{
 	private Date saleDate;
 
 	// bi-directional many-to-one association to Customer
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "customer_id", nullable = false)
 	private Customer customer;
 
 	// bi-directional many-to-one association to Staff
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "staff_id", nullable = false)
 	private Staff staff;
 
 	// bi-directional many-to-one association to Film
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "film_id", nullable = false)
 	private Film film;
+
+	public int getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(int saleId) {
+		this.saleId = saleId;
+	}
+
+	public Date getSaleDate() {
+		return saleDate;
+	}
+
+	public void setSaleDate(Date saleDate) {
+		this.saleDate = saleDate;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Staff getStaff() {
+		return staff;
+	}
+
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
+
+	public Film getFilm() {
+		return film; 
+	}
+
+	public void setFilm(Film film) {
+		this.film = film;
+	}
+
+	@Override
+	public String toString() {
+		return saleDate+"";
+	}
+
+
+	
+	
+	
 }

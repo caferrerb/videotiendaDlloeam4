@@ -20,10 +20,14 @@ public class Store implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="store_id", unique=true, nullable=false)
-	private byte storeId;
+	@Column(name="store_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int storeId;
+	
+	@Column(name="Nombre_tienda")
+	private String nombreTienda;
 
-	@Column(name="last_update", nullable=false)
+	@Column(name="last_update")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastUpdate;
 
@@ -41,7 +45,7 @@ public class Store implements Serializable {
 
 	//bi-directional many-to-one association to Address
 	@ManyToOne
-	@JoinColumn(name="address_id", nullable=false)
+	@JoinColumn(name="address_id")
 	private Address address;
 
 	//bi-directional many-to-one association to Staff
@@ -52,13 +56,15 @@ public class Store implements Serializable {
 	public Store() {
 	}
 
-	public byte getStoreId() {
-		return this.storeId;
+	public int getStoreId() {
+		return storeId;
 	}
 
-	public void setStoreId(byte storeId) {
+	public void setStoreId(int storeId) {
 		this.storeId = storeId;
 	}
+
+
 
 	public Date getLastUpdate() {
 		return this.lastUpdate;
@@ -152,7 +158,7 @@ public class Store implements Serializable {
 
 	@Override
 	public String toString() {
-		return storeId+"";
+		return nombreTienda;
 	}
 
 }

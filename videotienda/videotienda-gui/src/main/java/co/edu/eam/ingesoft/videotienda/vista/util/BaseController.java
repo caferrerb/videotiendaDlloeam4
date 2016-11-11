@@ -1,5 +1,8 @@
 package co.edu.eam.ingesoft.videotienda.vista.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.controlsfx.control.Notifications;
 
 import javafx.fxml.FXML;
@@ -16,6 +19,11 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class BaseController {
 
+	private static Map<String, Object> sesion;
+	static{
+		sesion=new HashMap<>();
+	}
+	
 	/**
 	 * Controlador principal.
 	 */
@@ -31,7 +39,33 @@ public class BaseController {
 	 */
 	public void init(MainController ctller) {
 		mainController = ctller;
+		
 
+	}
+	/**
+	 * MEtodo para almacenar datos en la seison
+	 * @param nombre
+	 * @param valor
+	 */
+	public void guardarEnSesion(String nombre,Object valor){
+		sesion.put(nombre, valor);
+	}
+	
+	/**
+	 * metodo para obetner un valor de la sesion.
+	 * @param nombre
+	 * @return
+	 */
+	public Object obtenerValor(String nombre){
+		return sesion.get(nombre);
+	}
+	
+	/**
+	 * 
+	 * @param nombre
+	 */
+	public void borrarSesion(String nombre){
+		sesion.remove(nombre);
 	}
 
 	/**

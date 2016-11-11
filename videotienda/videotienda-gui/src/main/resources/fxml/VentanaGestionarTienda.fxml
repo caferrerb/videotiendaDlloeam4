@@ -42,7 +42,7 @@
                         <ComboBox fx:id="cbEmpleado" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField fx:id="tfLocalidad" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label text="TIENDA:" />
-                        <ComboBox fx:id="cbTiendas" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="cbTiendas" onAction="#limpiarCampos" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                </children>
@@ -98,10 +98,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="bCrear" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="CREAR" />
-            <Button fx:id="bEditar" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="EDITAR" GridPane.columnIndex="1" />
-            <Button fx:id="bBuscar" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="BUSCAR" GridPane.columnIndex="2" onAction="#buscar"/>
+            <Button fx:id="bCrear" mnemonicParsing="false" onAction="#crear" prefHeight="25.0" prefWidth="98.0" text="CREAR" />
+            <Button fx:id="bEditar" mnemonicParsing="false" onAction="#editar" prefHeight="25.0" prefWidth="103.0" text="EDITAR" GridPane.columnIndex="1" />
+            <Button fx:id="bBuscar" mnemonicParsing="false" onAction="#buscar" prefHeight="25.0" prefWidth="111.0" text="BUSCAR" GridPane.columnIndex="2" />
          </children>
       </GridPane>
+      <Button fx:id="jBGenerarReporte" layoutX="839.0" layoutY="333.0" mnemonicParsing="false" text="GENERAR REPORTE" onAction="#generarReporte"/>
    </children>
 </AnchorPane>

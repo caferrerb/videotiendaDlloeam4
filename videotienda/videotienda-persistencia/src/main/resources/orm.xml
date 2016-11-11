@@ -4,17 +4,21 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
 	version="2.0">
 
-
-
 	<named-query name="listarPeliculas">
 		<query>
 			SELECT f FROM Film f WHERE f.length=?1
 		</query>
 	</named-query>
 
+	<named-query name="Film.listarPorNombrePelis">
+		<query>
+			SELECT f FROM Film f
+		</query>
+	</named-query>
+
 	<named-query name="Film.listarNombrePelicula">
 		<query>
-			SELECT f FROM Film f WHERE f.title=?1
+			SELECT f FROM Film f WHERE f.title like?1
 		</query>
 	</named-query>
 
@@ -51,7 +55,49 @@
 			SELECT f.actor FROM FilmActor f WHERE f.film = ?1
 		</query>
 	</named-query>
-	
+
+	<named-query name="Rental.listarPrestamosClientes">
+		<query>
+			SELECT r FROM Rental r
+			WHERE r.customer = ?1
+		</query>
+	</named-query>
+
+	<named-query name="Rental.consultaRepetidos">
+		<query>
+			SELECT r FROM Rental r
+			JOIN r.inventory i
+			JOIN i.film f
+			WHERE f =
+			?1
+		</query>
+	</named-query>
+
+	<named-query name="Rental.PrestamosCliente">
+		<query>
+			SELECT r FROM Rental r
+			JOIN r.customer c
+			WHERE c.customerId = ?1
+		</query>
+	</named-query>
+
+	<named-query name="Inventory.listarInventarioPelicula">
+		<query>
+			SELECT i FROM Inventory i
+			WHERE i.film = ?1
+		</query>
+	</named-query>
+
+	<named-query name="Rental.PeliculaPrestada">
+		<query>
+			SELECT r FROM Rental r
+			JOIN r.inventory i
+			JOIN i.film f
+			WHERE
+			f.title = ?1
+		</query>
+	</named-query>
+
 	<named-query name="Pais.listartodos">
 		<query>
 			SELECT c FROM Country c
@@ -75,15 +121,15 @@
 			SELECT s FROM Staff s
 		</query>
 	</named-query>
-	
+
 	<named-query name="Tienda.ListarTodos">
-	<query>
+		<query>
 			SELECT s FROM Store s
 		</query>
 	</named-query>
-	
+
 	<named-query name="Language.ListarTodos">
-	<query>
+		<query>
 			SELECT lag FROM Language lag
 		</query>
 	</named-query>
@@ -93,47 +139,206 @@
 			SELECT r FROM Rol r
 		</query>
 	</named-query>
-	
+
 	<named-query name="UsuarioRol.ListarRolesPorUsuario">
 		<query>
-			SELECT usuR.rol FROM UsuarioRol usuR WHERE usuR.usuario.usuario=?1
+			SELECT usuR.rol FROM UsuarioRol usuR WHERE
+			usuR.usuario.usuario=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="UsuarioRol.ListarPorRol">
 		<query>
 			SELECT usuR FROM UsuarioRol usuR WHERE usuR.rol.id=?1
 		</query>
-		</named-query>
-		
+	</named-query>
+
 	<named-query name="EmpleadosTienda.ListarTodos">
 		<query>
 			SELECT s FROM Staff s WHERE s.store=?1
 		</query>
 	</named-query>
 
+	<named-query name="InventarioTienda.ListarTodos">
+		<query>
+			SELECT i FROM Inventory i WHERE i.store=?1
+		</query>
+	</named-query>
 
 	<named-query name="datosTablaRental.Listar">
 		<query>
-			SELECT i.inventoryId,f.title,c.customerId FROM Rental r JOIN r.customer c
+			SELECT r FROM Rental r JOIN
+			r.customer c
 			JOIN r.inventory i
-			JOIN i.film f WHERE i.store = ?1
+			JOIN
+			i.film f WHERE i.store = ?1
 		</query>
 	</named-query>
 
 	<named-query name="datosTablaVentas.Listar">
 		<query>
-			SELECT f.filmId, f.title, c.customerId, s.saleDate FROM Sale s JOIN
+			SELECT s FROM Sale s
+			JOIN
 			s.customer c JOIN s.film f
 			JOIN s.staff p WHERE p.store = ?1
-
 		</query>
 	</named-query>
 
-	<named-query name="Acceso.ListarTodos">
+		
+	<named-query name="listarDatosClientes">
 		<query>
-			SELECT a FROM Acceso a
+			SELECT c FROM Customer c WHERE c.customerId=?1
 		</query>
 	</named-query>
+		
+	<named-query name="FilmActor.ListarTodos">
+		<query>
+			SELECT fa FROM FilmActor fa WHERE fa.film.filmId=?1
+		</query>
+	</named-query>
+
+	<named-query name="Rental.PeliculasRentadasCliente">
+		<query>
+			SELECT r FROM Rental r
+			WHERE r.customer = ?1
+		</query>
+	</named-query>
+	
+	<named-query name="Rental.PeliculasCliente">
+		<query>
+			SELECT r FROM Rental r
+			JOIN r.customer c
+			WHERE c.customerId = ?1
+		</query>
+	</named-query>
+
+	<named-query name="Rental.fechaEntregaCliente">
+		<query>
+			SELECT r FROM Rental r
+			JOIN r.customer c
+			WHERE c.customerId = ?1
+		</query>
+
+	</named-query>
+
+<named-query name="Rental.TituloNombrePrestamos">
+		<query>
+			SELECT new co.edu.uniquindio.videotienda.dtos.PrestamoDTO(s.nombreTienda, f.title,r.rentalId) FROM Rental r
+			JOIN r.inventory i
+			JOIN i.store s
+			JOIN i.film f
+			JOIN r.customer c
+			WHERE c.customerId = ?1
+		</query>
+	</named-query>
+		
+	<named-query name="Cliente.PrestamosCliente">
+		<query>
+			SELECT new co.edu.uniquindio.videotienda.dtos.PrestamosClienteDTO(f.title,r.rentalDate,r.returnDate) FROM Rental r
+			JOIN r.inventory i
+			JOIN i.film f
+			JOIN r.customer c
+			WHERE c.customerId = ?1
+		</query>
+	</named-query>
+		
+	<named-query name="Usuario.BuscarUsuario">
+		<query>
+			SELECT usu FROM Usuario usu WHERE usu=?1
+		</query>
+	</named-query>
+	
+	<named-query name="AccesoRol.ListarPantallasRol">
+		<query>
+			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
+		</query>
+	</named-query>
+
+
+	<named-query name="listarPeliculasPorActor">
+		<query>
+			SELECT f FROM FilmActor fa JOIN fa.film f WHERE fa.actor = ?1
+		</query>
+	</named-query>
+
+	
+
+	<named-query name="listarFilmActorPorActor">
+		<query>
+			SELECT fa FROM FilmActor fa WHERE fa.actor = ?1
+		</query>
+
+	</named-query>
+
+
+	
+	<named-query name="AccesoRol.ListarAccesoRol">
+		<query>
+			SELECT accR FROM AccesoRol accR
+		</query>
+	</named-query>
+
+	<named-query name="Acesso.ListarTodos">
+		<query>
+			SELECT acc FROM Acceso acc
+		</query>
+	</named-query>
+
+
+	<named-query name="Rental.datosTablaFilmRentada">
+		<query>
+			SELECT r FROM Rental r JOIN
+			r.customer c 
+			JOIN r.inventory i 
+			JOIN i.film f WHERE i.store = ?1
+					
+		</query>
+	</named-query>
+
+
+
+
+	<named-query name="StaffSchedule.ListaHorasEmpleado">
+		<query>
+			SELECT st FROM StaffSchedule st WHERE st.empleado = ?1
+		</query>
+
+	</named-query>
+
+		
+	<named-query name="StaffSchedule.ListaHorarios">
+		<query>
+			SELECT st FROM StaffSchedule st
+		</query>
+	</named-query>
+
+
+	<named-query name="Category.listarTodas">
+		<query>
+			SELECT ca FROM Category ca
+		</query>
+	</named-query>
+
+
+	<named-query name="Sale.TotalVentas">
+		<query>
+			SELECT SUM(f.rentalRate) FROM Rental r JOIN r.inventory i JOIN i.film f
+			WHERE r.rentalDate BETWEEN ?1 AND ?2
+		</query>
+	</named-query>
+
+	<named-query name="Rental.TotalRentas">
+		<query>
+			SELECT SUM(f.rentalRate)FROM Sale s JOIN s.film f WHERE s.saleDate BETWEEN
+			?1 AND ?2
+		</query>
+	</named-query>
+	
+	<named-query name="Empleado.buscarEmpleadoPorUsuario">
+		<query>
+			SELECT s FROM Staff s WHERE s.usuario=?1
+		</query>
+	</named-query>
+
 
 </entity-mappings>

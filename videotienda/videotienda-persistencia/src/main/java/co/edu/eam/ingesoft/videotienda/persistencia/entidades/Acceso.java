@@ -57,8 +57,6 @@ public class Acceso implements Serializable{
 		this.id = id;
 	}
 
-	
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -66,12 +64,18 @@ public class Acceso implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	public String getPantalla() {
+		return pantalla;
+	}
+
+	public void setPantalla(String pantalla) {
+		this.pantalla = pantalla;
+	}
+
+	@Override
+	public String toString() {
+		return nombre;
+	}
 	
 }

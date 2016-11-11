@@ -5,8 +5,13 @@ package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.sql.DataSource;
+import javax.swing.JOptionPane;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,7 +31,9 @@ import org.springframework.stereotype.Controller;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOFilm;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Category;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,6 +48,8 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 
 	@Autowired
 	private BOFilm boPelicula;	
+	@Autowired
+	private DataSource ds;
 	@FXML
 	private TextField jtfTitulo;	
 	@FXML
@@ -63,30 +72,38 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 	public void buscarPelicula(){
 		System.out.println("buscando...");
 		try {
+			data.clear();
 			String nomPelicula = jtfTitulo.getText();
 			List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
-			for (int i = 0; i < pelicula.size(); i++) {
-				data.add(pelicula.get(i));
-				jcolumnaGenero.setCellValueFactory(new PropertyValueFactory<Film, String>(""));
-				jcolumnaGenero.setMinWidth(100);
-				jcolumnaTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
-				jcolumnaTitulo.setMinWidth(100);
-				jcolumnaLong.setCellValueFactory(new PropertyValueFactory<Film, Integer>("length"));
-				jcolumnaLong.setMinWidth(100);
-				jcolumnaPrecio.setCellValueFactory(new PropertyValueFactory<Film, Double>("rentalRate"));
-				jcolumnaPrecio.setMinWidth(100);
+			if(pelicula.isEmpty()){
+				notificar("¡ERROR!", "No se encuentran peliculas registradas con este nombre",  TipoNotificacion.ERROR);
+			}else{
+			for ( int i = 0; i < pelicula.size(); i++) {
 				
-				jcolumnaboton.setCellFactory(new Callback<TableColumn<Film, Boolean>, TableCell<Film, Boolean>>() {
+					final Film f=pelicula.get(i);
+					data.add(pelicula.get(i));
+					jcolumnaGenero.setCellValueFactory(new PropertyValueFactory<Film, String>("category"));
+					jcolumnaGenero.setMinWidth(100);
+					jcolumnaTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("title"));
+					jcolumnaTitulo.setMinWidth(100);
+					jcolumnaLong.setCellValueFactory(new PropertyValueFactory<Film, Integer>("length"));
+					jcolumnaLong.setMinWidth(100);
+					jcolumnaPrecio.setCellValueFactory(new PropertyValueFactory<Film, Double>("rentalRate"));
+					jcolumnaPrecio.setMinWidth(100);
+					
+					jcolumnaboton.setCellFactory(new Callback<TableColumn<Film, Boolean>, TableCell<Film, Boolean>>() {
 
-					public TableCell<Film, Boolean> call(TableColumn<Film, Boolean> p) {
-						return new ButtonCell(jttablacontenidoPelicula);
-					}
+						public TableCell<Film, Boolean> call(TableColumn<Film, Boolean> p) {
+							return new ButtonCell(jttablacontenidoPelicula,f);
+						}
 
-				});
-				
-				jttablacontenidoPelicula.setItems(data);
-				
-			}
+					});
+					
+					jttablacontenidoPelicula.setItems(data);
+					
+				}
+						}
+//			generarReportePe();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -108,40 +125,18 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 
 		// boton a mostrar
 		final Button cellButton = new Button("Vender");
-
-		ButtonCell(final TableView tblView) {
-
+//		private Film film;
+		ButtonCell(final TableView tblView,Film f) {
+//			this.film=f;
 			cellButton.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent t) {
-					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/venderPelicula.fxml"));
-					Parent root1;
-					try {
-						root1 = (Parent) fxmlLoader.load();
-						Stage stage = new Stage();
-						stage.initModality(Modality.APPLICATION_MODAL);
-						stage.setTitle("VENDER PELICULA");
-						stage.setScene(new Scene(root1));
-						stage.show();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					Film f=getTableView().getItems().get(getIndex());
+					guardarEnSesion("peliculavender", f);
+					abrirVentana("/fxml/venderPelicula.fxml", ControladorvenderPelicula.class);
+				int num = getTableRow().getIndex();
 					
-					int num = getTableRow().getIndex();
-					
-					// borramos el objeto obtenido de la fila
-//					Film r = data.get(num);
-//					if(boPelicula.listarPeliculas(r.getTitle()).size()!= 0){
-//						notificar("Eliminar Rol", "No se puede eliminar el rol," + "ya que alguien lo tiene asignado",
-//								TipoNotificacion.ERROR);
-//
-//					} else {
-//						System.out.println("i dont know");
-//						boRol.eliminar(r.getId());
-//						roles.remove(num);
-//						notificar("Eliminar Rol", "Rol eliminado con exito!", TipoNotificacion.INFO);
 //					}
 				}
 			});
@@ -156,6 +151,21 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 			}
 		}
 
+	}
+	
+	@FXML
+	public void generarReportePe(){		
+		try {
+			if(!jtfTitulo.getText().isEmpty()){
+				GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+				Map<String, Object> params=new HashMap<>();
+				params.put("tituloPelicula",jtfTitulo.getText());				
+				reporter.generarReporte(params, "/reportes/reportePeliculas.jrxml", "PeliculasXNombre");
+						
+			}
+			} catch (Exception e) {
+			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
+		}
 	}
 
 }
