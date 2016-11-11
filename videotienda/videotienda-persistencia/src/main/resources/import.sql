@@ -9,3 +9,4 @@ INSERT INTO `videotienda`.`t_acceso` (`ID_ACCESO`, `NOMBRE`, `PANTALLA`) VALUES 
 INSERT INTO `videotienda`.`t_acceso` (`ID_ACCESO`, `NOMBRE`, `PANTALLA`) VALUES ('9', 'Tiendas', 'Tiendas');
 INSERT INTO `videotienda`.`t_acceso` (`ID_ACCESO`, `NOMBRE`, `PANTALLA`) VALUES ('10', 'Autorizacion', 'Autorizacion');
 INSERT INTO `videotienda`.`t_acceso` (`ID_ACCESO`, `NOMBRE`, `PANTALLA`) VALUES ('11', 'Reportes', 'Reportes');
+INSERT INTO `videotienda`.`film` (`film_id`, `description`, `last_update`, `length`, `rating`, `release_year`, `rental_duration`, `rental_rate`, `replacement_cost`, `special_features`, `title`, `category`, `language_id`, `original_language_id`) VALUES ('3', 'Latin Awards', '2016-11-09 21:59:46', '1', 'S', '2016-11-16', '11', '6443', '34554', 'Jhan Glock', 'La Suicida', '1', '2', '1');
