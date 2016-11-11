@@ -393,10 +393,11 @@ public class ControladorGestionarClientes extends BaseController implements Init
 	@FXML
 	public void generarReporteCliente(){
 		try {
+			int idCliente = Integer.parseInt(jTFId.getText());
 			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
 			Map<String, Object> params=new HashMap<>();
-			params.put("idcus", 999);
-			reporter.generarReporte(params, "RentasCliente.jrxml", "RentasDelCliente");		
+			params.put("idcus", idCliente);
+			reporter.generarReporte(params, "/reportes/rentascliente.jrxml", "RentasDelCliente");		
 		} catch (Exception e) {
 			notificar("Generar Reporte", "Error generando el reporte!", TipoNotificacion.ERROR);
 		}
