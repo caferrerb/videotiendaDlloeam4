@@ -141,6 +141,7 @@ public class LoginUsuarioController extends BaseController implements Initializa
 			}
 
 		} catch (Exception e) {
+		
 
 			e.printStackTrace();
 		}

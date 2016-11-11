@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 
 /**
