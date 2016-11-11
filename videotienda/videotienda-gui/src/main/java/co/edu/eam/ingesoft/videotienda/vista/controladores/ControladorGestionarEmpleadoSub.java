@@ -86,6 +86,9 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 		}
 	}
 
+	/**
+	 * Llena los conbos con las horas
+	 */
 	public void llenarHoras() {
 		String[] hora = boHorarioEmp.listaHoras();
 
@@ -93,6 +96,10 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 		horaFin.getItems().addAll(hora);
 	}
 
+	/**
+	 * Agrega un horario al empleado
+	 * @throws Exception
+	 */
 	@FXML
 	public void agregarHorario()throws Exception {
 		try {
@@ -118,6 +125,9 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 		}
 	}
 	
+	/**
+	 * Edita el horario de un empleado seleccionado de la tabla horarios
+	 */
 	public void actualizarHorario (){
 		try {
 			

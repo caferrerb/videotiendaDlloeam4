@@ -124,12 +124,11 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		film = (Film) obtenerValor("peliculavender");
-//		empleado = (Staff) obtenerValor("empleadologin"); 
+		empleado = (Staff) obtenerValor("empleadologin"); 
 		int id = film.getFilmId();
-//		int idem = empleado.getStaffId();
-		System.out.println(empleado);	
+		int idem = empleado.getStaffId();
 		jtfIdPelicula.setText(String.valueOf(id));
-//		jtfIdEmpleado.setText(String.valueOf(idem));
+		jtfIdEmpleado.setText(String.valueOf(idem));
 		
 	}
 	

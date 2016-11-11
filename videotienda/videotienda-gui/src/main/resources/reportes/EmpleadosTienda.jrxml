@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-11T00:36:03 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EmpleadosTienda" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6b13b267-acc0-4801-942d-fe5b5a46032b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="videotienda"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="idTienda" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT * FROM store st JOIN staff s ON (st.store_id=s.store_id)
+JOIN staffschedule ss ON (s.store_id=ss.EMPLEADO)
+WHERE s.store_id=$P{idTienda}]]>
+	</queryString>
+	<field name="store_id" class="java.lang.Integer"/>
+	<field name="last_update" class="java.sql.Timestamp"/>
+	<field name="address_id" class="java.lang.Integer"/>
+	<field name="manager_staff_id" class="java.lang.Integer"/>
+	<field name="staff_id" class="java.lang.Integer"/>
+	<field name="active" class="java.lang.Boolean"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="first_name" class="java.lang.String"/>
+	<field name="last_name" class="java.lang.String"/>
+	<field name="COLUMN_10" class="java.sql.Timestamp"/>
+	<field name="picture" class="java.lang.Object"/>
+	<field name="COLUMN_12" class="java.lang.Integer"/>
+	<field name="COLUMN_13" class="java.lang.Integer"/>
+	<field name="id_usuario" class="java.lang.String"/>
+	<field name="ID_HORARIO" class="java.lang.Integer"/>
+	<field name="dia" class="java.lang.Integer"/>
+	<field name="HORA_FINAL" class="java.lang.Integer"/>
+	<field name="HORA_INICIAL" class="java.lang.Integer"/>
+	<field name="EMPLEADO" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="20" width="550" height="1" forecolor="#5F6981" uuid="acf2ae9a-5bd8-4caf-a7bd-d829cf8e9e11"/>
+			</line>
+			<line>
+				<reportElement x="0" y="60" width="551" height="1" forecolor="#5F6981" uuid="02fc25b5-5b5a-4dd5-b740-0450bf8d08b4"/>
+			</line>
+			<staticText>
+				<reportElement x="160" y="30" width="250" height="31" forecolor="#5F6981" uuid="1972d82d-5904-4b96-9b4b-7570e495b4d7"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Empleados]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="550" height="24" forecolor="#A6CAF0" backcolor="#A6CAF0" uuid="ff7148bd-d08a-4d56-89f3-ab2836d09b28"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="2" width="100" height="20" uuid="679357d7-2b3e-4a39-949b-5804acec087d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id Tienda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="2" width="100" height="20" uuid="1d174dc4-58cb-4dc7-9977-042377c0e2ef"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="2" width="100" height="20" uuid="46eac661-08bb-4f10-8d69-253e7caf8e03"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="2" width="100" height="20" uuid="8c929bf6-52bc-43b1-893d-6558e5d19967"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora Llegada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="2" width="100" height="20" uuid="70bdd000-2fe0-4db2-8e0d-16aa9dd1ca18"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora Salida]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="-1" width="550" height="24" forecolor="#EEEEE0" backcolor="#EEEEE0" uuid="96929e50-8d79-42de-9f4f-dd129ec6d4e7"/>
+			</rectangle>
+			<textField>
+				<reportElement x="10" y="0" width="100" height="20" uuid="0cae662a-aa5f-43ae-9e2d-39702ffecd4b"/>
+				<textFieldExpression><![CDATA[$F{store_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="100" height="20" uuid="4ccbdf0f-29a5-46b4-967b-8f641ce2a9ae"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="0" width="100" height="20" uuid="40be5b60-cbda-4432-abc9-cd325a762398"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{last_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="100" height="20" uuid="344792db-be0a-4636-9480-7d99ec53ef5a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{HORA_INICIAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="100" height="20" uuid="13af718c-0c93-41cf-b23f-19e833be58cb"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{HORA_FINAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="227" y="20" width="100" height="30" uuid="36f2a784-aebd-46fa-8a02-05d19e15ebd7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -295,6 +295,8 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 			Rol selectedRol = cbReporte.getSelectionModel().getSelectedItem();
 			if (selectedRol != null) {
 				idReporte = selectedRol.getId();
+			}else{
+				idReporte = 0;
 			}
 		});
 	}
@@ -648,16 +650,15 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		try {
 			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
 			Map<String, Object> params=new HashMap<>();
-//			System.out.println(idReporte+"JAKJAKDSJAKSDJAS");
-//			InputStream imgInputStream = 
-//				    this.getClass().getResourceAsStream("/reportes/invoice-logo.png");
-//				params.put("myImg", imgInputStream);
+			if(idReporte!=0){
 			params.put("idrol", idReporte);
-			reporter.generarReporte(params, "/reportes/accesoroles.jrxml", "AccesosXRol");
+			reporter.generarReporte(params, "/reportes/accesorol.jrxml", "AccesosXRol");
+			}else{
+				notificar("Reporte accesos de un rol", "Debe seleccionar un rol", TipoNotificacion.ERROR);
+
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			
-			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
+			notificar("Reporte accesos de un rol", "Error generando el reporte", TipoNotificacion.ERROR);
 		}
 	}
 	
