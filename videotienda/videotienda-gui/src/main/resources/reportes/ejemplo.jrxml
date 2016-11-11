@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-07T23:08:18 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ejemplo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="938dfb28-4994-4723-9673-93e82e6c974d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sakila"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="test" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * FROM film]]>
+	</queryString>
+	<field name="film_id" class="java.lang.Integer"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="release_year" class="java.sql.Date"/>
+	<field name="language_id" class="java.lang.Integer"/>
+	<field name="original_language_id" class="java.lang.Integer"/>
+	<field name="rental_duration" class="java.lang.Integer"/>
+	<field name="rental_rate" class="java.math.BigDecimal"/>
+	<field name="length" class="java.lang.Integer"/>
+	<field name="replacement_cost" class="java.math.BigDecimal"/>
+	<field name="rating" class="java.lang.String"/>
+	<field name="special_features" class="java.lang.String"/>
+	<field name="last_update" class="java.sql.Timestamp"/>
+	<field name="category" class="java.lang.String"/>
+	<field name="poster" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="220" y="30" width="100" height="30" uuid="fc6e71a1-61ba-49e9-96d1-37da1bbaeb45"/>
+				<textFieldExpression><![CDATA[$P{test}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="ContainerHeight" mode="Transparent" x="0" y="0" width="555" height="36" uuid="004c83bc-adac-46f2-bff9-7c4335d05f80"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="499124b3-2f7e-4b99-9884-141a8342885c"/>
+				<text><![CDATA[film_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="0" width="220" height="30" uuid="72312be5-9865-46c4-b294-d18b7c97fa48"/>
+				<text><![CDATA[title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="0" width="100" height="30" uuid="2710181c-3aa5-48bc-87ae-0f6851553628"/>
+				<text><![CDATA[rating]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="0" width="100" height="30" uuid="23f5cba2-2e36-465b-8ed1-6eec01b181d5"/>
+				<text><![CDATA[release_year]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="40" uuid="702c2c97-cc02-442b-a1b7-a447be4d2e67"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="062dc017-a6f8-4da6-8ee6-f54e11619d75"/>
+				<textFieldExpression><![CDATA[$F{film_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="220" height="30" uuid="35b4664e-ec36-451c-8bd1-9241f619a3bf"/>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="100" height="30" uuid="5b7fb9dc-c339-4d0d-966d-6d09672475ab"/>
+				<textFieldExpression><![CDATA[$F{rating}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="100" height="30" uuid="eae3e484-948e-4bd2-a39f-ab630bbc2b7b"/>
+				<textFieldExpression><![CDATA[$F{release_year}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="337" y="0" width="1" height="40" uuid="de5e2c6e-910c-407f-8c4a-5da82d50f30e"/>
+			</line>
+			<line>
+				<reportElement x="105" y="0" width="1" height="40" uuid="044dbbbc-8047-4137-84af-8aecf2b12584"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="350" y="20" width="100" height="30" uuid="f014e722-f2ad-4a9a-b33f-fa94ab75cd6a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="450" y="20" width="100" height="30" uuid="9d8566c8-a5c3-47fa-80cf-46f055872aea"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="12" width="100" height="30" uuid="a61245de-c037-4b7b-b92f-802da2a1d428"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

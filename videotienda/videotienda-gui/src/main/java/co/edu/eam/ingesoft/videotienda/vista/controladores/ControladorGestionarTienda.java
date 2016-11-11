@@ -30,6 +30,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.MensajesGui;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.beans.property.SimpleObjectProperty;
@@ -165,6 +166,8 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 
 				}
 				tbEmpleado.setItems(data);
+
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -324,6 +327,7 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 	 *         Fecha: 2/11/2016<br/>
 	 */
 	@FXML
+
 	public void crear() {
 
 		Address address = new Address();
@@ -341,8 +345,24 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 		boDireccion.crear(address);
 		boTienda.crear(store);
 		notificar("Crear Tienda", "La tienda se ha creado exitosamente", TipoNotificacion.INFO);
-
 	}
+
+//	public void crear(){
+//				Address address = new Address();
+//				Store store = new Store();
+//				address.setAddress(tfDireccion.getText());
+//				address.setAddress2(tfDireccion2.getText());
+//				store.setStaff((Staff) cbEmpleado.getValue());
+//				address.setPostalCode(tfCodigoPostal.getText());
+//				address.setDistrict(tfLocalidad.getText());
+//				address.setCity((City) cbCiudad.getValue());
+//				address.setPhone(tfTelefono.getText());	
+//				boDireccion.crear(address);
+//				boTienda.crear(store);
+//				notificar("Crear Tienda","La tienda se ha creado exitosamente", TipoNotificacion.INFO);
+//				
+//
+//	}
 
 	@FXML
 	public void editar() {
@@ -410,6 +430,19 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 		cbCiudad.setValue(null);
 		cbEmpleado.setValue(null);
 		
+	}
+	
+	@FXML
+	public void generarReporte(){
+		
+		try {
+			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+			Map<String, Object> params=new HashMap<>();
+			params.put("idTienda", 1);
+			reporter.generarReporte(params, "/reportes/EmpleadosTienda.jrxml", "EmpleadosxTienda");
+		} catch (Exception e) {
+			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
+		}
 	}
 	
 	

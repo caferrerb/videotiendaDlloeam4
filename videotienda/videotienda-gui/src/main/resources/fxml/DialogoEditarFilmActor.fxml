@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="dialogoEditarFilmActor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="855.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="69.0" layoutY="55.0" prefHeight="386.0" prefWidth="715.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="140.0" layoutY="51.0" text="Pelicula:" />
+            <Label layoutX="140.0" layoutY="121.0" text="Actor:" />
+            <Label layoutX="140.0" layoutY="191.0" text="Personaje:" />
+            <ComboBox fx:id="jCBPeliculaFA" layoutX="250.0" layoutY="46.0" prefHeight="31.0" prefWidth="273.0" />
+            <ComboBox fx:id="jCBActorFA" layoutX="250.0" layoutY="115.0" prefHeight="31.0" prefWidth="273.0" />
+            <TextField fx:id="jTFPersonajeFA" layoutX="250.0" layoutY="191.0" prefHeight="31.0" prefWidth="273.0" />
+            <Button fx:id="jBEditarFA" layoutX="310.0" layoutY="304.0" mnemonicParsing="false" onAction="#editarFilmActor" prefHeight="31.0" prefWidth="128.0" text="Editar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+         </children>
+      </Pane>
+      <Label layoutX="324.0" layoutY="8.0" text="Editar Film Actor" textFill="WHITE">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

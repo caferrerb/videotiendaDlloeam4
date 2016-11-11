@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="474.0" prefWidth="568.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="474.0" prefWidth="568.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView fx:id="tablaPeliculas" layoutX="84.0" layoutY="104.0" prefHeight="204.0" prefWidth="461.0">
         <columns>
@@ -16,5 +15,6 @@
             <TableColumn fx:id="colBot" prefWidth="94.0" text="Accion" />
         </columns>
       </TableView>
+      <Button layoutX="262.0" layoutY="332.0" mnemonicParsing="false" onAction="#generarReporte" text="generarreporte" />
    </children>
 </AnchorPane>

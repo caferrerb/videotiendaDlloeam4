@@ -17,6 +17,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarClientes;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorAlquilarPelicula;
@@ -165,6 +166,7 @@ public class MainController implements Initializable {
 	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		boton();
 //		esconderMenus();
 		agregarVentana("/fxml/Login.fxml", LoginUsuarioController.class);
 
@@ -303,5 +305,15 @@ public class MainController implements Initializable {
 	public void abrirEjemplo(){
 		agregarVentana("/fxml/ejemplotabla.fxml", ControladorEjemploTabla.class);
 	}
+	
+	public void boton(){
+		mnuInicio.getItems().add(new MenuItem("Inicio"));
+	}
+	
+	@FXML
+	public void abrirGestionarClientes(){
+		agregarVentana("/fxml/VentanaGestionarClientes.fxml", ControladorGestionarClientes.class);
+	}
+
 	
 }
