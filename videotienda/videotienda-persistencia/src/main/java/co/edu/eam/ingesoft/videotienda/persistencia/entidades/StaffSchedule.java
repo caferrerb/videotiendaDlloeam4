@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.videotienda.persistencia.entidades;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,7 +19,7 @@ import co.edu.uniquindio.videotienda.dtos.DayEnum;
 
 @Entity
 @Table(name="StaffSchedule")
-public class StaffSchedule {
+public class StaffSchedule implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

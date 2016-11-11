@@ -11,6 +11,8 @@ public class ConstantesNamedQueries {
 
 	public static final String CONSULTA_LISTAREMPLEADOS = "Empleado.ListarTodos";
 	
+	public static final String CONSULTA_BUSCAR_EMPLEADOS_POR_USUARIO = "Empleado.buscarEmpleadoPorUsuario";
+	
 	/**
 	 * Lista los inventarios de una pel�cula
 	 * ?1: La pel�cula
@@ -55,6 +57,11 @@ public class ConstantesNamedQueries {
 	  */
 	public static final String CONSULTA_LISTAR_INFO_PRESTAMOS = "Rental.TituloNombrePrestamos";
 	
+	 /**
+	  * 
+	  */
+	public static final String CONSULTA_LISTAR_PRESTAMOS_DEL_CLIENTE = "Cliente.PrestamosCliente";
+	
 	/**
 	 * obtiene los prestamos que esten repetidos
 	 */
@@ -83,6 +90,9 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAR_EMPLEADOS_TIENDA = "EmpleadosTienda.ListarTodos";
 
 	public static final String CONSULTA_LISTAR_INVENTARIO_TIENDA = "InventarioTienda.ListarTodos";
+	
+	public static final String CONSULTA_LISTAR_INVENTARIO_PELICULA = "InventarioPelicula.ListarTodos";
+
 
 	/**
 	 * consulta que lista los datos de la tabla rentas en la ventana reporte

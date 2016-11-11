@@ -7,8 +7,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import co.edu.eam.ingesis.gestorlab.gui.MainApp;
@@ -20,13 +25,18 @@ import co.edu.eam.ingesoft.videotienda.logica.bos.BOTienda;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuario;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Address;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import co.edu.uniquindio.videotienda.dtos.DayEnum;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,6 +50,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -68,6 +79,11 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	@Autowired
 	private BOHoraioEmpleado boHorario;
 
+	@Autowired
+	private DataSource ds;
+	
+	
+	
 	@FXML
 	private TextField TFIdEmpleado;
 	@FXML
@@ -95,7 +111,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	@FXML
 	private TableColumn<StaffSchedule, Integer> tbFinal;
 	@FXML
-	private TableColumn TBOpciones;
+	private TableColumn<StaffSchedule, String> TBOpciones;
+	@FXML
+	private TableColumn<StaffSchedule, String> TbQuitar;
 	@FXML
 	private ObservableList<StaffSchedule> data = FXCollections.observableArrayList();
 
@@ -117,6 +135,8 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	private AnchorPane contenido;
 	@FXML
 	private Button BtAgregarHorario;
+	@FXML
+	private Button BTReporte;
 
 	private File imgFile;
 
@@ -124,11 +144,13 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	public void initialize(URL location, ResourceBundle resources) {
 		llenarComboCiudad();
 		llenarTienda();
+		configurarTAbla();
+		// llenarTabla();
 	}
 
 	public void limpiarCampos() {
 		TFIdEmpleado.setText(null);
-		TFIdUsuario.setText(null);
+		//TFIdUsuario.setText(null);
 		TfPrimerNombre.setText(null);
 		TfSegundoNombre.setText(null);
 		TfEmail.setText(null);
@@ -140,6 +162,21 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		CBCiudad.setSelectionModel(null);
 	}
 
+	public void limpiarCamposEditado() {
+		TFIdEmpleado.setText(null);
+		//TFIdUsuario.setText(null);
+		TfPrimerNombre.setText(null);
+		TfSegundoNombre.setText(null);
+		TfEmail.setText(null);
+		TFDireccionA.setText(null);
+		TFDdireccionB.setText(null);
+		TFDepartamento.setText(null);
+		TFTelefono.setText(null);
+		TFCodigoPos.setText(null);
+		CBCiudad.setSelectionModel(null);
+		TFFechaCreacion.setText(null);
+		TFUlltimaActualizacionDir.setText(null);	
+	}
 	@FXML
 	public void crearEmpleado() throws Exception {
 		try {
@@ -163,7 +200,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				// Empleado
 
 				empleado.setAddress(direccion);
-				empleado.setStaffId((byte) Integer.parseInt(TFIdEmpleado.getText()));
+				empleado.setStaffId(Byte.parseByte((TFIdEmpleado.getText())));
 				empleado.setEmail(TfEmail.getText());
 				empleado.setFirstName(TfPrimerNombre.getText());
 				empleado.setLastName(TfSegundoNombre.getText());
@@ -178,8 +215,8 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				} else {
 					empleado.setPicture(null);
 				}
-				Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
-				empleado.setUsuario(usuario);
+//				Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
+//				empleado.setUsuario(usuario);
 
 				Store tienda = boTienda.buscar(comboBoxSelecTienda.getSelectionModel().getSelectedItem().getStoreId());
 				empleado.setStore(tienda);
@@ -210,10 +247,11 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 					&& CBCiudad.getSelectionModel().getSelectedItem() != null && TFDepartamento.getText() != null
 					&& TFTelefono.getText() != null && TFCodigoPos.getText() != null
 					&& comboBoxSelecTienda.getSelectionModel().getSelectedItem() != null && PhFoto != null) {
-				Staff empleado = new Staff();
-				Address direccion = new Address();
+				Staff empleado = boEmpleado.buscar(Byte.parseByte(TFIdEmpleado.getText()));
+				Address direccion = boDireccion.buscar(empleado.getAddress().getAddressId());
 				// Busca una ciudad por su id
 				City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
+				
 				direccion.setAddress(TFDireccionA.getText());
 				direccion.setAddress2(TFDdireccionB.getText());
 				// direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
@@ -228,7 +266,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				empleado.setEmail(TfEmail.getText());
 				empleado.setFirstName(TfPrimerNombre.getText());
 				empleado.setLastName(TfSegundoNombre.getText());
-				// cambiar CAPTURAR LA FECHA QUE SALE EN EL TEXFILE AL BUSCAR
+				
 				empleado.setAddress(direccion);
 
 				// Imagen del empleado
@@ -241,8 +279,8 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 					empleado.setPicture(null);
 				}
 
-				Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
-				empleado.setUsuario(usuario);
+//				Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
+//				empleado.setUsuario(usuario);
 
 				Store tienda = boTienda.buscar(comboBoxSelecTienda.getSelectionModel().getSelectedItem().getStoreId());
 				empleado.setStore(tienda);
@@ -253,9 +291,11 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 					empleado.setActive(false);
 				}
 
-				boEmpleado.editarEmpleado(empleado);
-				boDireccion.editarDireccion(direccion);
+				
+				boDireccion.editar(direccion);
+				boEmpleado.editar(empleado);
 				notificar("Editar empleado", "Empleado editado con exito", TipoNotificacion.INFO);
+				limpiarCamposEditado();
 			} else {
 				notificar("Gestionar camposEmpeleado", "Debe llenar los campos obligatorios", TipoNotificacion.ERROR);
 			}
@@ -266,15 +306,15 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 
 	@FXML
 	public void buscarEmpleado() {
-		if (TFIdEmpleado.getText() != null) {
-			Staff empleado = boEmpleado.buscar((byte) Integer.parseInt(TFIdEmpleado.getText()));
+		if (!TFIdEmpleado.getText().isEmpty()) {
+			Staff empleado = boEmpleado.buscar(Byte.parseByte(TFIdEmpleado.getText()));
 
 			if (empleado != null) {
-				if (empleado.getUsuario() != null) {
-					TFIdUsuario.setText(empleado.getUsuario().getUsuario());
-				} else {
-					TFIdUsuario.setText(null);
-				}
+				// if (empleado.getUsuario() != null) {
+				// TFIdUsuario.setText(empleado.getUsuario().getUsuario());
+				// } else {
+				// TFIdUsuario.setText(null);
+				// }
 				TfPrimerNombre.setText(empleado.getFirstName());
 				TfSegundoNombre.setText(empleado.getLastName());
 				TfEmail.setText(empleado.getEmail());
@@ -289,39 +329,20 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				TFUlltimaActualizacionDir.setText(empleado.getAddress().getLastUpdate().toString());
 				TFTelefono.setText(empleado.getAddress().getPhone());
 				TFCodigoPos.setText(empleado.getAddress().getPostalCode());
-
+				comboBoxSelecTienda.setValue(empleado.getStore());
 				if (empleado.getPicture() != null) {
 					Image im = new Image(new ByteArrayInputStream(empleado.getPicture()));
 					PhFoto.setImage(im);
 				}
 
-				List<StaffSchedule> listahorarioEmple = boHorario.listaHorario(empleado);
-
-				for (int i = 0; i < listahorarioEmple.size(); i++) {
-
-					data.add(listahorarioEmple.get(i));
-					TBDia.setCellValueFactory(new PropertyValueFactory<StaffSchedule, DayEnum>("dia"));
-					TBDia.setMinWidth(100);
-					TBInicial.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaInicial"));
-					TBInicial.setMinWidth(100);
-					tbFinal.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaFinal"));
-					tbFinal.setMinWidth(100);
-
-					// TBOpciones.setCellValueFactory(
-					// new Callback<TableColumn<StaffSchedule, Boolean>,
-					// TableCell<StaffSchedule, Boolean>>() {
-					// public TableCell<StaffSchedule, Boolean>
-					// call(TableColumn<StaffSchedule, Boolean> p) {
-					// return new ButtonCell(TbHorario);
-					// }
-					// });
-					TbHorario.setItems(data);
-				}
+				llenarTabla(empleado);
+				
 			} else {
 				notificar("Gestionar BuscarEmpleado", "El empleado no esta registrado", TipoNotificacion.ERROR);
 			}
 		} else {
-			notificar("Gestionar CampoBuscarEmpleado", "Debe proporcionar un ID del EMPLEADO para buscar", TipoNotificacion.ERROR);
+			notificar("Gestionar CampoBuscarEmpleado", "Debe proporcionar un ID del EMPLEADO para buscar",
+					TipoNotificacion.ERROR);
 		}
 	}
 
@@ -383,74 +404,126 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		abrirVentana("/fxml/VentanaGestionEmpleadosSub.fxml", ControladorGestionarEmpleadoSub.class);
 	}
 
-	/**
-	 * Boton tabla 1
-	 * 
-	 * @author CAMILO
-	 *
-	 */
-	private class ButtonCell extends TableCell<StaffSchedule, Boolean> {
+	private void llenarTabla(Staff empleado) {
 
-		// boton a mostrar
-		final Button cellButton = new Button("Editar");
-		private StaffSchedule StaffSchedule;
-
-		ButtonCell(final TableView tblView) {
-			cellButton.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent t) {
-
-					abrirVentana("/VentanaGestionEmpleadosSub.fxml", ControladorGestionarEmpleadoSub.class);
-					int num = getTableRow().getIndex();
-
-				}
-			});
+		List<StaffSchedule> listahorarioEmple = boHorario.listaHorario(empleado);
+		ObservableList<StaffSchedule> listaTabla = FXCollections.observableArrayList();
+		for (StaffSchedule horario : listahorarioEmple) {
+			listaTabla.add(horario);
 		}
-
-		// Muestra un boton si la fila no es nula
-		@Override
-		protected void updateItem(Boolean t, boolean empty) {
-			super.updateItem(t, empty);
-			if (!empty) {
-				setGraphic(cellButton);
-			}
-		}
+		TbHorario.setItems(listaTabla);
 	}
 
-	/**
-	 * Boton tabla 2
-	 * 
-	 * @author CAMILO
-	 *
-	 */
-	private class ButtonCellB extends TableCell<StaffSchedule, Boolean> {
+	// SIGO AKI
+	private void configurarTAbla() {
 
-		// boton a mostrar
-		final Button cellButton = new Button("Vender");
-		private StaffSchedule StaffSchedule;
+		TBDia.setCellValueFactory(new PropertyValueFactory<StaffSchedule, DayEnum>("dia"));
+		// TBDia.setMinWidth(100);
+		TBInicial.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaInicial"));
+		// TBInicial.setMinWidth(100);
+		tbFinal.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaFinal"));
+		// tbFinal.setMinWidth(100);
 
-		ButtonCellB(final TableView tblView) {
-			cellButton.setOnAction(new EventHandler<ActionEvent>() {
+		Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>> cellFactory = new Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>>() {
 
-				@Override
-				public void handle(ActionEvent t) {
+			@Override
+			public TableCell<StaffSchedule, String> call(TableColumn<StaffSchedule, String> param) {
+				// TODO Auto-generated method stub
+				TableCell<StaffSchedule, String> cell = new TableCell<StaffSchedule, String>() {
+					final Button btn = new Button("Editar");
 
-					abrirVentana("/fxml/venderPelicula.fxml", ControladorvenderPelicula.class);
-					int num = getTableRow().getIndex();
+					@Override
+					protected void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						} else {
+							btn.setOnAction(new EventHandler<ActionEvent>() {
+								@Override
+								public void handle(ActionEvent event) {
 
-					// }
-				}
-			});
-		}
+									StaffSchedule f = getTableView().getItems().get(getIndex());
+									guardarEnSesion("horario", f);
+									abrirVentana("/fxml/VentanaGestionEmpleadosSub.fxml",
+											ControladorGestionarEmpleadoSub.class);
 
-		// Muestra un boton si la fila no es nula
-		@Override
-		protected void updateItem(Boolean t, boolean empty) {
-			super.updateItem(t, empty);
-			if (!empty) {
-				setGraphic(cellButton);
+								}
+							});
+
+							setGraphic(btn);
+
+							setText(null);
+						}
+
+					}
+				};
+				return cell;
 			}
+		};
+
+		Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>> cellFactoryB = new Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>>() {
+
+			@Override
+			public TableCell<StaffSchedule, String> call(TableColumn<StaffSchedule, String> param) {
+				// TODO Auto-generated method stub
+				TableCell<StaffSchedule, String> cell = new TableCell<StaffSchedule, String>() {
+
+					final Button btnB = new Button("Eliminar");
+
+					@Override
+					protected void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						} else {
+
+							btnB.setOnAction(new EventHandler<ActionEvent>() {
+
+								@Override
+								public void handle(ActionEvent event) {
+
+									StaffSchedule f = getTableView().getItems().get(getIndex());
+									guardarEnSesion("pelicula", f);
+									boHorario.eliminar(f.getIdStaffSchedule());
+									notificar("msj", "Horario eliminado", TipoNotificacion.INFO);
+									// abrirVentana("/fxml/VentanaGestionEmpleadosSub.fxml",
+									// ControladorGestionarEmpleadoSub.class);
+
+								}
+							});
+
+							setGraphic(btnB);
+							setText(null);
+						}
+
+					}
+				};
+				return cell;
+			}
+		};
+
+		TBOpciones.setCellFactory(cellFactory);
+		TbQuitar.setCellFactory(cellFactoryB);
+	}
+	
+	
+	@FXML
+	public void generarReporte(){
+		
+		try {
+			if(!TFIdEmpleado.getText().isEmpty()){
+			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+			Map<String, Object> params=new HashMap<>();
+			params.put("idEmpleado", Integer.parseInt(TFIdEmpleado.getText()));
+			reporter.generarReporte(params, "/reportes/reporteEmpleado.jrxml", "EmpleadoPorID");
+			}else{
+				notificar("Error id empleado", "No ha ingresado in id del empleado", TipoNotificacion.ERROR);
+			}
+		} catch (Exception e) {
+			notificar("generar reporte error", "Error generando el reporte", TipoNotificacion.ERROR);
+			e.printStackTrace();
 		}
 	}
 

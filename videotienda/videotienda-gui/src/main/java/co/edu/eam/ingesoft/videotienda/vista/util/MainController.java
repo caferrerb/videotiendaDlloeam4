@@ -17,6 +17,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarClientes;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorAlquilarPelicula;
@@ -65,25 +66,33 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	public Menu mnuPrestamos;
-
+	
 	/**
 	 * Menu peliculas
 	 */
 	@FXML
 	public Menu mnuPeliculas;
+	
+
+	/**
+	 * Menu inventario
+	 */
+	@FXML
+	public Menu mnuInventario;
 
 	/**
 	 * Menu reportes
 	 */
 	@FXML
 	public Menu menuReportes;
-
+	
 	@FXML
 	public Menu mnuTiendas;
-
+	
 	@FXML
 	public Menu mnuSucursales;
-
+	
+	
 	/**
 	 * Menu actores
 	 */
@@ -104,7 +113,7 @@ public class MainController implements Initializable {
 
 	@FXML
 	public Menu mnuParametrizacion;
-
+	
 	/**
 	 * Menu equipos
 	 */
@@ -122,11 +131,14 @@ public class MainController implements Initializable {
 	private MenuItem mnuItemGestionarCiudad;
 
 	@FXML
+	private MenuItem mnuItemGestionarInventario;
+	
+	@FXML
 	private MenuItem mnuItemGestionarActores;
 
 	@FXML
 	private MenuItem mIVenderPeliculas;
-
+	
 	@FXML
 	private MenuItem mIVerPeliculasRentadas;
 
@@ -153,18 +165,19 @@ public class MainController implements Initializable {
 
 	@FXML
 	private MenuItem menuItemGestionPrestamo;
-
+	
 	@FXML
-	private MenuItem menuItemEjemplo;
-
+	private MenuItem menuItemEjemplo; 
+	
 	public Button btnCerrarSesion;
-
+	
 	/**
 	 * Inicializacion de la ventana.
 	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
 		boton();
-//		 esconderMenus();
+//		esconderMenus();
 		agregarVentana("/fxml/Login.fxml", LoginUsuarioController.class);
 
 	}
@@ -218,6 +231,7 @@ public class MainController implements Initializable {
 		mnuPrestamos.setVisible(false);
 		mnuSucursales.setVisible(false);
 		btnCerrarSesion.setVisible(false);
+		mnuItemGestionarInventario.setVisible(false);
 	}
 
 	/**
@@ -227,13 +241,18 @@ public class MainController implements Initializable {
 	 *         email: caferrerb@gmail.com <br/>
 	 *         Fecha: 19/10/2015<br/>
 	 */
-	public void mostrarMenus() {
+	public void mostrarMenus(){
 
 	}
 
 	@FXML
 	public void abrirGEstionarCiudad() {
 		agregarVentana("/fxml/gestionarciudad.fxml", ControladorGestionarCIudad.class);
+	}
+	
+	@FXML
+	public void abrirGestionarInventario() {
+		agregarVentana("/fxml/GestionarInventario.fxml", ControladorGestionarCIudad.class);
 	}
 
 	@FXML
@@ -281,32 +300,36 @@ public class MainController implements Initializable {
 	public void abrirverpeliculasrentadas() {
 		agregarVentana("/fxml/verpeliculasrentadas.fxml", ControladorVerPeliculasRentadas.class);
 	}
-
+	
 	@FXML
 	public void abrirInicio() {
 		agregarVentana("/fxml/Inicio.fxml", LoginUsuarioController.class);
 	}
 	
-
 	@FXML
-	public void abrirGestionarPrestamos() {
+	public void abrirGestionarPrestamos(){
 		agregarVentana("/fxml/AlquilarPelicula.fxml", ControladorAlquilarPelicula.class);
 	}
-
+	
 	@FXML
-	public void cerrarSesion() {
+	public void cerrarSesion(){
 		agregarVentana("/fxml/Login.fxml", LoginUsuarioController.class);
 		esconderMenus();
 	}
-
+	
 	@FXML
-	public void abrirEjemplo() {
+	public void abrirEjemplo(){
 		agregarVentana("/fxml/ejemplotabla.fxml", ControladorEjemploTabla.class);
 	}
-
-	public void boton() {
-		MenuItem menu = new MenuItem("Inicio");
-		mnuInicio.getItems().add(menu);
-		menu.setOnAction(event -> abrirInicio());
+	
+	public void boton(){
+		mnuInicio.getItems().add(new MenuItem("Inicio"));
 	}
+	
+	@FXML
+	public void abrirGestionarClientes(){
+		agregarVentana("/fxml/VentanaGestionarClientes.fxml", ControladorGestionarClientes.class);
+	}
+
+	
 }
