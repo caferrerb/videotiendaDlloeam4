@@ -100,10 +100,10 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 					});
 					
 					jttablacontenidoPelicula.setItems(data);
-					generarReportePe();
+					
 				}
-				
-			}
+						}
+			generarReportePe();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -161,9 +161,11 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 			Map<String, Object> params=new HashMap<>();
 			String nomPelicula = jtfTitulo.getText();
 			List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
-				params.put("tituloPelicula",pelicula );
-				reporter.generarReporte(params, "/reportes/reportePeliculas.jrxml", "PeliculasXNombre");
+			for(int i =0;i<pelicula.size();i++){
+				params.put("tituloPelicula",pelicula.get(i) );
+			}		
 			
+			reporter.generarReporte(params, "/reportes/reportePeliculas.jrxml", "PeliculasXNombre");
 			
 		} catch (Exception e) {
 			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
