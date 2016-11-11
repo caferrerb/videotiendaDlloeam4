@@ -4,8 +4,12 @@
 package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 
@@ -23,15 +27,27 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.util.Callback;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
 
@@ -69,16 +85,17 @@ public class ControladorGestionInventario extends BaseController implements Init
 	private TableView<Inventory> jPTienda;
 	
 	@FXML
-	private TableColumn<Film, String> Titulo;
+	private TableColumn<Film, String> colTitulo;
 	
 	@FXML
-	private TableColumn<Film, Integer> Inventario;
+	private TableColumn<Film, Integer> colInventario;
 	
 	@FXML
-	private TableColumn<Film, Button> Info;
+	private TableColumn<Film, Button> colDarAlta;
 	
-//	@FXML
-//	private jjj JPDarDeBaja;
+	
+	@FXML
+	private Pane JPDarDeBaja;
 	
 	@FXML
 	private final ObservableList<Film> data = FXCollections.observableArrayList();
@@ -89,18 +106,33 @@ public class ControladorGestionInventario extends BaseController implements Init
 		
 	}
 
-	
-	private void llenarComboTiendas() {
+	@FXML
+	private void llenarComboTiendas(){
+		JCBTienda.getItems().add(null);
 		List<Store> lista = boTienda.listarTiendas();
-		for (Store tienda : lista) {
-			JCBTienda.getItems().add(tienda);
+		for (Store store : lista){
+			JCBTienda.getItems().add(store);
 		}
 	}
-	
+	@FXML
 	private void mostrarPanelDarBaja() {
+		JPDarDeBaja.setVisible(true);
+		
+	}
+	@FXML
+	private void confirmarDarAlta() {
+	
+	
+	}
+	@FXML
+	private void cancelarDarAlta() {
+		JPDarDeBaja.setVisible(false);
 		
 	
 	}
+	
+	
+	
 	@FXML
 	public void buscarPelicula()throws Exception{
 		if(JTFIdPelicula.getText().isEmpty()){
@@ -110,7 +142,8 @@ public class ControladorGestionInventario extends BaseController implements Init
 			Film pelicula=boFilm.buscar(JTFIdPelicula);
 			if(pelicula!=null){
 				JTFTitulo.setText(pelicula.getTitle());
-				//JTFGenero.setText(pelicula.get);
+				JTFGenero.setText(pelicula.getCategory().getName());
+				
 			}else{
 				notificar("¡ERROR!", "La pelicula con el ID= ''"+JTFIdPelicula+"'' (NO) se encuentra registrada",  TipoNotificacion.ERROR);
 
@@ -118,4 +151,67 @@ public class ControladorGestionInventario extends BaseController implements Init
 
 		}
 	}
+	
+	private void llenarTabla() {
+
+		List<Film> lista = boFilm.listarTodos();
+		ObservableList<Inventory> listaTabl = FXCollections.observableArrayList();
+		for (Film film : lista) {
+			listaTabl.add(film);
+		}
+		jPTienda.setItems(listaTabl);
+
+	}
+	
+	
+	private void configurarTabla() {
+		colTitulo.setCellValueFactory(new PropertyValueFactory<>("title"));
+		colLeng.setCellValueFactory(new Callback<CellDataFeatures<Film, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<Film, String> data) {
+				return new SimpleObjectProperty<>(data.getValue().getLanguage1().getName());
+			}
+		});
+		colLong.setCellValueFactory(new PropertyValueFactory<>("length"));
+
+		Callback<TableColumn<Film, String>, TableCell<Film, String>> cellFactory = new Callback<TableColumn<Film, String>, TableCell<Film, String>>() {
+
+			@Override
+			public TableCell<Film, String> call(TableColumn<Film, String> param) {
+				// TODO Auto-generated method stub
+				TableCell<Film, String> cell = new TableCell<Film, String>() {
+					final Button btn = new Button("Dar De Alta");
+
+					@Override
+					protected void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						}else{
+							btn.setOnAction(new EventHandler<ActionEvent>() {
+								
+								@Override
+								public void handle(ActionEvent event) {
+									
+									Film f=getTableView().getItems().get(getIndex());
+									guardarEnSesion("pelicula", f);
+									abrirVentana("/fxml/verpeli.fxml", ControladorVerPeliEjemplo.class);
+									
+								}
+							});
+							setGraphic( btn );
+                            setText( null );
+						}
+						
+					}
+				};
+				return cell;
+			}
+		};
+		colDarAlta.setCellFactory(cellFactory);
+	}
+	
+
+	
 }

@@ -74,7 +74,7 @@ public class LoginUsuarioController extends BaseController implements Initializa
 			Usuario usu = new Usuario();
 			usu.setUsuario(tfUser.getText());
 			usu.setPass(tfPass.getText());
-			List<Usuario> lista = boUsuario.buscarEntidad(usu);
+			List<Usuario> lista =boUsuario.buscarEntidad(usu);
 			int list = lista.size();
 			if (list == 0||
 					!(lista.get(0).getPass().equals(tfPass.getText()))) {
@@ -94,7 +94,6 @@ public class LoginUsuarioController extends BaseController implements Initializa
 				menus.add(mainController.mnuTiendas);
 				menus.add(mainController.mnuAutorizacion);
 				menus.add(mainController.menuReportes);
-				
 				for (Rol rol : roles) {
 					List<AccesoRol> accesosRol = boAccesoRol.listarPorRol(rol);
 					for (AccesoRol accesoRol : accesosRol) {
@@ -109,7 +108,7 @@ public class LoginUsuarioController extends BaseController implements Initializa
 				mainController.abrirInicio();
 				mainController.btnCerrarSesion.setVisible(true);
 				guardarEnSesion("empleadologin", lista.get(0));
-				//obtenerValor("empleadologin");
+				obtenerValor("empleadologin");
 			}
 
 		} catch (Exception e) {
