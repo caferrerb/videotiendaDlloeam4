@@ -12,6 +12,8 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Customer;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
+import co.edu.uniquindio.videotienda.dtos.PrestamoDTO;
+import co.edu.uniquindio.videotienda.dtos.PrestamosClienteDTO;
 
 @Component
 public class BOCliente extends BOGenerico<Customer> {
@@ -31,6 +33,15 @@ public class BOCliente extends BOGenerico<Customer> {
 		}
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 */
+	public List<PrestamosClienteDTO> listarPrestamosDelCliente(int c) {
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PRESTAMOS_DEL_CLIENTE, c);
+	}
+	
 	/**
 	 * Permite trasladar la ciudad a un cliente
 	 * 
