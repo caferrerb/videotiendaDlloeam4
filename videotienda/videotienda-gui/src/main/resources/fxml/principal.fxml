@@ -34,6 +34,11 @@
                               <MenuItem fx:id="menuItemGestionCliente" mnemonicParsing="false" onAction="#abrirGestionarClientes" text="Gestionar Clientes" />
 									</items>
 								</Menu>
+                        <Menu fx:id="mnuInventario" mnemonicParsing="false"  text="Inventario">
+                           <items>
+                              <MenuItem fx:id="mnuItemGestionarInventario" mnemonicParsing="false" onAction="#abrirGestionarInventario" text="Gestion Inventario" />
+                           </items>
+                        </Menu>
 								<Menu fx:id="mnuActores" mnemonicParsing="false" text="Actores">
 									<items>
 										<MenuItem id="ItemGestionarActores" fx:id="mnuItemGestionarActores" mnemonicParsing="false" onAction="#abrirGestionarActores" text="GestionarActores" />

@@ -162,6 +162,21 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		CBCiudad.setSelectionModel(null);
 	}
 
+	public void limpiarCamposEditado() {
+		TFIdEmpleado.setText(null);
+		//TFIdUsuario.setText(null);
+		TfPrimerNombre.setText(null);
+		TfSegundoNombre.setText(null);
+		TfEmail.setText(null);
+		TFDireccionA.setText(null);
+		TFDdireccionB.setText(null);
+		TFDepartamento.setText(null);
+		TFTelefono.setText(null);
+		TFCodigoPos.setText(null);
+		CBCiudad.setSelectionModel(null);
+		TFFechaCreacion.setText(null);
+		TFUlltimaActualizacionDir.setText(null);	
+	}
 	@FXML
 	public void crearEmpleado() throws Exception {
 		try {
@@ -280,6 +295,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				boDireccion.editar(direccion);
 				boEmpleado.editar(empleado);
 				notificar("Editar empleado", "Empleado editado con exito", TipoNotificacion.INFO);
+				limpiarCamposEditado();
 			} else {
 				notificar("Gestionar camposEmpeleado", "Debe llenar los campos obligatorios", TipoNotificacion.ERROR);
 			}
@@ -313,7 +329,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				TFUlltimaActualizacionDir.setText(empleado.getAddress().getLastUpdate().toString());
 				TFTelefono.setText(empleado.getAddress().getPhone());
 				TFCodigoPos.setText(empleado.getAddress().getPostalCode());
-
+				comboBoxSelecTienda.setValue(empleado.getStore());
 				if (empleado.getPicture() != null) {
 					Image im = new Image(new ByteArrayInputStream(empleado.getPicture()));
 					PhFoto.setImage(im);
