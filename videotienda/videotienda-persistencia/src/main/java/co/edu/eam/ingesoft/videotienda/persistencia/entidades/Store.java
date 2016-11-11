@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -161,4 +163,18 @@ public class Store implements Serializable {
 		return nombreTienda;
 	}
 
+	
+	
+	
+//	@Override
+//	public boolean equals(Object arg0) {
+//		if (arg0 instanceof Store) {
+//			Store prof = (Store) arg0;
+//			if (prof.storeId==(storeId)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+	
 }
