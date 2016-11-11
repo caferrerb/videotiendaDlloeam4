@@ -124,6 +124,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	ObservableList<PrestamoDTO> prestamosListar;
 
 	private Customer idCliente;
+	private Customer idCliente1;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -135,8 +136,14 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		jBPrestamo.setDisable(true);
 		jBBorrar.setDisable(true);
 		idCliente = (Customer) obtenerValor("clienteId");
+		idCliente1 = (Customer) obtenerValor("pelicula");
 		if (idCliente != null) {
 			buscarClienteCiro(idCliente);
+			
+		}
+		
+		if(idCliente1 != null){
+			buscarClienteCiro(idCliente1);
 		}
 	}
 
@@ -182,7 +189,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		Customer cliente = boCliente.buscar(iDcliente.getCustomerId());
 		if (cliente != null) {
 			tFNombre.setText(cliente.getFirstName() + " " + cliente.getLastName());
-			tFIdentificacion.setText(String.valueOf(idCliente.getCustomerId()));
+			tFIdentificacion.setText(String.valueOf(iDcliente.getCustomerId()));
 			Image img = new Image(new ByteArrayInputStream(cliente.getPicture()));
 			PhFoto.setImage(img);
 			listarPrestamosClientes();
@@ -281,7 +288,9 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 						int num = getTableRow().getIndex();
 						// borramos el objeto obtenido de la fila
 						PrestamoDTO p = getTableView().getItems().get(num);
-	                    //p.setRetornada(true);
+						Rental prest = boRental.buscar(p.getIdPrestamos());
+	                    prest.setReturned(true);
+	                    boRental.editar(prest);
 						prestamosListar.remove(num);
 						notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
 								TipoNotificacion.INFO);

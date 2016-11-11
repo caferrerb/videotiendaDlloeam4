@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOCliente;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BORental;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOTienda;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Customer;
@@ -59,6 +60,9 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 	@Autowired
 	private BORental boRental;
+	
+	@Autowired
+	private BOCliente boCliente;
 	
 	@Autowired
 	private DataSource ds;

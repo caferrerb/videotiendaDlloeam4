@@ -8,25 +8,25 @@ public class PrestamoDTO implements Serializable {
 	private String titulo;
 	private String nombreTienda;
 	private int idPrestamos;
-    //private boolean retornada;
+    private boolean retornada;
 	
 	public PrestamoDTO() {
+		
 	}
-	
-	
 
 	/**
 	 * @param titulo
 	 * @param nombreTienda
+	 * @param idPrestamos
+	 * @param retornada
 	 */
-	public PrestamoDTO(String nombreTienda, String titulo,int idpre) {
+	public PrestamoDTO(String titulo, String nombreTienda, int idPrestamos, boolean retornada) {
 		super();
-		this.titulo=titulo;
-		this.nombreTienda=nombreTienda;
-		this.idPrestamos=idpre;
-		//this.retornada=retornada;
+		this.titulo = titulo;
+		this.nombreTienda = nombreTienda;
+		this.idPrestamos = idPrestamos;
+		this.retornada = retornada;
 	}
-
 
 
 	/**
@@ -77,21 +77,21 @@ public class PrestamoDTO implements Serializable {
 
 
 
-//	/**
-//	 * @return the retornada
-//	 */
-//	public boolean isRetornada() {
-//		return retornada;
-//	}
-//
-//
-//
-//	/**
-//	 * @param retornada the retornada to set
-//	 */
-//	public void setRetornada(boolean retornada) {
-//		this.retornada = retornada;
-//	}
+	/**
+	 * @return the retornada
+	 */
+	public boolean isRetornada() {
+		return retornada;
+	}
+
+
+
+	/**
+	 * @param retornada the retornada to set
+	 */
+	public void setRetornada(boolean retornada) {
+		this.retornada = retornada;
+	}
 	
 	
 }

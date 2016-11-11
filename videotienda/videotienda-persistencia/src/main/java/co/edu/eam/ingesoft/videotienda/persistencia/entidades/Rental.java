@@ -149,6 +149,22 @@ public class Rental implements Serializable {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
+	
+	
+
+	/**
+	 * @return the returned
+	 */
+	public boolean isReturned() {
+		return returned;
+	}
+
+	/**
+	 * @param returned the returned to set
+	 */
+	public void setReturned(boolean returned) {
+		this.returned = returned;
+	}
 
 	@Override
 	public String toString() {
