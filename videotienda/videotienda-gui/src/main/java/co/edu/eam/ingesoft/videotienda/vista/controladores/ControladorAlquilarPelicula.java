@@ -264,7 +264,6 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 						PrestamoDTO p = getTableView().getItems().get(num);
 						boRental.eliminar(p.getIdPrestamos());
 						prestamosListar.remove(num);
-						System.out.println(p.getIdPrestamos());
 						notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
 								TipoNotificacion.INFO);
 
