@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-10T17:13:38 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1b8af087-d3bd-4dec-adc2-6c7ec980ccb8">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="videotienda"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="idEmpleado" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM  videotienda.staff WHERE staff_id=$P{idEmpleado}]]>
+	</queryString>
+	<field name="staff_id" class="java.lang.Integer"/>
+	<field name="active" class="java.lang.Boolean"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="first_name" class="java.lang.String"/>
+	<field name="last_name" class="java.lang.String"/>
+	<field name="last_update" class="java.sql.Timestamp"/>
+	<field name="picture" class="java.lang.Object"/>
+	<field name="address_id" class="java.lang.Integer"/>
+	<field name="store_id" class="java.lang.Integer"/>
+	<field name="id_usuario" class="java.lang.String"/>
+	<variable name="staff_id1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{staff_id}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="510" height="60" uuid="36d7d99f-bd7a-4f67-aa16-cc5443b134b9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Empleado]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="48" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="480" y="0" width="100" height="30" uuid="0c013299-fa43-40fb-a50a-566ef0057a98"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[last_update]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="100" height="30" uuid="c2590512-0485-426b-b9b3-563598bced25"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[last_update]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="100" height="30" uuid="9c6c3dcf-5311-45d6-947b-e36857b687a5"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[first_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="100" height="30" uuid="31bd5e85-65ef-4a1b-9854-bae12e8b0606"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="100" height="30" uuid="e026e3f5-7934-4279-a736-98d71c2a134e"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[active]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="30" uuid="23fa7191-fadb-4371-b754-eb3061466367"/>
+				<textElement textAlignment="Center">
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[staff_id]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="480" y="20" width="100" height="30" uuid="05d0a920-87e3-42eb-afed-e3e4ae4acda5"/>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{last_update}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="20" width="100" height="30" uuid="c9d43bc2-4df9-4767-aa46-133f5e285ce2"/>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{last_update}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="20" width="100" height="30" uuid="76c00d0e-c4a0-4a3d-bf84-466b3d8f1b07"/>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="20" width="100" height="30" uuid="382bddd3-9f30-4f9b-acbe-534a04a2532c"/>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="20" width="100" height="30" uuid="c6cd3117-ea74-4d1c-9227-45b2ae5c1443"/>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{active}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="19" width="80" height="30" uuid="3be03e8e-10dd-48f6-bd2a-e79ed9574dac"/>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{staff_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="42" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="10" y="12" width="100" height="30" uuid="183e6b40-4999-45dd-8dcc-0d1b978192df"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
