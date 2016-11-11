@@ -83,7 +83,6 @@ public class ControladorEjemploTabla extends BaseController implements Initializ
 			listaTabla.add(film);
 		}
 		tablaPeliculas.setItems(listaTabla);
-
 	}
 
 	/**

@@ -3,6 +3,7 @@ package co.edu.eam.ingesoft.videotienda.logica.bos;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -87,7 +88,7 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 	 * @param c
 	 * @return
 	 */
-	public List<Date> listarFechaEntregaPrestamoCliente(int c) {
+	public List<Rental> listarFechaEntregaPrestamoCliente(int c) {
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_FECHAS_CLIENTE, c);
 	}
 
@@ -121,28 +122,20 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 		prestamos.setReturnDate(fechaEntre);
 		prestamos.setLastUpdate(fechaActual);
 		prestamos.setInventory(inventarioPelicula(f));
-		prestamos.setStaff(empleado());
-        
-		Date fActual = new Date();
-		fActual.getYear();
-		fActual.getMonth();
-		fActual.getDay();
-		
-		
+		prestamos.setStaff(empleado());		
 		
 		List<Rental> lista = listarPrestamosRepetidos(f);
 		List<Rental> listaP = listarPrestamosDeUnCLiente(idCliente);
-		List<Date> listaF = listarFechaEntregaPrestamoCliente(idCliente);
+		List<Rental> listaF = listarFechaEntregaPrestamoCliente(idCliente);
 		if (lista.size() == 0) {
 			if (listaP.size() < 5) {
                 for (int i = 0; i < listaF.size(); i++) {
-                	Date fechaReturn = listaF.get(i);
-					if(fechaReturn.after(fechaActual)){
-						 crear(prestamos);
-						
+					if(fechaActual.after(listaF.get(i).getReturnDate())){
+						throw new ExcepcionNegocio(" El cliente tiene un prestamo con la fecha de entrega vencida ");
 					}
+					
 				}
-               
+               crear(prestamos);
 			} else {
 				throw new ExcepcionNegocio(
 						" El clienta al cual se le va a realizar el prestamo, ya tiene el limite de prestamos");

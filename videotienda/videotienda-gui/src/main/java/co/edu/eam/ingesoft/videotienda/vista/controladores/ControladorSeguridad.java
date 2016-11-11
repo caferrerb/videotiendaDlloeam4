@@ -1,8 +1,13 @@
 package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
+import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +26,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.UsuarioRol;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -48,6 +54,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 @Controller
 public class ControladorSeguridad extends BaseController implements Initializable {
 
+	/**
+	 * DataSource 
+	 */
+	@Autowired
+	private DataSource ds;
+	
 	/**
 	 * BO con los métodos de la lógica de Rol
 	 */
@@ -221,8 +233,16 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	 */
 	ObservableList<AccesoRol> accesoRoles;
 
+	/**
+	 * ComboBox rol el cual contiene el rol por el cual se generara el reporte
+	 */
+	@FXML
+	private ComboBox<Rol> cbReporte;
+	
 	private Usuario usu;
 
+	private int idReporte;
+	
 	/**
 	 * Empleado seleccionado en el combo
 	 */
@@ -268,6 +288,13 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 				tablaRolUsuario.setItems(null);
 				tfUsuario.setText(null);
 				tfPassword.setText(null);
+			}
+		});
+		
+		cbReporte.setOnAction((event) -> {
+			Rol selectedRol = cbReporte.getSelectionModel().getSelectedItem();
+			if (selectedRol != null) {
+				idReporte = selectedRol.getId();
 			}
 		});
 	}
@@ -571,9 +598,11 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 	private void llenarComboRoles() {
 		List<Rol> lista = boRol.listar();
 		cbRoles.getItems().removeAll(cbRoles.getItems());
+		cbReporte.getItems().removeAll(cbReporte.getItems());
 		cbRolUsuario.getItems().removeAll(cbRolUsuario.getItems());
 		for (Rol rol : lista) {
 			cbRoles.getItems().add(rol);
+			cbReporte.getItems().add(rol);
 			cbRolUsuario.getItems().add(rol);
 		}
 	}
@@ -606,4 +635,30 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		}
 	}
 
+	/**
+	 * Metodo para generar el reporte de acceso por rol
+	 *
+	 * @author Richard Alexander Vanegas Ochoa<br/>
+	 *         email: Richardvanegas8@gmail.com <br/>
+	 *         Fecha: 08/11/2015<br/>
+	 */
+	@FXML
+	public void generarReporte(){
+		
+		try {
+			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+			Map<String, Object> params=new HashMap<>();
+//			System.out.println(idReporte+"JAKJAKDSJAKSDJAS");
+//			InputStream imgInputStream = 
+//				    this.getClass().getResourceAsStream("/reportes/invoice-logo.png");
+//				params.put("myImg", imgInputStream);
+			params.put("idrol", idReporte);
+			reporter.generarReporte(params, "/reportes/accesoroles.jrxml", "AccesosXRol");
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
+		}
+	}
+	
 }

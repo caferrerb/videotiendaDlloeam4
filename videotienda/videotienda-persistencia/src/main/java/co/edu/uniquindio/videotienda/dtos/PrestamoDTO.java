@@ -1,3 +1,4 @@
+
 package co.edu.uniquindio.videotienda.dtos;
 
 import java.io.Serializable;
@@ -71,9 +72,4 @@ public class PrestamoDTO implements Serializable {
 	public void setNombreTienda(String nombreTienda) {
 		this.nombreTienda = nombreTienda;
 	}
-	
-	
-	
-	
-
 }

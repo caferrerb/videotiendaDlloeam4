@@ -144,6 +144,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 				PhFoto.setImage(img);
 				listarPrestamosClientes();
 				jBPrestamo.setDisable(false);
+				jBBuscar.setDisable(true);
 
 			} else {
 				notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
@@ -179,9 +180,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 				notificar("Prestamo", "Se ha prestado la pelicula", TipoNotificacion.INFO);
 				listarPrestamosClientes();
-				jBPrestamo.setDisable(true);
 				jBBorrar.setDisable(false);
-				jBBuscar.setDisable(true);
 			} catch (ExcepcionNegocio e) {
 				notificar("Prestamo", e.getMessage(), TipoNotificacion.ERROR);
 			}
@@ -241,6 +240,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 						PrestamoDTO p = getTableView().getItems().get(num);
 						boRental.eliminar(p.getIdPrestamos());
 						prestamosListar.remove(num);
+						System.out.println(p.getIdPrestamos());
 					    notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
 					    TipoNotificacion.INFO);
 

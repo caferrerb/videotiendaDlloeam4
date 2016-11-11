@@ -172,7 +172,8 @@
 	<named-query name="Rental.PeliculasRentadasCliente">
 		<query>
 			SELECT r FROM Rental r
-			WHERE r.customer = ?1
+			JOIN r.customer c
+			WHERE c.customerId = ?1
 		</query>
 	</named-query>
 	
@@ -186,10 +187,9 @@
 
 	<named-query name="Rental.fechaEntregaCliente">
 		<query>
-			SELECT r.returnDate FROM Rental r
+			SELECT r FROM Rental r
 			JOIN r.customer c
-			WHERE
-			c.customerId = ?1
+			WHERE c.customerId = ?1
 		</query>
 
 	</named-query>

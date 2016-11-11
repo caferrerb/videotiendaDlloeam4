@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-10T09:28:52 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="actoresxpelicula" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d1ef8e97-e631-4718-9c69-867041f1fea4">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="videotienda"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="idFilm" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select fi.film_id,ac.actor_id,ac.first_name,ac.last_name,fiac.caracter from film fi 
+JOIN film_actor fiac on (fi.film_id=fiac.film_id) 
+JOIN actor ac on (ac.actor_id=fiac.actor_id) where fi.film_id= $P{idFilm}]]>
+	</queryString>
+	<field name="film_id" class="java.lang.Integer"/>
+	<field name="actor_id" class="java.lang.Integer"/>
+	<field name="first_name" class="java.lang.String"/>
+	<field name="last_name" class="java.lang.String"/>
+	<field name="caracter" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement key="" x="130" y="10" width="310" height="40" forecolor="#FC0905" uuid="d28f825f-8f9a-43e3-986e-e86d06c71732"/>
+				<textElement textAlignment="Center">
+					<font fontName="HelveticaNeueLT Com 57 Cn" size="22"/>
+				</textElement>
+				<text><![CDATA[Reporte de Actores por Pelicula]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="-9" y="0" width="100" height="30" uuid="6b7a6fd2-b679-4685-8e8f-d2b46492c1bc"/>
+				<textElement textAlignment="Center">
+					<font fontName="HelveticaNeueLT Com 57 Cn" size="15"/>
+				</textElement>
+				<text><![CDATA[film_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="0" width="100" height="30" uuid="d1722281-7817-4d2e-8541-fc8fc0c82d4c"/>
+				<textElement textAlignment="Center">
+					<font fontName="HelveticaNeueLT Com 57 Cn" size="15"/>
+				</textElement>
+				<text><![CDATA[actor_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="100" height="30" uuid="20296821-ba0f-4961-92d5-d52cfb775178"/>
+				<textElement textAlignment="Center">
+					<font fontName="HelveticaNeueLT Com 57 Cn" size="15"/>
+				</textElement>
+				<text><![CDATA[first_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="0" width="100" height="30" uuid="f78e8c9c-60e8-4c0e-b31b-00c7392961dc"/>
+				<textElement textAlignment="Center">
+					<font fontName="HelveticaNeueLT Com 57 Cn" size="15"/>
+				</textElement>
+				<text><![CDATA[last_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="30" uuid="eae1c852-285f-4a92-a3ce-7d0c9a5f48ca"/>
+				<textElement textAlignment="Center">
+					<font fontName="HelveticaNeueLT Com 57 Cn" size="15"/>
+				</textElement>
+				<text><![CDATA[caracter]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="76" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="10" width="555" height="60" uuid="82511c9d-ffda-406d-a87d-1626d16bd577"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="37" y="37" width="72" height="30" uuid="b9d82397-a01c-43ea-bb5c-994b9039a9eb"/>
+				<textFieldExpression><![CDATA[$F{film_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="151" y="37" width="66" height="30" uuid="36b29f39-f757-4057-bafd-6ca67c9bcc96"/>
+				<textFieldExpression><![CDATA[$F{actor_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="256" y="37" width="100" height="30" uuid="9c631352-73ec-410c-8e02-05bf17e5a372"/>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="37" width="100" height="30" uuid="113cbe72-2d85-44c9-a9bc-c9d16a794637"/>
+				<textFieldExpression><![CDATA[$F{last_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="484" y="37" width="84" height="30" uuid="9fceaa2b-f1ea-4a58-a07e-576dcbd875eb"/>
+				<textFieldExpression><![CDATA[$F{caracter}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="10" width="100" height="60" uuid="29b43a76-89a4-497f-a255-0099e490a32f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="112" y="10" width="100" height="60" uuid="70c0abb1-9779-494c-bd1b-fc89b6a21abc"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="225" y="10" width="100" height="60" uuid="b70546b6-9152-414f-bc0f-ca2dcb2ba183"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="340" y="10" width="100" height="60" uuid="73d26923-4845-4faa-97fd-0e8f8880d106"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="454" y="10" width="100" height="60" uuid="6cdcb1a5-2d38-4f26-8614-419d298bbfd1"/>
+			</rectangle>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="460" y="20" width="58" height="30" uuid="598ae02e-3cff-4633-a0bd-0c4689a04127"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="518" y="20" width="58" height="30" uuid="3797fd8c-b26a-42d5-9379-6aa065814d21"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="-11" y="24" width="100" height="30" uuid="f7ded956-f1f6-440f-9dc3-43d2c185b391"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
