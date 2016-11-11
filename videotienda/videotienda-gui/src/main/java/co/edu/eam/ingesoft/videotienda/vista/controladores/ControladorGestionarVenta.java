@@ -157,15 +157,20 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 	public void generarReportePe(){
 		
 		try {
-			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
-			Map<String, Object> params=new HashMap<>();
-			String nomPelicula = jtfTitulo.getText();
-			List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
-			for(int i =0;i<pelicula.size();i++){
-				params.put("tituloPelicula",pelicula.get(i) );
-			}		
-			
-			reporter.generarReporte(params, "/reportes/reportePeliculas.jrxml", "PeliculasXNombre");
+			if(jtfTitulo!= null){
+
+				GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+				Map<String, Object> params=new HashMap<>();
+				String nomPelicula = jtfTitulo.getText();
+				List<Film> pelicula = boPelicula.listarPeliculas(nomPelicula);
+				for(int i =0;i<pelicula.size();i++){
+					params.put("tituloPelicula",pelicula.get(i) );
+				}		
+				
+				reporter.generarReporte(params, "/reportes/reportePeliculas.jrxml", "PeliculasXNombre");
+			}else{
+				notificar("Ejemplo", "Por favor buscar una pelicula", TipoNotificacion.ERROR);
+			}
 			
 		} catch (Exception e) {
 			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
