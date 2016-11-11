@@ -47,12 +47,31 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 
 	@FXML
 	private Button BTAgregarHorario;
-
+	
+	@FXML
+	private Button BTActualizar;
+	
 	@FXML
 	private TextField idEmpleado;
 
+	private StaffSchedule horario;
+	
+	private int idHorario;
+	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		horario=(StaffSchedule) obtenerValor("horario");
+		
+		if(horario != null){
+			idEmpleado.setText(Integer.toString(horario.getEmpleado().getStaffId()));
+			CBDia.setValue(horario.getDia());
+			horaIni.setValue(Integer.toString(horario.getHoraInicial()));
+			horaFin.setValue(Integer.toString(horario.getHoraFinal()));
+			idHorario=horario.getIdStaffSchedule();
+			//BTAgregarHorario.
+		}
+		
 		llenarDia();
 		llenarHoras();
 	}
@@ -91,6 +110,31 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 			boHorarioEmp.crearHorario(horario);
 
 			notificar("gestionar Horario", "Horario agregado con exito", TipoNotificacion.INFO);
+		}catch (ExcepcionNegocio ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void actualizarHorario (){
+		try {
+			
+			StaffSchedule horario = boHorarioEmp.buscar(idHorario);
+
+			//Staff empleado = boEmpleado.buscar(Byte.parseByte(idEmpleado.getText()));
+
+			horario.setEmpleado(horario.getEmpleado());
+			horario.setIdStaffSchedule(horario.getIdStaffSchedule());
+			DayEnum di = CBDia.getSelectionModel().getSelectedItem();
+			horario.setDia(di);
+			horario.setHoraFinal(Integer.parseInt(horaFin.getSelectionModel().getSelectedItem()));
+			horario.setHoraInicial(Integer.parseInt(horaIni.getSelectionModel().getSelectedItem()));
+
+			boHorarioEmp.editarHorario(horario);
+
+			notificar("gestionar Horario", "Horario Actualizado con exito", TipoNotificacion.INFO);
 		}catch (ExcepcionNegocio ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage());
 		} 

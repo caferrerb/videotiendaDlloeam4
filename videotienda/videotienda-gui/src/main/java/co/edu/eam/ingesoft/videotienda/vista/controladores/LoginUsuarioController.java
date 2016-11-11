@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOAccesoRol;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOEmpleado;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuario;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOUsuarioRol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.AccesoRol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
@@ -44,19 +46,42 @@ public class LoginUsuarioController extends BaseController implements Initializa
 	@FXML
 	private PasswordField tfPass;
 
+	/**
+	 * BO con los métodos de la lógica de Usuario
+	 */
 	@Autowired
 	private BOUsuario boUsuario;
+
+	/**
+	 * BO con los métodos de la lógica de AccesoRol
+	 */
 	@Autowired
 	private BOAccesoRol boAccesoRol;
+
+	/**
+	 * BO con los métodos de la lógica de UsuarioRol
+	 */
 	@Autowired
 	private BOUsuarioRol boUsuarioRol;
 
+	/**
+	 * BO con los métodos de la lógica de Empleado
+	 */
+	@Autowired
+	private BOEmpleado boEmpleado;
+
 	private Usuario usu;
 
+	private Staff emp;
+
+	/**
+	 * Constructor
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		usu = new Usuario();
+		emp = new Staff();
 	}
 
 	/**
@@ -74,10 +99,9 @@ public class LoginUsuarioController extends BaseController implements Initializa
 			Usuario usu = new Usuario();
 			usu.setUsuario(tfUser.getText());
 			usu.setPass(tfPass.getText());
-			List<Usuario> lista =boUsuario.buscarEntidad(usu);
+			List<Usuario> lista = boUsuario.buscarEntidad(usu);
 			int list = lista.size();
-			if (list == 0||
-					!(lista.get(0).getPass().equals(tfPass.getText()))) {
+			if (list == 0 || !(lista.get(0).getPass().equals(tfPass.getText()))) {
 				notificar("LogIn", "El usuario o el password que ha ingresado no son correctos",
 						TipoNotificacion.ERROR);
 			} else {
@@ -94,6 +118,7 @@ public class LoginUsuarioController extends BaseController implements Initializa
 				menus.add(mainController.mnuTiendas);
 				menus.add(mainController.mnuAutorizacion);
 				menus.add(mainController.menuReportes);
+
 				for (Rol rol : roles) {
 					List<AccesoRol> accesosRol = boAccesoRol.listarPorRol(rol);
 					for (AccesoRol accesoRol : accesosRol) {
@@ -105,18 +130,22 @@ public class LoginUsuarioController extends BaseController implements Initializa
 						}
 					}
 				}
+				emp = boEmpleado.buscarEmpleadoPorUsuario(usu).get(0);
+				notificar("LogIn","El empleado " + emp.getFirstName() + " " + emp.getLastName() + " ha iniciado sesion",
+						TipoNotificacion.INFO);
+				guardarEnSesion("empleadologin", emp);
 				mainController.abrirInicio();
 				mainController.btnCerrarSesion.setVisible(true);
-				guardarEnSesion("empleadologin", lista.get(0));
-				obtenerValor("empleadologin");
+
+				// obtenerValor("empleadologin");
 			}
 
 		} catch (Exception e) {
+		
 
 			e.printStackTrace();
 		}
 
 	}
-
 
 }
