@@ -10,8 +10,12 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +37,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import co.edu.uniquindio.videotienda.dtos.DayEnum;
 import co.edu.uniquindio.videotienda.dtos.PrestamoDTO;
@@ -69,6 +74,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 	
 	@Autowired
 	private BOTienda boTienda;
+	
+	@Autowired
+	private DataSource ds;
 	
 	@FXML
 	private TextField jTFNombres;
@@ -311,7 +319,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 				
 				
 			} else {
-				notificar("Buscar Cliente", "El empleado no se encuentra registrado", TipoNotificacion.ERROR);
+				notificar("Buscar Cliente", "El cliente no se encuentra registrado", TipoNotificacion.ERROR);
 				limpiarCampos();
 			}
 		} else {
@@ -380,6 +388,18 @@ public class ControladorGestionarClientes extends BaseController implements Init
 			e.printStackTrace();
 		}
 
+	}
+	
+	@FXML
+	public void generarReporteCliente(){
+		try {
+			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+			Map<String, Object> params=new HashMap<>();
+			params.put("idcus", 999);
+			reporter.generarReporte(params, "RentasCliente.jrxml", "RentasDelCliente");		
+		} catch (Exception e) {
+			notificar("Generar Reporte", "Error generando el reporte!", TipoNotificacion.ERROR);
+		}
 	}
 	
 	@FXML
