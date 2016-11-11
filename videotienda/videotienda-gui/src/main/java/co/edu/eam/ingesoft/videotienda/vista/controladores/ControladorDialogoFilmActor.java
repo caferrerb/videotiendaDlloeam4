@@ -113,15 +113,15 @@ public class ControladorDialogoFilmActor extends BaseController implements Initi
 			filacPK.setFilmId(film.getFilmId());
 			filacPK.setCaracter(personaje);
 			
-			FilmActor fiAc = new FilmActor();
+			FilmActor fiAcnew = new FilmActor();
 			
-			fiAc.setId(filacPK);
-			fiAc.setActor(actor);
-			fiAc.setFilm(film);
-			fiAc.setLastUpdate(new Timestamp(new Date().getTime()));
-			fiAc.setCaracter(personaje);
+			fiAcnew.setId(filacPK);
+			fiAcnew.setActor(actor);
+			fiAcnew.setFilm(film);
+			fiAcnew.setLastUpdate(new Timestamp(new Date().getTime()));
+			fiAcnew.setCaracter(personaje);
 			
-			boFilmActor.editar(fiAc);
+			boFilmActor.editar(fiAc, fiAcnew);
 			notificar("¡EXITO!", "Se ha editado exitosamente",  TipoNotificacion.INFO);
 		}
 	}
