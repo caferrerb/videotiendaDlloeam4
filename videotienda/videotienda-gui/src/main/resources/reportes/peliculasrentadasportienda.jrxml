@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-10T17:37:06 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="peliculasrentadasportienda" pageWidth="792" pageHeight="1224" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="videotienda"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value="Y3VzdG9tZXIgLDkwLDE1LDg3MjgxZjIzLTkyOWMtNDU2OC04ZTFkLTY2YzE1OTRlZDM0YztmaWxt&#xA;ICwyODEsMTUsNTE2OWM2MTMtNjJjNi00NTllLWFmMTUtMjgyNDA4MjNhNDNhO3JlbnRhbCAsMTUs&#xA;MTUsMzc0ZDBjOTYtMDE3ZS00MTFhLTlmYTktNmQxMzQ3ZjIxYjJkO2ludmVudG9yeSAsMTg3LDE1&#xA;LGYwNWZkNDVlLTk2MzEtNDAxNS1hZmNhLWE2ZTBhZGI3NjczNjs="/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="idTienda" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT i.inventory_id, f.title, c.first_name, r.rental_date, r.return_date  FROM rental r 
+JOIN	customer c ON r.customer_id=c.customer_id  
+JOIN inventory i ON r.inventory_id=i.inventory_id  JOIN film f ON i.film_id=f.film_id 
+WHERE i.store_id = $P{idTienda} ]]>
+	</queryString>
+	<field name="inventory_id" class="java.lang.Integer"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="first_name" class="java.lang.String"/>
+	<field name="rental_date" class="java.sql.Timestamp"/>
+	<field name="return_date" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="739" height="95" backcolor="#000000" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="719" height="66" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Peliculas Rentadas De La Tienda]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="451" height="32" forecolor="#000000" backcolor="#CC0000" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="307" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="30" forecolor="#050505" backcolor="#FCF8F7" uuid="2e09619b-a84f-4e74-93af-6a0569704011"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Id Inventario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="10" width="100" height="30" forecolor="#050505" backcolor="#FCF8F7" uuid="fe486c07-dad9-4eec-ab2a-3e3e6384f789"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Titulo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="10" width="100" height="30" forecolor="#050505" backcolor="#FCF8F7" uuid="a2fa83c3-5f86-4312-bf85-9b5e12a3a18a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nombre Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="10" width="100" height="30" forecolor="#050505" backcolor="#FCF8F7" uuid="8d926aeb-cc15-4cfd-abee-721373b03d34"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Fecha Prestamo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="592" y="8" width="100" height="30" forecolor="#050505" backcolor="#FCF8F7" uuid="d210abff-7cfc-4d20-adaa-7c0cfa2ba759"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Fecha Entrega]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="78" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="31" width="100" height="30" uuid="41243b51-d4ec-4215-b0a8-9adda52b2b56"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{inventory_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="30" width="100" height="30" uuid="352e45d8-09e0-4f94-8f6f-b0c42a0464dc"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="31" width="100" height="30" uuid="c38e1cb7-9ea7-4ab4-a501-38642829ca23"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="30" width="100" height="30" uuid="ef47c7d5-05e3-40c0-97fc-fd9f3837377c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{rental_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="592" y="30" width="100" height="30" uuid="48b2bd95-e213-46da-b18f-193f3e8196e4"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{return_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="9825b46e-76f1-469a-abb8-a1cc27aad685"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="137d38c7-1a83-4fc5-b156-9d5f1b1a0ddc"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

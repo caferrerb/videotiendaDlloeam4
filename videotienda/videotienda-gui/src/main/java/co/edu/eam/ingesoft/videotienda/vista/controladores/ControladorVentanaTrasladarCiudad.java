@@ -43,16 +43,16 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 	private BOCliente boCliente;
 
 	private Customer cliente;
-	
+
 	@Autowired
 	private DataSource ds;
 
 	@Autowired
 	private BOCiudad boCiudad;
-	
+
 	@FXML
 	private Button btnReporte;
-	
+
 	@FXML
 	private Button btnTrasladar;
 
@@ -64,7 +64,7 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 
 	@FXML
 	private TextField jTFCiudadActual;
-	
+
 	@FXML
 	private ComboBox<City> comboCiudadReporte;
 
@@ -111,18 +111,22 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 	@FXML
 	public void buscar() {
 
-		Customer c = boCliente.buscar(Integer.valueOf(jTFIdentificacion.getText()));
-		if (c != null) {
-			cliente = c;
-			jTFNombre.setText(c.getFirstName() + " " + c.getLastName());
-			jTFCiudadActual.setText(c.getAddress().getCity().getCity());
+		try {
+			Customer c = boCliente.buscar(Integer.valueOf(jTFIdentificacion.getText()));
+			if (c != null) {
+				cliente = c;
+				jTFNombre.setText(c.getFirstName() + " " + c.getLastName());
+				jTFCiudadActual.setText(c.getAddress().getCity().getCity());
 
-			// Cargar imagen
-			Image im = new Image(new ByteArrayInputStream(c.getPicture()));
-			imgViewFoto.setImage(im);
+				// Cargar imagen
+				Image im = new Image(new ByteArrayInputStream(c.getPicture()));
+				imgViewFoto.setImage(im);
 
-		} else {
-			notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
+			} else {
+				notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
+			}
+		} catch (NumberFormatException e) {
+			notificar("Busqueda", "El campo de cédula debe ser diligenciado con números", TipoNotificacion.ERROR);
 		}
 
 	}
@@ -141,14 +145,14 @@ public class ControladorVentanaTrasladarCiudad extends BaseController implements
 		}
 
 	}
-	
+
 	@FXML
-	public void generarReporte(){
-		
+	public void generarReporte() {
+
 		try {
 			City ciudad = comboCiudadReporte.getValue();
-			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
-			Map<String, Object> params=new HashMap<>();
+			GeneradorReporte reporter = new GeneradorReporte(ds.getConnection());
+			Map<String, Object> params = new HashMap<>();
 			params.put("idciudad", ciudad.getCityId());
 			reporter.generarReporte(params, "/reportes/clienteciudad.jrxml", "Clientes de una ciudad");
 		} catch (Exception e) {

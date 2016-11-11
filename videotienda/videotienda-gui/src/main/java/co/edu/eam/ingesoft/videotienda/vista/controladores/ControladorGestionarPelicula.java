@@ -156,7 +156,9 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		ListarLenguajes();
 		listarCategorias();
 	}
-	
+	/**
+	 * Metodo encargado de abrir ventana para seleccionar una imagen
+	 */
 	public void abrirImagen(){
 		
 		FileChooser fileChooser = new FileChooser();
@@ -195,7 +197,9 @@ public class ControladorGestionarPelicula extends BaseController implements Init
         
 	
 	}
-	
+	/**
+	 * metodo encargado de listar los actores
+	 */
 	public void listarActores(){
 	
 		List<Actor> listaAutores = boActores.listarAutores();
@@ -203,7 +207,9 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			jCBActores.getItems().add(actor);
 		}
 	}
-	
+	/**
+	 * metodo encargado de listar los lenguajes
+	 */
 	public void ListarLenguajes(){
 		
 		List<Language> listaLenguajes = boLenguaje.listarLenguajes();
@@ -212,14 +218,19 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			jCBLanguage2.getItems().add(language);
 		}
 	}
-	
+	/**
+	 * metodo encargado de listar las categorias
+	 */
 	public void listarCategorias(){
 		List<Category> listaCategorias = boFilm.listarCategorias();
 		for (Category category : listaCategorias) {
 			jCBCategory.getItems().add(category);
 		}
 	}
-
+	/**
+	 * Metodo encargado de crear un Film
+	 * @throws Exception en caso de que los campos esten mal diligenciados
+	 */
 	@FXML
 	private void crearPelicula()throws Exception{
 		
@@ -299,7 +310,9 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		}
 	  }
 	}
-	
+	/**
+	 * metodo para limpiar los campos en el momento de crear una pelicula o eliminarla
+	 */
 	public void limpiarCampos(){
 		
 		jTFFilmID.setText(null);;
@@ -317,13 +330,17 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		jTFLength.setText(null);
 		jCBCategory.setValue(null);
 	}
-	
+	/**
+	 * metodo encargado de buscar una pelicula por su ID
+	 * @throws Exception en caso de que la pelicula no exista o lo campos esten mal
+	 */
 	@FXML
 	public void buscarPelicula()throws Exception{
 		
 		if(jTFFilmID.getText().isEmpty()){
 			notificar("¡INGRESE!", "Por favor ingrese el ID de la pelicula que desea buscar",  TipoNotificacion.ERROR);
 		}else{
+			try{
 		int idFilm = Integer.parseInt(jTFFilmID.getText()); 
 		Film fi =boFilm.buscar(idFilm);
 		if(fi!=null){
@@ -355,10 +372,16 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			llenarTabla(idFilm);
 			agregarActorFilmTabla();
 		
+			
 		}else{
 			notificar("¡ERROR!", "La pelicula con el ID= ''"+idFilm+"'' (NO) se encuentra registrada",  TipoNotificacion.ERROR);
 
 		}
+			}catch (NumberFormatException ex){
+				
+				notificar("¡VERIFICAR!", "Por favor verifique que el ID de la pelicula solo "
+						+ "contenga datos numericos", TipoNotificacion.ERROR);
+			}
 		
 	}
 	}

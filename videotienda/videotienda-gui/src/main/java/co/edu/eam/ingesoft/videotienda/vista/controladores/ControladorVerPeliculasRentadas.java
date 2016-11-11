@@ -1,11 +1,14 @@
 package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.swing.event.TableColumnModelListener;
-
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -17,9 +20,11 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Inventory;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,14 +32,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.cell.PropertyValueFactory;
 /**
  * Clase responsable de controlar la ventana ver peliculas rentadas
  * 
@@ -50,28 +59,34 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 	@Autowired
 	private BORental boRental;
+	
+	@Autowired
+	private DataSource ds;
 
 	@FXML
 	private ComboBox<Store> cbTienda;
-
+	/*
+	 * Tabla de las peliculas rentadas
+	 */
 	@FXML
 	private TableView<Rental> tbPeliculasDeTiendaR;
+	
+	//Atributos que lleva la tabla
+	@FXML
+	private TableColumn<Rental, Integer> cIDInventario;
 
 	@FXML
-	private TableColumn<Inventory, Integer> cIDInventario;
+	private TableColumn<Rental, String> cTitulo;
 
 	@FXML
-	private TableColumn<Film, String> cTitulo;
+	private TableColumn<Rental, String> cCliente;
 
 	@FXML
-	private TableColumn<Customer, Integer> cCliente;
+	private TableColumn<Rental, String> cFecha;
 
 	@FXML
-	private TableColumn<Rental, Date> cFecha;
-
-	@FXML
-	private TableColumn<Rental, Date> cEntrega;
-
+	private TableColumn<Rental, String> cEntrega;
+	
 	@FXML
 	private TableColumn cBoton;
 
@@ -83,10 +98,15 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		cargarTablaPeliculas();
 		cargarComboTienda();
-
+		eventoSeleccionCombo();
 	}
-
+	
+	/**
+	 * Metodo que carga todas las tiendas 
+	 */
+	@FXML
 	private void cargarComboTienda() {
 		List<Store> lista = boTienda.listarTiendas();
 		for (Store store : lista) {
@@ -94,27 +114,58 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 		}
 	}
 
+	@FXML
+	public void llenarTabla(Store  store){
+		filmRentadas.removeAll(filmRentadas);
+		List<Rental> lista = boRental.listarTablaRental(store);
+		for (int i=0; i<lista.size(); i++) {
+			filmRentadas.add(lista.get(i));
+		}
+		
+		tbPeliculasDeTiendaR.setItems(filmRentadas);
+	}
 	/**
-	 * Metodo que carga la tabla de peliculas rentadas
+	 * Metodo que configura la tabla con los atributos que lleva
 	 * 
-	 * @param store,
-	 *            tienda a la cua se le busca las peliculas rentadas
 	 */
 	@FXML
-	public void cargarTablaPeliculas(Store store) {
-		List<Rental> lista = boRental.listarTablaRental(store);
-		for (Rental rental : lista) {
-			filmRentadas.add(rental);
-			cIDInventario.setCellValueFactory(new PropertyValueFactory<Inventory, Integer>("Id Inventario"));
-			cTitulo.setCellValueFactory(new PropertyValueFactory<Film, String>("Titulo Pelicula"));
-			cCliente.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("Cliente"));
-			cFecha.setCellValueFactory(new PropertyValueFactory<Rental, Date>("Fecha Prestamo"));
-			cEntrega.setCellValueFactory(new PropertyValueFactory<Rental, Date>("Fecha Entrega"));
-			cBoton1.setCellFactory(new Callback<TableColumn<Rental, Boolean>, TableCell<Rental, Boolean>>() {
-				public TableCell<Rental, Boolean> call(TableColumn<Rental, Boolean> p) {
-					return new ButtonCell(tbPeliculasDeTiendaR);
+	public void cargarTablaPeliculas() {
+		
+			cIDInventario.setCellValueFactory(new Callback<CellDataFeatures<Rental, Integer>, ObservableValue<Integer>>() {
+			@Override
+			public ObservableValue<Integer> call(CellDataFeatures<Rental, Integer> data) {
+				return new SimpleObjectProperty<>(data.getValue().getInventory().getInventoryId());
+			}
+		});
+			
+			cTitulo.setCellValueFactory(new Callback<CellDataFeatures<Rental, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<Rental, String> data) {
+				return new SimpleObjectProperty<>(data.getValue().getInventory().getFilm().getTitle());
+			}
+		});
+			
+			cCliente.setCellValueFactory(new Callback<CellDataFeatures<Rental, String>, ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(CellDataFeatures<Rental, String> data) {
+					return new SimpleObjectProperty<>(data.getValue().getCustomer().getFirstName());
 				}
+			});
+			
+			cFecha.setCellValueFactory(new Callback<CellDataFeatures<Rental, String>,ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(CellDataFeatures<Rental, String> data) {
+					SimpleDateFormat df=new SimpleDateFormat("dd-MM-YYYY");
+					return new SimpleObjectProperty<>(df.format(data.getValue().getRentalDate()));
+				}
+			});
 
+			cEntrega.setCellValueFactory(new Callback<CellDataFeatures<Rental, String>,ObservableValue<String>>() {
+				@Override
+				public ObservableValue<String> call(CellDataFeatures<Rental, String> data) {
+					SimpleDateFormat df=new SimpleDateFormat("dd-MM-YYYY");
+					return new SimpleObjectProperty<>(df.format(data.getValue().getReturnDate()));
+				}
 			});
 			cBoton.setCellFactory(new Callback<TableColumn<Rental, Boolean>, TableCell<Rental, Boolean>>() {
 				public TableCell<Rental, Boolean> call(TableColumn<Rental, Boolean> p) {
@@ -122,24 +173,29 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 				}
 
 			});
-		
-		tbPeliculasDeTiendaR.setItems(filmRentadas);
-	}
+			cBoton1.setCellFactory(new Callback<TableColumn<Rental, Boolean>, TableCell<Rental, Boolean>>() {
+				public TableCell<Rental, Boolean> call(TableColumn<Rental, Boolean> p) {
+					return new ButtonCell2(tbPeliculasDeTiendaR);
+				}
 
+			});
+		
 }
 
 
 	
 
-	@FXML
+	/**
+	 * Metodo que llena la tabla cuando se selecciona una tienda
+	 */
 	public void eventoSeleccionCombo() {
-		if (cbTienda.getSelectionModel().getSelectedIndex() != 0) {
-			Store store = cbTienda.getSelectionModel().getSelectedItem();
-			cargarTablaPeliculas(store);
 
-		} else {
-			notificar("NOTIFICACION", "Por favor selecione una tienda", TipoNotificacion.ERROR);
-		}
+		cbTienda.setOnAction((event) -> {
+			Store store = cbTienda.getSelectionModel().getSelectedItem();
+			
+			llenarTabla(store);
+		});
+
 	}
 	
 	/**
@@ -147,6 +203,7 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 	 * @author Cristian Sinisterra
 	 *
 	 */
+
 	private class ButtonCell extends TableCell<Rental, Boolean> {
 		// boton a mostrar
 		final Button cellButton = new Button("Entregar");
@@ -157,7 +214,9 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 				@Override
 				public void handle(ActionEvent t) {
-					abrirVentana("/fxml/GestionarPrestamos.fxml.fxml", ControladorVerPeliculasRentadas.class);
+					Rental r = getTableView().getItems().get(getIndex());
+					guardarEnSesion("pelicula", r.getCustomer());
+					abrirVentana("/fxml/AlquilarPelicula.fxml", ControladorAlquilarPelicula.class);
 				}
 			});
 		}
@@ -172,7 +231,7 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 		}
 	}
 
-	
+
 	private class ButtonCell2 extends TableCell<Rental, Boolean> {
 		// boton a mostrar
 		final Button cellButton = new Button("Ver Cliente");
@@ -183,7 +242,10 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 				@Override
 				public void handle(ActionEvent t) {
-					abrirVentana("/fxml/GestionarPrestamos.fxml.fxml", ControladorVerPeliculasRentadas.class);
+					Rental r = getTableView().getItems().get(getIndex());
+					guardarEnSesion("cliente", r.getCustomer());
+				
+					abrirVentana("/fxml/VentanaGestionarClientes.fxml", ControladorGestionarClientes.class);
 				}
 			});
 		}
@@ -197,6 +259,18 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 			}
 		}
 	}
-
+	
+	@FXML
+	public void generarReporte(){
+		try{
+			GeneradorReporte report= new GeneradorReporte(ds.getConnection());
+			Map<String, Object> params=new HashMap<>();
+			params.put("idTienda",(cbTienda.getSelectionModel().getSelectedItem().getStoreId()) );
+			report.generarReporte(params, "/reportes/peliculasrentadasportienda.jrxml", "PeliculasRentadasPorTienda");
+		}catch (Exception e){
+			notificar("Error", "Error generando el reporte", TipoNotificacion.ERROR);
+			e.printStackTrace();
+		}
+	}
 	
 }

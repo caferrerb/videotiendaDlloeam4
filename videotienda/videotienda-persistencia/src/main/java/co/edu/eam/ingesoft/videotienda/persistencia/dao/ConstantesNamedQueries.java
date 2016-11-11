@@ -90,6 +90,9 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAR_EMPLEADOS_TIENDA = "EmpleadosTienda.ListarTodos";
 
 	public static final String CONSULTA_LISTAR_INVENTARIO_TIENDA = "InventarioTienda.ListarTodos";
+	
+	public static final String CONSULTA_LISTAR_INVENTARIO_PELICULA = "InventarioPelicula.ListarTodos";
+
 
 	/**
 	 * consulta que lista los datos de la tabla rentas en la ventana reporte

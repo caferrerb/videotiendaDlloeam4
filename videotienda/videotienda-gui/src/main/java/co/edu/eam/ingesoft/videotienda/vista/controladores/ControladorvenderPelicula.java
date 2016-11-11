@@ -63,7 +63,7 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	private TextField jtfFecha;
 	
 	@FXML
-	private ImageView jimagenPerfil;	
+	private ImageView jcampoFoto;	
 	
 	private Staff empleado;
 
@@ -77,17 +77,19 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 			List<Customer> cus = boCus.listaBucarCliente(idCliente);
 			Customer regiCus = boCus.buscar(idCliente);
 			if (regiCus != null) {
+				
 			for (int i = 0; i < cus.size(); i++) {
-				if(regiCus.getPicture()!=null){
-					Image im=new Image(new ByteArrayInputStream(regiCus.getPicture()));
-//					jimagenPerfil.setImage(im); 
-					}
 				jtfNombreCliente.setText(cus.get(i).getFirstName());
 				}
 			
 			}else{
 				notificar("¡ERROR!", "El cliente no se encuentra registrado",  TipoNotificacion.ERROR);
 				abrirVentana("/fxml/VentanaGestionarClientes.fxml", ControladorGestionarClientes.class);
+			}
+			
+			if (regiCus.getPicture() != null) {
+				Image im = new Image(new ByteArrayInputStream(regiCus.getPicture()));
+				jcampoFoto.setImage(im);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,6 +113,7 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 			
 			notificar("¡NOTIFICACION!", "La venta se realizo exitosamente",  TipoNotificacion.INFO);
 			limpiarcampos();
+			abrirVentana("/fxml/GestionarVentaPeliculas.fxml", ControladorGestionarVenta.class);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,12 +124,11 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		film = (Film) obtenerValor("peliculavender");
-		empleado = (Staff) obtenerValor("empleado"); 
+		empleado = (Staff) obtenerValor("empleadologin"); 
 		int id = film.getFilmId();
-//		int idem = empleado.getStaffId();
-		System.out.println(empleado);	
+		int idem = empleado.getStaffId();
 		jtfIdPelicula.setText(String.valueOf(id));
-//		jtfIdEmpleado.setText(String.valueOf(empleado.getStaffId()));
+		jtfIdEmpleado.setText(String.valueOf(idem));
 		
 	}
 	
