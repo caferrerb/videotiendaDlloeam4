@@ -285,6 +285,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 					public void handle(ActionEvent t) {
 						int num = getTableRow().getIndex();
 						//Abrimos la ventana de prestamos
+						guardarEnSesion("clienteId", boCliente.buscar(Integer.parseInt(jTFId.getText())));
 						abrirVentana("/fxml/AlquilarPelicula.fxml", ControladorAlquilarPelicula.class);
 
 					}

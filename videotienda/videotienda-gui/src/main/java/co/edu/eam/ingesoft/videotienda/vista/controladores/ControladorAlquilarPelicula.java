@@ -71,8 +71,6 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	@FXML
 	private Button jBBuscar;
 
-	private Customer customer;
-
 	@Autowired
 	private BORental boRental;
 
@@ -125,17 +123,21 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 	ObservableList<PrestamoDTO> prestamosListar;
 
+	private Customer idCliente;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		// inicializarTabla();
-		customer = null;
 		inicializarTabla();
 		llenarComboPeliculas();
 		tFNombre.setEditable(false);
 		jBPrestamo.setDisable(true);
 		jBBorrar.setDisable(true);
-
+		idCliente = (Customer) obtenerValor("clienteId");
+		if (idCliente != null) {
+			buscarClienteCiro(idCliente);
+		}
 	}
 
 	@FXML
@@ -159,7 +161,6 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		} else {
 			int identificacion = Integer.parseInt(tFIdentificacion.getText());
 			Customer cliente = boCliente.buscar(identificacion);
-			customer = cliente;
 			if (cliente != null) {
 				tFNombre.setText(cliente.getFirstName() + " " + cliente.getLastName());
 				Image img = new Image(new ByteArrayInputStream(cliente.getPicture()));
@@ -174,6 +175,24 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 			}
 		}
 
+	}
+
+	@FXML
+	public void buscarClienteCiro(Customer iDcliente) {
+		Customer cliente = boCliente.buscar(iDcliente.getCustomerId());
+		if (cliente != null) {
+			tFNombre.setText(cliente.getFirstName() + " " + cliente.getLastName());
+			tFIdentificacion.setText(String.valueOf(idCliente.getCustomerId()));
+			Image img = new Image(new ByteArrayInputStream(cliente.getPicture()));
+			PhFoto.setImage(img);
+			listarPrestamosClientes();
+			jBPrestamo.setDisable(false);
+			jBBuscar.setDisable(true);
+			jBBorrar.setDisable(false);
+
+		} else {
+			notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
+		}
 	}
 
 	@FXML
@@ -262,7 +281,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 						int num = getTableRow().getIndex();
 						// borramos el objeto obtenido de la fila
 						PrestamoDTO p = getTableView().getItems().get(num);
-						boRental.eliminar(p.getIdPrestamos());
+	                    //p.setRetornada(true);
 						prestamosListar.remove(num);
 						notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
 								TipoNotificacion.INFO);
