@@ -10,7 +10,15 @@ import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 
+/**
+ * Objeto de negocio para todas las operaciones asociadas al Empleado.
+ *
+ * @author Richard Alexander Vanegas Ochoa<br/>
+ *         email: Richardvanegas8@gmail.com <br/>
+ *         Fecha: 23/10/2015<br/>
+ */
 @Component
 public class BOEmpleado extends BOGenerico<Staff>{
 
@@ -54,6 +62,17 @@ public class BOEmpleado extends BOGenerico<Staff>{
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void editarEmpleado(Staff empleado){
 		super.editar(empleado);
+	}
+	
+	/**
+	 * Objeto de negocio para todas las operaciones asociadas al Empleado.
+	 *
+	 * @author Richard Alexander Vanegas Ochoa<br/>
+	 *         email: Richardvanegas8@gmail.com <br/>
+	 *         Fecha: 23/10/2015<br/>
+	 */
+	public List<Staff> buscarEmpleadoPorUsuario(Usuario usu){
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_BUSCAR_EMPLEADOS_POR_USUARIO,usu);
 	}
 	
 }

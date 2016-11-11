@@ -7,9 +7,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="753.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="810.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane layoutY="1.0" prefHeight="503.0" prefWidth="288.0" text="Datos">
+      <TitledPane layoutX="14.0" layoutY="14.0" prefHeight="503.0" prefWidth="288.0" text="Datos">
          <content>
             <Pane layoutY="1.0" prefHeight="471.0" prefWidth="278.0">
                <children>
@@ -61,11 +61,11 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </TitledPane>
-      <TitledPane layoutX="288.0" layoutY="1.0" prefHeight="503.0" prefWidth="456.0" text="Peliculas">
+      <TitledPane layoutX="302.0" layoutY="14.0" prefHeight="503.0" prefWidth="495.0" text="Peliculas">
          <content>
-            <Pane layoutX="300.0" layoutY="1.0" prefHeight="471.0" prefWidth="518.0">
+            <Pane layoutX="300.0" layoutY="1.0" prefHeight="471.0" prefWidth="422.0">
                <children>
-                  <TableView fx:id="tbListaPelicula" layoutX="20.0" layoutY="22.0" prefHeight="253.0" prefWidth="455.0">
+                  <TableView fx:id="tbListaPelicula" layoutX="20.0" layoutY="22.0" prefHeight="253.0" prefWidth="407.0">
                     <columns>
                       <TableColumn fx:id="tablaTitulo" prefWidth="74.0" text="Titulo" />
                       <TableColumn fx:id="tablaAnio" text="Año" />
@@ -73,6 +73,12 @@
                         <TableColumn fx:id="tablaBoton" prefWidth="145.0" text="..." />
                     </columns>
                   </TableView>
+
+                  <Button fx:id="btnReporte" layoutX="291.0" layoutY="432.0" mnemonicParsing="false" onAction="#generarReporteActor" text="generarReporteActor">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children>
                <opaqueInsets>
                   <Insets />
