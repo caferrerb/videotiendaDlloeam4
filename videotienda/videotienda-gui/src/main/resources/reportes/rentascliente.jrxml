@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-10T23:57:43 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RentasCliente" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="82d59d48-7b29-42bc-9ecc-af4bc48e27eb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="videotiendadb"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="idcus" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT * FROM rental r JOIN customer c ON(r.customer_id=c.customer_id)
+JOIN staff s ON(r.staff_id=s.staff_id)
+JOIN inventory i ON(r.inventory_id=i.inventory_id)
+JOIN store st ON(i.store_id=st.store_id)
+WHERE c.customer_id=$P{idcus}]]>
+	</queryString>
+	<field name="rental_id" class="java.lang.Integer"/>
+	<field name="last_update" class="java.sql.Timestamp"/>
+	<field name="rental_date" class="java.sql.Timestamp"/>
+	<field name="return_date" class="java.sql.Timestamp"/>
+	<field name="customer_id" class="java.lang.Integer"/>
+	<field name="inventory_id" class="java.lang.Integer"/>
+	<field name="staff_id" class="java.lang.Integer"/>
+	<field name="COLUMN_8" class="java.lang.Integer"/>
+	<field name="active" class="java.lang.Boolean"/>
+	<field name="create_date" class="java.sql.Timestamp"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="first_name" class="java.lang.String"/>
+	<field name="last_name" class="java.lang.String"/>
+	<field name="COLUMN_14" class="java.sql.Timestamp"/>
+	<field name="picture" class="java.lang.Object"/>
+	<field name="address_id" class="java.lang.Integer"/>
+	<field name="store_id" class="java.lang.Integer"/>
+	<field name="COLUMN_18" class="java.lang.Integer"/>
+	<field name="COLUMN_19" class="java.lang.Boolean"/>
+	<field name="COLUMN_20" class="java.lang.String"/>
+	<field name="COLUMN_21" class="java.lang.String"/>
+	<field name="COLUMN_22" class="java.lang.String"/>
+	<field name="COLUMN_23" class="java.sql.Timestamp"/>
+	<field name="COLUMN_24" class="java.lang.Object"/>
+	<field name="COLUMN_25" class="java.lang.Integer"/>
+	<field name="COLUMN_26" class="java.lang.Integer"/>
+	<field name="id_usuario" class="java.lang.String"/>
+	<field name="COLUMN_28" class="java.lang.Integer"/>
+	<field name="COLUMN_29" class="java.sql.Timestamp"/>
+	<field name="film_id" class="java.lang.Integer"/>
+	<field name="COLUMN_31" class="java.lang.Integer"/>
+	<field name="COLUMN_32" class="java.lang.Integer"/>
+	<field name="COLUMN_33" class="java.sql.Timestamp"/>
+	<field name="Nombre_tienda" class="java.lang.String"/>
+	<field name="COLUMN_35" class="java.lang.Integer"/>
+	<field name="manager_staff_id" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="183" y="30" width="189" height="36" uuid="a5f1957d-74f3-4306-88c6-c19643bc46e0"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="ari" size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Rentas del Cliente]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="8" width="90" height="30" uuid="7eadb447-6e09-4949-9331-0c7d654190b8"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Renta Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="8" width="100" height="30" uuid="ecee579c-020d-4b9e-b73c-39b72df2fca7"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="10" width="100" height="30" uuid="cb7ef640-8f61-4e5f-98fa-c483d79bc290"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="10" width="100" height="30" uuid="1a6236f9-d411-46f7-8b91-6810462f7660"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Renta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="10" width="110" height="30" uuid="90f485b5-a4c0-40b7-94ab-724a81929e27"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Entrega]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="10" width="90" height="30" uuid="1cdc2967-1399-46d7-bba6-6890e1ceffad"/>
+				<textElement textAlignment="Center">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rental_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="10" width="100" height="30" uuid="04abfd02-7509-4b1f-be35-bbf7344cfec1"/>
+				<textElement textAlignment="Center">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="10" width="100" height="30" uuid="ab8e76cc-b5b9-4384-a5f7-731f2d10d0e8"/>
+				<textElement textAlignment="Center">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{last_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="10" width="100" height="30" uuid="935116e8-1474-4385-be16-a9a6d7887619"/>
+				<textElement textAlignment="Center">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rental_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="10" width="110" height="30" uuid="57d90561-4293-4f81-919c-3b2523388185"/>
+				<textElement textAlignment="Center">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{return_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="56" splitType="Stretch">
+			<textField>
+				<reportElement x="360" y="14" width="100" height="30" uuid="6615a048-7c9a-4e8d-8015-5cd5e943b13b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="460" y="14" width="90" height="30" uuid="6ee71266-f257-44d4-9958-3b64568cdd7d"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="10" y="13" width="90" height="30" uuid="4a4c144f-f25a-4783-a1ad-7a9db897dbe8"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

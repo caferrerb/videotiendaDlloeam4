@@ -72,6 +72,13 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	public Menu mnuPeliculas;
+	
+
+	/**
+	 * Menu inventario
+	 */
+	@FXML
+	public Menu mnuInventario;
 
 	/**
 	 * Menu reportes
@@ -123,6 +130,9 @@ public class MainController implements Initializable {
 	@FXML
 	private MenuItem mnuItemGestionarCiudad;
 
+	@FXML
+	private MenuItem mnuItemGestionarInventario;
+	
 	@FXML
 	private MenuItem mnuItemGestionarActores;
 
@@ -221,6 +231,7 @@ public class MainController implements Initializable {
 		mnuPrestamos.setVisible(false);
 		mnuSucursales.setVisible(false);
 		btnCerrarSesion.setVisible(false);
+		mnuItemGestionarInventario.setVisible(false);
 	}
 
 	/**
@@ -237,6 +248,11 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirGEstionarCiudad() {
 		agregarVentana("/fxml/gestionarciudad.fxml", ControladorGestionarCIudad.class);
+	}
+	
+	@FXML
+	public void abrirGestionarInventario() {
+		agregarVentana("/fxml/GestionarInventario.fxml", ControladorGestionarCIudad.class);
 	}
 
 	@FXML

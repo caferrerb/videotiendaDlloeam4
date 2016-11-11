@@ -461,11 +461,15 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 	@FXML
 	private void agregarActorFilm(){
 		
-		if(jTFFilmID.getText().isEmpty()|| jTFPersonaje.getText().isEmpty()||jCBActores.getValue()==null){
-			notificar("¡INGRESE!", "Por favor ingrese (ID de pelicula , Actor  y su personaje)",  TipoNotificacion.ERROR);
+		if(jTFFilmID.getText().isEmpty()||jCBActores.getValue()==null){
+			notificar("¡INGRESE!", "Por favor ingrese (ID de pelicula y Actor )",  TipoNotificacion.ERROR);
 		}else{
 		try {
 			
+			if(jTFPersonaje.getText().isEmpty()){
+				notificar("¡INGRESE!", "Por favor el personaje",  TipoNotificacion.ERROR);
+				return;
+			}
 			String personaje = jTFPersonaje.getText();
 			Actor actor = jCBActores.getValue();
 			int idFilm=Integer.parseInt(jTFFilmID.getText());

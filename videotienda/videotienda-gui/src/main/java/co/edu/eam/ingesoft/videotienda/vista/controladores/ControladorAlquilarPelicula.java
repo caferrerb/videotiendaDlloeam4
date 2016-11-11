@@ -6,8 +6,12 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +28,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import co.edu.uniquindio.videotienda.dtos.PrestamoDTO;
 import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
@@ -56,16 +61,16 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 	@Autowired
 	private BOCliente boCliente;
-	
+
 	@FXML
 	private Button jBPrestamo;
-	
+
 	@FXML
 	private Button jBBorrar;
-	
+
 	@FXML
 	private Button jBBuscar;
-	
+
 	private Customer customer;
 
 	@Autowired
@@ -73,6 +78,9 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 	@Autowired
 	private BOFilm pelicula;
+
+	@Autowired
+	private DataSource ds;
 
 	@Autowired
 	private BOAlquilarPeliculas boAlquiPelicula;
@@ -88,6 +96,9 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 	@FXML
 	private TextField tFFechaEntrega;
+
+	@FXML
+	private TextField iDClienteReporte;
 
 	@FXML
 	private AnchorPane iDAlquilarPelicula;
@@ -113,21 +124,32 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	List<PrestamoDTO> listaPrestamos;
 
 	ObservableList<PrestamoDTO> prestamosListar;
-	
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		//inicializarTabla();
+		// inicializarTabla();
 		customer = null;
 		inicializarTabla();
 		llenarComboPeliculas();
 		tFNombre.setEditable(false);
 		jBPrestamo.setDisable(true);
 		jBBorrar.setDisable(true);
-		
-        
+
+	}
+
+	@FXML
+	public void generarReporte() {
+
+		try {
+			GeneradorReporte reporter = new GeneradorReporte(ds.getConnection());
+			Map<String, Object> params = new HashMap<>();
+			int idClienteRepor = Integer.parseInt(iDClienteReporte.getText());
+			params.put("idCliente", idClienteRepor);
+			reporter.generarReporte(params, "/reportes/ReportePrestamos.jrxml", "ReportePrestamoClientes");
+		} catch (Exception e) {
+			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
+		}
 	}
 
 	@FXML
@@ -144,6 +166,8 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 				PhFoto.setImage(img);
 				listarPrestamosClientes();
 				jBPrestamo.setDisable(false);
+				jBBuscar.setDisable(true);
+				jBBorrar.setDisable(false);
 
 			} else {
 				notificar("Busqueda", "El cliente que busca no ha sido encontrado", TipoNotificacion.ERROR);
@@ -179,9 +203,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 
 				notificar("Prestamo", "Se ha prestado la pelicula", TipoNotificacion.INFO);
 				listarPrestamosClientes();
-				jBPrestamo.setDisable(true);
 				jBBorrar.setDisable(false);
-				jBBuscar.setDisable(true);
 			} catch (ExcepcionNegocio e) {
 				notificar("Prestamo", e.getMessage(), TipoNotificacion.ERROR);
 			}
@@ -197,7 +219,8 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		cBPeliculas.getSelectionModel().select(1);
 		jBBorrar.setDisable(true);
 		jBBuscar.setDisable(false);
-		
+		jBPrestamo.setDisable(true);
+
 	}
 
 	@FXML
@@ -205,10 +228,10 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		int idCliente = Integer.parseInt(tFIdentificacion.getText());
 		listaPrestamos = boAlquiPelicula.listarLosPrestamosCliente(idCliente);
 		prestamosListar = FXCollections.observableArrayList();
-		 for (PrestamoDTO dto : listaPrestamos) {
-			 prestamosListar.add(dto);
-		} 
-		
+		for (PrestamoDTO dto : listaPrestamos) {
+			prestamosListar.add(dto);
+		}
+
 		tTPrestamos.setItems(prestamosListar);
 
 	}
@@ -217,7 +240,7 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 		cCTitulo.setCellValueFactory(new PropertyValueFactory<PrestamoDTO, String>("titulo"));
 		cCTienda.setCellValueFactory(new PropertyValueFactory<PrestamoDTO, String>("nombreTienda"));
 		cCbotonEliminar.setSortable(false);
-		
+
 		cCbotonEliminar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		cCbotonEliminar.setCellFactory(param -> new TableCell<PrestamoDTO, PrestamoDTO>() {
 			private final Button deleteButton = new Button("Retornar");
@@ -237,13 +260,13 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 					@Override
 					public void handle(ActionEvent t) {
 						int num = getTableRow().getIndex();
-						//borramos el objeto obtenido de la fila
+						// borramos el objeto obtenido de la fila
 						PrestamoDTO p = getTableView().getItems().get(num);
 						boRental.eliminar(p.getIdPrestamos());
 						prestamosListar.remove(num);
 						System.out.println(p.getIdPrestamos());
-					    notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
-					    TipoNotificacion.INFO);
+						notificar("Eliminar Prestamo", "El prestamo a sido entragado correctamente",
+								TipoNotificacion.INFO);
 
 					}
 				});

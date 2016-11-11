@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -25,6 +26,8 @@ import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 @Controller
 public class ControladorvenderPelicula extends BaseController implements Initializable {
@@ -59,6 +62,9 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	@FXML
 	private TextField jtfFecha;
 	
+	@FXML
+	private ImageView jcampoFoto;	
+	
 	private Staff empleado;
 
 	private Film film;
@@ -71,16 +77,19 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 			List<Customer> cus = boCus.listaBucarCliente(idCliente);
 			Customer regiCus = boCus.buscar(idCliente);
 			if (regiCus != null) {
-			for (int i = 0; i < cus.size(); i++) {
 				
-					jtfNombreCliente.setText(cus.get(i).getFirstName());
-//					fecha.
-					
-					// jtfIdPelicula.setText(film.getFilmId());
+			for (int i = 0; i < cus.size(); i++) {
+				jtfNombreCliente.setText(cus.get(i).getFirstName());
 				}
+			
 			}else{
 				notificar("¡ERROR!", "El cliente no se encuentra registrado",  TipoNotificacion.ERROR);
-				abrirVentana("/fxml/VentanaGestionEmpleados.fxml", ControladorGestionarEmpleado.class);
+				abrirVentana("/fxml/VentanaGestionarClientes.fxml", ControladorGestionarClientes.class);
+			}
+			
+			if (regiCus.getPicture() != null) {
+				Image im = new Image(new ByteArrayInputStream(regiCus.getPicture()));
+				jcampoFoto.setImage(im);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,6 +113,8 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 			
 			notificar("¡NOTIFICACION!", "La venta se realizo exitosamente",  TipoNotificacion.INFO);
 			limpiarcampos();
+			abrirVentana("/fxml/GestionarVentaPeliculas.fxml", ControladorGestionarVenta.class);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -113,12 +124,12 @@ public class ControladorvenderPelicula extends BaseController implements Initial
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		film = (Film) obtenerValor("peliculavender");
-		empleado = (Staff) obtenerValor("empleado"); 
+//		empleado = (Staff) obtenerValor("empleadologin"); 
 		int id = film.getFilmId();
 //		int idem = empleado.getStaffId();
 		System.out.println(empleado);	
 		jtfIdPelicula.setText(String.valueOf(id));
-//		jtfIdEmpleado.setText(String.valueOf(empleado.getStaffId()));
+//		jtfIdEmpleado.setText(String.valueOf(idem));
 		
 	}
 	
