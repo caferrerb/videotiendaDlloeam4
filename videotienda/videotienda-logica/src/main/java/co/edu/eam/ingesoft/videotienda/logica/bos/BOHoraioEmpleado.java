@@ -44,6 +44,37 @@ public class BOHoraioEmpleado extends BOGenerico<StaffSchedule> {
 			throw new ExcepcionNegocio("La hora final no puede ser menos a la hora inicial o igual");
 		}
 	}
+	
+	
+	/**
+	 * Crea un horario para el empleado
+	 * 
+	 * @param horario
+	 */
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void editarHorario(StaffSchedule horario) throws Exception {
+		List<StaffSchedule> listaH = listaHorario(horario.getEmpleado());
+		if (horario.getHoraInicial() < horario.getHoraFinal()) {
+
+			int hora = 0;
+			int horaB = 0;
+
+			for (int i = 0; i < listaH.size(); i++) {
+				hora += listaH.get(i).getHoraFinal() - listaH.get(i).getHoraInicial();
+				horaB = hora + (horario.getHoraFinal() - horario.getHoraInicial());
+			}
+			if (horaB < 48) {
+				super.editar(horario);
+			} else {
+				throw new ExcepcionNegocio(
+						"Usted ya excedio el limite de horas ha trabajar" + "\nLa suma de horas esta dando: " + horaB);
+			}
+		} else {
+			throw new ExcepcionNegocio("La hora final no puede ser menos a la hora inicial o igual");
+		}
+	}
+	
+	
 
 	/**
 	 * Trae una lista de horario del empleado buscado
