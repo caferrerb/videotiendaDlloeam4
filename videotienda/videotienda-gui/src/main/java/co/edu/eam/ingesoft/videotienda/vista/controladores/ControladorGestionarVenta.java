@@ -103,7 +103,7 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 					
 				}
 						}
-			generarReportePe();
+//			generarReportePe();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		

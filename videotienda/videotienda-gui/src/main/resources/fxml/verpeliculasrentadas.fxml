@@ -4,21 +4,21 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="392.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="392.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="46.0" layoutY="14.0" text="Tiendas" />
-      <TableView fx:id="tbPeliculasDeTiendaR" layoutX="27.0" layoutY="84.0" prefHeight="200.0" prefWidth="538.0">
+      <Label layoutX="14.0" layoutY="14.0" text="Tiendas" />
+      <TableView fx:id="tbPeliculasDeTiendaR" layoutX="8.0" layoutY="54.0" prefHeight="200.0" prefWidth="625.0">
         <columns>
-          <TableColumn fx:id="cIDInventario" prefWidth="75.0" text="ID Inventario" />
-          <TableColumn fx:id="cTitulo" prefWidth="75.0" text="Titulo" />
-            <TableColumn fx:id="cCliente" prefWidth="75.0" text="Cliente" />
-            <TableColumn fx:id="cFecha" prefWidth="75.0" text="Fecha Prestamo" />
+          <TableColumn fx:id="cIDInventario" prefWidth="92.0" text="ID Inventario" />
+          <TableColumn fx:id="cTitulo" prefWidth="82.0" text="Titulo" />
+            <TableColumn fx:id="cCliente" prefWidth="71.0" text="Cliente" />
+            <TableColumn fx:id="cFecha" prefWidth="102.0" text="Fecha Prestamo" />
             <TableColumn fx:id="cEntrega" prefWidth="107.0" text="Fecha Entrega" />
-            <TableColumn fx:id="cBoton" prefWidth="58.0" text="Entregar" />
-            <TableColumn fx:id="cBoton1" prefWidth="68.0" text="Ver Cliente" />
+            <TableColumn fx:id="cBoton" prefWidth="72.0" text="Entregar" />
+            <TableColumn fx:id="cBoton1" prefWidth="97.0" text="Ver Cliente" />
         </columns>
       </TableView>
-      <ComboBox fx:id="cbTienda" layoutX="106.0" layoutY="10.0" prefHeight="25.0" prefWidth="178.0" promptText="Seleccione una tienda" />
-      <Button fx:id="buscar" layoutX="322.0" layoutY="23.0" mnemonicParsing="false" onAction="#eventoSeleccionCombo" text="Buscar" />
+      <ComboBox fx:id="cbTienda" layoutX="94.0" layoutY="10.0" prefHeight="25.0" prefWidth="178.0" promptText="Seleccione una tienda" />
+      <Button layoutX="94.0" layoutY="273.0" mnemonicParsing="false" onAction="#generarReporte" text="Generar Reporte" />
    </children>
 </AnchorPane>
