@@ -20,6 +20,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Inventory;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rol;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.StaffSchedule;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
@@ -239,6 +240,8 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 				@Override
 				public void handle(ActionEvent t) {
+					//StaffSchedule c=getTableView().getItems().get(getIndex());
+				
 					abrirVentana("/fxml/GestionarPrestamos.fxml.fxml", ControladorVerPeliculasRentadas.class);
 				}
 			});
