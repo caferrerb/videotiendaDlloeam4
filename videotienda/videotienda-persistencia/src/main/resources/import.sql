@@ -9,3 +9,8 @@ INSERT INTO `videotienda`.`t_acceso` (`ID_ACCESO`, `NOMBRE`, `PANTALLA`) VALUES 
 INSERT INTO `videotienda`.`t_acceso` (`ID_ACCESO`, `NOMBRE`, `PANTALLA`) VALUES ('9', 'Tiendas', 'Tiendas');
 INSERT INTO `videotienda`.`t_acceso` (`ID_ACCESO`, `NOMBRE`, `PANTALLA`) VALUES ('10', 'Autorizacion', 'Autorizacion');
 INSERT INTO `videotienda`.`t_acceso` (`ID_ACCESO`, `NOMBRE`, `PANTALLA`) VALUES ('11', 'Reportes', 'Reportes');
+
+INSERT INTO `videotienda`.`country` (`country_id`, `country`, `last_update`) VALUES ('1', 'Colombia', '2016-10-06');
+
+INSERT INTO `videotienda`.`city` (`city_id`, `city`, `country_id`) VALUES ('1', 'Armenia', '1');
+INSERT INTO `videotienda`.`city` (`city_id`, `city`, `country_id`) VALUES ('2', 'Bogota', '1');
