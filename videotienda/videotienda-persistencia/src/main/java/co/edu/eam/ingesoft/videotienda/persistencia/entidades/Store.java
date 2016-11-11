@@ -23,9 +23,6 @@ public class Store implements Serializable {
 	@Column(name="store_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int storeId;
-	
-	@Column(name="Nombre_tienda")
-	private String nombreTienda;
 
 	@Column(name="last_update")
 	@Temporal(TemporalType.TIMESTAMP)
