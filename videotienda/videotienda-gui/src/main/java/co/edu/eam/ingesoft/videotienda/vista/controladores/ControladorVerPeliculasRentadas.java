@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOCliente;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BORental;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOTienda;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Customer;
@@ -59,6 +60,9 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 	@Autowired
 	private BORental boRental;
+	
+	@Autowired
+	private BOCliente boCliente;
 	
 	@Autowired
 	private DataSource ds;
@@ -214,7 +218,9 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 				@Override
 				public void handle(ActionEvent t) {
-					abrirVentana("/fxml/GestionarPrestamos.fxml.fxml", ControladorVerPeliculasRentadas.class);
+					Rental r = getTableView().getItems().get(getIndex());
+					guardarEnSesion("pelicula", r.getCustomer());
+					abrirVentana("/fxml/AlquilarPelicula.fxml", ControladorAlquilarPelicula.class);
 				}
 			});
 		}
@@ -240,9 +246,10 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 
 				@Override
 				public void handle(ActionEvent t) {
-					//StaffSchedule c=getTableView().getItems().get(getIndex());
+					Rental r = getTableView().getItems().get(getIndex());
+					guardarEnSesion("cliente", r.getCustomer());
 				
-					abrirVentana("/fxml/GestionarPrestamos.fxml.fxml", ControladorVerPeliculasRentadas.class);
+					abrirVentana("/fxml/VentanaGestionarClientes.fxml", ControladorGestionarClientes.class);
 				}
 			});
 		}
@@ -262,7 +269,7 @@ public class ControladorVerPeliculasRentadas<Date> extends BaseController implem
 		try{
 			GeneradorReporte report= new GeneradorReporte(ds.getConnection());
 			Map<String, Object> params=new HashMap<>();
-			params.put("idTienda",Integer.parseInt(cbTienda.getSelectionModel().getSelectedItem().toString()) );
+			params.put("idTienda",(cbTienda.getSelectionModel().getSelectedItem().getStoreId()) );
 			report.generarReporte(params, "/reportes/peliculasrentadasportienda.jrxml", "PeliculasRentadasPorTienda");
 		}catch (Exception e){
 			notificar("Error", "Error generando el reporte", TipoNotificacion.ERROR);

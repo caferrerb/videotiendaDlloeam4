@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
 @Table(name="store")
 @NamedQuery(name="Store.findAll", query="SELECT s FROM Store s")
 public class Store implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -155,10 +158,40 @@ public class Store implements Serializable {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
+	
 
-	@Override
-	public String toString() {
+	/**
+	 * @return El atributo nombreTienda
+	 */
+	public String getNombreTienda() {
 		return nombreTienda;
 	}
 
+	/**
+	 * Establece el valor del atributo nombreTienda
+	 * @param nombreTienda: EL nombreTienda a establecer
+	 */
+	public void setNombreTienda(String nombreTienda) {
+		this.nombreTienda = nombreTienda;
+	}
+
+	@Override
+	public String toString() {
+		return getNombreTienda();
+	}
+
+	
+	
+	
+//	@Override
+//	public boolean equals(Object arg0) {
+//		if (arg0 instanceof Store) {
+//			Store prof = (Store) arg0;
+//			if (prof.storeId==(storeId)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+	
 }

@@ -1,34 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-11-11T00:36:03 -->
+<!-- 2016-11-11T08:48:23 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EmpleadosTienda" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6b13b267-acc0-4801-942d-fe5b5a46032b">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="videotienda"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="idTienda" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[SELECT * FROM store st JOIN staff s ON (st.store_id=s.store_id)
+		<![CDATA[SELECT st.store_id, s.first_name, s.last_name, ss.HORA_INICIAL,
+ss.HORA_FINAL
+FROM store st JOIN staff s ON (st.store_id=s.store_id)
 JOIN staffschedule ss ON (s.store_id=ss.EMPLEADO)
 WHERE s.store_id=$P{idTienda}]]>
 	</queryString>
 	<field name="store_id" class="java.lang.Integer"/>
-	<field name="last_update" class="java.sql.Timestamp"/>
-	<field name="address_id" class="java.lang.Integer"/>
-	<field name="manager_staff_id" class="java.lang.Integer"/>
-	<field name="staff_id" class="java.lang.Integer"/>
-	<field name="active" class="java.lang.Boolean"/>
-	<field name="email" class="java.lang.String"/>
 	<field name="first_name" class="java.lang.String"/>
 	<field name="last_name" class="java.lang.String"/>
-	<field name="COLUMN_10" class="java.sql.Timestamp"/>
-	<field name="picture" class="java.lang.Object"/>
-	<field name="COLUMN_12" class="java.lang.Integer"/>
-	<field name="COLUMN_13" class="java.lang.Integer"/>
-	<field name="id_usuario" class="java.lang.String"/>
-	<field name="ID_HORARIO" class="java.lang.Integer"/>
-	<field name="dia" class="java.lang.Integer"/>
-	<field name="HORA_FINAL" class="java.lang.Integer"/>
 	<field name="HORA_INICIAL" class="java.lang.Integer"/>
-	<field name="EMPLEADO" class="java.lang.Integer"/>
+	<field name="HORA_FINAL" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

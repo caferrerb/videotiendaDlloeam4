@@ -2,6 +2,7 @@ package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -86,6 +87,9 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 	
 	@FXML
 	private ComboBox<Store> cbTiendas;
+	
+	@FXML 
+	private TextField TFNombreTienda;
 
 	@FXML
 	private TextField tfDireccion;
@@ -308,6 +312,7 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 	}
 
 	private void llenarComboTienda() {
+		cbTiendas.getItems().setAll(new ArrayList<Store>());
 		cbTiendas.getItems().add(null);
 		List<Store> lista = boTienda.listarTiendas();
 		for (Store store : lista) {
@@ -333,6 +338,7 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 		Address address = new Address();
 		Store store = new Store();
 
+		store.setNombreTienda(TFNombreTienda.getText());
 		store.setAddress(address);
 		address.setAddress(tfDireccion.getText());
 		address.setAddress2(tfDireccion2.getText());
@@ -345,6 +351,8 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 		boDireccion.crear(address);
 		boTienda.crear(store);
 		notificar("Crear Tienda", "La tienda se ha creado exitosamente", TipoNotificacion.INFO);
+		limpiar();
+		llenarComboTienda();
 	}
 
 //	public void crear(){
@@ -368,18 +376,20 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 	public void editar() {
 		
 		
-		Store sto = new Store();
-		Address add = new Address();
-		add.setAddress(tfDireccion.getText());
-		add.setAddress2(tfDireccion2.getText());
-		add.setDistrict(tfLocalidad.getText());
-		add.setPhone(tfTelefono.getText());
-		add.setPostalCode(tfCodigoPostal.getText());
-		add.setCity(cbCiudad.getValue());
+		Store sto = boTienda.buscar(cbTiendas.getSelectionModel().getSelectedIndex());
+		Address ad = boDireccion.buscar(sto.getAddress().getAddressId());
+		sto.setNombreTienda(TFNombreTienda.getText());
+		ad.setAddress(tfDireccion.getText());
+		ad.setAddress2(tfDireccion2.getText());
+		ad.setDistrict(tfLocalidad.getText());
+		ad.setPhone(tfTelefono.getText());
+		ad.setPostalCode(tfCodigoPostal.getText());
+		ad.setCity(cbCiudad.getValue());
 		sto.setStaff(cbEmpleado.getValue());
-		boDireccion.editar(add);
+		boDireccion.editar(ad);
 		notificar("Editar tienda", "La tienda se edito correctamente", TipoNotificacion.INFO);
 		limpiar();
+		llenarComboTienda();
 	}
 	
 	@FXML
@@ -398,6 +408,7 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 			SingleSelectionModel<Store> s = cbTiendas.getSelectionModel();
 			Store tienda = s.getSelectedItem();
 			if(s !=null){
+				TFNombreTienda.setText(tienda.getNombreTienda());
 				tfDireccion.setText(tienda.getAddress().getAddress());
 				tfDireccion2.setText(tienda.getAddress().getAddress2());
 				tfCodigoPostal.setText(tienda.getAddress().getPostalCode());
@@ -422,6 +433,7 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 	
 	@FXML
 	public void limpiar(){
+		TFNombreTienda.setText(null);
 		tfDireccion.setText(null);
 		tfDireccion2.setText(null);
 		tfCodigoPostal.setText(null);
@@ -436,11 +448,17 @@ public class ControladorGestionarTienda extends BaseController implements Initia
 	public void generarReporte(){
 		
 		try {
-			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
-			Map<String, Object> params=new HashMap<>();
-			params.put("idTienda", 1);
-			reporter.generarReporte(params, "/reportes/EmpleadosTienda.jrxml", "EmpleadosxTienda");
+			if(cbTiendas.getSelectionModel() !=null){
+				GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+				Map<String, Object> params=new HashMap<>();
+//				params.put("idTienda", 1);
+				params.put("idTienda", cbTiendas.getSelectionModel().getSelectedIndex());
+				reporter.generarReporte(params, "/reportes/EmpleadosTienda.jrxml", "EmpleadosxTienda");
+			}else{
+				notificar("Error nombre de tienda", "Por favor seleccione una tienda", TipoNotificacion.ERROR);
+			}	
 		} catch (Exception e) {
+			e.printStackTrace();
 			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
 		}
 	}
