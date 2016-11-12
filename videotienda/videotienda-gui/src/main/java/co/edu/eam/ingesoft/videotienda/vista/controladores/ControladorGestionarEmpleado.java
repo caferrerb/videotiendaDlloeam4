@@ -81,9 +81,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 
 	@Autowired
 	private DataSource ds;
-	
-	
-	
+
 	@FXML
 	private TextField TFIdEmpleado;
 	@FXML
@@ -139,7 +137,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	private Button BTReporte;
 
 	private File imgFile;
-	
+
 	private Staff Empleado;
 
 	@Override
@@ -148,13 +146,13 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		llenarTienda();
 		configurarTAbla();
 		// llenarTabla();
-		Empleado=(Staff) obtenerValor("Empleado");
-		
-		if(Empleado != null){
+		Empleado = (Staff) obtenerValor("Empleado");
+
+		if (Empleado != null) {
 			TFIdEmpleado.setText(Integer.toString(Empleado.getStaffId()));
 			TfPrimerNombre.setText(Empleado.getFirstName());
 			TfSegundoNombre.setText(Empleado.getLastName());
-			TfEmail.setText(Empleado.getEmail());	
+			TfEmail.setText(Empleado.getEmail());
 			CheckActivo.setSelected(Empleado.getActive());
 			TFDireccionA.setText(Empleado.getAddress().getAddress());
 			TFDdireccionB.setText(Empleado.getAddress().getAddress2());
@@ -163,7 +161,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 			TFUlltimaActualizacionDir.setText(Empleado.getLastUpdate().toString());
 			TFTelefono.setText(Empleado.getAddress().getPhone());
 			TFCodigoPos.setText(Empleado.getAddress().getPostalCode());
-			
+
 		}
 	}
 
@@ -172,7 +170,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	 */
 	public void limpiarCampos() {
 		TFIdEmpleado.setText(null);
-		//TFIdUsuario.setText(null);
+		// TFIdUsuario.setText(null);
 		TfPrimerNombre.setText(null);
 		TfSegundoNombre.setText(null);
 		TfEmail.setText(null);
@@ -189,7 +187,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	 */
 	public void limpiarCamposEditado() {
 		TFIdEmpleado.setText(null);
-		//TFIdUsuario.setText(null);
+		// TFIdUsuario.setText(null);
 		TfPrimerNombre.setText(null);
 		TfSegundoNombre.setText(null);
 		TfEmail.setText(null);
@@ -202,10 +200,12 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		TFUlltimaActualizacionDir.setText(null);
 		PhFoto.setImage(null);
 	}
-	
+
 	/**
 	 * Crea un empelado con su direccion respectiva
-	 * @throws Exception si ocurre alguna inconsistencia
+	 * 
+	 * @throws Exception
+	 *             si ocurre alguna inconsistencia
 	 */
 	@FXML
 	public void crearEmpleado() throws Exception {
@@ -245,8 +245,8 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				} else {
 					empleado.setPicture(null);
 				}
-//				Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
-//				empleado.setUsuario(usuario);
+				// Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
+				// empleado.setUsuario(usuario);
 
 				Store tienda = boTienda.buscar(comboBoxSelecTienda.getSelectionModel().getSelectedItem().getStoreId());
 				empleado.setStore(tienda);
@@ -270,8 +270,10 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	}
 
 	/**
-	 * Edita un empleado y su direccion  por el id del empleado buscado
-	 * @throws Exception si hay una inconsistencia
+	 * Edita un empleado y su direccion por el id del empleado buscado
+	 * 
+	 * @throws Exception
+	 *             si hay una inconsistencia
 	 */
 	@FXML
 	public void editarEmpleado() throws Exception {
@@ -285,7 +287,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				Address direccion = boDireccion.buscar(empleado.getAddress().getAddressId());
 				// Busca una ciudad por su id
 				City ciudad = boCiudad.buscar(CBCiudad.getSelectionModel().getSelectedItem().getCityId());
-				
+
 				direccion.setAddress(TFDireccionA.getText());
 				direccion.setAddress2(TFDdireccionB.getText());
 				// direccion.setAddressId(Integer.parseInt(TFIdDireccion.getText()));
@@ -300,7 +302,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				empleado.setEmail(TfEmail.getText());
 				empleado.setFirstName(TfPrimerNombre.getText());
 				empleado.setLastName(TfSegundoNombre.getText());
-				
+
 				empleado.setAddress(direccion);
 
 				// Imagen del empleado
@@ -313,8 +315,8 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 					empleado.setPicture(null);
 				}
 
-//				Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
-//				empleado.setUsuario(usuario);
+				// Usuario usuario = boUsuario.buscar(TFIdUsuario.getText());
+				// empleado.setUsuario(usuario);
 
 				Store tienda = boTienda.buscar(comboBoxSelecTienda.getSelectionModel().getSelectedItem().getStoreId());
 				empleado.setStore(tienda);
@@ -325,7 +327,6 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 					empleado.setActive(false);
 				}
 
-				
 				boDireccion.editar(direccion);
 				boEmpleado.editar(empleado);
 				notificar("Editar empleado", "Empleado editado con exito", TipoNotificacion.INFO);
@@ -373,7 +374,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				}
 
 				llenarTabla(empleado);
-				
+
 			} else {
 				notificar("Gestionar BuscarEmpleado", "El empleado no esta registrado", TipoNotificacion.ERROR);
 			}
@@ -404,7 +405,8 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	}
 
 	/**
-	 * Metodo encargado de abrir la imagen y cargarla en el PhPhoto para guardar la imagen
+	 * Metodo encargado de abrir la imagen y cargarla en el PhPhoto para guardar
+	 * la imagen
 	 */
 	public void abrirImagen() {
 		FileChooser fileChooser = new FileChooser();
@@ -448,8 +450,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	}
 
 	/**
-	 * Recibe un objeto empleado y genera una lista del empleado enviado
-	 * para cargar la tabla
+	 * Recibe un objeto empleado y genera una lista del empleado enviado para
+	 * cargar la tabla
+	 * 
 	 * @param empleado
 	 */
 	private void llenarTabla(Staff empleado) {
@@ -463,17 +466,17 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	}
 
 	/**
-	 * Se encarga de generar la tabla con todos sus campos y botones 
+	 * Se encarga de generar la tabla con todos sus campos y botones
 	 */
 	private void configurarTAbla() {
 
 		TBDia.setCellValueFactory(new PropertyValueFactory<StaffSchedule, DayEnum>("dia"));
-		
+
 		TBInicial.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaInicial"));
-	
+
 		tbFinal.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaFinal"));
-		
-		//Primer boton que se crea
+
+		// Primer boton que se crea
 		Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>> cellFactory = new Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>>() {
 
 			@Override
@@ -511,8 +514,8 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				return cell;
 			}
 		};
-		
-		//Segundo boton que se crea
+
+		// Segundo boton que se crea
 		Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>> cellFactoryB = new Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>>() {
 
 			@Override
@@ -558,20 +561,26 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		TBOpciones.setCellFactory(cellFactory);
 		TbQuitar.setCellFactory(cellFactoryB);
 	}
-	
+
 	/**
 	 * Genera un reposte de un empleado registrado
 	 */
 	@FXML
-	public void generarReporte(){
-		
+	public void generarReporte() {
+
 		try {
-			if(!TFIdEmpleado.getText().isEmpty()){
-			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
-			Map<String, Object> params=new HashMap<>();
-			params.put("idEmpleado", Integer.parseInt(TFIdEmpleado.getText()));
-			reporter.generarReporte(params, "/reportes/reporteEmpleado.jrxml", "EmpleadoPorID");
-			}else{
+
+			if (!TFIdEmpleado.getText().isEmpty()) {
+				Staff empleado = boEmpleado.buscar(Byte.parseByte(TFIdEmpleado.getText()));
+				if (empleado != null) {
+					GeneradorReporte reporter = new GeneradorReporte(ds.getConnection());
+					Map<String, Object> params = new HashMap<>();
+					params.put("idEmpleado", Integer.parseInt(TFIdEmpleado.getText()));
+					reporter.generarReporte(params, "/reportes/reporteEmpleado.jrxml", "EmpleadoPorID");
+				} else {
+					notificar("Error id empleado", "Empleado no registrado", TipoNotificacion.ERROR);
+				}
+			} else {
 				notificar("Error id empleado", "No ha ingresado in id del empleado", TipoNotificacion.ERROR);
 			}
 		} catch (Exception e) {
