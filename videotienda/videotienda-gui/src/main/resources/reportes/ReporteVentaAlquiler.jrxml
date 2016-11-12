@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-11-11T10:54:48 -->
+<!-- 2016-11-11T21:39:59 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteVentaAlquiler" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="341c2be9-f674-41f1-8249-978fdbca72aa">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="479"/>
@@ -31,22 +31,30 @@ where s.Nombre_tienda = $P{nombreTienda}]]>
 	</background>
 	<title>
 		<band height="93" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="0" width="595" height="93" forecolor="#1C93ED" backcolor="#3C96F0" uuid="a265b3cc-9b15-45aa-ba0a-350b3e3d8d92"/>
+			</rectangle>
 			<staticText>
-				<reportElement x="160" y="30" width="250" height="30" forecolor="#F21511" uuid="d07b5c2b-b9d1-49e0-9824-5dff239ff5b2"/>
+				<reportElement x="152" y="30" width="250" height="30" forecolor="#FCFAFA" uuid="d07b5c2b-b9d1-49e0-9824-5dff239ff5b2"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="16" isBold="true" isItalic="true" isUnderline="true"/>
+					<font fontName="Angsana New" size="26" isBold="true" isItalic="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[PELICULAS RENTADAS]]></text>
 			</staticText>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch">
 			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="10" y="0" width="100" height="30" uuid="35c9db27-5c1e-4cb4-a2b7-399874a010b2"/>
+				<reportElement x="460" y="50" width="100" height="20" forecolor="#FCFAFA" uuid="35c9db27-5c1e-4cb4-a2b7-399874a010b2"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="51" splitType="Stretch">
@@ -74,17 +82,17 @@ where s.Nombre_tienda = $P{nombreTienda}]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="41" splitType="Stretch">
+		<band height="36" splitType="Stretch">
 			<textField>
-				<reportElement x="50" y="12" width="80" height="20" uuid="5d4b13b3-5a73-4f0f-a68c-7e6a187f1fce"/>
+				<reportElement x="72" y="7" width="80" height="20" uuid="5d4b13b3-5a73-4f0f-a68c-7e6a187f1fce"/>
 				<textFieldExpression><![CDATA[$F{inventory_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="230" y="10" width="70" height="19" uuid="af9812b5-fd1d-472f-877c-ed8019430ef7"/>
+				<reportElement x="260" y="7" width="70" height="19" uuid="af9812b5-fd1d-472f-877c-ed8019430ef7"/>
 				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="12" width="40" height="14" uuid="50b58645-2593-4ab0-8861-85c1e63039a1"/>
+				<reportElement x="415" y="7" width="40" height="14" uuid="50b58645-2593-4ab0-8861-85c1e63039a1"/>
 				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
 			</textField>
 		</band>
