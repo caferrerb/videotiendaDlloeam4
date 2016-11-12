@@ -139,6 +139,8 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 	private Button BTReporte;
 
 	private File imgFile;
+	
+	private Staff Empleado;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -146,6 +148,23 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		llenarTienda();
 		configurarTAbla();
 		// llenarTabla();
+		Empleado=(Staff) obtenerValor("Empleado");
+		
+		if(Empleado != null){
+			TFIdEmpleado.setText(Integer.toString(Empleado.getStaffId()));
+			TfPrimerNombre.setText(Empleado.getFirstName());
+			TfSegundoNombre.setText(Empleado.getLastName());
+			TfEmail.setText(Empleado.getEmail());	
+			CheckActivo.setSelected(Empleado.getActive());
+			TFDireccionA.setText(Empleado.getAddress().getAddress());
+			TFDdireccionB.setText(Empleado.getAddress().getAddress2());
+			CBCiudad.setValue(Empleado.getAddress().getCity());
+			TFDepartamento.setText(Empleado.getAddress().getDistrict());
+			TFUlltimaActualizacionDir.setText(Empleado.getLastUpdate().toString());
+			TFTelefono.setText(Empleado.getAddress().getPhone());
+			TFCodigoPos.setText(Empleado.getAddress().getPostalCode());
+			
+		}
 	}
 
 	/**
@@ -162,7 +181,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		TFDepartamento.setText(null);
 		TFTelefono.setText(null);
 		TFCodigoPos.setText(null);
-		CBCiudad.setSelectionModel(null);
+		PhFoto.setImage(null);
 	}
 
 	/**
@@ -179,9 +198,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		TFDepartamento.setText(null);
 		TFTelefono.setText(null);
 		TFCodigoPos.setText(null);
-		CBCiudad.setSelectionModel(null);
 		TFFechaCreacion.setText(null);
-		TFUlltimaActualizacionDir.setText(null);	
+		TFUlltimaActualizacionDir.setText(null);
+		PhFoto.setImage(null);
 	}
 	
 	/**

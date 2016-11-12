@@ -19,6 +19,7 @@ import java.util.List;
 @Table(name="store")
 @NamedQuery(name="Store.findAll", query="SELECT s FROM Store s")
 public class Store implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -157,10 +158,26 @@ public class Store implements Serializable {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
+	
+
+	/**
+	 * @return El atributo nombreTienda
+	 */
+	public String getNombreTienda() {
+		return nombreTienda;
+	}
+
+	/**
+	 * Establece el valor del atributo nombreTienda
+	 * @param nombreTienda: EL nombreTienda a establecer
+	 */
+	public void setNombreTienda(String nombreTienda) {
+		this.nombreTienda = nombreTienda;
+	}
 
 	@Override
 	public String toString() {
-		return nombreTienda;
+		return getNombreTienda();
 	}
 
 	

@@ -45,7 +45,7 @@ public class ConstantesNamedQueries {
 	 * Obtiene las peliculas alquiladas por un cliente
 	 *  El cliente
 	 */
-	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Rental.PeliculasRentadasCliente";
+	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Rental.PeliculasCliente";
 	
 	/**
 	 * Obtiene las peliculas alquiladas por un cliente
@@ -75,6 +75,12 @@ public class ConstantesNamedQueries {
 	  * 
 	  */
 	public static final String CONSULTA_LISTAR_INFO_PRESTAMOS = "Rental.TituloNombrePrestamos";
+	
+	/**
+	 * Obtiene la lista de prestamos de un cliente
+	 * ?1: El cliente
+	 */
+	public static final String CONSULTA_PELICULAS_RENTADAS_CLIENTE = "Rental.PeliculasRentadasCliente";
 	
 	 /**
 	  * 
