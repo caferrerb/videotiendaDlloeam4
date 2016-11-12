@@ -93,4 +93,3 @@ INSERT INTO `rental` (`rental_id`, `last_update`, `rental_date`, `return_date`, 
 INSERT INTO `rental` (`rental_id`, `last_update`, `rental_date`, `return_date`, `customer_id`, `inventory_id`, `staff_id`) VALUES ('31', '2000-9-9', '2000-6-6', '2001-3-3', '878', '32', '17');
 INSERT INTO `rental` (`rental_id`, `last_update`, `rental_date`, `return_date`, `customer_id`, `inventory_id`, `staff_id`) VALUES ('41', '2000-10-10', '2000-7-7', '2001-4-4', '898', '43', '18');
 INSERT INTO `rental` (`rental_id`, `last_update`, `rental_date`, `return_date`, `customer_id`, `inventory_id`, `staff_id`) VALUES ('51', '2000-11-11', '2000-8-8', '2001-5-5', '898', '56', '19');
-
