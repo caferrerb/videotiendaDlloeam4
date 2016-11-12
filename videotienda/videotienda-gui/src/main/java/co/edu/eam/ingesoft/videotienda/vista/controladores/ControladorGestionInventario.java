@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -67,6 +68,10 @@ public class ControladorGestionInventario extends BaseController implements Init
 	private BOTienda boTienda;
 	@Autowired
 	private BOFilm boFilm;
+	@Autowired
+	private DataSource ds;
+	@FXML
+	private ComboBox<Store> JCBTienda;
 	@FXML
 	private TextField JTFTituloDarAlta;
 	@FXML
@@ -79,8 +84,7 @@ public class ControladorGestionInventario extends BaseController implements Init
 	private TextField JTFTitulo;
 	@FXML
 	private TextField JTFIdPelicula;
-	@FXML
-	private ComboBox<Store> JCBTienda;
+
 	
 	@FXML
 	private TableView<Film> jPTienda;
@@ -103,7 +107,7 @@ public class ControladorGestionInventario extends BaseController implements Init
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		llenarComboTiendas();
+		//llenarComboTiendas();
 		
 	}
 
@@ -143,18 +147,19 @@ public class ControladorGestionInventario extends BaseController implements Init
 		}
 		jPTienda.setItems(data);
 	}
+	
 	@FXML
-	private void mostrarPanelDarBaja() {
+	private void DarDeAlta() {
 		JPDarDeBaja.setVisible(true);
 		
 	}
 	@FXML
-	private void confirmarDarAlta() {
+	private void AceptarDarAlta() {
 	
 	
 	}
 	@FXML
-	private void cancelarDarAlta() {
+	private void CancelarDarAlta() {
 		JPDarDeBaja.setVisible(false);
 		
 	
@@ -163,7 +168,7 @@ public class ControladorGestionInventario extends BaseController implements Init
 	
 	
 	@FXML
-	public void buscarPelicula()throws Exception{
+	public void BuscarPeli()throws Exception{
 		if(JTFIdPelicula.getText().isEmpty()){
 			notificar("Ingrese", "Ingrese el Id de la pelicula que desea buscar", TipoNotificacion.ERROR);
 		}else{
@@ -182,10 +187,27 @@ public class ControladorGestionInventario extends BaseController implements Init
 	}
 	
 	
+	@FXML
+	public void AgregarPeli()throws Exception{
+		if(JTFIdPelicula.getText().isEmpty()){
+			notificar("Ingrese", "Ingrese el Id de la pelicula que desea buscar", TipoNotificacion.ERROR);
+		}else{
+			int idPelicula=Integer.parseInt(JTFIdPelicula.getText());
+			Film pelicula=boFilm.buscar(JTFIdPelicula);
+			if(pelicula!=null){
+				JTFTitulo.setText(pelicula.getTitle());
+				JTFGenero.setText(pelicula.getCategory().getName());
+				
+			}else{
+				notificar("¡ERROR!", "La pelicula con el ID= ''"+JTFIdPelicula+"'' (NO) se encuentra registrada",  TipoNotificacion.ERROR);
 
-	//private int cuentaCantidad(){
-		
-		
+			}
+
+		}
+	}
+	
+
+	//private int cuentaCantidad(){	
 	//}
 	
 	private void configurarTabla() {
@@ -230,6 +252,33 @@ public class ControladorGestionInventario extends BaseController implements Init
 		
 	}
 	
+	@FXML
+	public void limpiarCampos(){
+		JTFTituloDarAlta.setText(null);
+		JTFIdPeliculaDarAlta.setText(null);
+		JTARazonDarAlta.setText(null);
+		JTFGenero.setText(null);
+		JTFTitulo.setText(null);
+		JTFIdPelicula.setText(null);
+		
+	}
+	@FXML
+	public void generarReporte(){
+		
+		try {
+			if(JCBTienda.getSelectionModel() !=null){
+				GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+				Map<String, Object> params=new HashMap<>();
+				params.put("idTienda", JCBTienda.getSelectionModel().getSelectedIndex());
+				reporter.generarReporte(params, "/reportes/EmpleadosTienda.jrxml", "EmpleadosxTienda");
+			}else{
+				notificar("Error nombre de tienda", "Por favor seleccione una tienda", TipoNotificacion.ERROR);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
+		}
+	}
 
 	
 }
