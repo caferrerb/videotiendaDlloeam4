@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-11-12T08:32:13 -->
+<!-- 2016-11-12T10:48:38 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RentasCliente" pageWidth="720" pageHeight="842" columnWidth="680" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="82d59d48-7b29-42bc-9ecc-af4bc48e27eb">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="videotiendadb"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -11,7 +11,7 @@ JOIN staff s ON(r.staff_id=s.staff_id)
 JOIN inventory i ON(r.inventory_id=i.inventory_id)
 JOIN store st ON(i.store_id=st.store_id)
 JOIN film f ON(i.film_id=f.film_id)
-WHERE c.customer_id=$P{idcus}]]>
+WHERE c.customer_id=$P{idcus} AND r.RETURNED=0]]>
 	</queryString>
 	<field name="rental_id" class="java.lang.Integer"/>
 	<field name="last_update" class="java.sql.Timestamp"/>
@@ -21,39 +21,38 @@ WHERE c.customer_id=$P{idcus}]]>
 	<field name="inventory_id" class="java.lang.Integer"/>
 	<field name="staff_id" class="java.lang.Integer"/>
 	<field name="RETURNED" class="java.lang.Boolean"/>
-	<field name="rentalcol" class="java.lang.String"/>
-	<field name="COLUMN_10" class="java.lang.Integer"/>
+	<field name="COLUMN_9" class="java.lang.Integer"/>
 	<field name="active" class="java.lang.Boolean"/>
 	<field name="create_date" class="java.sql.Timestamp"/>
 	<field name="email" class="java.lang.String"/>
 	<field name="first_name" class="java.lang.String"/>
 	<field name="last_name" class="java.lang.String"/>
-	<field name="COLUMN_16" class="java.sql.Timestamp"/>
+	<field name="COLUMN_15" class="java.sql.Timestamp"/>
 	<field name="picture" class="java.lang.Object"/>
 	<field name="address_id" class="java.lang.Integer"/>
 	<field name="store_id" class="java.lang.Integer"/>
-	<field name="COLUMN_20" class="java.lang.Integer"/>
-	<field name="COLUMN_21" class="java.lang.Boolean"/>
+	<field name="COLUMN_19" class="java.lang.Integer"/>
+	<field name="COLUMN_20" class="java.lang.Boolean"/>
+	<field name="COLUMN_21" class="java.lang.String"/>
 	<field name="COLUMN_22" class="java.lang.String"/>
 	<field name="COLUMN_23" class="java.lang.String"/>
-	<field name="COLUMN_24" class="java.lang.String"/>
-	<field name="COLUMN_25" class="java.sql.Timestamp"/>
-	<field name="COLUMN_26" class="java.lang.Object"/>
+	<field name="COLUMN_24" class="java.sql.Timestamp"/>
+	<field name="COLUMN_25" class="java.lang.Object"/>
+	<field name="COLUMN_26" class="java.lang.Integer"/>
 	<field name="COLUMN_27" class="java.lang.Integer"/>
-	<field name="COLUMN_28" class="java.lang.Integer"/>
 	<field name="id_usuario" class="java.lang.String"/>
-	<field name="COLUMN_30" class="java.lang.Integer"/>
-	<field name="COLUMN_31" class="java.sql.Timestamp"/>
+	<field name="COLUMN_29" class="java.lang.Integer"/>
+	<field name="COLUMN_30" class="java.sql.Timestamp"/>
 	<field name="film_id" class="java.lang.Integer"/>
+	<field name="COLUMN_32" class="java.lang.Integer"/>
 	<field name="COLUMN_33" class="java.lang.Integer"/>
-	<field name="COLUMN_34" class="java.lang.Integer"/>
-	<field name="COLUMN_35" class="java.sql.Timestamp"/>
+	<field name="COLUMN_34" class="java.sql.Timestamp"/>
 	<field name="Nombre_tienda" class="java.lang.String"/>
-	<field name="COLUMN_37" class="java.lang.Integer"/>
+	<field name="COLUMN_36" class="java.lang.Integer"/>
 	<field name="manager_staff_id" class="java.lang.Integer"/>
-	<field name="COLUMN_39" class="java.lang.Integer"/>
+	<field name="COLUMN_38" class="java.lang.Integer"/>
 	<field name="description" class="java.lang.String"/>
-	<field name="COLUMN_41" class="java.sql.Timestamp"/>
+	<field name="COLUMN_40" class="java.sql.Timestamp"/>
 	<field name="length" class="java.lang.Integer"/>
 	<field name="poster" class="java.lang.Object"/>
 	<field name="rating" class="java.lang.String"/>
