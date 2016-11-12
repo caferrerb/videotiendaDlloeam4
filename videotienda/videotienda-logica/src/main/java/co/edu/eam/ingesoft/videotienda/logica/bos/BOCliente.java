@@ -19,14 +19,14 @@ import co.edu.uniquindio.videotienda.dtos.PrestamosClienteDTO;
 public class BOCliente extends BOGenerico<Customer> {
 
 	/**
-	 * Lista las rentas de un cliente
+	 * Lista los prestamos de películas de un cliente
 	 * 
 	 * @param c
-	 *            Cliente al cual se le listarán las rentas
-	 * @return las lista de rentas del cliente
+	 *            Cliente al cual se le listarán los prestamos
+	 * @return la lista de prestamos del cliente
 	 */
 	public List<Rental> peliculasCliente(Customer c) {
-		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_CLIENTE, c);
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_PELICULAS_RENTADAS_CLIENTE, c);
 	}
 
 	/**
