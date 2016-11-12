@@ -187,7 +187,7 @@
 
 	<named-query name="Rental.fechaEntregaCliente">
 		<query>
-			SELECT r.returnDate FROM Rental r
+			SELECT r FROM Rental r
 			JOIN r.customer c
 			WHERE c.customerId = ?1 AND r.returned = false
 		</query>

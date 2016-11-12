@@ -130,7 +130,8 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 		if (lista.size() == 0 ) {
 			if (listaP.size() < 5) {
                 for (int i = 0; i < listaF.size(); i++) {
-					if(fechaActual.after(listaF.get(i).getReturnDate()) && listaF.get(i).isReturned() == false){
+                	Date fechaPrestamo = listaF.get(i).getReturnDate();
+					if(fechaActual.after(fechaPrestamo)){
 						throw new ExcepcionNegocio(" El cliente tiene un prestamo con la fecha de entrega vencida ");
 					}
 					
