@@ -173,7 +173,8 @@
 	<named-query name="Rental.PeliculasRentadasCliente">
 		<query>
 			SELECT r FROM Rental r
-			WHERE r.customer = ?1
+			WHERE r.returned = false 
+			AND r.customer = ?1
 		</query>
 	</named-query>
 

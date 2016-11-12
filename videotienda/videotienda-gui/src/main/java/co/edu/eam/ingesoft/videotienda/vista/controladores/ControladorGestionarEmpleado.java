@@ -181,7 +181,7 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		TFDepartamento.setText(null);
 		TFTelefono.setText(null);
 		TFCodigoPos.setText(null);
-		CBCiudad.setSelectionModel(null);
+		PhFoto.setImage(null);
 	}
 
 	/**
@@ -198,9 +198,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		TFDepartamento.setText(null);
 		TFTelefono.setText(null);
 		TFCodigoPos.setText(null);
-		CBCiudad.setSelectionModel(null);
 		TFFechaCreacion.setText(null);
-		TFUlltimaActualizacionDir.setText(null);	
+		TFUlltimaActualizacionDir.setText(null);
+		PhFoto.setImage(null);
 	}
 	
 	/**
