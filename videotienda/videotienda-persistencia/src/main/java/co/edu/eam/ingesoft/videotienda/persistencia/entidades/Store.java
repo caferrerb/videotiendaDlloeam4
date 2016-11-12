@@ -155,6 +155,22 @@ public class Store implements Serializable {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
+	
+
+	/**
+	 * @return El atributo nombreTienda
+	 */
+	public String getNombreTienda() {
+		return nombreTienda;
+	}
+
+	/**
+	 * Establece el valor del atributo nombreTienda
+	 * @param nombreTienda: EL nombreTienda a establecer
+	 */
+	public void setNombreTienda(String nombreTienda) {
+		this.nombreTienda = nombreTienda;
+	}
 
 	@Override
 	public String toString() {

@@ -76,7 +76,7 @@ public class ControladorGestionarEmpleadoSub extends BaseController implements I
 		llenarHoras();
 	}
 
-	/**
+	/*
 	 * LLena el comboBox Dia
 	 */
 	public void llenarDia() {
