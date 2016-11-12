@@ -5,18 +5,19 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="392.0" prefWidth="1017.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="1017.0" style="-fx-background-color: #f1f1f1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TitledPane animated="false" layoutX="14.0" layoutY="14.0" prefHeight="300.0" prefWidth="414.0" text="DATOS BASICOS">
+      <TitledPane animated="false" layoutX="14.0" layoutY="14.0" prefHeight="349.0" prefWidth="414.0" text="DATOS BASICOS">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="212.0" prefWidth="308.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="325.0" prefWidth="412.0">
                <children>
-                  <GridPane layoutX="14.0" layoutY="14.0" prefHeight="242.0" prefWidth="363.0">
+                  <GridPane layoutX="14.0" layoutY="14.0" prefHeight="282.0" prefWidth="363.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.0" minWidth="10.0" prefWidth="187.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="145.0" />
                     </columnConstraints>
                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -27,35 +28,37 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="DIRECCION:" GridPane.rowIndex="1" />
-                        <TextField fx:id="tfDireccion" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="DIRECCION 2:" GridPane.rowIndex="2" />
-                        <Label text="EMPLEADO:" GridPane.rowIndex="3" />
-                        <TextField fx:id="tfDireccion2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label prefHeight="17.0" prefWidth="159.0" text="CODIGO POSTAL:" GridPane.rowIndex="4" />
-                        <Label text="CIUDAD:" GridPane.rowIndex="6" />
-                        <ComboBox fx:id="cbCiudad" prefHeight="25.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label text="LOCALIDAD:" GridPane.rowIndex="5" />
-                        <TextField fx:id="tfCodigoPostal" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label text="TELEFONO:" GridPane.rowIndex="7" />
-                        <TextField fx:id="tfTelefono" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <ComboBox fx:id="cbEmpleado" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextField fx:id="tfLocalidad" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="DIRECCION:" GridPane.rowIndex="2" />
+                        <TextField fx:id="tfDireccion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="DIRECCION 2:" GridPane.rowIndex="3" />
+                        <Label text="EMPLEADO:" GridPane.rowIndex="4" />
+                        <TextField fx:id="tfDireccion2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label prefHeight="17.0" prefWidth="159.0" text="CODIGO POSTAL:" GridPane.rowIndex="5" />
+                        <Label text="CIUDAD:" GridPane.rowIndex="7" />
+                        <ComboBox fx:id="cbCiudad" prefHeight="25.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label text="LOCALIDAD:" GridPane.rowIndex="6" />
+                        <TextField fx:id="tfCodigoPostal" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="TELEFONO:" GridPane.rowIndex="8" />
+                        <TextField fx:id="tfTelefono" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <ComboBox fx:id="cbEmpleado" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="tfLocalidad" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Label text="TIENDA:" />
                         <ComboBox fx:id="cbTiendas" onAction="#limpiarCampos" prefHeight="25.0" prefWidth="178.0" GridPane.columnIndex="1" />
+                        <Label prefHeight="17.0" prefWidth="84.0" text="NOMBRE:" GridPane.rowIndex="1" />
+                        <TextField fx:id="TFNombreTienda" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
-      <TabPane layoutX="517.0" layoutY="17.0" prefHeight="300.0" prefWidth="442.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="517.0" layoutY="17.0" prefHeight="349.0" prefWidth="442.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="EMPLEADOS">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="391.0">
                      <children>
-                        <TableView fx:id="tbEmpleado" layoutX="11.0" layoutY="16.0" prefHeight="246.0" prefWidth="427.0">
+                        <TableView fx:id="tbEmpleado" layoutX="11.0" layoutY="16.0" prefHeight="301.0" prefWidth="427.0">
                           <columns>
                             <TableColumn fx:id="cCodigo" prefWidth="75.0" text="CODIGO" />
                             <TableColumn fx:id="cNombre" prefWidth="75.0" text="NOMBRE" />
@@ -68,25 +71,9 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="INVENTARIO">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tbInventario" layoutX="19.0" layoutY="16.0" prefHeight="239.0" prefWidth="414.0">
-                          <columns>
-                            <TableColumn fx:id="cTitulo" prefWidth="142.0" text="TITULO" />
-                            <TableColumn fx:id="cGenero" prefWidth="90.0" text="GENERO" />
-                              <TableColumn fx:id="cCantidad" prefWidth="90.0" text="CANTIDAD" />
-                              <TableColumn fx:id="cButtonInventario" prefWidth="91.0" text="INFO" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
         </tabs>
       </TabPane>
-      <GridPane layoutX="238.0" layoutY="333.0" prefHeight="90.0" prefWidth="428.0">
+      <GridPane layoutX="237.0" layoutY="383.0" prefHeight="90.0" prefWidth="428.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="152.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.0" minWidth="10.0" prefWidth="150.0" />
@@ -94,8 +81,8 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Button fx:id="bCrear" mnemonicParsing="false" onAction="#crear" prefHeight="25.0" prefWidth="98.0" text="CREAR" />
@@ -103,6 +90,6 @@
             <Button fx:id="bBuscar" mnemonicParsing="false" onAction="#buscar" prefHeight="25.0" prefWidth="111.0" text="BUSCAR" GridPane.columnIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="jBGenerarReporte" layoutX="839.0" layoutY="333.0" mnemonicParsing="false" text="GENERAR REPORTE" onAction="#generarReporte"/>
+      <Button fx:id="jBGenerarReporte" layoutX="839.0" layoutY="389.0" mnemonicParsing="false" onAction="#generarReporte" text="GENERAR REPORTE" />
    </children>
 </AnchorPane>

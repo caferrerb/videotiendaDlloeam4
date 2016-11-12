@@ -63,81 +63,161 @@ import javafx.stage.FileChooser;
 @Controller
 public class ControladorGestionarClientes extends BaseController implements Initializable {
 
+	/**
+	 * BO con los métodos de la lógica de Cliente
+	 */
 	@Autowired
 	private BOCliente boCliente;
 
-	@Autowired
-	private BODireccion boDir;
-
+	/**
+	 * BO con los métodos de la lógica de Ciudad
+	 */
 	@Autowired
 	private BOCiudad boCiudad;
 	
+	/**
+	 * BO con los métodos de la lógica de Tienda
+	 */
 	@Autowired
 	private BOTienda boTienda;
 	
+	/**
+	 * DataSource 
+	 */
 	@Autowired
 	private DataSource ds;
 	
+	/**
+	 * TextField nombres del cliente
+	 */
 	@FXML
 	private TextField jTFNombres;
 	
+	/**
+	 * TextField apellidos del cliente
+	 */
 	@FXML
 	private TextField jTFApellidos;
 
+	/**
+	 * TextField Documento del cliente
+	 */
 	@FXML
 	private TextField jTFId;
 	
+	/**
+	 * ComboBox ciudad del cliente
+	 */
 	@FXML
 	private ComboBox<City> jCBCiudad;
 	
+	/**
+	 * TextField Direccion del cliente
+	 */
 	@FXML
 	private TextField jTFDireccion;
 	
+	/**
+	 * TextField Direccion 2 del cliente
+	 */
 	@FXML
 	private TextField jTFDireccion2;
 	
+	/**
+	 * TextField Distrito del cliente
+	 */
 	@FXML
 	private TextField jTFDistrito;
 	
+	/**
+	 * TextField Telefono del cliente
+	 */
 	@FXML
 	private TextField jTFTelefono;
 	
+	/**
+	 * TextField Codigo postal del cliente
+	 */
 	@FXML
 	private TextField jTFCodPostal;
 	
+	/**
+	 * ComboBox tienda del cliente
+	 */
 	@FXML
 	private ComboBox<Store> jCBTienda;
 	
+	/**
+	 * TableView de los prestamos del cliente
+	 */
 	@FXML
 	private TableView<PrestamosClienteDTO> TVPrestamos;
 
+	/**
+	 * TableColumn contiene el titulo de la pelicula del prestamo
+	 */
 	@FXML
 	private TableColumn<PrestamosClienteDTO, String> TCTitulo;
 	
+	/**
+	 * TableColumn contiene la fecha del prestamo del cliente
+	 */
 	@FXML
 	private TableColumn<PrestamosClienteDTO, Date> TCFechaPres;
 	
+	/**
+	 * TableColumn contiene la fecha de entrega del prestamo del cliente
+	 */
 	@FXML
 	private TableColumn<PrestamosClienteDTO, Date> TCFechaEnt;
 	
+	/**
+	 * TableColumn contiene los botones para ir a la ventana de entregar prestamos
+	 */
 	@FXML
 	private TableColumn<PrestamosClienteDTO, PrestamosClienteDTO> TCBoton;
 	
+	/**
+	 * ImageView imagen del cliente
+	 */
 	@FXML
 	private ImageView imgFoto;
 	
+	/**
+	 * ImageView imagen del cliente
+	 */
 	private File imgFile;
 	
+	/**
+	 * Cliente traido de la ventana de la ventana peliculas rentadas
+	 */
+	private Customer idCliente;
+	
+	/**
+	 * Se declara la lista de los prestamos de los prestamos del cliente
+	 *  para usarse en la ventana
+	 */
 	List<PrestamosClienteDTO> listaPrestamosCliente;
 
+	/**
+	 * ObservableList para llenar la tabla de los prestamos del cliente
+	 */
 	ObservableList<PrestamosClienteDTO> prestamosListarCliente;
 	
+	
+	/**
+	 * Constructor de la ventana
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		llenarComboCiudades();
 		llenarComboTiendas();
 		inicializarTabla();
-		
+		idCliente = (Customer) obtenerValor("cliente");
+		if (idCliente != null) {
+			buscarClienteTraido(idCliente);
+			
+		}
 	}
 
 	/**
@@ -153,6 +233,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 		}
 	}
 	
+	/**
+	 * LLena el combo de las tiendas
+	 */
 	@FXML
 	private void llenarComboTiendas() {
 		List<Store> lista = boTienda.listarTiendas();
@@ -161,6 +244,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 		}
 	}
 	
+	/**
+	 * Metodo para abrir la imagen que desea cargar el cliente
+	 */
 	@FXML
 	public void abrirImagen() {
 		FileChooser fileChooser = new FileChooser();
@@ -182,6 +268,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 		}
 	}
 	
+	/**
+	 * Metodo para crear el cliente
+	 */
 	public void crearCliente()  {
 
 		try {
@@ -190,7 +279,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 				|| jTFId.getText().isEmpty() || jTFTelefono.getText().isEmpty() || jCBCiudad.getValue()==null || jCBTienda.getValue()==null
 					) {
 
-				notificar("Crear Cliente", "Verifique que todos los campos estï¿½n diligenciados",
+				notificar("Crear Cliente", "Verifique que todos los campos esten diligenciados",
 						TipoNotificacion.ERROR);
 
 			} else {
@@ -229,23 +318,30 @@ public class ControladorGestionarClientes extends BaseController implements Init
 				Store tienda = boTienda.buscar(jCBTienda.getSelectionModel().getSelectedItem().getStoreId());
 				cliente.setStore(tienda);
 
-				//boDir.crearDireccion(direccion);
-				boCliente.crear(cliente);
-				
-				notificar("Crear Cliente", "El Cliente se ha creado exitosamente", TipoNotificacion.INFO);
-				limpiarCampos();
+				Customer cus = boCliente.buscar(Integer.parseInt(jTFId.getText()));
+				if(cus == null){
+					//boDir.crearDireccion(direccion);
+					boCliente.crear(cliente);				
+					notificar("Crear Cliente", "El Cliente se ha creado exitosamente", TipoNotificacion.INFO);
+					limpiarCampos();
+				} else{
+					notificar("Crear Cliente", "el cliente con documento "+"'"+cus.getCustomerId()+"'"+" ya se encuentra registrado", TipoNotificacion.ERROR);
+				}
 
 			}
 
 		} catch (ExcepcionNegocio e) {
 			notificar("Crear Cliente", "Este Cliente ya se encuentra registrado", TipoNotificacion.ERROR);
 		}  catch (IOException e) {
-			
-			e.printStackTrace();
+			notificar("Crear Cliente", "Error al crear el cliente", TipoNotificacion.ERROR);
+			//e.printStackTrace();
 		}
 
 	}
 	
+	/**
+	 * metodo para listar y cargar los prestamos del cliente
+	 */
 	@FXML
 	public void listarPrestamosClientes() {
 		int idCliente = Integer.parseInt(jTFId.getText());
@@ -259,6 +355,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 
 	}
 	
+	/**
+	 * Metodo para inicializar las columnas de las tablas y agregar los botones
+	 */
 	public void inicializarTabla() {
 		TCTitulo.setCellValueFactory(new PropertyValueFactory<PrestamosClienteDTO, String>("titulo"));
 		TCFechaPres.setCellValueFactory(new PropertyValueFactory<PrestamosClienteDTO, Date>("fechaPrestamo"));
@@ -295,9 +394,12 @@ public class ControladorGestionarClientes extends BaseController implements Init
 
 	}
 	
+	/**
+	 * metodo buscar un cliente registrado
+	 */
 	@FXML
 	public void buscarCliente() {
-		if (jTFId.getText() != null) {
+		if (!jTFId.getText().isEmpty()) {
 			Customer cliente = boCliente.buscar(Integer.parseInt(jTFId.getText()));
 
 			if (cliente != null) {
@@ -328,6 +430,39 @@ public class ControladorGestionarClientes extends BaseController implements Init
 		}
 	}
 	
+	/**
+	 * metodo para buscar el cliente que se trae de la ventana de peliculas rentadas
+	 */
+	@FXML
+	public void buscarClienteTraido(Customer cliTraido) {
+		Customer cliente = boCliente.buscar(cliTraido.getCustomerId());
+			if (cliente != null) {
+				jTFId.setText(String.valueOf(cliTraido.getCustomerId()));
+				jTFNombres.setText(cliente.getFirstName());
+				jTFApellidos.setText(cliente.getLastName());
+				jCBTienda.setValue(cliente.getStore());
+				jTFDireccion.setText(cliente.getAddress().getAddress());
+				jTFDireccion2.setText(cliente.getAddress().getAddress2());
+				jTFDistrito.setText(cliente.getAddress().getDistrict());
+				jTFTelefono.setText(cliente.getAddress().getPhone());
+				jTFCodPostal.setText(cliente.getAddress().getPostalCode());
+				jCBCiudad.setValue(cliente.getAddress().getCity());
+				listarPrestamosClientes();
+				
+				if (cliente.getPicture() != null) {
+					Image im = new Image(new ByteArrayInputStream(cliente.getPicture()));
+					imgFoto.setImage(im);
+				}
+				
+			} else {
+				notificar("Buscar Cliente", "El cliente no se encuentra registrado", TipoNotificacion.ERROR);
+				limpiarCampos();
+			}
+	}
+	
+	/**
+	 * metodo para editar un cliente registrado
+	 */
 	public void editarCliente()  {
 
 		try {
@@ -336,7 +471,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 				|| jTFId.getText().isEmpty() || jTFTelefono.getText().isEmpty() || jCBCiudad.getValue()==null || jCBTienda.getValue()==null
 					) {
 
-				notificar("Crear Cliente", "Verifique que todos los campos estï¿½n diligenciados",
+				notificar("Editar Cliente", "Debe Buscar un Cliente y verificar que todos los campos esten diligenciados",
 						TipoNotificacion.ERROR);
 
 			} else {
@@ -391,21 +526,42 @@ public class ControladorGestionarClientes extends BaseController implements Init
 
 	}
 	
+	/**
+	 * metodo para generar el reporte de un cliente por su documento de identidad
+	 */
 	@FXML
 	public void generarReporteCliente(){
 		try {
-			
-			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
-			Map<String, Object> params=new HashMap<>();
-			int idCliente = Integer.parseInt(jTFId.getText());
-			params.put("idcus", idCliente);
-			reporter.generarReporte(params, "/reportes/rentascliente.jrxml", "RentasDelCliente");		
+			if(jTFId.getText().isEmpty()){
+				notificar("Generar Reporte", "Debe diligenciar el campo: Numero de Documento* para el reporte del cliente", TipoNotificacion.ERROR);
+			}else{
+				Customer cliente = boCliente.buscar(Integer.parseInt(jTFId.getText()));
+
+				if (cliente != null) {
+					
+					GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+					Map<String, Object> params=new HashMap<>();
+					int idCliente = Integer.parseInt(jTFId.getText());
+					params.put("idcus", idCliente);
+					reporter.generarReporte(params, "/reportes/rentascliente.jrxml", "RentasDelCliente");
+					
+				} else {
+					
+					notificar("Generar Reporte", "El cliente no se encuentra registrado", TipoNotificacion.ERROR);
+					limpiarCampos();
+					
+				}
+				
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			notificar("Generar Reporte", "Error generando el reporte!", TipoNotificacion.ERROR);
 		}
 	}
 	
+	/**
+	 * metodo para limpiar los campos de texto de la ventana del cliente
+	 */
 	@FXML
 	public void limpiarCampos() {
 		jTFNombres.setText(null);
