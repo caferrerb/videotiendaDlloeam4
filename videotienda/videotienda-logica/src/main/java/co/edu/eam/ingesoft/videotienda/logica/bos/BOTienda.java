@@ -35,4 +35,5 @@ public class BOTienda extends BOGenerico<Store>{
 		super.crear(store);
 	}
 	
+
 }
