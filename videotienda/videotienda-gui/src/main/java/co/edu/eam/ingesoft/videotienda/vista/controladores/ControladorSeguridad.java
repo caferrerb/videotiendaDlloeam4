@@ -275,6 +275,10 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 		llenarComboRoles();
 		llenarComboPantallas();
 		llenarComboEmpleados();
+		cbRoles.getSelectionModel().selectFirst();
+		cbPantalla.getSelectionModel().selectFirst();
+		cbReporte.getSelectionModel().selectFirst();
+		cbRolUsuario.getSelectionModel().selectFirst();
 		usu = new Usuario();
 		empleado = new Staff();
 		cbEmpleado.setOnAction((event) -> {
@@ -342,7 +346,7 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 			if (tfUsuario.getText().isEmpty() || tfPassword.getText().isEmpty()) {
 				notificar("Asignar usuario", "Debe completar los campos", TipoNotificacion.ERROR);
 			} else {
-				if (cbEmpleado.getSelectionModel().getSelectedItem().equals("Elegir el empleado")) {
+				if (cbEmpleado.getSelectionModel().getSelectedItem()==null) {
 					notificar("Asignar usuario", "Debe seleccionar el empleado", TipoNotificacion.ERROR);
 				} else {
 					empleado = (Staff) cbEmpleado.getSelectionModel().getSelectedItem();
@@ -370,12 +374,17 @@ public class ControladorSeguridad extends BaseController implements Initializabl
 			notificar("Asignar rol al usuario", "Debe seleccionar el rol a asignar", TipoNotificacion.ERROR);
 		} else {
 			try{
+				if(usu !=null){
 			UsuarioRol usuarioRol = new UsuarioRol();
 			Rol rolCombo = cbRolUsuario.getSelectionModel().getSelectedItem();
 			usuarioRol.setRol(rolCombo);
 			usuarioRol.setUsuario(usu);
 			boUsuarioRol.crear(usuarioRol);
 			llenarTablaRolUsuario();
+				}else{
+					notificar("Asignar rol al usuario", "Debe seleccionar el empleado", TipoNotificacion.ERROR);
+					
+				}
 		} catch (ExcepcionNegocio e) {
 			notificar("Asignar pantalla a rol", e.getMessage(), TipoNotificacion.ERROR);
 		} catch (Exception e) {
