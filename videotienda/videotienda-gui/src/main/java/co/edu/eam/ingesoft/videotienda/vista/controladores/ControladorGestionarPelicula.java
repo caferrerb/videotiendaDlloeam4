@@ -12,9 +12,13 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,21 +37,30 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.FilmActor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.FilmActorPK;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Language;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.util.Callback;
 
 /**
  * @author TOSHIBAP55W
@@ -56,6 +69,10 @@ import javafx.stage.FileChooser;
 @Controller
 public class ControladorGestionarPelicula extends BaseController implements Initializable{
 
+	@Autowired
+	private DataSource ds;
+	
+	
 	@Autowired
 	private BOFilm boFilm;
 	
@@ -120,17 +137,17 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 	@FXML
 	private TextField jTFPersonaje;
 	@FXML
-	private ComboBox<Actor> jCBActores;
+	private ComboBox<Actor> jCBActores;	
 	@FXML
-	private TableView<FilmActor> tabla;	
-	@FXML
-	private TableColumn<FilmActor, Actor> columnaActor;	
+	private TableColumn<FilmActor, String> columnaActor;	
 	@FXML
 	private TableColumn<FilmActor, String> columnaPersonaje;		
 	@FXML
-	private TableColumn columnaBotones;	
+	private TableColumn<FilmActor,String> columnaBotones1;
 	@FXML
-	private ObservableList<FilmActor> data = FXCollections.observableArrayList();
+	private TableColumn<FilmActor,String> columnaBotones2;
+	@FXML
+	private TableView<FilmActor> tabla;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -139,7 +156,9 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		ListarLenguajes();
 		listarCategorias();
 	}
-	
+	/**
+	 * Metodo encargado de abrir ventana para seleccionar una imagen
+	 */
 	public void abrirImagen(){
 		
 		FileChooser fileChooser = new FileChooser();
@@ -167,6 +186,7 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 				byte[] bites=new byte[(int)imgFile.length()];
 				FileInputStream fin=new FileInputStream(imgFile);
 				fin.read(bites);
+				fin.close();
             	}
 				
 			} catch (IOException e) {
@@ -177,7 +197,9 @@ public class ControladorGestionarPelicula extends BaseController implements Init
         
 	
 	}
-	
+	/**
+	 * metodo encargado de listar los actores
+	 */
 	public void listarActores(){
 	
 		List<Actor> listaAutores = boActores.listarAutores();
@@ -185,7 +207,9 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			jCBActores.getItems().add(actor);
 		}
 	}
-	
+	/**
+	 * metodo encargado de listar los lenguajes
+	 */
 	public void ListarLenguajes(){
 		
 		List<Language> listaLenguajes = boLenguaje.listarLenguajes();
@@ -194,14 +218,19 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			jCBLanguage2.getItems().add(language);
 		}
 	}
-	
+	/**
+	 * metodo encargado de listar las categorias
+	 */
 	public void listarCategorias(){
 		List<Category> listaCategorias = boFilm.listarCategorias();
 		for (Category category : listaCategorias) {
 			jCBCategory.getItems().add(category);
 		}
 	}
-
+	/**
+	 * Metodo encargado de crear un Film
+	 * @throws Exception en caso de que los campos esten mal diligenciados
+	 */
 	@FXML
 	private void crearPelicula()throws Exception{
 		
@@ -281,7 +310,9 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		}
 	  }
 	}
-	
+	/**
+	 * metodo para limpiar los campos en el momento de crear una pelicula o eliminarla
+	 */
 	public void limpiarCampos(){
 		
 		jTFFilmID.setText(null);;
@@ -299,13 +330,17 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		jTFLength.setText(null);
 		jCBCategory.setValue(null);
 	}
-	
+	/**
+	 * metodo encargado de buscar una pelicula por su ID
+	 * @throws Exception en caso de que la pelicula no exista o lo campos esten mal
+	 */
 	@FXML
 	public void buscarPelicula()throws Exception{
 		
 		if(jTFFilmID.getText().isEmpty()){
 			notificar("¡INGRESE!", "Por favor ingrese el ID de la pelicula que desea buscar",  TipoNotificacion.ERROR);
 		}else{
+			try{
 		int idFilm = Integer.parseInt(jTFFilmID.getText()); 
 		Film fi =boFilm.buscar(idFilm);
 		if(fi!=null){
@@ -333,12 +368,20 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			Image im=new Image(new ByteArrayInputStream(fi.getPoster()));
 			jPoster.setImage(im); 
 			}
+			
+			llenarTabla(idFilm);
 			agregarActorFilmTabla();
 		
+			
 		}else{
 			notificar("¡ERROR!", "La pelicula con el ID= ''"+idFilm+"'' (NO) se encuentra registrada",  TipoNotificacion.ERROR);
 
 		}
+			}catch (NumberFormatException ex){
+				
+				notificar("¡VERIFICAR!", "Por favor verifique que el ID de la pelicula solo "
+						+ "contenga datos numericos", TipoNotificacion.ERROR);
+			}
 		
 	}
 	}
@@ -441,58 +484,195 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 	@FXML
 	private void agregarActorFilm(){
 		
-		if(jTFFilmID.getText().isEmpty()|| jTFPersonaje.getText().isEmpty()||jCBActores.getValue()==null){
-			notificar("¡INGRESE!", "Por favor ingrese (ID de pelicula , Actor  y su personaje)",  TipoNotificacion.ERROR);
+		if(jTFFilmID.getText().isEmpty()||jCBActores.getValue()==null){
+			notificar("¡INGRESE!", "Por favor ingrese (ID de pelicula y Actor )",  TipoNotificacion.ERROR);
 		}else{
 		try {
 			
+			if(jTFPersonaje.getText().isEmpty()){
+				notificar("¡INGRESE!", "Por favor el personaje",  TipoNotificacion.ERROR);
+				return;
+			}
 			String personaje = jTFPersonaje.getText();
 			Actor actor = jCBActores.getValue();
-			FilmActorPK filacPK = boFilmActorPK.buscar(actor.getActorId());
-//			filacPK.
-//			FilmActor filac = boFilmActor.buscar(filacPK);
-//			
-//			if(filac!=null){
-//				notificar("ERROR", "El actor con ID ''"+actor.getActorId()+"'' ya tiene un personaje asignado",  TipoNotificacion.ERROR);
-//				return;
-//			}
-			
 			int idFilm=Integer.parseInt(jTFFilmID.getText());
 			Film film = boFilm.buscar(idFilm);
 			
+			FilmActorPK filacPK = new FilmActorPK();
+			filacPK.setActorId(actor.getActorId());
+			filacPK.setFilmId(film.getFilmId());
+			filacPK.setCaracter(personaje);
+			
 			FilmActor fiAc = new FilmActor();
+			
+			fiAc.setId(filacPK);
 			fiAc.setActor(actor);
 			fiAc.setFilm(film);
 			fiAc.setLastUpdate(new Timestamp(new Date().getTime()));
 			fiAc.setCaracter(personaje);
-			FilmActorPK fialmAcPK = new FilmActorPK();
-			fialmAcPK.setActorId(actor.getActorId());
-			fialmAcPK.setFilmId(film.getFilmId());
-			fiAc.setId(fialmAcPK);
+			
+
 			
 			boFilmActor.crear(fiAc);
-			notificar("¡EXITO!", "Se ha ha agragado un personaje exitosamente",  TipoNotificacion.INFO);
+			notificar("¡EXITO!", "Se ha agragado un personaje exitosamente",  TipoNotificacion.INFO);
+			limpiarCamposFilmActor();
 			agregarActorFilmTabla();
+			llenarTabla(idFilm);
 			
-		}catch (Exception e) {
+		}catch(ExcepcionNegocio ex){
+			notificar("¡ERROR!", ex.getMessage(), TipoNotificacion.ERROR);
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	}
 	
+	private void limpiarCamposFilmActor(){
+		
+		jCBActores.setValue(null);
+		jTFPersonaje.setText(null);
+	}
+	
+	private void llenarTabla(int idFilm) {
+
+		List<FilmActor> lista = boFilmActor.listarFilmesActores(idFilm);
+		ObservableList<FilmActor> listaTabla = FXCollections.observableArrayList();
+		for (FilmActor filmActor : lista) {
+			listaTabla.add(filmActor);
+		}
+		
+		tabla.setItems(listaTabla);
+
+	}
+	
 	private void agregarActorFilmTabla(){
+	
+		columnaPersonaje.setCellValueFactory(new PropertyValueFactory<>("caracter"));
+		columnaActor.setCellValueFactory(new Callback<CellDataFeatures<FilmActor, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<FilmActor, String> data) {
+				return new SimpleObjectProperty<>(data.getValue().getActor().getFirstName()+" "+data.getValue().getActor().getLastName());
+			}
+		});
+		
+		Callback<TableColumn<FilmActor, String>, TableCell<FilmActor, String>> cellFactory = new Callback<TableColumn<FilmActor, String>, TableCell<FilmActor, String>>() {
+
+			@Override
+			public TableCell<FilmActor, String> call(TableColumn<FilmActor, String> param) {
+				// TODO Auto-generated method stub
+				TableCell<FilmActor, String> cell = new TableCell<FilmActor, String>() {
+					final Button btn1 = new Button("Editar");
+					//final Button btn2 = new Button("Eliminar");
+
+					@Override
+					protected void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						}else{
+							btn1.setOnAction(new EventHandler<ActionEvent>() {
+								
+								@Override
+								public void handle(ActionEvent event) {
+									
+									FilmActor f=getTableView().getItems().get(getIndex());
+									
+									
+										guardarEnSesion("peliculaActor", f);
+										abrirVentana("/fxml/DialogoEditarFilmActor.fxml", ControladorDialogoFilmActor.class);
+										llenarTabla(f.getFilm().getFilmId());
+										
+									
+								}
+							});
+							setGraphic( btn1 );
+                            setText( null );
+                            
+                          
+						}
+						
+					}
+				};
+				return cell;
+			}
+		};
+		
+		
+		Callback<TableColumn<FilmActor, String>, TableCell<FilmActor, String>> cellFactoryB = new Callback<TableColumn<FilmActor, String>, TableCell<FilmActor, String>>() {
+
+			@Override
+			public TableCell<FilmActor, String> call(TableColumn<FilmActor, String> param) {
+				// TODO Auto-generated method stub
+				TableCell<FilmActor, String> cell = new TableCell<FilmActor, String>() {
+					final Button btn1 = new Button("Eliminar");
+
+					@Override
+					protected void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+							setText(null);
+						}else{
+							btn1.setOnAction(new EventHandler<ActionEvent>() {
+								
+								@Override
+								public void handle(ActionEvent event) {
+									
+									FilmActor f=getTableView().getItems().get(getIndex());
+									
+									boFilmActor.eliminar(f.getId());
+									notificar("¡EXITO!", "Se ha eliminado exitosamente",  TipoNotificacion.INFO);
+									guardarEnSesion("pelicula", f);
+									llenarTabla(f.getFilm().getFilmId());
+								}
+							});
+							setGraphic( btn1 );
+                            setText( null );
+                          
+						}
+						
+					}
+				};
+				return cell;
+			}
+		};
+		columnaBotones1.setCellFactory(cellFactory);
+		columnaBotones2.setCellFactory(cellFactoryB);
+	}
+	
+	@FXML
+	public void generarReporte(){
 		
 		int idFilm=Integer.parseInt(jTFFilmID.getText());
-		List<FilmActor> filmsActors = boFilmActor.listarFilmesActores(idFilm);
-		for (int i = 0; i < filmsActors.size(); i++) {
-			
-			data.add(filmsActors.get(i));
-			columnaActor.setCellValueFactory(new PropertyValueFactory<FilmActor, Actor>("firstName "+"lastName"));
-			columnaActor.setMinWidth(100);
-			columnaPersonaje.setCellValueFactory(new PropertyValueFactory<FilmActor, String>("caracter"));
-			columnaPersonaje.setMinWidth(100);
-			tabla.setItems(data);
-			
+		try {
+			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+			Map<String, Object> params=new HashMap<>();
+			params.put("idFilm",idFilm);
+			reporter.generarReporte(params, "/reportes/actoresxpelicula.jrxml", "ActoresXPelicula");
+		} catch (Exception e) {
+			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
+		}
+	}
+	
+	@FXML
+	public void hacerReporte(){
+		
+		if(jTFFilmID.getText().isEmpty()){
+			notificar("¡INGRESE!", "Ingrese el ID de la pelicula",  TipoNotificacion.ERROR);
+			return;
+		}
+		int idFilm=Integer.parseInt(jTFFilmID.getText());
+		Film fi = boFilm.buscar(idFilm);
+		if(fi==null){
+			notificar("¡ERROR!", "La pelicula con el id= ''"+idFilm+"'' (NO) se encuentra registrada",  TipoNotificacion.ERROR);
+		}else{
+			generarReporte();
 		}
 	}
 }
+	
+
+
+

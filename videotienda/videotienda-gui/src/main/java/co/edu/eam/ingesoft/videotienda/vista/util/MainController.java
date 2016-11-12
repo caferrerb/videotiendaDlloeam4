@@ -17,6 +17,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarActores;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarCIudad;
+import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarClientes;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarEmpleado;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorGestionarPelicula;
 import co.edu.eam.ingesoft.videotienda.vista.controladores.ControladorAlquilarPelicula;
@@ -71,6 +72,13 @@ public class MainController implements Initializable {
 	 */
 	@FXML
 	public Menu mnuPeliculas;
+	
+
+	/**
+	 * Menu inventario
+	 */
+	@FXML
+	public Menu mnuInventario;
 
 	/**
 	 * Menu reportes
@@ -122,6 +130,9 @@ public class MainController implements Initializable {
 	@FXML
 	private MenuItem mnuItemGestionarCiudad;
 
+	@FXML
+	private MenuItem mnuItemGestionarInventario;
+	
 	@FXML
 	private MenuItem mnuItemGestionarActores;
 
@@ -220,6 +231,7 @@ public class MainController implements Initializable {
 		mnuPrestamos.setVisible(false);
 		mnuSucursales.setVisible(false);
 		btnCerrarSesion.setVisible(false);
+		mnuItemGestionarInventario.setVisible(false);
 	}
 
 	/**
@@ -236,6 +248,11 @@ public class MainController implements Initializable {
 	@FXML
 	public void abrirGEstionarCiudad() {
 		agregarVentana("/fxml/gestionarciudad.fxml", ControladorGestionarCIudad.class);
+	}
+	
+	@FXML
+	public void abrirGestionarInventario() {
+		agregarVentana("/fxml/GestionarInventario.fxml", ControladorGestionarCIudad.class);
 	}
 
 	@FXML
@@ -308,5 +325,11 @@ public class MainController implements Initializable {
 	public void boton(){
 		mnuInicio.getItems().add(new MenuItem("Inicio"));
 	}
+	
+	@FXML
+	public void abrirGestionarClientes(){
+		agregarVentana("/fxml/VentanaGestionarClientes.fxml", ControladorGestionarClientes.class);
+	}
+
 	
 }

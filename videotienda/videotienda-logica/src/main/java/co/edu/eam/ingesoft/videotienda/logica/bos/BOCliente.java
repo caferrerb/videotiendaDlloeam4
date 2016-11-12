@@ -12,6 +12,8 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.City;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Customer;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
+import co.edu.uniquindio.videotienda.dtos.PrestamoDTO;
+import co.edu.uniquindio.videotienda.dtos.PrestamosClienteDTO;
 
 @Component
 public class BOCliente extends BOGenerico<Customer> {
@@ -24,13 +26,18 @@ public class BOCliente extends BOGenerico<Customer> {
 	 * @return las lista de rentas del cliente
 	 */
 	public List<Rental> peliculasCliente(Customer c) {
-		if (c != null) {
-			return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_CLIENTE, c);
-		} else {
-			return null;
-		}
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PELICULAS_CLIENTE, c);
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 */
+	public List<PrestamosClienteDTO> listarPrestamosDelCliente(int c) {
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_PRESTAMOS_DEL_CLIENTE, c);
+	}
+	
 	/**
 	 * Permite trasladar la ciudad a un cliente
 	 * 
@@ -45,12 +52,12 @@ public class BOCliente extends BOGenerico<Customer> {
 	 */
 	@org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED)
 	public void trasladar(Customer cliente, City ciudad, String dir) throws ExcepcionNegocio {
-		List<Rental> peliculasCliente = peliculasCliente(cliente);
-		if (peliculasCliente.size() != 0) {
-			throw new ExcepcionNegocio("No se puede trasladar porque tiene películas prestadas");
+		if (cliente == null) {
+			throw new ExcepcionNegocio("Debe buscar el cliente para hacer el traslado");
 		} else {
-			if (cliente == null) {
-				throw new ExcepcionNegocio("Debe buscar el cliente para hacer el traslado");
+			List<Rental> peliculasCliente = peliculasCliente(cliente);
+			if (peliculasCliente.size() != 0) {
+				throw new ExcepcionNegocio("No se puede trasladar porque tiene películas prestadas");
 			} else {
 				if (cliente.getAddress().getCity().getCity().equals(ciudad.getCity())) {
 					throw new ExcepcionNegocio("La ciudad actual y la de traslado deben ser diferentes");

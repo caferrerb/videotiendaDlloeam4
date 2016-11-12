@@ -195,19 +195,27 @@
 
 	</named-query>
 
-	<named-query name="Rental.TituloNombrePrestamos">
+	 <named-query name="Rental.TituloNombrePrestamos">
 		<query>
-			SELECT new
-			co.edu.uniquindio.videotienda.dtos.PrestamoDTO(s.nombreTienda,
-			f.title,r.rentalId) FROM Rental r
+			SELECT new co.edu.uniquindio.videotienda.dtos.PrestamoDTO(s.nombreTienda, f.title, r.rentalId, r.returned) FROM Rental r
 			JOIN r.inventory i
 			JOIN i.store s
+			JOIN i.film f
+			JOIN r.customer c
+			WHERE c.customerId = ?1 AND r.returned = false
+		</query>
+	</named-query>
+ 
+    <named-query name="Cliente.PrestamosCliente">
+		<query>
+			SELECT new co.edu.uniquindio.videotienda.dtos.PrestamosClienteDTO(f.title,r.rentalDate,r.returnDate) FROM Rental r
+			JOIN r.inventory i
 			JOIN i.film f
 			JOIN r.customer c
 			WHERE c.customerId = ?1
 		</query>
 	</named-query>
-
+	
 	<named-query name="Usuario.BuscarUsuario">
 		<query>
 			SELECT usu FROM Usuario usu WHERE usu=?1
@@ -248,20 +256,6 @@
 			SELECT acc FROM Acceso acc
 		</query>
 	</named-query>
-
-
-	<named-query name="Rental.datosTablaFilmRentada">
-		<query>
-			SELECT i.inventoryId, f.title, c.customerId, r.rentalDate,
-			r.returnDate FROM Rental r JOIN
-			r.customer c
-			JOIN r.inventory i
-			JOIN i.film f WHERE i.store = ?1
-		</query>
-	</named-query>
-
-
-
 
 	<named-query name="StaffSchedule.ListaHorasEmpleado">
 		<query>

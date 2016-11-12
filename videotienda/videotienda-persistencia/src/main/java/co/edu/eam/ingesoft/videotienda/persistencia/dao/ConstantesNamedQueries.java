@@ -26,7 +26,7 @@ public class ConstantesNamedQueries {
 	 * Obtiene las peliculas alquiladas por un cliente
 	 *  El cliente
 	 */
-	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Rental.PeliculasRentadasCliente";
+	public static final String CONSULTA_LISTAR_PELICULAS_CLIENTE = "Rental.PeliculasCliente";
 	
 	/**
 	 * Obtiene las peliculas alquiladas por un cliente
@@ -57,6 +57,11 @@ public class ConstantesNamedQueries {
 	  */
 	public static final String CONSULTA_LISTAR_INFO_PRESTAMOS = "Rental.TituloNombrePrestamos";
 	
+	 /**
+	  * 
+	  */
+	public static final String CONSULTA_LISTAR_PRESTAMOS_DEL_CLIENTE = "Cliente.PrestamosCliente";
+	
 	/**
 	 * obtiene los prestamos que esten repetidos
 	 */
@@ -85,6 +90,9 @@ public class ConstantesNamedQueries {
 	public static final String CONSULTA_LISTAR_EMPLEADOS_TIENDA = "EmpleadosTienda.ListarTodos";
 
 	public static final String CONSULTA_LISTAR_INVENTARIO_TIENDA = "InventarioTienda.ListarTodos";
+	
+	public static final String CONSULTA_LISTAR_INVENTARIO_PELICULA = "InventarioPelicula.ListarTodos";
+
 
 	/**
 	 * consulta que lista los datos de la tabla rentas en la ventana reporte

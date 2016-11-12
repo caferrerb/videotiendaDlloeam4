@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-11T08:11:43 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clienteciudad" pageWidth="685" pageHeight="842" columnWidth="645" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9979ae8f-1108-40f7-9a40-1cf108391afe">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="videotiendadb"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="idciudad" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT * FROM customer c 
+JOIN address a ON (a.address_id=c.address_id) 
+JOIN city ci ON (a.city_id=ci.city_id) 
+WHERE ci.city_id = $P{idciudad}]]>
+	</queryString>
+	<field name="customer_id" class="java.lang.Integer"/>
+	<field name="active" class="java.lang.Boolean"/>
+	<field name="create_date" class="java.sql.Timestamp"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="first_name" class="java.lang.String"/>
+	<field name="last_name" class="java.lang.String"/>
+	<field name="last_update" class="java.sql.Timestamp"/>
+	<field name="picture" class="java.lang.Object"/>
+	<field name="address_id" class="java.lang.Integer"/>
+	<field name="store_id" class="java.lang.Integer"/>
+	<field name="COLUMN_11" class="java.lang.Integer"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="address2" class="java.lang.String"/>
+	<field name="district" class="java.lang.String"/>
+	<field name="COLUMN_15" class="java.sql.Timestamp"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="postal_code" class="java.lang.String"/>
+	<field name="city_id" class="java.lang.Integer"/>
+	<field name="COLUMN_19" class="java.lang.Integer"/>
+	<field name="city" class="java.lang.String"/>
+	<field name="country_id" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="30" width="230" height="30" forecolor="#0F9EFC" uuid="f36e19c3-d21e-4e9f-bdee-7a2bb1fbd7d7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clientes de la ciudad de ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="410" y="30" width="100" height="30" forecolor="#130FFC" uuid="814cab47-c50f-4f94-94f7-ee3767055a2e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Narrow" size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{city}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="-10" y="0" width="100" height="30" uuid="de755eda-efb3-4199-bda3-79dba6c73d43"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" x="120" y="0" width="100" height="30" uuid="bddcfe1a-78ee-447e-902d-6b34c177ce1d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="3" width="100" height="30" uuid="da458541-2521-4f07-854e-e06d2373a8ff"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="0" width="100" height="30" uuid="236cbc6a-fc92-4efc-a71f-c87c2427ee70"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="0" width="100" height="30" uuid="91d9d761-8a69-4326-bb2d-5eaa3f837e0b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="64" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="-10" y="17" width="100" height="30" uuid="508068e7-aa69-4661-8080-a9ba63b7dce6"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="120" y="17" width="100" height="30" uuid="e6f712b9-0f77-4b73-8673-abc7d465458c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{last_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="17" width="157" height="30" uuid="a80f5816-6c36-4d2d-a397-419f6f39e622"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="17" width="100" height="30" uuid="947cf633-fd76-4e36-84b7-98ef3e6bf9ab"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="550" y="17" width="100" height="30" uuid="6f308bdf-66fa-4c0b-86d9-15001c5e995c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

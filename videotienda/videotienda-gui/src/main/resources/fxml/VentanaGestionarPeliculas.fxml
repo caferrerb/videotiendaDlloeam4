@@ -16,7 +16,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="ventanaGestionarPeliculas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="1426.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="ventanaGestionarPeliculas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="1428.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="620.0" layoutY="14.0" prefHeight="40.0" prefWidth="243.0" text="Gestionar Peliculas" textFill="WHITE">
          <font>
@@ -111,9 +111,10 @@
                   </Button>
                   <TableView fx:id="tabla" layoutX="15.0" layoutY="141.0" prefHeight="330.0" prefWidth="637.0">
                     <columns>
-                      <TableColumn fx:id="columnaActor" prefWidth="156.0" text="Actor" />
-                      <TableColumn fx:id="columnaPersonaje" prefWidth="237.0" text="Personaje" />
-                        <TableColumn fx:id="columnaBotones" prefWidth="242.0" text="Accion" />
+                      <TableColumn fx:id="columnaActor" prefWidth="203.0" text="Actor" />
+                      <TableColumn fx:id="columnaPersonaje" prefWidth="234.0" text="Personaje" />
+                        <TableColumn fx:id="columnaBotones1" prefWidth="95.0" text="Editar" />
+                        <TableColumn fx:id="columnaBotones2" prefWidth="101.0" text="Eliminar" />
                     </columns>
                   </TableView>
                   <Label layoutX="575.0" layoutY="104.0" prefHeight="21.0" prefWidth="77.0" text="Agregar" />
@@ -128,6 +129,14 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </Button>
+      <Button fx:id="jBReporte" layoutX="1299.0" layoutY="649.0" mnemonicParsing="false" onAction="#hacerReporte" prefHeight="24.0" prefWidth="115.0" text="Generar Reporte" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

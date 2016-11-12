@@ -5,8 +5,13 @@ package co.edu.eam.ingesoft.videotienda.vista.controladores;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.sql.DataSource;
+import javax.swing.JOptionPane;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,7 +31,9 @@ import org.springframework.stereotype.Controller;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOFilm;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Category;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Staff;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,6 +48,8 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 
 	@Autowired
 	private BOFilm boPelicula;	
+	@Autowired
+	private DataSource ds;
 	@FXML
 	private TextField jtfTitulo;	
 	@FXML
@@ -93,8 +102,8 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 					jttablacontenidoPelicula.setItems(data);
 					
 				}
-				
-			}
+						}
+//			generarReportePe();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -142,6 +151,21 @@ public class ControladorGestionarVenta extends BaseController implements Initial
 			}
 		}
 
+	}
+	
+	@FXML
+	public void generarReportePe(){		
+		try {
+			if(!jtfTitulo.getText().isEmpty()){
+				GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+				Map<String, Object> params=new HashMap<>();
+				params.put("tituloPelicula",jtfTitulo.getText());				
+				reporter.generarReporte(params, "/reportes/reportePeliculas.jrxml", "PeliculasXNombre");
+						
+			}
+			} catch (Exception e) {
+			notificar("Ejemplo", "Error generando el reporte", TipoNotificacion.ERROR);
+		}
 	}
 
 }

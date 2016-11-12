@@ -36,7 +36,18 @@ public class FilmActorPK implements Serializable {
 	public void setFilmId(int filmId) {
 		this.filmId = filmId;
 	}
-
+	/**
+	 * @return the caracter
+	 */
+	public String getCaracter() {
+		return caracter;
+	}
+	/**
+	 * @param caracter the caracter to set
+	 */
+	public void setCaracter(String caracter) {
+		this.caracter = caracter;
+	}
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;
