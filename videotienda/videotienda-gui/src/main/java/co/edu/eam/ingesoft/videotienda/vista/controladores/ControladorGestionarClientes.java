@@ -63,77 +63,151 @@ import javafx.stage.FileChooser;
 @Controller
 public class ControladorGestionarClientes extends BaseController implements Initializable {
 
+	/**
+	 * BO con los métodos de la lógica de Cliente
+	 */
 	@Autowired
 	private BOCliente boCliente;
 
-	@Autowired
-	private BODireccion boDir;
-
+	/**
+	 * BO con los métodos de la lógica de Ciudad
+	 */
 	@Autowired
 	private BOCiudad boCiudad;
 	
+	/**
+	 * BO con los métodos de la lógica de Tienda
+	 */
 	@Autowired
 	private BOTienda boTienda;
 	
+	/**
+	 * DataSource 
+	 */
 	@Autowired
 	private DataSource ds;
 	
+	/**
+	 * TextField nombres del cliente
+	 */
 	@FXML
 	private TextField jTFNombres;
 	
+	/**
+	 * TextField apellidos del cliente
+	 */
 	@FXML
 	private TextField jTFApellidos;
 
+	/**
+	 * TextField Documento del cliente
+	 */
 	@FXML
 	private TextField jTFId;
 	
+	/**
+	 * ComboBox ciudad del cliente
+	 */
 	@FXML
 	private ComboBox<City> jCBCiudad;
 	
+	/**
+	 * TextField Direccion del cliente
+	 */
 	@FXML
 	private TextField jTFDireccion;
 	
+	/**
+	 * TextField Direccion 2 del cliente
+	 */
 	@FXML
 	private TextField jTFDireccion2;
 	
+	/**
+	 * TextField Distrito del cliente
+	 */
 	@FXML
 	private TextField jTFDistrito;
 	
+	/**
+	 * TextField Telefono del cliente
+	 */
 	@FXML
 	private TextField jTFTelefono;
 	
+	/**
+	 * TextField Codigo postal del cliente
+	 */
 	@FXML
 	private TextField jTFCodPostal;
 	
+	/**
+	 * ComboBox tienda del cliente
+	 */
 	@FXML
 	private ComboBox<Store> jCBTienda;
 	
+	/**
+	 * TableView de los prestamos del cliente
+	 */
 	@FXML
 	private TableView<PrestamosClienteDTO> TVPrestamos;
 
+	/**
+	 * TableColumn contiene el titulo de la pelicula del prestamo
+	 */
 	@FXML
 	private TableColumn<PrestamosClienteDTO, String> TCTitulo;
 	
+	/**
+	 * TableColumn contiene la fecha del prestamo del cliente
+	 */
 	@FXML
 	private TableColumn<PrestamosClienteDTO, Date> TCFechaPres;
 	
+	/**
+	 * TableColumn contiene la fecha de entrega del prestamo del cliente
+	 */
 	@FXML
 	private TableColumn<PrestamosClienteDTO, Date> TCFechaEnt;
 	
+	/**
+	 * TableColumn contiene los botones para ir a la ventana de entregar prestamos
+	 */
 	@FXML
 	private TableColumn<PrestamosClienteDTO, PrestamosClienteDTO> TCBoton;
 	
+	/**
+	 * ImageView imagen del cliente
+	 */
 	@FXML
 	private ImageView imgFoto;
 	
+	/**
+	 * ImageView imagen del cliente
+	 */
 	private File imgFile;
 	
+	/**
+	 * Cliente traido de la ventana de la ventana peliculas rentadas
+	 */
 	private Customer idCliente;
 	
+	/**
+	 * Se declara la lista de los prestamos de los prestamos del cliente
+	 *  para usarse en la ventana
+	 */
 	List<PrestamosClienteDTO> listaPrestamosCliente;
 
+	/**
+	 * ObservableList para llenar la tabla de los prestamos del cliente
+	 */
 	ObservableList<PrestamosClienteDTO> prestamosListarCliente;
 	
+	
+	/**
+	 * Constructor de la ventana
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		llenarComboCiudades();
@@ -159,6 +233,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 		}
 	}
 	
+	/**
+	 * LLena el combo de las tiendas
+	 */
 	@FXML
 	private void llenarComboTiendas() {
 		List<Store> lista = boTienda.listarTiendas();
@@ -167,6 +244,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 		}
 	}
 	
+	/**
+	 * Metodo para abrir la imagen que desea cargar el cliente
+	 */
 	@FXML
 	public void abrirImagen() {
 		FileChooser fileChooser = new FileChooser();
@@ -188,6 +268,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 		}
 	}
 	
+	/**
+	 * Metodo para crear el cliente
+	 */
 	public void crearCliente()  {
 
 		try {
@@ -256,6 +339,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 
 	}
 	
+	/**
+	 * metodo para listar y cargar los prestamos del cliente
+	 */
 	@FXML
 	public void listarPrestamosClientes() {
 		int idCliente = Integer.parseInt(jTFId.getText());
@@ -269,6 +355,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 
 	}
 	
+	/**
+	 * Metodo para inicializar las columnas de las tablas y agregar los botones
+	 */
 	public void inicializarTabla() {
 		TCTitulo.setCellValueFactory(new PropertyValueFactory<PrestamosClienteDTO, String>("titulo"));
 		TCFechaPres.setCellValueFactory(new PropertyValueFactory<PrestamosClienteDTO, Date>("fechaPrestamo"));
@@ -305,6 +394,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 
 	}
 	
+	/**
+	 * metodo buscar un cliente registrado
+	 */
 	@FXML
 	public void buscarCliente() {
 		if (!jTFId.getText().isEmpty()) {
@@ -338,6 +430,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 		}
 	}
 	
+	/**
+	 * metodo para buscar el cliente que se trae de la ventana de peliculas rentadas
+	 */
 	@FXML
 	public void buscarClienteTraido(Customer cliTraido) {
 		Customer cliente = boCliente.buscar(cliTraido.getCustomerId());
@@ -365,6 +460,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 			}
 	}
 	
+	/**
+	 * metodo para editar un cliente registrado
+	 */
 	public void editarCliente()  {
 
 		try {
@@ -428,6 +526,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 
 	}
 	
+	/**
+	 * metodo para generar el reporte de un cliente por su documento de identidad
+	 */
 	@FXML
 	public void generarReporteCliente(){
 		try {
@@ -458,6 +559,9 @@ public class ControladorGestionarClientes extends BaseController implements Init
 		}
 	}
 	
+	/**
+	 * metodo para limpiar los campos de texto de la ventana del cliente
+	 */
 	@FXML
 	public void limpiarCampos() {
 		jTFNombres.setText(null);

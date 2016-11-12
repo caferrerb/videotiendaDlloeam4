@@ -40,8 +40,7 @@
 			SELECT r FROM Rental r
 			JOIN r.inventory i
 			JOIN i.film f
-			WHERE f =
-			?1
+			WHERE f = ?1 AND r.returned = false
 		</query>
 	</named-query>
 
@@ -173,24 +172,24 @@
 	<named-query name="Rental.PeliculasRentadasCliente">
 		<query>
 			SELECT r FROM Rental r
-			WHERE r.customer = ?1
+			WHERE r.returned = false 
+			AND r.customer = ?1
 		</query>
 	</named-query>
 
 	<named-query name="Rental.PeliculasCliente">
 		<query>
-			SELECT r FROM Rental r
+			SELECT r.returned FROM Rental r
 			JOIN r.customer c
-			WHERE c.customerId = ?1
+			WHERE c.customerId = ?1 AND r.returned = false
 		</query>
 	</named-query>
 
 	<named-query name="Rental.fechaEntregaCliente">
 		<query>
-			SELECT r.returnDate FROM Rental r
+			SELECT r FROM Rental r
 			JOIN r.customer c
-			WHERE
-			c.customerId = ?1
+			WHERE c.customerId = ?1 AND r.returned = false
 		</query>
 
 	</named-query>
@@ -212,7 +211,7 @@
 			JOIN r.inventory i
 			JOIN i.film f
 			JOIN r.customer c
-			WHERE c.customerId = ?1
+			WHERE c.customerId = ?1 AND r.returned = false
 		</query>
 	</named-query>
 	

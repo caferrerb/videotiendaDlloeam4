@@ -127,10 +127,11 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 		List<Rental> lista = listarPrestamosRepetidos(f);
 		List<Rental> listaP = listarPrestamosDeUnCLiente(idCliente);
 		List<Rental> listaF = listarFechaEntregaPrestamoCliente(idCliente);
-		if (lista.size() == 0) {
+		if (lista.size() == 0 ) {
 			if (listaP.size() < 5) {
                 for (int i = 0; i < listaF.size(); i++) {
-					if(fechaActual.after(listaF.get(i).getReturnDate())){
+                	Date fechaPrestamo = listaF.get(i).getReturnDate();
+					if(fechaActual.after(fechaPrestamo)){
 						throw new ExcepcionNegocio(" El cliente tiene un prestamo con la fecha de entrega vencida ");
 					}
 					
@@ -145,6 +146,7 @@ public class BOAlquilarPeliculas extends BOGenerico<Rental> {
 		}
 
 	}
+
 
 	/**
 	 * metodo que lista las peliculas por su nombre

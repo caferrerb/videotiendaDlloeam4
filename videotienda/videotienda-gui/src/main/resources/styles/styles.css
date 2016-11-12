@@ -7,6 +7,11 @@
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
 
+.letrasTraslado{
+	-fx-color: white;
+	-fx-text-fill: white;
+}
+
 .labeltitulo {
     -fx-font-size: 31px;
     -fx-font-weight: bold;
