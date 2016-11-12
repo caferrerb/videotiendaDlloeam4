@@ -152,17 +152,18 @@
 			SELECT s FROM Sale s
 			JOIN
 			s.customer c JOIN s.film f
-			JOIN s.staff p WHERE p.store = ?1
+			JOIN s.staff
+			p WHERE p.store = ?1
 		</query>
 	</named-query>
 
-		
+
 	<named-query name="listarDatosClientes">
 		<query>
 			SELECT c FROM Customer c WHERE c.customerId=?1
 		</query>
 	</named-query>
-		
+
 	<named-query name="FilmActor.ListarTodos">
 		<query>
 			SELECT fa FROM FilmActor fa WHERE fa.film.filmId=?1
@@ -175,7 +176,7 @@
 			WHERE r.customer = ?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="Rental.PeliculasCliente">
 		<query>
 			SELECT r FROM Rental r
@@ -186,25 +187,26 @@
 
 	<named-query name="Rental.fechaEntregaCliente">
 		<query>
-			SELECT r FROM Rental r
+			SELECT r.returnDate FROM Rental r
 			JOIN r.customer c
-			WHERE c.customerId = ?1
+			WHERE
+			c.customerId = ?1
 		</query>
 
 	</named-query>
 
-<named-query name="Rental.TituloNombrePrestamos">
+	 <named-query name="Rental.TituloNombrePrestamos">
 		<query>
-			SELECT new co.edu.uniquindio.videotienda.dtos.PrestamoDTO(s.nombreTienda, f.title,r.rentalId) FROM Rental r
+			SELECT new co.edu.uniquindio.videotienda.dtos.PrestamoDTO(s.nombreTienda, f.title, r.rentalId, r.returned) FROM Rental r
 			JOIN r.inventory i
 			JOIN i.store s
 			JOIN i.film f
 			JOIN r.customer c
-			WHERE c.customerId = ?1
+			WHERE c.customerId = ?1 AND r.returned = false
 		</query>
 	</named-query>
-		
-	<named-query name="Cliente.PrestamosCliente">
+ 
+    <named-query name="Cliente.PrestamosCliente">
 		<query>
 			SELECT new co.edu.uniquindio.videotienda.dtos.PrestamosClienteDTO(f.title,r.rentalDate,r.returnDate) FROM Rental r
 			JOIN r.inventory i
@@ -213,13 +215,13 @@
 			WHERE c.customerId = ?1
 		</query>
 	</named-query>
-		
+	
 	<named-query name="Usuario.BuscarUsuario">
 		<query>
 			SELECT usu FROM Usuario usu WHERE usu=?1
 		</query>
 	</named-query>
-	
+
 	<named-query name="AccesoRol.ListarPantallasRol">
 		<query>
 			SELECT accR FROM AccesoRol accR WHERE accR.rol = ?1
@@ -233,7 +235,6 @@
 		</query>
 	</named-query>
 
-	
 
 	<named-query name="listarFilmActorPorActor">
 		<query>
@@ -243,7 +244,7 @@
 	</named-query>
 
 
-	
+
 	<named-query name="AccesoRol.ListarAccesoRol">
 		<query>
 			SELECT accR FROM AccesoRol accR
@@ -256,28 +257,12 @@
 		</query>
 	</named-query>
 
-
-	<named-query name="Rental.datosTablaFilmRentada">
-		<query>
-			SELECT r FROM Rental r JOIN
-			r.customer c 
-			JOIN r.inventory i 
-			JOIN i.film f WHERE i.store = ?1
-					
-		</query>
-	</named-query>
-
-
-
-
 	<named-query name="StaffSchedule.ListaHorasEmpleado">
 		<query>
 			SELECT st FROM StaffSchedule st WHERE st.empleado = ?1
 		</query>
 
 	</named-query>
-
-		
 	<named-query name="StaffSchedule.ListaHorarios">
 		<query>
 			SELECT st FROM StaffSchedule st
@@ -294,18 +279,19 @@
 
 	<named-query name="Sale.TotalVentas">
 		<query>
-			SELECT SUM(f.rentalRate) FROM Rental r JOIN r.inventory i JOIN i.film f
-			WHERE r.rentalDate BETWEEN ?1 AND ?2
+			SELECT SUM(f.replacementCost)FROM Sale s JOIN s.film f WHERE
+			s.saleDate BETWEEN
+			?1 AND ?2
 		</query>
 	</named-query>
 
 	<named-query name="Rental.TotalRentas">
 		<query>
-			SELECT SUM(f.rentalRate)FROM Sale s JOIN s.film f WHERE s.saleDate BETWEEN
-			?1 AND ?2
+			SELECT SUM(f.rentalRate) FROM Rental r JOIN r.inventory i JOIN i.film f
+			WHERE r.rentalDate BETWEEN ?1 AND ?2
 		</query>
 	</named-query>
-	
+
 	<named-query name="Empleado.buscarEmpleadoPorUsuario">
 		<query>
 			SELECT s FROM Staff s WHERE s.usuario=?1

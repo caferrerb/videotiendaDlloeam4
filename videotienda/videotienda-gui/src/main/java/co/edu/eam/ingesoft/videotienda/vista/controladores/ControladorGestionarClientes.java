@@ -176,7 +176,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 				Image image = new Image("file:" + imgFile.getAbsolutePath());
 				imgFoto.setImage(image); // Mostar la imagen
 			} else {
-				notificar("Crear Actor", "La imagen supero el tamaño maximo de 100k", TipoNotificacion.ERROR);
+				notificar("Crear Actor", "La imagen supero el tamaï¿½o maximo de 100k", TipoNotificacion.ERROR);
 			}
 
 		}
@@ -190,7 +190,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 				|| jTFId.getText().isEmpty() || jTFTelefono.getText().isEmpty() || jCBCiudad.getValue()==null || jCBTienda.getValue()==null
 					) {
 
-				notificar("Crear Cliente", "Verifique que todos los campos estén diligenciados",
+				notificar("Crear Cliente", "Verifique que todos los campos estï¿½n diligenciados",
 						TipoNotificacion.ERROR);
 
 			} else {
@@ -285,6 +285,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 					public void handle(ActionEvent t) {
 						int num = getTableRow().getIndex();
 						//Abrimos la ventana de prestamos
+						guardarEnSesion("clienteId", boCliente.buscar(Integer.parseInt(jTFId.getText())));
 						abrirVentana("/fxml/AlquilarPelicula.fxml", ControladorAlquilarPelicula.class);
 
 					}
@@ -335,7 +336,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 				|| jTFId.getText().isEmpty() || jTFTelefono.getText().isEmpty() || jCBCiudad.getValue()==null || jCBTienda.getValue()==null
 					) {
 
-				notificar("Crear Cliente", "Verifique que todos los campos estén diligenciados",
+				notificar("Crear Cliente", "Verifique que todos los campos estï¿½n diligenciados",
 						TipoNotificacion.ERROR);
 
 			} else {
@@ -393,12 +394,14 @@ public class ControladorGestionarClientes extends BaseController implements Init
 	@FXML
 	public void generarReporteCliente(){
 		try {
-			int idCliente = Integer.parseInt(jTFId.getText());
+			
 			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
 			Map<String, Object> params=new HashMap<>();
+			int idCliente = Integer.parseInt(jTFId.getText());
 			params.put("idcus", idCliente);
 			reporter.generarReporte(params, "/reportes/rentascliente.jrxml", "RentasDelCliente");		
 		} catch (Exception e) {
+			e.printStackTrace();
 			notificar("Generar Reporte", "Error generando el reporte!", TipoNotificacion.ERROR);
 		}
 	}

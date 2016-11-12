@@ -4,15 +4,22 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOReportes;
+import co.edu.eam.ingesoft.videotienda.logica.bos.BOTienda;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Rental;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Sale;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -37,7 +44,13 @@ public class ControladorReporteVentaAlquiler extends BaseController implements I
 	private BOReportes boReportes;
 
 	@FXML
+	private Button jBGeneraraRepVentas;
+
+	@FXML
 	private Button jBbuscar;
+
+	@FXML
+	private Button jBreportes;
 
 	@FXML
 	private ComboBox<Store> jcbstore;
@@ -47,6 +60,9 @@ public class ControladorReporteVentaAlquiler extends BaseController implements I
 
 	@FXML
 	private TableView<Sale> TBVenta;
+
+	@Autowired
+	private DataSource ds;
 
 	@FXML
 	private DatePicker JDFechaInicio;
@@ -249,4 +265,58 @@ public class ControladorReporteVentaAlquiler extends BaseController implements I
 		}
 	}
 
+	@FXML
+	public void generarReporteAlquiler() {
+
+		try {
+			LocalDate dateUno = JDFechaInicio.getValue();
+			LocalDate dateDos = JDFechaFinal.getValue();
+			if ((dateUno != null) && (dateDos != null) && (jcbstore.getSelectionModel().getSelectedItem() != null)) {
+				LocalDate date = JDFechaInicio.getValue();
+				Date FechaInicio = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				LocalDate data = JDFechaFinal.getValue();
+				Date FechaFinal = Date.from(data.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				Store s = jcbstore.getSelectionModel().getSelectedItem();
+				GeneradorReporte reporter = new GeneradorReporte(ds.getConnection());
+				Map<String, Object> params = new HashMap<>();
+				params.put("nombreTienda", s.getNombreTienda());
+				params.put("fechaInicial", FechaInicio);
+				params.put("fechaFinal", FechaFinal);
+				reporter.generarReporte(params, "/reportes/ReporteVentaAlquiler.jrxml", "PeliculasRentadas");
+			} else {
+				notificar("INFORMACION", "seleccione todos los campos", TipoNotificacion.INFO);
+			}
+		} catch (Exception e) {
+			notificar("Ejemplo", "Error generando el reporte ", TipoNotificacion.ERROR);
+		}
+	}
+
+	@FXML
+	public void generarReporteVentas() {
+
+		try {
+			LocalDate dateUno = JDFechaInicio.getValue();
+			LocalDate dateDos = JDFechaFinal.getValue();
+			if ((dateUno != null) && (dateDos != null) && (jcbstore.getSelectionModel().getSelectedItem() != null)) {
+				LocalDate date = JDFechaInicio.getValue();
+				Date FechaInicio = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				LocalDate data = JDFechaFinal.getValue();
+				Date FechaFinal = Date.from(data.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				Store s = jcbstore.getSelectionModel().getSelectedItem();
+				GeneradorReporte reporter = new GeneradorReporte(ds.getConnection());
+				Map<String, Object> params = new HashMap<>();
+				params.put("nombreTienda", s.getNombreTienda());
+				params.put("fechaInicial", FechaInicio);
+				params.put("fechaFinal", FechaFinal);
+				reporter.generarReporte(params, "/reportes/ReporteVentasPeliculas.jrxml", "PeliculasVendidas");
+
+			} else {
+				notificar("INFORMACION", "seleccione todos los campos", TipoNotificacion.INFO);
+			}
+
+		} catch (Exception e) {
+			notificar("Ejemplo", "Error generando el reporte \n Seleccione una tienda para continuar ",
+					TipoNotificacion.ERROR);
+		}
+	}
 }

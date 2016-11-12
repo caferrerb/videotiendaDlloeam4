@@ -28,6 +28,9 @@
                </children>
             </AnchorPane>
         </content>
+         <font>
+            <Font name="Arial Narrow" size="14.0" />
+         </font>
       </TitledPane>
       <TitledPane animated="false" collapsible="false" layoutX="14.0" layoutY="13.0" prefHeight="427.0" prefWidth="667.0" text="TRASLADO">
         <content>
@@ -108,6 +111,9 @@
                </children>
             </AnchorPane>
         </content>
+         <font>
+            <Font name="Arial Narrow" size="18.0" />
+         </font>
       </TitledPane>
    </children>
 </AnchorPane>
