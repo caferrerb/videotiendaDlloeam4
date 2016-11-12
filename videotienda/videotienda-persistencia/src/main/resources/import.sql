@@ -42,4 +42,10 @@ INSERT INTO `t_acceso_rol` (`ID_ACCESO`, `ID_ROL`) VALUES ('8', '1');
 INSERT INTO `t_acceso_rol` (`ID_ACCESO`, `ID_ROL`) VALUES ('9', '1');
 INSERT INTO `t_acceso_rol` (`ID_ACCESO`, `ID_ROL`) VALUES ('10', '1');
 INSERT INTO `t_acceso_rol` (`ID_ACCESO`, `ID_ROL`) VALUES ('11', '1');
+INSERT INTO `t_usuario` (`USUARIO`, `PASS`) VALUES ('admin', '1234');
+INSERT INTO `t_usuario` (`USUARIO`, `PASS`) VALUES ('empleado', '1234');
+INSERT INTO `t_usuario_rol` (`ID_ROL`, `ID_USUARIO`) VALUES ('1', 'admin');
+INSERT INTO `t_usuario_rol` (`ID_ROL`, `ID_USUARIO`) VALUES ('3', 'empleado');
+INSERT INTO staff (staff_id, active, email, first_name, last_name, last_update, address_id) VALUES (1, 1, 'juju', 'hghj', 'hb', '2015-04-03', '1')
+UPDATE `staff` SET `id_usuario`='admin' WHERE `staff_id`='1';
 
