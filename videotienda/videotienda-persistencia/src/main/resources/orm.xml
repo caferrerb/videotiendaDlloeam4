@@ -213,7 +213,7 @@
 			JOIN r.inventory i
 			JOIN i.film f
 			JOIN r.customer c
-			WHERE c.customerId = ?1
+			WHERE c.customerId = ?1 AND r.returned = false
 		</query>
 	</named-query>
 	
