@@ -235,19 +235,23 @@ public class ControladorGestionarClientes extends BaseController implements Init
 				Store tienda = boTienda.buscar(jCBTienda.getSelectionModel().getSelectedItem().getStoreId());
 				cliente.setStore(tienda);
 
-				//boDir.crearDireccion(direccion);
-				boCliente.crear(cliente);
-				
-				notificar("Crear Cliente", "El Cliente se ha creado exitosamente", TipoNotificacion.INFO);
-				limpiarCampos();
+				Customer cus = boCliente.buscar(Integer.parseInt(jTFId.getText()));
+				if(cus == null){
+					//boDir.crearDireccion(direccion);
+					boCliente.crear(cliente);				
+					notificar("Crear Cliente", "El Cliente se ha creado exitosamente", TipoNotificacion.INFO);
+					limpiarCampos();
+				} else{
+					notificar("Crear Cliente", "el cliente con documento "+"'"+cus.getCustomerId()+"'"+" ya se encuentra registrado", TipoNotificacion.ERROR);
+				}
 
 			}
 
 		} catch (ExcepcionNegocio e) {
 			notificar("Crear Cliente", "Este Cliente ya se encuentra registrado", TipoNotificacion.ERROR);
 		}  catch (IOException e) {
-			
-			e.printStackTrace();
+			notificar("Crear Cliente", "Error al crear el cliente", TipoNotificacion.ERROR);
+			//e.printStackTrace();
 		}
 
 	}
