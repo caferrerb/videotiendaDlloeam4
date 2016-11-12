@@ -345,7 +345,7 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 		Film fi =boFilm.buscar(idFilm);
 		if(fi!=null){
 			
-			jTFFilmID.setText(fi.getFilmId()+"");
+			jTFFilmID.setText(String.valueOf(fi.getFilmId()));
 			jTFescriptionj.setText(fi.getDescription());
 			jTFRating.setText(fi.getRating());
 			
@@ -353,20 +353,22 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 			DatePicker date = new DatePicker(LocalDate.of(fi.getReleaseYear().getYear()+1900, fi.getReleaseYear().getMonth()+1, fi.getReleaseYear().getDate()));
 			jYearRelease.setValue(date.getValue());
 			
-			jTFRentalDuration.setText(fi.getRentalDuration()+"");
-			jTFRentalRate.setText(fi.getRentalRate()+"");
-			jTFReplacementCost.setText(fi.getReplacementCost()+"");
+			jTFRentalDuration.setText(String.valueOf(fi.getRentalDuration()));
+			jTFRentalRate.setText(String.valueOf(fi.getRentalRate()));
+			jTFReplacementCost.setText(String.valueOf(fi.getReplacementCost()));
 			jTFFactures.setText(fi.getSpecialFeatures());
 			jTFTitle.setText(fi.getTitle());
 			
 			jCBLanguage1.setValue(fi.getLanguage1());
 			jCBLanguage2.setValue(fi.getLanguage2());
 			jCBCategory.setValue(fi.getCategory());
-			jTFLength.setText(fi.getLength()+"");
+			jTFLength.setText(String.valueOf(fi.getLength()));
 			
 			if(fi.getPoster()!=null){
 			Image im=new Image(new ByteArrayInputStream(fi.getPoster()));
 			jPoster.setImage(im); 
+			}else{
+			jPoster.setImage(null);
 			}
 			
 			llenarTabla(idFilm);
@@ -485,12 +487,12 @@ public class ControladorGestionarPelicula extends BaseController implements Init
 	private void agregarActorFilm(){
 		
 		if(jTFFilmID.getText().isEmpty()||jCBActores.getValue()==null){
-			notificar("¡INGRESE!", "Por favor ingrese (ID de pelicula y Actor )",  TipoNotificacion.ERROR);
+			notificar("¡INGRESE!", "Por favor ingrese (ID de pelicula, Actor y el personaje )",  TipoNotificacion.ERROR);
 		}else{
 		try {
 			
 			if(jTFPersonaje.getText().isEmpty()){
-				notificar("¡INGRESE!", "Por favor el personaje",  TipoNotificacion.ERROR);
+				notificar("¡INGRESE!", "Por favor ingrese el personaje",  TipoNotificacion.ERROR);
 				return;
 			}
 			String personaje = jTFPersonaje.getText();
