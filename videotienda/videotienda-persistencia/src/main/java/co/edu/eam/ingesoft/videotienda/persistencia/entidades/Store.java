@@ -19,14 +19,7 @@ import java.util.List;
 @Table(name="store")
 @NamedQuery(name="Store.findAll", query="SELECT s FROM Store s")
 public class Store implements Serializable {
-	public String getNombreTienda() {
-		return nombreTienda;
-	}
-
-	public void setNombreTienda(String nombreTienda) {
-		this.nombreTienda = nombreTienda;
-	}
-
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
