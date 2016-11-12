@@ -56,7 +56,7 @@ WHERE c.customer_id=$P{idcus}]]>
 			<staticText>
 				<reportElement x="183" y="30" width="189" height="36" uuid="a5f1957d-74f3-4306-88c6-c19643bc46e0"/>
 				<textElement textAlignment="Center" markup="none">
-					<font fontName="ari" size="16" isBold="true" isItalic="true"/>
+					<font  size="16" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Rentas del Cliente]]></text>
 			</staticText>

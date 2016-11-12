@@ -15,7 +15,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
  *		   Fecha 04/11/2016
  */
 @Component
-public class BORental extends BOGenerico<Store> {
+public class BORental extends BOGenerico<Rental> {
 	
 	/**
 	 * Consulta que trae una lista con los datos de la tabla de peliculas rentadas

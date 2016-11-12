@@ -167,6 +167,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		}
 	}
 
+	/**
+	 * Limpia los campos del eliminar empleado
+	 */
 	public void limpiarCampos() {
 		TFIdEmpleado.setText(null);
 		//TFIdUsuario.setText(null);
@@ -181,6 +184,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		CBCiudad.setSelectionModel(null);
 	}
 
+	/**
+	 * Limpia lso campos del metodo editar empleado
+	 */
 	public void limpiarCamposEditado() {
 		TFIdEmpleado.setText(null);
 		//TFIdUsuario.setText(null);
@@ -196,6 +202,11 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		TFFechaCreacion.setText(null);
 		TFUlltimaActualizacionDir.setText(null);	
 	}
+	
+	/**
+	 * Crea un empelado con su direccion respectiva
+	 * @throws Exception si ocurre alguna inconsistencia
+	 */
 	@FXML
 	public void crearEmpleado() throws Exception {
 		try {
@@ -258,6 +269,10 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		}
 	}
 
+	/**
+	 * Edita un empleado y su direccion  por el id del empleado buscado
+	 * @throws Exception si hay una inconsistencia
+	 */
 	@FXML
 	public void editarEmpleado() throws Exception {
 		try {
@@ -323,6 +338,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		}
 	}
 
+	/**
+	 * Busca un empleado y su direcion por el id del empleado
+	 */
 	@FXML
 	public void buscarEmpleado() {
 		if (!TFIdEmpleado.getText().isEmpty()) {
@@ -385,6 +403,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		}
 	}
 
+	/**
+	 * Metodo encargado de abrir la imagen y cargarla en el PhPhoto para guardar la imagen
+	 */
 	public void abrirImagen() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Buscar Imagen");
@@ -418,11 +439,19 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		}
 	}
 
+	/**
+	 * Abre la venta de horario empleados
+	 */
 	@FXML
 	private void llamarVentana() {
 		abrirVentana("/fxml/VentanaGestionEmpleadosSub.fxml", ControladorGestionarEmpleadoSub.class);
 	}
 
+	/**
+	 * Recibe un objeto empleado y genera una lista del empleado enviado
+	 * para cargar la tabla
+	 * @param empleado
+	 */
 	private void llenarTabla(Staff empleado) {
 
 		List<StaffSchedule> listahorarioEmple = boHorario.listaHorario(empleado);
@@ -433,16 +462,18 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		TbHorario.setItems(listaTabla);
 	}
 
-	// SIGO AKI
+	/**
+	 * Se encarga de generar la tabla con todos sus campos y botones 
+	 */
 	private void configurarTAbla() {
 
 		TBDia.setCellValueFactory(new PropertyValueFactory<StaffSchedule, DayEnum>("dia"));
-		// TBDia.setMinWidth(100);
+		
 		TBInicial.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaInicial"));
-		// TBInicial.setMinWidth(100);
+	
 		tbFinal.setCellValueFactory(new PropertyValueFactory<StaffSchedule, Integer>("horaFinal"));
-		// tbFinal.setMinWidth(100);
-
+		
+		//Primer boton que se crea
 		Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>> cellFactory = new Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>>() {
 
 			@Override
@@ -480,7 +511,8 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 				return cell;
 			}
 		};
-
+		
+		//Segundo boton que se crea
 		Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>> cellFactoryB = new Callback<TableColumn<StaffSchedule, String>, TableCell<StaffSchedule, String>>() {
 
 			@Override
@@ -527,7 +559,9 @@ public class ControladorGestionarEmpleado extends BaseController implements Init
 		TbQuitar.setCellFactory(cellFactoryB);
 	}
 	
-	
+	/**
+	 * Genera un reposte de un empleado registrado
+	 */
 	@FXML
 	public void generarReporte(){
 		

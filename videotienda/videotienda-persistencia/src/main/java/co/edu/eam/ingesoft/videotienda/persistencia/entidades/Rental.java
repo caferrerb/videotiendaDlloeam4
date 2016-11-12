@@ -45,6 +45,9 @@ public class Rental implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name="return_date")
 	private Date returnDate;
+	
+	@Column(name="RETURNED")
+	private boolean returned;
 
 	//bi-directional many-to-one association to Payment
 	@OneToMany(mappedBy="rental",fetch=FetchType.LAZY)
@@ -66,7 +69,7 @@ public class Rental implements Serializable {
 	private Staff staff;
     
 	public Rental(){
-		
+		returned=false;
 	}
 
 	public int getRentalId() {
@@ -145,6 +148,22 @@ public class Rental implements Serializable {
 
 	public void setStaff(Staff staff) {
 		this.staff = staff;
+	}
+	
+	
+
+	/**
+	 * @return the returned
+	 */
+	public boolean isReturned() {
+		return returned;
+	}
+
+	/**
+	 * @param returned the returned to set
+	 */
+	public void setReturned(boolean returned) {
+		this.returned = returned;
 	}
 
 	@Override
