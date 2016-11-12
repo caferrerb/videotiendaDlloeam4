@@ -25,4 +25,6 @@ INSERT INTO `country` (`country_id`, `country`, `last_update`) VALUES ('1', 'Col
 INSERT INTO `city` (`city_id`, `city`, `country_id`) VALUES ('1', 'Armenia', '1');
 INSERT INTO `city` (`city_id`, `city`, `country_id`) VALUES ('2', 'Bogota', '1');
 INSERT INTO `videotienda`.`address` (`address`, `address2`, `district`, `last_update`, `phone`, `postal_code`, `city_id`) VALUES ('B/ laureles', 'null', 'comuna 3', '2007-10-15', '320735', '2672762', '1');
+INSERT INTO `videotienda`.`address` (`address`, `address2`, `district`, `last_update`, `phone`, `postal_code`, `city_id`) VALUES ('B/ las americas', 'null', 'comuna 7', '2010-11-15', '72939', '53562', '1');
 INSERT INTO `videotienda`.`store` (`store_id`, `last_update`, `Nombre_tienda`, `address_id`) VALUES ('17', '2010-10-26', 'Video net', '1');
+INSERT INTO `videotienda`.`store` (`store_id`, `last_update`, `Nombre_tienda`, `address_id`) VALUES ('23', '2014-10-26', 'Video Armenia', '2');
