@@ -128,6 +128,8 @@ public class ControladorGestionarClientes extends BaseController implements Init
 	
 	private File imgFile;
 	
+	private Customer idCliente;
+	
 	List<PrestamosClienteDTO> listaPrestamosCliente;
 
 	ObservableList<PrestamosClienteDTO> prestamosListarCliente;
@@ -137,7 +139,11 @@ public class ControladorGestionarClientes extends BaseController implements Init
 		llenarComboCiudades();
 		llenarComboTiendas();
 		inicializarTabla();
-		
+		idCliente = (Customer) obtenerValor("cliente");
+		if (idCliente != null) {
+			buscarClienteTraido(idCliente);
+			
+		}
 	}
 
 	/**
@@ -190,7 +196,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 				|| jTFId.getText().isEmpty() || jTFTelefono.getText().isEmpty() || jCBCiudad.getValue()==null || jCBTienda.getValue()==null
 					) {
 
-				notificar("Crear Cliente", "Verifique que todos los campos est�n diligenciados",
+				notificar("Crear Cliente", "Verifique que todos los campos esten diligenciados",
 						TipoNotificacion.ERROR);
 
 			} else {
@@ -297,7 +303,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 	
 	@FXML
 	public void buscarCliente() {
-		if (jTFId.getText() != null) {
+		if (!jTFId.getText().isEmpty()) {
 			Customer cliente = boCliente.buscar(Integer.parseInt(jTFId.getText()));
 
 			if (cliente != null) {
@@ -328,6 +334,33 @@ public class ControladorGestionarClientes extends BaseController implements Init
 		}
 	}
 	
+	@FXML
+	public void buscarClienteTraido(Customer cliTraido) {
+		Customer cliente = boCliente.buscar(cliTraido.getCustomerId());
+			if (cliente != null) {
+				jTFId.setText(String.valueOf(cliTraido.getCustomerId()));
+				jTFNombres.setText(cliente.getFirstName());
+				jTFApellidos.setText(cliente.getLastName());
+				jCBTienda.setValue(cliente.getStore());
+				jTFDireccion.setText(cliente.getAddress().getAddress());
+				jTFDireccion2.setText(cliente.getAddress().getAddress2());
+				jTFDistrito.setText(cliente.getAddress().getDistrict());
+				jTFTelefono.setText(cliente.getAddress().getPhone());
+				jTFCodPostal.setText(cliente.getAddress().getPostalCode());
+				jCBCiudad.setValue(cliente.getAddress().getCity());
+				listarPrestamosClientes();
+				
+				if (cliente.getPicture() != null) {
+					Image im = new Image(new ByteArrayInputStream(cliente.getPicture()));
+					imgFoto.setImage(im);
+				}
+				
+			} else {
+				notificar("Buscar Cliente", "El cliente no se encuentra registrado", TipoNotificacion.ERROR);
+				limpiarCampos();
+			}
+	}
+	
 	public void editarCliente()  {
 
 		try {
@@ -336,7 +369,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 				|| jTFId.getText().isEmpty() || jTFTelefono.getText().isEmpty() || jCBCiudad.getValue()==null || jCBTienda.getValue()==null
 					) {
 
-				notificar("Crear Cliente", "Verifique que todos los campos est�n diligenciados",
+				notificar("Editar Cliente", "Debe Buscar un Cliente y verificar que todos los campos esten diligenciados",
 						TipoNotificacion.ERROR);
 
 			} else {
@@ -394,14 +427,29 @@ public class ControladorGestionarClientes extends BaseController implements Init
 	@FXML
 	public void generarReporteCliente(){
 		try {
-			
-			GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
-			Map<String, Object> params=new HashMap<>();
-			int idCliente = Integer.parseInt(jTFId.getText());
-			params.put("idcus", idCliente);
-			reporter.generarReporte(params, "/reportes/rentascliente.jrxml", "RentasDelCliente");		
+			if(jTFId.getText().isEmpty()){
+				notificar("Generar Reporte", "Debe diligenciar el campo: Numero de Documento* para el reporte del cliente", TipoNotificacion.ERROR);
+			}else{
+				Customer cliente = boCliente.buscar(Integer.parseInt(jTFId.getText()));
+
+				if (cliente != null) {
+					
+					GeneradorReporte reporter=new GeneradorReporte(ds.getConnection());
+					Map<String, Object> params=new HashMap<>();
+					int idCliente = Integer.parseInt(jTFId.getText());
+					params.put("idcus", idCliente);
+					reporter.generarReporte(params, "/reportes/rentascliente.jrxml", "RentasDelCliente");
+					
+				} else {
+					
+					notificar("Generar Reporte", "El cliente no se encuentra registrado", TipoNotificacion.ERROR);
+					limpiarCampos();
+					
+				}
+				
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			notificar("Generar Reporte", "Error generando el reporte!", TipoNotificacion.ERROR);
 		}
 	}
