@@ -10,6 +10,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.dao.ConstantesNamedQueries;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Actor;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Category;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
+import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Store;
 /**
  * Clase respondable de la logica de la pelicula
  * @author laura posada
@@ -37,6 +38,10 @@ public class BOFilm extends BOGenerico<Film>{
 	 */
 	public List<Film> listarPeliculas(String nombre){
 		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_POR_NOMBRE_PELICULA,"%"+nombre+"%");
+	}
+	
+	public List<Film> listarInventarioTienda(Store store){
+		return dao.ejecutarNamedQuery(ConstantesNamedQueries.CONSULTA_LISTAR_INVENTARIO_TIENDA, store);
 	}
 	
 
