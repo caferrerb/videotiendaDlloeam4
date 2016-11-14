@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2016-11-11T07:42:07 -->
+<!-- 2016-11-11T19:24:21 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="accesorol" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="videotienda"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -78,13 +78,6 @@ WHERE r.ID_ROL=$P{idrol}]]>
 		<groupHeader>
 			<band height="40">
 				<staticText>
-					<reportElement x="140" y="10" width="100" height="30" uuid="d320b294-da32-4457-986c-1df1e251cc73"/>
-					<textElement>
-						<font size="14" isBold="true"/>
-					</textElement>
-					<text><![CDATA[DESCRIPCION]]></text>
-				</staticText>
-				<staticText>
 					<reportElement x="20" y="10" width="100" height="30" uuid="4832f6ff-bd0c-4dcd-9441-be875fe924db"/>
 					<textElement>
 						<font size="14" isBold="true"/>
@@ -92,14 +85,14 @@ WHERE r.ID_ROL=$P{idrol}]]>
 					<text><![CDATA[ID_ROL]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="270" y="10" width="100" height="30" uuid="9e44fd16-7d27-4c00-b275-58330f98ec8b"/>
+					<reportElement x="140" y="10" width="100" height="30" uuid="9e44fd16-7d27-4c00-b275-58330f98ec8b"/>
 					<textElement>
 						<font size="14" isBold="true"/>
 					</textElement>
 					<text><![CDATA[ID_ACCESO]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="390" y="10" width="100" height="30" uuid="d7266d31-277e-41c4-b395-75f043402627"/>
+					<reportElement x="263" y="10" width="100" height="30" uuid="d7266d31-277e-41c4-b395-75f043402627"/>
 					<textElement>
 						<font size="14" isBold="true"/>
 					</textElement>
@@ -115,7 +108,7 @@ WHERE r.ID_ROL=$P{idrol}]]>
 		</groupFooter>
 	</group>
 	<title>
-		<band height="130" splitType="Stretch">
+		<band height="140" splitType="Stretch">
 			<line>
 				<reportElement x="0" y="80" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
 					<property name="local_mesure_unitheight" value="pixel"/>
@@ -165,12 +158,19 @@ WHERE r.ID_ROL=$P{idrol}]]>
 				<text><![CDATA[Armenia, Quindio,057]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="100" width="556" height="30" uuid="baa09782-02b3-4869-8006-c19264164a8b"/>
+				<reportElement x="40" y="100" width="356" height="30" uuid="baa09782-02b3-4869-8006-c19264164a8b"/>
 				<textElement textAlignment="Center">
 					<font size="18" isBold="true"/>
 				</textElement>
-				<text><![CDATA[REPORTE ACCESOS DE UN ROL]]></text>
+				<text><![CDATA[Reporte accesos de ]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="306" y="100" width="215" height="30" uuid="a464bacf-3401-4f78-b746-83385d10965f"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCRIPCION}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
@@ -187,19 +187,15 @@ WHERE r.ID_ROL=$P{idrol}]]>
 	<detail>
 		<band height="40">
 			<textField>
-				<reportElement x="140" y="6" width="100" height="30" uuid="a464bacf-3401-4f78-b746-83385d10965f"/>
-				<textFieldExpression><![CDATA[$F{DESCRIPCION}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="21" y="6" width="100" height="30" uuid="ac868fc0-9779-441b-a3af-72dc683434fa"/>
 				<textFieldExpression><![CDATA[$F{ID_ROL}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="270" y="6" width="100" height="30" uuid="c69f9187-d242-4247-8261-17a96e316fe3"/>
+				<reportElement x="140" y="5" width="100" height="30" uuid="c69f9187-d242-4247-8261-17a96e316fe3"/>
 				<textFieldExpression><![CDATA[$F{ID_ACCESO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="6" width="100" height="30" uuid="3cf4ead3-b859-441a-9da0-0db126542d31"/>
+				<reportElement x="263" y="6" width="100" height="30" uuid="3cf4ead3-b859-441a-9da0-0db126542d31"/>
 				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
 			</textField>
 		</band>
