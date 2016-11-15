@@ -6,8 +6,13 @@ package co.edu.eam.ingesoft.videotienda.vista.controladores;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import co.edu.eam.ingesoft.videotienda.logica.bos.BOGenero;
@@ -18,6 +23,7 @@ import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Country;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Film;
 import co.edu.eam.ingesoft.videotienda.persistencia.entidades.Language;
 import co.edu.eam.ingesoft.videotienda.vista.util.BaseController;
+import co.edu.eam.ingesoft.videotienda.vista.util.GeneradorReporte;
 import co.edu.eam.ingesoft.videotienda.vista.util.TipoNotificacion;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -33,6 +39,8 @@ import javafx.fxml.FXML;
 
 @Controller
 public class ControladorGestionarGenero extends BaseController implements Initializable{
+	@Autowired
+	private DataSource ds;
 	
 	@Autowired
 	private BOGenero bo;
@@ -51,7 +59,7 @@ public class ControladorGestionarGenero extends BaseController implements Initia
 	
 	/* Combo con todas los Generos */
 	@FXML
-	private ComboBox<Category> CbGeneros;
+	private ComboBox<java.util.Locale.Category> CbGeneros;
 	
 	/* Tabla Generos */
 	@FXML
@@ -303,6 +311,24 @@ public class ControladorGestionarGenero extends BaseController implements Initia
 			TbActores.setItems(actores);			
 		}catch(Exception e){
 				e.printStackTrace();
+		}
+	}
+	/**
+	 * Generar reporte de peliculas por genero
+	 */
+	public void reportePeliculasGenero(){
+		Category genero = CbGeneros.getSelectionModel().getSelectedItem();
+		if(genero == null){
+			notificar("Genero no seleccionado", "por favor, seleccione un genero",  TipoNotificacion.ERROR);
+		}else{
+			try{
+				GeneradorReporte reporte = new GeneradorReporte(ds.getConnection());
+				Map<String, Object> parametros = new HashMap<>();
+				parametros.put("genero",genero.getCategoryId());
+				reporte.generarReporte(parametros, "/reportes/peliculasPorGenero.jrxml", "peliculas por Genero");
+			} catch (Exception e) {
+				notificar("Error reporte", "Error al intentar generar el reporte", TipoNotificacion.ERROR);
+			}
 		}
 	}
 }
