@@ -263,8 +263,8 @@ public class ControladorAlquilarPelicula extends BaseController implements Initi
 	}
 
 	public void inicializarTabla() {
-		cCTitulo.setCellValueFactory(new PropertyValueFactory<PrestamoDTO, String>("titulo"));
-		cCTienda.setCellValueFactory(new PropertyValueFactory<PrestamoDTO, String>("nombreTienda"));
+		cCTitulo.setCellValueFactory(new PropertyValueFactory<PrestamoDTO, String>("nombreTienda"));
+		cCTienda.setCellValueFactory(new PropertyValueFactory<PrestamoDTO, String>("titulo"));
 		cCbotonEliminar.setSortable(false);
 
 		cCbotonEliminar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));

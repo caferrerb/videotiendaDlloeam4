@@ -554,7 +554,7 @@ public class ControladorGestionarClientes extends BaseController implements Init
 				
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			notificar("Generar Reporte", "Error generando el reporte!", TipoNotificacion.ERROR);
 		}
 	}
